@@ -53,6 +53,8 @@ struct ContentView: View {
                 context[MoreButtonService.self].bindClickHandler { [weak context] in
                     context?[ToastService.self].toast(ToastService.Toast(title: "哈哈哈"))
                 }
+                
+                context[ControlService.self].configure(controlStyle: .manual)
             }
     }
 }

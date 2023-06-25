@@ -8,21 +8,17 @@
 import SwiftUI
 import Combine
 
-public extension ControlService {
+fileprivate extension ControlService {
     
-    typealias LayoutContainer = ([IdentifableView]) -> any View
-    
-    fileprivate static func horizontal(_ views: [IdentifableView]) -> any View {
+    static func horizontal(_ views: [IdentifableView]) -> any View {
         HStack { ForEach(views) { $0 } }
     }
     
-    fileprivate static func vertical(_ views: [IdentifableView]) -> any View {
+    static func vertical(_ views: [IdentifableView]) -> any View {
         VStack { ForEach(views) { $0 } }
     }
     
-    typealias ItemsGetter = () -> [IdentifableView]
-    
-    fileprivate static func emptyItems() -> [IdentifableView] {
+    static func emptyItems() -> [IdentifableView] {
         return [IdentifableView]()
     }
 }
@@ -31,13 +27,12 @@ public class ControlService : Service {
     
     private var cancellables = [AnyCancellable]()
     
-    @ViewState fileprivate var hidden = false
     @ViewState fileprivate var horizontalSpacing = 10.0
     
     @ViewState fileprivate var shadowForTopBar: LinearGradient? = .init(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .top, endPoint: .bottom)
     @ViewState fileprivate var shadowForBottomBar: LinearGradient? = .init(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .bottom, endPoint: .top)
     
-    struct ControlBar {
+    fileprivate struct ControlBar {
         var top = ControlService.horizontal
         var left = ControlService.vertical
         var right = ControlService.vertical
@@ -49,7 +44,7 @@ public class ControlService : Service {
     @ViewState fileprivate var fullScreenControlBar = ControlBar()
     @ViewState fileprivate var portraitScreenControlBar = ControlBar()
     
-    struct ControlBarItems {
+    fileprivate struct ControlBarItems {
         var top = ControlService.emptyItems
         var left = ControlService.emptyItems
         var right = ControlService.emptyItems
@@ -61,7 +56,7 @@ public class ControlService : Service {
     @ViewState fileprivate var fullScreenControlBarItems = ControlBarItems()
     @ViewState fileprivate var portraitScreenControlBarItems = ControlBarItems()
     
-    struct Transition {
+    fileprivate struct Transition {
         var top = AnyTransition.move(edge: .top)
         var left = AnyTransition.move(edge: .leading)
         var right = AnyTransition.move(edge: .trailing)
@@ -73,6 +68,16 @@ public class ControlService : Service {
     @ViewState fileprivate var fullScreenTransition = Transition()
     @ViewState fileprivate var portraitScreenTransition = Transition()
     
+    public enum ControlStyle {
+        case always
+        case never
+        case auto(DispatchTimeInterval)
+        case manual
+    }
+    
+    @ViewState fileprivate var hidden = false
+    fileprivate var controlStyle = ControlStyle.auto(.seconds(3))
+    
     @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
     
     public required init(_ context: Context) {
@@ -82,14 +87,41 @@ public class ControlService : Service {
         service.observeTap {
             withAnimation {
                 let service = context[ControlService.self]
-                service.toggle()
+                service.didClick()
             }
         }.store(in: &cancellables)
     }
     
-    public func toggle() {
-        withAnimation {
-            hidden.toggle()
+    private func didClick() {
+        switch self.controlStyle {
+        case .always: break
+        case .never: break
+        case .manual:
+            withAnimation {
+                hidden.toggle()
+            }
+        case let .auto(duration):
+            withAnimation {
+                hidden.toggle()
+            }
+            if !hidden {
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
+                    withAnimation {
+                        self?.hidden = true
+                    }
+                }
+            }
+        }
+    }
+    
+    public func configure(controlStyle: ControlStyle) {
+        self.controlStyle = controlStyle
+        
+        switch controlStyle {
+        case .always: hidden = false
+        case .never: hidden = true
+        case .manual:break
+        case .auto: break
         }
     }
     
@@ -137,7 +169,7 @@ public class ControlService : Service {
         }
     }
     
-    public func configure(_ location: Location, layout: @escaping LayoutContainer) {
+    public func configure(_ location: Location, layout: @escaping ([IdentifableView]) -> any View) {
         switch location {
         case let .fullScreen(direction):
             switch direction {

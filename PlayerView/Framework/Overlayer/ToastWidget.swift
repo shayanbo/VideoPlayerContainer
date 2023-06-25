@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-public class ToastService: Service {
+public extension ToastService {
     
-    public struct Toast: Identifiable, Equatable {
+    struct Toast: Identifiable, Equatable {
         let title: String
         public let id = UUID().uuidString
         
@@ -17,6 +17,9 @@ public class ToastService: Service {
             return a.id == b.id
         }
     }
+}
+
+public class ToastService: Service {
     
     @ViewState fileprivate var toasts = [Toast]()
     
