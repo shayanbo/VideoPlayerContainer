@@ -30,7 +30,7 @@ public class PluginService : Service {
     
     @ViewState fileprivate var plugin: Plugin?
     
-    public func present(_ alignment: Alignment, viewGetter: @escaping ()-> any View) {
+    public func present(_ alignment: Alignment, viewGetter: @escaping ()-> some View) {
         self.plugin = Plugin(alignment: alignment, viewGetter: viewGetter)
     }
     

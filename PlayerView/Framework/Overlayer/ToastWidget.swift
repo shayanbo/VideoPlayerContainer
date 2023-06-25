@@ -20,7 +20,11 @@ public class ToastService: Service {
     
     @ViewState fileprivate var toasts = [Toast]()
     
-    @ViewState fileprivate var verticalOffset = 48.0
+    @ViewState fileprivate var insets: EdgeInsets = .init(top: 48, leading: 10, bottom: 48, trailing: 0)
+    
+    @ViewState fileprivate var lineSpacing: CGFloat = 8
+    
+    fileprivate var duration: DispatchTimeInterval = .seconds(3)
     
     fileprivate var toastGetter: (Toast)->any View = { toast in
         Button(toast.title) {}
@@ -32,14 +36,26 @@ public class ToastService: Service {
         super.init(context)
     }
     
-    public func bindToastGetter(_ getter: @escaping (Toast)->any View) {
-        toastGetter = getter
+    public func configure(duration: DispatchTimeInterval) {
+        self.duration = duration
+    }
+    
+    public func configure(insets: EdgeInsets) {
+        self.insets = insets
+    }
+    
+    public func configure(toastView: @escaping (Toast)->some View) {
+        toastGetter = toastView
+    }
+    
+    public func configure(lineSpacing: CGFloat) {
+        self.lineSpacing = lineSpacing
     }
     
     public func toast(_ toast: Toast) {
         withAnimation {
             toasts.append(toast)
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(3)) { [weak self] in
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
                 withAnimation {
                     self?.toasts.removeAll { $0 == toast }
                 }
@@ -53,28 +69,35 @@ struct ToastWidget: View {
     var body: some View {
         
         WithService(ToastService.self) { service in
-            ToastLayout(verticalOffset: service.verticalOffset) {
+            ToastLayout(service.lineSpacing) {
+                Spacer()
                 ForEach(service.toasts) { toast in
                     AnyView(service.toastGetter(toast))
+                        .padding(.leading, service.insets.leading)
                         .transition(.asymmetric(insertion: .move(edge: .leading), removal: .opacity))
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .clipped()
+            .padding(EdgeInsets(top: service.insets.top, leading: 0, bottom: service.insets.bottom, trailing: service.insets.trailing))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
 }
 
 struct ToastLayout : Layout {
     
-    let verticalOffset: CGFloat
+    let lineSpacing: CGFloat
+    
+    init(_ lineSpacing: CGFloat) {
+        self.lineSpacing = lineSpacing
+    }
     
     func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
         
         var y = 0.0
         for subview in subviews.reversed() {
             let viewSize = subview.sizeThatFits(proposal)
-            y = y + 8 + viewSize.height
+            y = y + lineSpacing + viewSize.height
             subview.place(at: CGPoint(x: 0, y: bounds.minY + (proposal.height ?? 0) - y), proposal: proposal)
         }
     }

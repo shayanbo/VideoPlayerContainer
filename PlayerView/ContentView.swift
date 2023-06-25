@@ -46,8 +46,12 @@ struct ContentView: View {
                 let item = AVPlayerItem(url: URL(string: "https://devstreaming-cdn.apple.com/videos/wwdc/2023/10036/4/BB960BFD-F982-4800-8060-5674B049AC5A/cmaf/hvc/2160p_16800/hvc_2160p_16800.m3u8")!)
                 context[RenderService.self].player.replaceCurrentItem(with: item)
                 
-                context[ToastService.self].bindToastGetter { toast in
+                context[ToastService.self].configure { toast in
                     Text(toast.title)
+                }
+                
+                context[MoreButtonService.self].bindClickHandler { [weak context] in
+                    context?[ToastService.self].toast(ToastService.Toast(title: "哈哈哈"))
                 }
             }
     }
