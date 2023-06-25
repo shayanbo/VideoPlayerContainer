@@ -11,8 +11,8 @@ import Combine
 public class FeatureService : Service {
     
     enum Feature {
-        case left(()->AnyView)
-        case right(()->AnyView)
+        case left( () -> any View)
+        case right( () -> any View)
     }
     
     @ViewState fileprivate var feature: Feature?
@@ -28,13 +28,13 @@ public class FeatureService : Service {
         }.store(in: &cancellables)
     }
     
-    public func left(_ viewGetter: @escaping ()->AnyView) {
+    public func left(_ viewGetter: @escaping () -> some View) {
         withAnimation {
             feature = .left(viewGetter)
         }
     }
     
-    public func right(_ viewGetter: @escaping ()->AnyView) {
+    public func right(_ viewGetter: @escaping () -> some View) {
         withAnimation {
             feature = .right(viewGetter)
         }
@@ -58,9 +58,11 @@ struct FeatureWidget: View {
                     Spacer()
                         .frame(maxWidth: .infinity, maxHeight: 0)
                     if case let .left(view) = service.feature {
-                        view()
-                            .frame(maxHeight: .infinity)
-                            .transition(.move(edge: .leading))
+                        AnyView(
+                            view()
+                                .frame(maxHeight: .infinity)
+                                .transition(.move(edge: .leading))
+                        ) // can add an eraseToAnyView in extension to replace here
                     }
                 }
                 
@@ -68,9 +70,11 @@ struct FeatureWidget: View {
                     Spacer()
                         .frame(maxWidth: .infinity, maxHeight: 0)
                     if case let .right(view) = service.feature {
-                        view()
-                            .frame(maxHeight: .infinity)
-                            .transition(.move(edge: .trailing))
+                        AnyView(
+                            view()
+                                .frame(maxHeight: .infinity)
+                                .transition(.move(edge: .trailing))
+                        )
                     }
                 }
             }
