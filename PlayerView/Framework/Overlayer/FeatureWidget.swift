@@ -15,7 +15,14 @@ public class FeatureService : Service {
         case right(()->any View)
     }
     
-    @ViewState fileprivate var feature: Feature?
+    @ViewState private(set) var feature: Feature?
+    
+    public enum Style {
+        case cover
+        case squeeze
+    }
+    
+    @ViewState private(set) var style: Style = .cover
     
     private var cancellables = [AnyCancellable]()
     
@@ -28,15 +35,19 @@ public class FeatureService : Service {
         }.store(in: &cancellables)
     }
     
-    public func left(_ viewGetter: @escaping ()-> some View) {
-        withAnimation {
-            feature = .left(viewGetter)
-        }
+    public enum Direction {
+        case left
+        case right
     }
     
-    public func right(_ viewGetter: @escaping ()-> some View) {
+    public func present(_ direction: Direction, viewGetter: @escaping ()-> some View) {
         withAnimation {
-            feature = .right(viewGetter)
+            switch direction {
+            case .left:
+                feature = .left(viewGetter)
+            case .right:
+                feature = .right(viewGetter)
+            }
         }
     }
     
@@ -44,6 +55,10 @@ public class FeatureService : Service {
         withAnimation {
             feature = nil
         }
+    }
+    
+    public func configure(style: Style) {
+        self.style = style
     }
 }
 
@@ -53,28 +68,30 @@ struct FeatureWidget: View {
         
         WithService(FeatureService.self) { service in
             ZStack {
-                
-                VStack(alignment: .leading) {
-                    Spacer()
-                        .frame(maxWidth: .infinity, maxHeight: 0)
-                    if case let .left(view) = service.feature {
-                        AnyView(
-                            view()
-                                .frame(maxHeight: .infinity)
-                                .transition(.move(edge: .leading))
-                        )
+                if service.style == .cover {
+                    
+                    VStack(alignment: .leading) {
+                        Spacer()
+                            .frame(maxWidth: .infinity, maxHeight: 0)
+                        if case let .left(view) = service.feature {
+                            AnyView(
+                                view()
+                                    .frame(maxHeight: .infinity)
+                                    .transition(.move(edge: .leading))
+                            )
+                        }
                     }
-                }
-                
-                VStack(alignment: .trailing) {
-                    Spacer()
-                        .frame(maxWidth: .infinity, maxHeight: 0)
-                    if case let .right(view) = service.feature {
-                        AnyView(
-                            view()
-                                .frame(maxHeight: .infinity)
-                                .transition(.move(edge: .trailing))
-                        )
+                    
+                    VStack(alignment: .trailing) {
+                        Spacer()
+                            .frame(maxWidth: .infinity, maxHeight: 0)
+                        if case let .right(view) = service.feature {
+                            AnyView(
+                                view()
+                                    .frame(maxHeight: .infinity)
+                                    .transition(.move(edge: .trailing))
+                            )
+                        }
                     }
                 }
             }

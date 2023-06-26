@@ -14,6 +14,10 @@ public class RenderService : Service {
     
     @ViewState fileprivate var gravity: AVLayerVideoGravity = .resizeAspect
     
+    @StateSync(serviceType: FeatureService.self, keyPath: \.$feature) fileprivate var feature
+    
+    @StateSync(serviceType: FeatureService.self, keyPath: \.$style) fileprivate var style
+    
     public let player = AVPlayer()
     
     public func fill() {
@@ -29,7 +33,27 @@ struct RenderWidget : View {
     
     var body: some View {
         WithService(RenderService.self) { service in
-            RenderView(player: service.player, gravity: service.gravity)
+            HStack {
+                if service.style == .squeeze {
+                    if case let .left(view) = service.feature {
+                        AnyView(
+                            view()
+                                .frame(maxHeight: .infinity)
+                                .transition(.move(edge: .leading))
+                        )
+                    }
+                }
+                RenderView(player: service.player, gravity: service.gravity)
+                if service.style == .squeeze {
+                    if case let .right(view) = service.feature {
+                        AnyView(
+                            view()
+                                .frame(maxHeight: .infinity)
+                                .transition(.move(edge: .leading))
+                        )
+                    }
+                }
+            }
         }
     }
 }

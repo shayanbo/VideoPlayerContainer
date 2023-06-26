@@ -38,7 +38,15 @@ struct ContentView: View {
                 ]}
                 
                 controlService.configure(.halfScreen(.center)) {[
-                    IdentifableView(id: "playback") {  Button("Hello World") {} },
+                    IdentifableView(id: "playback") {  Button("Hello World") {
+                        context[FeatureService.self].present(.left) {
+                            Form {
+                                Text("Hello")
+                                Text("Hello")
+                                Text("Hello")
+                            }.frame(width: 100)
+                        }
+                    } },
                 ]}
                 
                 context[TitleService.self].setTitle("WWDC Video")
@@ -55,6 +63,7 @@ struct ContentView: View {
                 }
                 
                 context[ControlService.self].configure(controlStyle: .manual)
+                context[FeatureService.self].configure(style: .squeeze)
             }
     }
 }
