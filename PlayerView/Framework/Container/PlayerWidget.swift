@@ -21,7 +21,6 @@ public struct PlayerWidget: View {
             
             ZStack {
                 RenderWidget()
-                GestureWidget()
                 FeatureWidget()
                 PluginWidget()
                 ControlWidget()

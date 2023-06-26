@@ -40,7 +40,10 @@ struct RenderWidget : View {
                     )
                 }
                 
-                RenderView(player: service.player, gravity: service.gravity)
+                ZStack {
+                    RenderView(player: service.player, gravity: service.gravity)
+                    GestureWidget()
+                }
                 
                 if let feature = service.feature, feature.direction == .right(.squeeze) {
                     AnyView(

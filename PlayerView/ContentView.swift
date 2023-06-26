@@ -31,9 +31,9 @@ struct ContentView: View {
                     IdentifableView(id: "playback") {  Button("Hello World") {
                         context[FeatureService.self].present(.right(.squeeze)) {AnyView(
                             Form {
-                                Text("Hello")
-                                Text("Hello")
-                                Text("Hello")
+                                Text("World")
+                                Text("World")
+                                Text("World")
                             }.frame(width: 100)
                         )}
                     } },
