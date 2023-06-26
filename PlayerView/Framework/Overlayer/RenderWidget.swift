@@ -16,8 +16,6 @@ public class RenderService : Service {
     
     @StateSync(serviceType: FeatureService.self, keyPath: \.$feature) fileprivate var feature
     
-    @StateSync(serviceType: FeatureService.self, keyPath: \.$style) fileprivate var style
-    
     public let player = AVPlayer()
     
     public func fill() {
@@ -34,24 +32,22 @@ struct RenderWidget : View {
     var body: some View {
         WithService(RenderService.self) { service in
             HStack {
-                if service.style == .squeeze {
-                    if case let .left(view) = service.feature {
-                        AnyView(
-                            view()
-                                .frame(maxHeight: .infinity)
-                                .transition(.move(edge: .leading))
-                        )
-                    }
+                if let feature = service.feature, feature.direction == .left(.squeeze) {
+                    AnyView(
+                        feature.viewGetter()
+                            .frame(maxHeight: .infinity)
+                            .transition(.move(edge: .leading))
+                    )
                 }
+                
                 RenderView(player: service.player, gravity: service.gravity)
-                if service.style == .squeeze {
-                    if case let .right(view) = service.feature {
-                        AnyView(
-                            view()
-                                .frame(maxHeight: .infinity)
-                                .transition(.move(edge: .leading))
-                        )
-                    }
+                
+                if let feature = service.feature, feature.direction == .right(.squeeze) {
+                    AnyView(
+                        feature.viewGetter()
+                            .frame(maxHeight: .infinity)
+                            .transition(.move(edge: .trailing))
+                    )
                 }
             }
         }

@@ -21,35 +21,12 @@ public struct PlayerWidget: View {
             
             ZStack {
                 RenderWidget()
+                GestureWidget()
                 FeatureWidget()
                 PluginWidget()
                 ControlWidget()
                 ToastWidget()
             }
-            .onTapGesture(count: 2) {
-                let service = context[GestureService.self]
-                service.performDoubleTap()
-            }
-            .onTapGesture(count: 1) {
-                let service = context[GestureService.self]
-                service.performTap()
-            }
-            .gesture(
-                DragGesture()
-                    .onChanged{ value in
-                        let service = context[GestureService.self]
-                        service.performDrag(.changed(value))
-                    }
-                    .onEnded{ value in
-                        let service = context[GestureService.self]
-                        service.performDrag(.end(value))
-                    }
-            )
-            .onLongPressGesture {
-                } onPressingChanged: {
-                    context[GestureService.self].performLongPress( $0 ? .start : .end)
-            }
-
         }
     }
 }

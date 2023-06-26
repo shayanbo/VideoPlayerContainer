@@ -97,18 +97,12 @@ public class ControlService : Service {
         case .always: break
         case .never: break
         case .manual:
-            withAnimation {
-                hidden.toggle()
-            }
+            withAnimation { hidden.toggle() }
         case let .auto(duration):
-            withAnimation {
-                hidden.toggle()
-            }
+            withAnimation { hidden.toggle() }
             if !hidden {
                 DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
-                    withAnimation {
-                        self?.hidden = true
-                    }
+                    withAnimation { self?.hidden = true }
                 }
             }
         }

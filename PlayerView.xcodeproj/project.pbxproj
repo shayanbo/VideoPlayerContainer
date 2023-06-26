@@ -29,9 +29,9 @@
 		D4D839832A403E1A00DD3C70 /* PlaybackButtonWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D839822A403E1A00DD3C70 /* PlaybackButtonWidget.swift */; };
 		D4D839852A403E2600DD3C70 /* ProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D839842A403E2600DD3C70 /* ProgressWidget.swift */; };
 		D4D839872A403E3100DD3C70 /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D839862A403E3100DD3C70 /* TimelineWidget.swift */; };
-		D4D839A52A403F2000DD3C70 /* GestureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D8399A2A403F2000DD3C70 /* GestureService.swift */; };
 		D4D839AE2A40878800DD3C70 /* ViewSizeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D839AD2A40878800DD3C70 /* ViewSizeService.swift */; };
 		D4FBD69C2A48313C008C00D0 /* LoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FBD69B2A48313C008C00D0 /* LoadingService.swift */; };
+		D4FBD69E2A4964A8008C00D0 /* GestureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FBD69D2A4964A8008C00D0 /* GestureWidget.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,9 +58,9 @@
 		D4D839822A403E1A00DD3C70 /* PlaybackButtonWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackButtonWidget.swift; sourceTree = "<group>"; };
 		D4D839842A403E2600DD3C70 /* ProgressWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressWidget.swift; sourceTree = "<group>"; };
 		D4D839862A403E3100DD3C70 /* TimelineWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
-		D4D8399A2A403F2000DD3C70 /* GestureService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureService.swift; sourceTree = "<group>"; };
 		D4D839AD2A40878800DD3C70 /* ViewSizeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSizeService.swift; sourceTree = "<group>"; };
 		D4FBD69B2A48313C008C00D0 /* LoadingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingService.swift; sourceTree = "<group>"; };
+		D4FBD69D2A4964A8008C00D0 /* GestureWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GestureWidget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +150,7 @@
 				D4A8761B2A468B290006D717 /* PluginWidget.swift */,
 				D4A8761C2A468B290006D717 /* RenderWidget.swift */,
 				D4A8761E2A468B290006D717 /* ToastWidget.swift */,
+				D4FBD69D2A4964A8008C00D0 /* GestureWidget.swift */,
 			);
 			path = Overlayer;
 			sourceTree = "<group>";
@@ -157,7 +158,6 @@
 		D4D839992A403F2000DD3C70 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				D4D8399A2A403F2000DD3C70 /* GestureService.swift */,
 				D4D839AD2A40878800DD3C70 /* ViewSizeService.swift */,
 				D44A67142A41DEDF00F3FD2D /* StatusService.swift */,
 			);
@@ -265,10 +265,10 @@
 				D4A876222A468B290006D717 /* FeatureWidget.swift in Sources */,
 				D402B00A2A413468007FCD64 /* TitleWidget.swift in Sources */,
 				D499861C2A389FEF00384185 /* PlayerViewApp.swift in Sources */,
+				D4FBD69E2A4964A8008C00D0 /* GestureWidget.swift in Sources */,
 				D4D839832A403E1A00DD3C70 /* PlaybackButtonWidget.swift in Sources */,
 				D4A876212A468B290006D717 /* RenderWidget.swift in Sources */,
 				D4A876232A468B290006D717 /* ToastWidget.swift in Sources */,
-				D4D839A52A403F2000DD3C70 /* GestureService.swift in Sources */,
 				D4FBD69C2A48313C008C00D0 /* LoadingService.swift in Sources */,
 				D482AB462A44882C00CCC65E /* StateSync.swift in Sources */,
 			);

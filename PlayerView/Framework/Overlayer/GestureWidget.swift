@@ -1,13 +1,12 @@
 //
-//  GestureService.swift
+//  GestureWidget.swift
 //  PlayerView
 //
-//  Created by shayanbo on 2023/6/18.
+//  Created by shayanbo on 2023/6/26.
 //
 
-import Foundation
-import Combine
 import SwiftUI
+import Combine
 
 public class GestureService : Service {
     
@@ -15,7 +14,7 @@ public class GestureService : Service {
     
     private let tap = PassthroughSubject<Void, Never>()
     
-    public func performTap() {
+    fileprivate func performTap() {
         tap.send(())
     }
     
@@ -29,7 +28,7 @@ public class GestureService : Service {
     
     private let doubleTap = PassthroughSubject<Void, Never>()
     
-    public func performDoubleTap() {
+    fileprivate func performDoubleTap() {
         doubleTap.send(())
     }
     
@@ -48,7 +47,7 @@ public class GestureService : Service {
     
     private let drag = PassthroughSubject<DragEvent, Never>()
     
-    public func performDrag(_ event: DragEvent) {
+    fileprivate func performDrag(_ event: DragEvent) {
         drag.send(event)
     }
     
@@ -74,6 +73,33 @@ public class GestureService : Service {
     public func observeLongPress(_ handler: @escaping (LongPressEvent)->Void) -> AnyCancellable {
         longPress.sink {
             handler($0)
+        }
+    }
+}
+
+struct GestureWidget: View {
+    var body: some View {
+        WithService(GestureService.self) { service in
+            Color.clear.contentShape(Rectangle())
+                .onTapGesture(count: 2) {
+                    service.performDoubleTap()
+                }
+                .onTapGesture(count: 1) {
+                    service.performTap()
+                }
+                .gesture(
+                    DragGesture()
+                        .onChanged{ value in
+                            service.performDrag(.changed(value))
+                        }
+                        .onEnded{ value in
+                            service.performDrag(.end(value))
+                        }
+                )
+                .onLongPressGesture {
+                    } onPressingChanged: {
+                        service.performLongPress( $0 ? .start : .end)
+                }
         }
     }
 }
