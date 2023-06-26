@@ -1,5 +1,5 @@
 //
-//  VideoPlayerApp.swift
+//  ExampleApp.swift
 //  VideoPlayer
 //
 //  Created by shayanbo on 2023/6/13.

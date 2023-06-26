@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D499861C2A389FEF00384185 /* PlayerViewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D499861B2A389FEF00384185 /* PlayerViewApp.swift */; };
+		D499861C2A389FEF00384185 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D499861B2A389FEF00384185 /* ExampleApp.swift */; };
 		D499861E2A389FEF00384185 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D499861D2A389FEF00384185 /* ContentView.swift */; };
 		D49986202A389FF000384185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D499861F2A389FF000384185 /* Assets.xcassets */; };
 		D49986232A389FF000384185 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49986222A389FF000384185 /* Preview Assets.xcassets */; };
@@ -69,7 +69,7 @@
 
 /* Begin PBXFileReference section */
 		D49986182A389FEF00384185 /* VideoPlayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VideoPlayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D499861B2A389FEF00384185 /* PlayerViewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewApp.swift; sourceTree = "<group>"; };
+		D499861B2A389FEF00384185 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		D499861D2A389FEF00384185 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D499861F2A389FF000384185 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D49986222A389FF000384185 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -139,7 +139,7 @@
 			isa = PBXGroup;
 			children = (
 				D4FA61462A49D26400B28EAE /* Widgets */,
-				D499861B2A389FEF00384185 /* PlayerViewApp.swift */,
+				D499861B2A389FEF00384185 /* ExampleApp.swift */,
 				D499861D2A389FEF00384185 /* ContentView.swift */,
 				D499861F2A389FF000384185 /* Assets.xcassets */,
 				D49986212A389FF000384185 /* Preview Content */,
@@ -330,7 +330,7 @@
 				D4FA615E2A49D33100B28EAE /* ProgressWidget.swift in Sources */,
 				D4FA615F2A49D33100B28EAE /* TimelineWidget.swift in Sources */,
 				D499861E2A389FEF00384185 /* ContentView.swift in Sources */,
-				D499861C2A389FEF00384185 /* PlayerViewApp.swift in Sources */,
+				D499861C2A389FEF00384185 /* ExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
