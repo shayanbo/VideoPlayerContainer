@@ -7,8 +7,12 @@
 
 import Foundation
 import SwiftUI
-import UIKit
 import AVKit
+#if os(iOS) || os(watchOS) || os(tvOS)
+import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
 
 public class RenderService : Service {
     
@@ -57,6 +61,8 @@ struct RenderWidget : View {
     }
 }
 
+#if os(iOS) || os(watchOS) || os(tvOS)
+
 struct RenderView : UIViewRepresentable {
 
     let player: AVPlayer
@@ -98,3 +104,56 @@ class PlayerView: UIView {
         return AVPlayerLayer.self
     }
 }
+
+#elseif os(macOS)
+
+struct RenderView : NSViewRepresentable {
+    
+    let player: AVPlayer
+    let gravity: AVLayerVideoGravity
+    
+    func makeNSView(context: NSViewRepresentableContext<Self>) -> PlayerView {
+        let playerView = PlayerView()
+        playerView.player = player
+        playerView.videoGravity = gravity
+        return playerView
+    }
+
+    func updateNSView(_ uiView: PlayerView, context: NSViewRepresentableContext<Self>) {
+        uiView.videoGravity = gravity
+    }
+}
+
+class PlayerView: NSView {
+    
+    let renderCanvas = AVPlayerLayer()
+    
+    init() {
+        super.init(frame: .zero)
+        wantsLayer = true
+        renderCanvas.frame = bounds
+        renderCanvas.autoresizingMask = [.layerHeightSizable, .layerWidthSizable]
+        layer?.addSublayer(renderCanvas)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var videoGravity: AVLayerVideoGravity {
+        get {
+            return renderCanvas.videoGravity
+        }
+        set {
+            renderCanvas.videoGravity = newValue
+        }
+    }
+    
+    var player: AVPlayer? {
+        didSet {
+            renderCanvas.player = player
+        }
+    }
+}
+
+#endif
