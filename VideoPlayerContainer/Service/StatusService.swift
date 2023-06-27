@@ -9,7 +9,7 @@ import Foundation
 
 public class StatusService : Service {
     
-    public enum Status {
+    enum Status {
         case halfScreen
         case fullScreen
         case portrait
