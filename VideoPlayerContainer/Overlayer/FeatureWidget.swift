@@ -12,7 +12,7 @@ public class FeatureService : Service {
     
     struct Feature {
         var direction: Direction
-        var viewGetter: ()->AnyView
+        var viewGetter: ()->any View
     }
     
     @ViewState private(set) var feature: Feature?
@@ -39,7 +39,7 @@ public class FeatureService : Service {
         case right(Style)
     }
     
-    public func present(_ direction: Direction, viewGetter: @escaping ()-> AnyView) {
+    public func present(_ direction: Direction, viewGetter: @escaping ()-> some View) {
         withAnimation {
             feature = Feature(direction: direction, viewGetter: viewGetter)
         }

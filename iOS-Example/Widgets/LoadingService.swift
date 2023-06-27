@@ -20,6 +20,7 @@ class LoadingService : Service {
             if player.timeControlStatus == .waitingToPlayAtSpecifiedRate {
                 context[PluginService.self].present(.center) {
                     ProgressView()
+                        .allowsHitTesting(false)
                 }
             } else {
                 context[PluginService.self].dismiss()

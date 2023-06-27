@@ -126,14 +126,16 @@ struct RenderView : NSViewRepresentable {
 
 class PlayerView: NSView {
     
-    let renderCanvas = AVPlayerLayer()
-    
     init() {
         super.init(frame: .zero)
         wantsLayer = true
-        renderCanvas.frame = bounds
-        renderCanvas.autoresizingMask = [.layerHeightSizable, .layerWidthSizable]
-        layer?.addSublayer(renderCanvas)
+//        renderCanvas.frame = bounds
+//        renderCanvas.autoresizingMask = [.layerHeightSizable, .layerWidthSizable]
+//        layer?.addSublayer(renderCanvas)
+    }
+    
+    override func makeBackingLayer() -> CALayer {
+        AVPlayerLayer()
     }
     
     required init?(coder: NSCoder) {
@@ -142,16 +144,19 @@ class PlayerView: NSView {
     
     var videoGravity: AVLayerVideoGravity {
         get {
-            return renderCanvas.videoGravity
+            let canvas = self.layer as! AVPlayerLayer
+            return canvas.videoGravity
         }
         set {
-            renderCanvas.videoGravity = newValue
+            let canvas = self.layer as! AVPlayerLayer
+            canvas.videoGravity = newValue
         }
     }
     
     var player: AVPlayer? {
         didSet {
-            renderCanvas.player = player
+            let canvas = self.layer as! AVPlayerLayer
+            canvas.player = player
         }
     }
 }

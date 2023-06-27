@@ -10,6 +10,12 @@ import Combine
 
 public class GestureService : Service {
     
+    @ViewState public private(set) var enabled = true
+    
+    public func configure(_ onOrOff: Bool) {
+        self.enabled = onOrOff
+    }
+    
     //MARK: Single Tap
     
     private let tap = PassthroughSubject<Void, Never>()
@@ -80,26 +86,28 @@ public class GestureService : Service {
 struct GestureWidget: View {
     var body: some View {
         WithService(GestureService.self) { service in
-            Color.clear.contentShape(Rectangle())
-                .onTapGesture(count: 2) {
-                    service.performDoubleTap()
-                }
-                .onTapGesture(count: 1) {
-                    service.performTap()
-                }
-                .gesture(
-                    DragGesture()
-                        .onChanged{ value in
-                            service.performDrag(.changed(value))
-                        }
-                        .onEnded{ value in
-                            service.performDrag(.end(value))
-                        }
-                )
-                .onLongPressGesture {
-                    } onPressingChanged: {
-                        service.performLongPress( $0 ? .start : .end)
-                }
+            if service.enabled {
+                Color.clear.contentShape(Rectangle())
+                    .onTapGesture(count: 2) {
+                        service.performDoubleTap()
+                    }
+                    .onTapGesture(count: 1) {
+                        service.performTap()
+                    }
+                    .gesture(
+                        DragGesture()
+                            .onChanged{ value in
+                                service.performDrag(.changed(value))
+                            }
+                            .onEnded{ value in
+                                service.performDrag(.end(value))
+                            }
+                    )
+                    .onLongPressGesture {
+                        } onPressingChanged: {
+                            service.performLongPress( $0 ? .start : .end)
+                    }
+            }
         }
     }
 }

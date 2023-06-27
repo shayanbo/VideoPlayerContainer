@@ -9,11 +9,11 @@ import SwiftUI
 
 public class PlayerService: Service {
     
-    @ViewState fileprivate var overlayAfterRender:( ()->AnyView )?
-    @ViewState fileprivate var overlayAfterFeature:( ()->AnyView )?
-    @ViewState fileprivate var overlayAfterPlugin:( ()->AnyView )?
-    @ViewState fileprivate var overlayAfterControl:( ()->AnyView )?
-    @ViewState fileprivate var overlayAfterToast:( ()->AnyView )?
+    @ViewState fileprivate var overlayAfterRender:( ()->any View )?
+    @ViewState fileprivate var overlayAfterFeature:( ()->any View )?
+    @ViewState fileprivate var overlayAfterPlugin:( ()->any View )?
+    @ViewState fileprivate var overlayAfterControl:( ()->any View )?
+    @ViewState fileprivate var overlayAfterToast:( ()->any View )?
     
     public enum Overlay {
         case render
@@ -23,7 +23,7 @@ public class PlayerService: Service {
         case toast
     }
     
-    public func configure(_ overlay: Overlay, overlayGetter: @escaping ()->AnyView) {
+    public func configure(_ overlay: Overlay, overlayGetter: @escaping ()->some View) {
         switch overlay {
         case .render:
             overlayAfterRender = overlayGetter
@@ -56,15 +56,34 @@ public struct PlayerWidget: View {
                 
                 ZStack {
                     RenderWidget()
-                    service.overlayAfterRender?()
+                    
+                    if let overlay = service.overlayAfterRender {
+                        AnyView(overlay())
+                    }
+                    
                     FeatureWidget()
-                    service.overlayAfterFeature?()
+                    
+                    if let overlay = service.overlayAfterFeature {
+                        AnyView(overlay())
+                    }
+                    
                     PluginWidget()
-                    service.overlayAfterPlugin?()
+                    
+                    if let overlay = service.overlayAfterPlugin {
+                        AnyView(overlay())
+                    }
+                    
                     ControlWidget()
-                    service.overlayAfterControl?()
+                    
+                    if let overlay = service.overlayAfterControl {
+                        AnyView(overlay())
+                    }
+                    
                     ToastWidget()
-                    service.overlayAfterToast?()
+                    
+                    if let overlay = service.overlayAfterToast {
+                        AnyView(overlay())
+                    }
                 }
             }
         }

@@ -48,13 +48,13 @@ struct ContentView: View {
                     IdentifableView(id: "title") { TitleWidget() },
                     IdentifableView(id: "space") { Spacer() },
                     IdentifableView(id: "playback") {  Button("Hello World") {
-                        context[FeatureService.self].present(.right(.squeeze)) {AnyView(
+                        context[FeatureService.self].present(.right(.squeeze)) {
                             Form {
                                 Text("World")
                                 Text("World")
                                 Text("World")
                             }.frame(width: 100)
-                        )}
+                        }
                     } },
                     IdentifableView(id: "more") {  MoreButtonWidget() }
                 ]}
@@ -69,13 +69,13 @@ struct ContentView: View {
                 /// halfScreen center
                 controlService.configure(.halfScreen(.center)) {[
                     IdentifableView(id: "playback") {  Button("Hello World") {
-                        context[FeatureService.self].present(.left(.cover)) {AnyView(
+                        context[FeatureService.self].present(.left(.cover)) {
                             Form {
                                 Text("Hello")
                                 Text("Hello")
                                 Text("Hello")
                             }.frame(width: 100)
-                        )}
+                        }
                     } },
                 ]}
                 
