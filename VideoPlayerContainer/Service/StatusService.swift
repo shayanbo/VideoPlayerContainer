@@ -40,4 +40,8 @@ public class StatusService : Service {
             status = .halfScreen
         }
     }
+    
+    public func toPortrait() {
+        status = .portrait
+    }
 }
