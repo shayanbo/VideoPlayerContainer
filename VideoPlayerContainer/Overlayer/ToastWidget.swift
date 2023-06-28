@@ -85,7 +85,6 @@ struct ToastWidget: View {
                         .transition(.asymmetric(insertion: .move(edge: .leading), removal: .opacity))
                 }
             }
-            .clipped()
             .padding(EdgeInsets(top: service.insets.top, leading: 0, bottom: service.insets.bottom, trailing: service.insets.trailing))
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }

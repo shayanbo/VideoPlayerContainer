@@ -10,10 +10,16 @@ import SwiftUI
 public class PlayerService: Service {
     
     @ViewState fileprivate var overlayAfterRender:( ()->any View )?
+    
     @ViewState fileprivate var overlayAfterFeature:( ()->any View )?
+    
     @ViewState fileprivate var overlayAfterPlugin:( ()->any View )?
+    
     @ViewState fileprivate var overlayAfterControl:( ()->any View )?
+    
     @ViewState fileprivate var overlayAfterToast:( ()->any View )?
+    
+    @StateSync(serviceType: FeatureService.self, keyPath: \.$feature) fileprivate var feature
     
     public enum Overlay {
         case render
@@ -47,45 +53,100 @@ public struct PlayerWidget: View {
     
     public var body: some View {
         WithService(PlayerService.self) { service in
-            GeometryReader { proxy in
+            
+            HStack {
+                if let feature = service.feature, case .left(.squeeze) = feature.direction {
+                    AnyView(
+                        feature.viewGetter()
+                            .frame(maxHeight: .infinity)
+                            .transition(.move(edge: .leading))
+                    )
+                }
                 
-                let _ = {
-                    let service = context[ViewSizeService.self]
-                    service.updateViewSize(proxy.size)
-                }()
+                if let feature = service.feature, case let .left(.squeeze(spacing)) = feature.direction {
+                    Spacer().frame(width: spacing)
+                }
                 
-                ZStack {
-                    RenderWidget()
+                VStack {
                     
-                    if let overlay = service.overlayAfterRender {
-                        AnyView(overlay())
+                    if let feature = service.feature, case .top(.squeeze) = feature.direction {
+                        AnyView(
+                            feature.viewGetter()
+                                .frame(maxWidth: .infinity)
+                                .transition(.move(edge: .bottom))
+                        )
                     }
                     
-                    FeatureWidget()
-                    
-                    if let overlay = service.overlayAfterFeature {
-                        AnyView(overlay())
+                    if let feature = service.feature, case let .top(.squeeze(spacing)) = feature.direction {
+                        Spacer().frame(height: spacing)
                     }
                     
-                    PluginWidget()
-                    
-                    if let overlay = service.overlayAfterPlugin {
-                        AnyView(overlay())
+                    GeometryReader { proxy in
+                        
+                        let _ = {
+                            let service = context[ViewSizeService.self]
+                            service.updateViewSize(proxy.size)
+                        }()
+                        
+                        ZStack {
+                            RenderWidget()
+                            
+                            if let overlay = service.overlayAfterRender {
+                                AnyView(overlay())
+                            }
+                            
+                            FeatureWidget()
+                            
+                            if let overlay = service.overlayAfterFeature {
+                                AnyView(overlay())
+                            }
+                            
+                            PluginWidget()
+                            
+                            if let overlay = service.overlayAfterPlugin {
+                                AnyView(overlay())
+                            }
+                            
+                            ControlWidget()
+                            
+                            if let overlay = service.overlayAfterControl {
+                                AnyView(overlay())
+                            }
+                            
+                            ToastWidget()
+                            
+                            if let overlay = service.overlayAfterToast {
+                                AnyView(overlay())
+                            }
+                        }
                     }
                     
-                    ControlWidget()
-                    
-                    if let overlay = service.overlayAfterControl {
-                        AnyView(overlay())
+                    if let feature = service.feature, case let .bottom(.squeeze(spacing)) = feature.direction {
+                        Spacer().frame(height: spacing)
                     }
                     
-                    ToastWidget()
-                    
-                    if let overlay = service.overlayAfterToast {
-                        AnyView(overlay())
+                    if let feature = service.feature, case .bottom(.squeeze) = feature.direction {
+                        AnyView(
+                            feature.viewGetter()
+                                .frame(maxWidth: .infinity)
+                                .transition(.move(edge: .top))
+                        )
                     }
                 }
+                
+                if let feature = service.feature, case let .right(.squeeze(spacing)) = feature.direction {
+                    Spacer().frame(width: spacing)
+                }
+                
+                if let feature = service.feature, case .right(.squeeze) = feature.direction {
+                    AnyView(
+                        feature.viewGetter()
+                            .frame(maxHeight: .infinity)
+                            .transition(.move(edge: .trailing))
+                    )
+                }
             }
+            .clipped()
         }
     }
 }

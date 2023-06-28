@@ -18,8 +18,6 @@ public class RenderService : Service {
     
     @ViewState fileprivate var gravity: AVLayerVideoGravity = .resizeAspect
     
-    @StateSync(serviceType: FeatureService.self, keyPath: \.$feature) fileprivate var feature
-    
     public let player = AVPlayer()
     
     public func fill() {
@@ -35,27 +33,9 @@ struct RenderWidget : View {
     
     var body: some View {
         WithService(RenderService.self) { service in
-            HStack {
-                if let feature = service.feature, feature.direction == .left(.squeeze) {
-                    AnyView(
-                        feature.viewGetter()
-                            .frame(maxHeight: .infinity)
-                            .transition(.move(edge: .leading))
-                    )
-                }
-                
-                ZStack {
-                    RenderView(player: service.player, gravity: service.gravity)
-                    GestureWidget()
-                }
-                
-                if let feature = service.feature, feature.direction == .right(.squeeze) {
-                    AnyView(
-                        feature.viewGetter()
-                            .frame(maxHeight: .infinity)
-                            .transition(.move(edge: .trailing))
-                    )
-                }
+            ZStack {
+                RenderView(player: service.player, gravity: service.gravity)
+                GestureWidget()
             }
         }
     }

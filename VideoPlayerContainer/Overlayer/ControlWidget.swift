@@ -442,7 +442,6 @@ struct ControlWidget: View {
             bottom
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .clipped()
     }
 }
 

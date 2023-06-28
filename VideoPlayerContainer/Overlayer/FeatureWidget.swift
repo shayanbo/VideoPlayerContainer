@@ -32,11 +32,13 @@ public class FeatureService : Service {
         
         public enum Style: Equatable {
             case cover
-            case squeeze
+            case squeeze(CGFloat)
         }
         
         case left(Style)
         case right(Style)
+        case top(Style)
+        case bottom(Style)
     }
     
     public func present(_ direction: Direction, viewGetter: @escaping ()-> some View) {
@@ -79,6 +81,30 @@ struct FeatureWidget: View {
                             feature.viewGetter()
                                 .frame(maxHeight: .infinity)
                                 .transition(.move(edge: .trailing))
+                        )
+                    }
+                }
+                
+                VStack {
+                    Spacer()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    if let feature = service.feature, feature.direction == .top(.cover) {
+                        AnyView(
+                            feature.viewGetter()
+                                .frame(maxWidth: .infinity)
+                                .transition(.move(edge: .bottom))
+                        )
+                    }
+                }
+                
+                VStack {
+                    Spacer()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    if let feature = service.feature, feature.direction == .bottom(.cover) {
+                        AnyView(
+                            feature.viewGetter()
+                                .frame(maxWidth: .infinity)
+                                .transition(.move(edge: .top))
                         )
                     }
                 }
