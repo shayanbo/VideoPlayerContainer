@@ -62,7 +62,7 @@ struct ContentView: View {
                 /// halfScreen bottom
                 controlService.configure(.halfScreen(.bottom)) {[
                     IdentifableView(id: "playback") {  PlaybackButtonWidget() },
-                    IdentifableView(id: "progress") {  ProgressWidget()   },
+                    IdentifableView(id: "progress") {  SeekBarWidget()   },
                     IdentifableView(id: "timeline") {  TimelineWidget()   }
                 ]}
                 
@@ -97,7 +97,7 @@ struct ContentView: View {
                 /// fullScreen bottom
                 controlService.configure(.fullScreen(.bottom)) {[
                     IdentifableView(id: "playback") {  PlaybackButtonWidget() },
-                    IdentifableView(id: "progress") {  ProgressWidget()   },
+                    IdentifableView(id: "progress") {  SeekBarWidget()   },
                     IdentifableView(id: "timeline") {  TimelineWidget()   }
                 ]}
                 

@@ -1,5 +1,5 @@
 //
-//  ProgressWidget.swift
+//  SeekBarWidget.swift
 //  VideoPlayer
 //
 //  Created by shayanbo on 2023/6/19.
@@ -11,11 +11,11 @@ import SwiftUI
 import Combine
 import VideoPlayerContainer
 
-struct ProgressWidget : View {
+struct SeekBarWidget : View {
     
     var body: some View {
     
-        WithService(ProgressService.self) { service in
+        WithService(SeekBarService.self) { service in
             Slider(value: Binding(get: {
                 service.progress
             }, set: { value, _ in
@@ -25,11 +25,12 @@ struct ProgressWidget : View {
                 service.seekProgress(service.progress)
             }
             .disabled(service.progress == 0)
+            .frame(height: 40)
         }
     }
 }
 
-class ProgressService : Service {
+class SeekBarService : Service {
     
     @ViewState fileprivate var progress = 0.0
     

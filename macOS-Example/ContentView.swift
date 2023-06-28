@@ -9,8 +9,7 @@ import SwiftUI
 import AVKit
 import VideoPlayerContainer
 
-let wwdcVideo = "file:///Users/shayanbo/Desktop/book/untitled_folder/a.mp4"
-//"https://devstreaming-cdn.apple.com/videos/wwdc/2023/10036/4/BB960BFD-F982-4800-8060-5674B049AC5A/cmaf/hvc/2160p_16800/hvc_2160p_16800.m3u8"
+let wwdcVideo = "https://devstreaming-cdn.apple.com/videos/wwdc/2023/10036/4/BB960BFD-F982-4800-8060-5674B049AC5A/cmaf/hvc/2160p_16800/hvc_2160p_16800.m3u8"
 
 struct ContentView: View {
     
@@ -19,8 +18,7 @@ struct ContentView: View {
     var body: some View {
         
         PlayerWidget()
-            .ignoresSafeArea(edges: .vertical)
-            .frame(maxWidth: .infinity, maxHeight: 300)
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
             .bindContext(context, launch: [
                 LoadingService.self,
             ])
@@ -34,13 +32,13 @@ struct ContentView: View {
                     IdentifableView(id: "title") { TitleWidget() },
                     IdentifableView(id: "space") { Spacer() },
                     IdentifableView(id: "playback") {  Button("Hello World") {
-                        context[FeatureService.self].present(.right(.squeeze)) {AnyView(
+                        context[FeatureService.self].present(.right(.squeeze(0))) {
                             Form {
                                 Text("World")
                                 Text("World")
                                 Text("World")
                             }.frame(width: 100)
-                        )}
+                        }
                     } },
                     IdentifableView(id: "more") {  MoreButtonWidget() }
                 ]}
@@ -48,20 +46,20 @@ struct ContentView: View {
                 /// halfScreen bottom
                 controlService.configure(.halfScreen(.bottom)) {[
                     IdentifableView(id: "playback") {  PlaybackButtonWidget() },
-                    IdentifableView(id: "progress") {  ProgressWidget()   },
+                    IdentifableView(id: "progress") {  SeekBarWidget()   },
                     IdentifableView(id: "timeline") {  TimelineWidget()   }
                 ]}
                 
                 /// halfScreen center
                 controlService.configure(.halfScreen(.center)) {[
                     IdentifableView(id: "playback") {  Button("Hello World") {
-                        context[FeatureService.self].present(.left(.cover)) {AnyView(
+                        context[FeatureService.self].present(.left(.cover)) {
                             Form {
                                 Text("Hello")
                                 Text("Hello")
                                 Text("Hello")
                             }.frame(width: 100)
-                        )}
+                        }
                     } },
                 ]}
                 

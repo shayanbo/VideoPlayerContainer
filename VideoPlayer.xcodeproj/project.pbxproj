@@ -31,7 +31,7 @@
 		D4130F1D2A4A65FE007DAFFE /* PlaybackButtonWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F152A4A65FE007DAFFE /* PlaybackButtonWidget.swift */; };
 		D4130F1E2A4A65FE007DAFFE /* TitleWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F162A4A65FE007DAFFE /* TitleWidget.swift */; };
 		D4130F1F2A4A65FE007DAFFE /* BackButtonWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F172A4A65FE007DAFFE /* BackButtonWidget.swift */; };
-		D4130F202A4A65FE007DAFFE /* ProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F182A4A65FE007DAFFE /* ProgressWidget.swift */; };
+		D4130F202A4A65FE007DAFFE /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */; };
 		D4130F212A4A65FE007DAFFE /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */; };
 		D4130F262A4A6E5F007DAFFE /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F252A4A6E5F007DAFFE /* ExampleApp.swift */; };
 		D499861C2A389FEF00384185 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D499861B2A389FEF00384185 /* ExampleApp.swift */; };
@@ -43,7 +43,7 @@
 		D4FA615B2A49D33100B28EAE /* PlaybackButtonWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FA61492A49D26400B28EAE /* PlaybackButtonWidget.swift */; };
 		D4FA615C2A49D33100B28EAE /* TitleWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FA614A2A49D26400B28EAE /* TitleWidget.swift */; };
 		D4FA615D2A49D33100B28EAE /* BackButtonWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FA614B2A49D26400B28EAE /* BackButtonWidget.swift */; };
-		D4FA615E2A49D33100B28EAE /* ProgressWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FA614C2A49D26400B28EAE /* ProgressWidget.swift */; };
+		D4FA615E2A49D33100B28EAE /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FA614C2A49D26400B28EAE /* SeekBarWidget.swift */; };
 		D4FA615F2A49D33100B28EAE /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FA614D2A49D26400B28EAE /* TimelineWidget.swift */; };
 /* End PBXBuildFile section */
 
@@ -103,7 +103,7 @@
 		D4130F152A4A65FE007DAFFE /* PlaybackButtonWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackButtonWidget.swift; sourceTree = "<group>"; };
 		D4130F162A4A65FE007DAFFE /* TitleWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleWidget.swift; sourceTree = "<group>"; };
 		D4130F172A4A65FE007DAFFE /* BackButtonWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButtonWidget.swift; sourceTree = "<group>"; };
-		D4130F182A4A65FE007DAFFE /* ProgressWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWidget.swift; sourceTree = "<group>"; };
+		D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 		D4130F252A4A6E5F007DAFFE /* ExampleApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		D49986182A389FEF00384185 /* iOS-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -116,7 +116,7 @@
 		D4FA61492A49D26400B28EAE /* PlaybackButtonWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackButtonWidget.swift; sourceTree = "<group>"; };
 		D4FA614A2A49D26400B28EAE /* TitleWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TitleWidget.swift; sourceTree = "<group>"; };
 		D4FA614B2A49D26400B28EAE /* BackButtonWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButtonWidget.swift; sourceTree = "<group>"; };
-		D4FA614C2A49D26400B28EAE /* ProgressWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressWidget.swift; sourceTree = "<group>"; };
+		D4FA614C2A49D26400B28EAE /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D4FA614D2A49D26400B28EAE /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,7 +229,7 @@
 				D4130F152A4A65FE007DAFFE /* PlaybackButtonWidget.swift */,
 				D4130F162A4A65FE007DAFFE /* TitleWidget.swift */,
 				D4130F172A4A65FE007DAFFE /* BackButtonWidget.swift */,
-				D4130F182A4A65FE007DAFFE /* ProgressWidget.swift */,
+				D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */,
 				D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */,
 			);
 			path = Widgets;
@@ -284,7 +284,7 @@
 				D4FA61492A49D26400B28EAE /* PlaybackButtonWidget.swift */,
 				D4FA614A2A49D26400B28EAE /* TitleWidget.swift */,
 				D4FA614B2A49D26400B28EAE /* BackButtonWidget.swift */,
-				D4FA614C2A49D26400B28EAE /* ProgressWidget.swift */,
+				D4FA614C2A49D26400B28EAE /* SeekBarWidget.swift */,
 				D4FA614D2A49D26400B28EAE /* TimelineWidget.swift */,
 			);
 			path = Widgets;
@@ -465,7 +465,7 @@
 				D4130F1F2A4A65FE007DAFFE /* BackButtonWidget.swift in Sources */,
 				D4130F1D2A4A65FE007DAFFE /* PlaybackButtonWidget.swift in Sources */,
 				D4130F212A4A65FE007DAFFE /* TimelineWidget.swift in Sources */,
-				D4130F202A4A65FE007DAFFE /* ProgressWidget.swift in Sources */,
+				D4130F202A4A65FE007DAFFE /* SeekBarWidget.swift in Sources */,
 				D4130F1C2A4A65FE007DAFFE /* LoadingService.swift in Sources */,
 				D4130F1E2A4A65FE007DAFFE /* TitleWidget.swift in Sources */,
 				D4130F1B2A4A65FE007DAFFE /* MoreButtonWidget.swift in Sources */,
@@ -482,7 +482,7 @@
 				D4FA615B2A49D33100B28EAE /* PlaybackButtonWidget.swift in Sources */,
 				D4FA615C2A49D33100B28EAE /* TitleWidget.swift in Sources */,
 				D4FA615D2A49D33100B28EAE /* BackButtonWidget.swift in Sources */,
-				D4FA615E2A49D33100B28EAE /* ProgressWidget.swift in Sources */,
+				D4FA615E2A49D33100B28EAE /* SeekBarWidget.swift in Sources */,
 				D4FA615F2A49D33100B28EAE /* TimelineWidget.swift in Sources */,
 				D499861E2A389FEF00384185 /* ContentView.swift in Sources */,
 				D499861C2A389FEF00384185 /* ExampleApp.swift in Sources */,
