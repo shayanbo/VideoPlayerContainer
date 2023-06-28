@@ -8,21 +8,6 @@
 import SwiftUI
 import Combine
 
-fileprivate extension ControlService {
-    
-    static func horizontal(_ views: [IdentifableView]) -> any View {
-        HStack { ForEach(views) { $0 } }
-    }
-    
-    static func vertical(_ views: [IdentifableView]) -> any View {
-        VStack { ForEach(views) { $0 } }
-    }
-    
-    static func emptyItems() -> [IdentifableView] {
-        return [IdentifableView]()
-    }
-}
-
 public class ControlService : Service {
     
     private var cancellables = [AnyCancellable]()
@@ -33,11 +18,19 @@ public class ControlService : Service {
     @ViewState fileprivate var shadowForBottomBar: LinearGradient? = .init(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .bottom, endPoint: .top)
     
     fileprivate struct ControlBar {
-        var top = ControlService.horizontal
-        var left = ControlService.vertical
-        var right = ControlService.vertical
-        var bottom = ControlService.horizontal
-        var center = ControlService.horizontal
+        
+        static func horizontal(_ views: [IdentifableView]) -> any View {
+            HStack { ForEach(views) { $0 } }
+        }
+        static func vertical(_ views: [IdentifableView]) -> any View {
+            VStack { ForEach(views) { $0 } }
+        }
+        
+        var top = horizontal
+        var left = vertical
+        var right = vertical
+        var bottom = horizontal
+        var center = horizontal
     }
     
     @ViewState fileprivate var halfScreenControlBar = ControlBar()
@@ -45,11 +38,11 @@ public class ControlService : Service {
     @ViewState fileprivate var portraitScreenControlBar = ControlBar()
     
     fileprivate struct ControlBarItems {
-        var top = ControlService.emptyItems
-        var left = ControlService.emptyItems
-        var right = ControlService.emptyItems
-        var bottom = ControlService.emptyItems
-        var center = ControlService.emptyItems
+        var top = { [IdentifableView]() }
+        var left = { [IdentifableView]() }
+        var right = { [IdentifableView]() }
+        var bottom = { [IdentifableView]() }
+        var center = { [IdentifableView]() }
     }
     
     @ViewState fileprivate var halfScreenControlBarItems = ControlBarItems()
@@ -271,11 +264,7 @@ public extension ControlService {
     enum Location {
         
         public enum Direction {
-            case top
-            case left
-            case right
-            case bottom
-            case center
+            case top, left, right, bottom, center
         }
         
         case fullScreen(Direction)

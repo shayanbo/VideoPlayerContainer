@@ -66,8 +66,7 @@ public class GestureService : Service {
     //MARK: Long Press
     
     public enum LongPressEvent {
-        case start
-        case end
+        case start, end
     }
     
     private let longPress = PassthroughSubject<LongPressEvent, Never>()

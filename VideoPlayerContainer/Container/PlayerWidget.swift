@@ -21,15 +21,17 @@ public class PlayerService: Service {
     
     @StateSync(serviceType: FeatureService.self, keyPath: \.$feature) fileprivate var feature
     
-    public enum Overlay {
-        case render
-        case feature
-        case plugin
-        case control
-        case toast
+    @ViewState fileprivate var overlays = Overlay.allCases
+    
+    public enum Overlay: CaseIterable {
+        case render, feature, plugin, control, toast
     }
     
-    public func configure(_ overlay: Overlay, overlayGetter: @escaping ()->some View) {
+    public func enable(overlays: [Overlay]) {
+        self.overlays = overlays
+    }
+    
+    public func configure(overlay: Overlay, overlayGetter: @escaping ()->some View) {
         switch overlay {
         case .render:
             overlayAfterRender = overlayGetter
@@ -89,31 +91,42 @@ public struct PlayerWidget: View {
                         }()
                         
                         ZStack {
-                            RenderWidget()
+                            
+                            if service.overlays.contains(.render) {
+                                RenderWidget()
+                            }
                             
                             if let overlay = service.overlayAfterRender {
                                 AnyView(overlay())
                             }
                             
-                            FeatureWidget()
+                            if service.overlays.contains(.feature) {
+                                FeatureWidget()
+                            }
                             
                             if let overlay = service.overlayAfterFeature {
                                 AnyView(overlay())
                             }
                             
-                            PluginWidget()
+                            if service.overlays.contains(.plugin) {
+                                PluginWidget()
+                            }
                             
                             if let overlay = service.overlayAfterPlugin {
                                 AnyView(overlay())
                             }
                             
-                            ControlWidget()
+                            if service.overlays.contains(.control) {
+                                ControlWidget()
+                            }
                             
                             if let overlay = service.overlayAfterControl {
                                 AnyView(overlay())
                             }
                             
-                            ToastWidget()
+                            if service.overlays.contains(.toast) {
+                                ToastWidget()
+                            }
                             
                             if let overlay = service.overlayAfterToast {
                                 AnyView(overlay())
