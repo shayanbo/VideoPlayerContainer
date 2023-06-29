@@ -109,9 +109,6 @@ class PlayerView: NSView {
     init() {
         super.init(frame: .zero)
         wantsLayer = true
-//        renderCanvas.frame = bounds
-//        renderCanvas.autoresizingMask = [.layerHeightSizable, .layerWidthSizable]
-//        layer?.addSublayer(renderCanvas)
     }
     
     override func makeBackingLayer() -> CALayer {

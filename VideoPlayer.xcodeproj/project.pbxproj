@@ -34,6 +34,18 @@
 		D4130F202A4A65FE007DAFFE /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */; };
 		D4130F212A4A65FE007DAFFE /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */; };
 		D4130F262A4A6E5F007DAFFE /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F252A4A6E5F007DAFFE /* ExampleApp.swift */; };
+		D49604102A4D224F00AD3FE6 /* TikTok_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D496040F2A4D224F00AD3FE6 /* TikTok_ExampleApp.swift */; };
+		D49604122A4D224F00AD3FE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604112A4D224F00AD3FE6 /* ContentView.swift */; };
+		D49604142A4D225000AD3FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604132A4D225000AD3FE6 /* Assets.xcassets */; };
+		D49604172A4D225000AD3FE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604162A4D225000AD3FE6 /* Preview Assets.xcassets */; };
+		D49604222A4D228700AD3FE6 /* Youtube_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604212A4D228700AD3FE6 /* Youtube_ExampleApp.swift */; };
+		D49604242A4D228700AD3FE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604232A4D228700AD3FE6 /* ContentView.swift */; };
+		D49604262A4D228800AD3FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604252A4D228800AD3FE6 /* Assets.xcassets */; };
+		D49604292A4D228800AD3FE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604282A4D228800AD3FE6 /* Preview Assets.xcassets */; };
+		D49604342A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604332A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift */; };
+		D49604362A4D22AF00AD3FE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604352A4D22AF00AD3FE6 /* ContentView.swift */; };
+		D49604382A4D22B000AD3FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604372A4D22B000AD3FE6 /* Assets.xcassets */; };
+		D496043B2A4D22B000AD3FE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D496043A2A4D22B000AD3FE6 /* Preview Assets.xcassets */; };
 		D499861C2A389FEF00384185 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D499861B2A389FEF00384185 /* ExampleApp.swift */; };
 		D499861E2A389FEF00384185 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D499861D2A389FEF00384185 /* ContentView.swift */; };
 		D49986202A389FF000384185 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D499861F2A389FF000384185 /* Assets.xcassets */; };
@@ -106,6 +118,21 @@
 		D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 		D4130F252A4A6E5F007DAFFE /* ExampleApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
+		D496040D2A4D224F00AD3FE6 /* TikTok-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TikTok-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D496040F2A4D224F00AD3FE6 /* TikTok_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikTok_ExampleApp.swift; sourceTree = "<group>"; };
+		D49604112A4D224F00AD3FE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D49604132A4D225000AD3FE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D49604162A4D225000AD3FE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D496041F2A4D228700AD3FE6 /* Youtube-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Youtube-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D49604212A4D228700AD3FE6 /* Youtube_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Youtube_ExampleApp.swift; sourceTree = "<group>"; };
+		D49604232A4D228700AD3FE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D49604252A4D228800AD3FE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D49604282A4D228800AD3FE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		D49604312A4D22AF00AD3FE6 /* Bilibili-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bilibili-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D49604332A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bilibili_ExampleApp.swift; sourceTree = "<group>"; };
+		D49604352A4D22AF00AD3FE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D49604372A4D22B000AD3FE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D496043A2A4D22B000AD3FE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D49986182A389FEF00384185 /* iOS-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "iOS-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D499861B2A389FEF00384185 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		D499861D2A389FEF00384185 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -133,6 +160,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4061C502A4B260800CDD1FF /* VideoPlayerContainer.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D496040A2A4D224F00AD3FE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D496041C2A4D228700AD3FE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D496042E2A4D22AF00AD3FE6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,12 +283,72 @@
 			path = Widgets;
 			sourceTree = "<group>";
 		};
+		D496040E2A4D224F00AD3FE6 /* TikTok-Example */ = {
+			isa = PBXGroup;
+			children = (
+				D496040F2A4D224F00AD3FE6 /* TikTok_ExampleApp.swift */,
+				D49604112A4D224F00AD3FE6 /* ContentView.swift */,
+				D49604132A4D225000AD3FE6 /* Assets.xcassets */,
+				D49604152A4D225000AD3FE6 /* Preview Content */,
+			);
+			path = "TikTok-Example";
+			sourceTree = "<group>";
+		};
+		D49604152A4D225000AD3FE6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D49604162A4D225000AD3FE6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D49604202A4D228700AD3FE6 /* Youtube-Example */ = {
+			isa = PBXGroup;
+			children = (
+				D49604212A4D228700AD3FE6 /* Youtube_ExampleApp.swift */,
+				D49604232A4D228700AD3FE6 /* ContentView.swift */,
+				D49604252A4D228800AD3FE6 /* Assets.xcassets */,
+				D49604272A4D228800AD3FE6 /* Preview Content */,
+			);
+			path = "Youtube-Example";
+			sourceTree = "<group>";
+		};
+		D49604272A4D228800AD3FE6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D49604282A4D228800AD3FE6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D49604322A4D22AF00AD3FE6 /* Bilibili-Example */ = {
+			isa = PBXGroup;
+			children = (
+				D49604332A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift */,
+				D49604352A4D22AF00AD3FE6 /* ContentView.swift */,
+				D49604372A4D22B000AD3FE6 /* Assets.xcassets */,
+				D49604392A4D22B000AD3FE6 /* Preview Content */,
+			);
+			path = "Bilibili-Example";
+			sourceTree = "<group>";
+		};
+		D49604392A4D22B000AD3FE6 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				D496043A2A4D22B000AD3FE6 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
 		D499860F2A389FEF00384185 = {
 			isa = PBXGroup;
 			children = (
 				D4130F032A4A6598007DAFFE /* macOS-Example */,
 				D499861A2A389FEF00384185 /* iOS-Example */,
 				D4061C252A4B257800CDD1FF /* VideoPlayerContainer */,
+				D496040E2A4D224F00AD3FE6 /* TikTok-Example */,
+				D49604202A4D228700AD3FE6 /* Youtube-Example */,
+				D49604322A4D22AF00AD3FE6 /* Bilibili-Example */,
 				D49986192A389FEF00384185 /* Products */,
 				D4FA61572A49D28E00B28EAE /* Frameworks */,
 			);
@@ -252,6 +360,9 @@
 				D49986182A389FEF00384185 /* iOS-Example.app */,
 				D4130F022A4A6598007DAFFE /* macOS-Example.app */,
 				D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */,
+				D496040D2A4D224F00AD3FE6 /* TikTok-Example.app */,
+				D496041F2A4D228700AD3FE6 /* Youtube-Example.app */,
+				D49604312A4D22AF00AD3FE6 /* Bilibili-Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -346,6 +457,57 @@
 			productReference = D4130F022A4A6598007DAFFE /* macOS-Example.app */;
 			productType = "com.apple.product-type.application";
 		};
+		D496040C2A4D224F00AD3FE6 /* TikTok-Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D496041A2A4D225000AD3FE6 /* Build configuration list for PBXNativeTarget "TikTok-Example" */;
+			buildPhases = (
+				D49604092A4D224F00AD3FE6 /* Sources */,
+				D496040A2A4D224F00AD3FE6 /* Frameworks */,
+				D496040B2A4D224F00AD3FE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TikTok-Example";
+			productName = "TikTok-Example";
+			productReference = D496040D2A4D224F00AD3FE6 /* TikTok-Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D496041E2A4D228700AD3FE6 /* Youtube-Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D496042A2A4D228800AD3FE6 /* Build configuration list for PBXNativeTarget "Youtube-Example" */;
+			buildPhases = (
+				D496041B2A4D228700AD3FE6 /* Sources */,
+				D496041C2A4D228700AD3FE6 /* Frameworks */,
+				D496041D2A4D228700AD3FE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Youtube-Example";
+			productName = "Youtube-Example";
+			productReference = D496041F2A4D228700AD3FE6 /* Youtube-Example.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D49604302A4D22AF00AD3FE6 /* Bilibili-Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D496043C2A4D22B000AD3FE6 /* Build configuration list for PBXNativeTarget "Bilibili-Example" */;
+			buildPhases = (
+				D496042D2A4D22AF00AD3FE6 /* Sources */,
+				D496042E2A4D22AF00AD3FE6 /* Frameworks */,
+				D496042F2A4D22AF00AD3FE6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Bilibili-Example";
+			productName = "Bilibili-Example";
+			productReference = D49604312A4D22AF00AD3FE6 /* Bilibili-Example.app */;
+			productType = "com.apple.product-type.application";
+		};
 		D49986172A389FEF00384185 /* iOS-Example */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = D49986262A389FF000384185 /* Build configuration list for PBXNativeTarget "iOS-Example" */;
@@ -382,6 +544,15 @@
 						CreatedOnToolsVersion = 14.3.1;
 						LastSwiftMigration = 1430;
 					};
+					D496040C2A4D224F00AD3FE6 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					D496041E2A4D228700AD3FE6 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+					D49604302A4D22AF00AD3FE6 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
 					D49986172A389FEF00384185 = {
 						CreatedOnToolsVersion = 14.1;
 					};
@@ -403,6 +574,9 @@
 				D49986172A389FEF00384185 /* iOS-Example */,
 				D4130F012A4A6598007DAFFE /* macOS-Example */,
 				D4061C232A4B257800CDD1FF /* VideoPlayerContainer */,
+				D496040C2A4D224F00AD3FE6 /* TikTok-Example */,
+				D496041E2A4D228700AD3FE6 /* Youtube-Example */,
+				D49604302A4D22AF00AD3FE6 /* Bilibili-Example */,
 			);
 		};
 /* End PBXProject section */
@@ -421,6 +595,33 @@
 			files = (
 				D4130F0C2A4A6599007DAFFE /* Preview Assets.xcassets in Resources */,
 				D4130F092A4A6599007DAFFE /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D496040B2A4D224F00AD3FE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D49604172A4D225000AD3FE6 /* Preview Assets.xcassets in Resources */,
+				D49604142A4D225000AD3FE6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D496041D2A4D228700AD3FE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D49604292A4D228800AD3FE6 /* Preview Assets.xcassets in Resources */,
+				D49604262A4D228800AD3FE6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D496042F2A4D22AF00AD3FE6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D496043B2A4D22B000AD3FE6 /* Preview Assets.xcassets in Resources */,
+				D49604382A4D22B000AD3FE6 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -470,6 +671,33 @@
 				D4130F1E2A4A65FE007DAFFE /* TitleWidget.swift in Sources */,
 				D4130F1B2A4A65FE007DAFFE /* MoreButtonWidget.swift in Sources */,
 				D4130F1A2A4A65FE007DAFFE /* ContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D49604092A4D224F00AD3FE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D49604122A4D224F00AD3FE6 /* ContentView.swift in Sources */,
+				D49604102A4D224F00AD3FE6 /* TikTok_ExampleApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D496041B2A4D228700AD3FE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D49604242A4D228700AD3FE6 /* ContentView.swift in Sources */,
+				D49604222A4D228700AD3FE6 /* Youtube_ExampleApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D496042D2A4D22AF00AD3FE6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D49604362A4D22AF00AD3FE6 /* ContentView.swift in Sources */,
+				D49604342A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -643,6 +871,192 @@
 				SDKROOT = macosx;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		D49604182A4D225000AD3FE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TikTok-Example/Preview Content\"";
+				DEVELOPMENT_TEAM = 5V8DJBQ6XZ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shayanbo.videoplayercontainer.TikTok-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D49604192A4D225000AD3FE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"TikTok-Example/Preview Content\"";
+				DEVELOPMENT_TEAM = 5V8DJBQ6XZ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shayanbo.videoplayercontainer.TikTok-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D496042B2A4D228800AD3FE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Youtube-Example/Preview Content\"";
+				DEVELOPMENT_TEAM = 5V8DJBQ6XZ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shayanbo.videoplayercontainer.Youtube-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D496042C2A4D228800AD3FE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Youtube-Example/Preview Content\"";
+				DEVELOPMENT_TEAM = 5V8DJBQ6XZ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shayanbo.videoplayercontainer.Youtube-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D496043D2A4D22B000AD3FE6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Bilibili-Example/Preview Content\"";
+				DEVELOPMENT_TEAM = 5V8DJBQ6XZ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shayanbo.videoplayercontainer.Bilibili-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D496043E2A4D22B000AD3FE6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"Bilibili-Example/Preview Content\"";
+				DEVELOPMENT_TEAM = 5V8DJBQ6XZ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.shayanbo.videoplayercontainer.Bilibili-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -841,6 +1255,33 @@
 			buildConfigurations = (
 				D4130F0F2A4A6599007DAFFE /* Debug */,
 				D4130F102A4A6599007DAFFE /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D496041A2A4D225000AD3FE6 /* Build configuration list for PBXNativeTarget "TikTok-Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D49604182A4D225000AD3FE6 /* Debug */,
+				D49604192A4D225000AD3FE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D496042A2A4D228800AD3FE6 /* Build configuration list for PBXNativeTarget "Youtube-Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D496042B2A4D228800AD3FE6 /* Debug */,
+				D496042C2A4D228800AD3FE6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D496043C2A4D22B000AD3FE6 /* Build configuration list for PBXNativeTarget "Bilibili-Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D496043D2A4D22B000AD3FE6 /* Debug */,
+				D496043E2A4D22B000AD3FE6 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
