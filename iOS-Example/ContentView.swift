@@ -126,7 +126,7 @@ struct ContentView: View {
                 }
                 
                 // configure control style
-                context[ControlService.self].configure(controlStyle: .manual)
+                context[ControlService.self].configure(controlStyle: .manual(firstAppear: true))
             }
     }
 }

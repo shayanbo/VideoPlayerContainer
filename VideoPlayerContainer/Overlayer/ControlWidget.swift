@@ -64,12 +64,12 @@ public class ControlService : Service {
     public enum ControlStyle {
         case always
         case never
-        case auto(DispatchTimeInterval)
-        case manual
+        case auto(firstAppear: Bool, duration: DispatchTimeInterval)
+        case manual(firstAppear: Bool)
     }
     
-    @ViewState fileprivate var hidden = false
-    fileprivate var controlStyle = ControlStyle.auto(.seconds(3))
+    @ViewState fileprivate var hidden = true
+    fileprivate var controlStyle = ControlStyle.auto(firstAppear: false, duration: .seconds(3))
     
     @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
     
@@ -91,7 +91,7 @@ public class ControlService : Service {
         case .never: break
         case .manual:
             withAnimation { hidden.toggle() }
-        case let .auto(duration):
+        case let .auto(_, duration):
             withAnimation { hidden.toggle() }
             if !hidden {
                 DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
@@ -107,8 +107,8 @@ public class ControlService : Service {
         switch controlStyle {
         case .always: hidden = false
         case .never: hidden = true
-        case .manual:break
-        case .auto: break
+        case .manual(let firstAppear): hidden = !firstAppear
+        case .auto(let firstAppear, _): hidden = !firstAppear
         }
     }
     
