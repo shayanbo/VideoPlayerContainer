@@ -14,22 +14,22 @@ import VideoPlayerContainer
 struct SeekBarWidget : View {
     
     var body: some View {
-        WithService(SeekBarService.self) { service in
+        
+        GeometryReader { proxy in
+            WithService(SeekBarService.self) { service in
             
-            ZStack(alignment: .leading) {
-                Rectangle()
-                    .fill(.gray)
-                    .cornerRadius(2)
-                GeometryReader { proxy in
-                    Rectangle()
-                        .fill(.white)
+                ZStack(alignment: .leading) {
+                    Rectangle().fill(.gray)
+                    
+                    Rectangle().fill(.white)
                         .frame(maxHeight: .infinity)
                         .frame(width: service.progress * proxy.size.width)
                 }
+                .cornerRadius(2)
             }
-            .padding(.horizontal, 10)
-            .frame(height: 5)
         }
+        .padding(.horizontal, 10)
+        .frame(height: 5)
     }
 }
 
@@ -37,11 +37,7 @@ class SeekBarService : Service {
     
     @ViewState fileprivate var progress = 0.0
     
-    private var cancellables = [AnyCancellable]()
-    
     private var timeObserver: Any?
-    
-    fileprivate var acceptProgress = true
     
     required init(_ context: Context) {
         super.init(context)
@@ -53,7 +49,6 @@ class SeekBarService : Service {
             guard let self = self else { return }
             
             self.progress = time.seconds / item.duration.seconds
-            print(self.progress)
         }
     }
 }
