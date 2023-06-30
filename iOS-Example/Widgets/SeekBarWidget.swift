@@ -57,15 +57,16 @@ class SeekBarService : Service {
         let gestureService = context[GestureService.self]
         let viewSizeService = context[ViewSizeService.self]
         
-        gestureService.observeDrag { event in
+        gestureService.observe(.drag(.horizontal)) { event in
             
-            switch event {
-            case .changed(_):
-                break
-            case let .end(value):
+            switch event.action {
+            case .start: break
+            case .end:
                 
                 guard let item = renderService.player.currentItem else { return }
                 guard item.duration.seconds.isNormal else { return }
+                guard case let .drag(value) = event.value else { return }
+                
                 let percent = value.translation.width / viewSizeService.width
                 let secs = item.duration.seconds * percent
                 let current = item.currentTime().seconds

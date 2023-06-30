@@ -23,7 +23,7 @@ public class FeatureService : Service {
         super.init(context)
         
         let gestureService = context[GestureService.self]
-        gestureService.observeTap { [weak self] in
+        gestureService.observe(.tap(.all)) { [weak self] event in
             self?.dismiss()
         }.store(in: &cancellables)
     }

@@ -77,7 +77,7 @@ public class ControlService : Service {
         super.init(context)
         
         let service = context[GestureService.self]
-        service.observeTap {
+        service.observe(.tap(.all)) { _ in
             withAnimation {
                 let service = context[ControlService.self]
                 service.didClick()

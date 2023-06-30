@@ -16,69 +16,122 @@ public class GestureService : Service {
         self.enabled = onOrOff
     }
     
-    //MARK: Single Tap
-    
-    private let tap = PassthroughSubject<Void, Never>()
-    
-    fileprivate func performTap() {
-        tap.send(())
+    public enum Gesture: Equatable {
+
+        public enum Location: Equatable {
+            case all, left, right
+            
+            public static func == (a: Location, b: Location) -> Bool {
+                switch (a, b) {
+                case (.all, _), (_, .all): return true
+                case (.left, .right), (.right, .left): return false
+                default: return true
+                }
+            }
+        }
+
+        public enum Direction: Equatable {
+            case horizontal, vertical(Location)
+        }
+
+        case tap(Location)
+        case doubleTap(Location)
+        case drag(Direction)
+        case longPress(Location)
+        case rotate
+        case pinch
     }
     
-    public func observeTap(_ handler: @escaping ()->Void) -> AnyCancellable {
-        tap.sink { _ in
-            handler()
+    private let observable = PassthroughSubject<GestureEvent, Never>()
+    
+    public struct GestureEvent {
+        
+        public enum Action {
+            case start, end
+        }
+        
+        public enum Value {
+            case tap(CGPoint)
+            case doubleTap(CGPoint)
+            case drag(DragGesture.Value)
+            case longPress(CGPoint)
+            case rotate(RotationGesture.Value)
+            case pinch(MagnificationGesture.Value)
+        }
+        
+        public let gesture: Gesture
+        public let action: Action
+        public let value: Value
+    }
+    
+    public func observe(_ gesture: Gesture, handler: @escaping (GestureEvent)->Void) -> AnyCancellable {
+        observable.filter { event in
+            event.gesture == gesture
+        }.sink { event in
+            handler(event)
         }
     }
     
-    //MARK: Double Tap
+    //MARK: Individual Gesture Handler
     
-    private let doubleTap = PassthroughSubject<Void, Never>()
-    
-    fileprivate func performDoubleTap() {
-        doubleTap.send(())
+    fileprivate func handleTap(_ value: CGPoint, action: GestureEvent.Action) {
+        
+        let leftSide = value.x < context[ViewSizeService.self].width * 0.5
+        let event = GestureEvent(gesture: .tap( leftSide ? .left : .right ), action: action, value: .tap(value))
+        observable.send(event)
     }
     
-    public func observeDoubleTap(_ handler: @escaping ()->Void) -> AnyCancellable {
-        doubleTap.sink { _ in
-            handler()
+    fileprivate func handleDoubleTap(_ value: CGPoint, action: GestureEvent.Action) {
+        
+        let leftSide = value.x < context[ViewSizeService.self].width * 0.5
+        let event = GestureEvent(gesture: .doubleTap( leftSide ? .left : .right ), action: action, value: .tap(value))
+        observable.send(event)
+    }
+    
+    fileprivate var lastDragGesture: GestureEvent?
+    
+    fileprivate func handleDrag(_ value: DragGesture.Value, action: GestureEvent.Action) {
+        
+        let direction: Gesture.Direction = {
+            
+            if let last = lastDragGesture, case let .drag(direction) = last.gesture {
+                return direction
+            }
+            
+            let horizontal = value.translation.width > value.translation.height
+            if horizontal {
+                return .horizontal
+            }
+            let leftSide = value.startLocation.x < context[ViewSizeService.self].width * 0.5
+            if leftSide {
+                return .vertical(.left)
+            } else {
+                return .vertical(.right)
+            }
+        }()
+        
+        let event = GestureEvent(gesture: .drag(direction), action: action, value: .drag(value))
+        
+        switch action {
+        case .start:
+            if lastDragGesture == nil {
+                lastDragGesture = event
+            }
+        case .end:
+            lastDragGesture = nil
         }
+        
+        observable.send(event)
     }
     
-    //MARK: Drag
-    
-    public enum DragEvent {
-        case changed(DragGesture.Value)
-        case end(DragGesture.Value)
+    fileprivate func handlePinch(_ value: MagnificationGesture.Value, action: GestureEvent.Action) {
+        let event = GestureEvent(gesture: .pinch, action: action, value: .pinch(value))
+        observable.send(event)
     }
     
-    private let drag = PassthroughSubject<DragEvent, Never>()
-    
-    fileprivate func performDrag(_ event: DragEvent) {
-        drag.send(event)
-    }
-    
-    public func observeDrag(_ handler: @escaping (DragEvent)->Void) -> AnyCancellable {
-        drag.sink {
-            handler($0)
-        }
-    }
-    
-    //MARK: Long Press
-    
-    public enum LongPressEvent {
-        case start, end
-    }
-    
-    private let longPress = PassthroughSubject<LongPressEvent, Never>()
-    
-    public func performLongPress(_ event: LongPressEvent) {
-        longPress.send(event)
-    }
-    
-    public func observeLongPress(_ handler: @escaping (LongPressEvent)->Void) -> AnyCancellable {
-        longPress.sink {
-            handler($0)
-        }
+    fileprivate func handleRotation(_ value: RotationGesture.Value, action: GestureEvent.Action) {
+        let event = GestureEvent(gesture: .rotate, action: action, value: .rotate(value))
+        observable.send(event)
     }
 }
 
@@ -87,25 +140,39 @@ struct GestureWidget: View {
         WithService(GestureService.self) { service in
             if service.enabled {
                 Color.clear.contentShape(Rectangle())
-                    .onTapGesture(count: 2) {
-                        service.performDoubleTap()
+                    .onTapGesture(count: 2) { value in
+                        service.handleDoubleTap(value, action: .end)
                     }
-                    .onTapGesture(count: 1) {
-                        service.performTap()
+                    .onTapGesture(count: 1) { value in
+                        service.handleTap(value, action: .end)
                     }
                     .gesture(
                         DragGesture()
                             .onChanged{ value in
-                                service.performDrag(.changed(value))
+                                service.handleDrag(value, action: .start)
                             }
                             .onEnded{ value in
-                                service.performDrag(.end(value))
+                                service.handleDrag(value, action: .end)
                             }
                     )
-                    .onLongPressGesture {
-                        } onPressingChanged: {
-                            service.performLongPress( $0 ? .start : .end)
-                    }
+                    .gesture(
+                        MagnificationGesture()
+                            .onChanged { value in
+                                service.handlePinch(value, action: .start)
+                            }
+                            .onEnded { value in
+                                service.handlePinch(value, action: .end)
+                            }
+                    )
+                    .gesture(
+                        RotationGesture()
+                            .onChanged { value in
+                                service.handleRotation(value, action: .start)
+                            }
+                            .onEnded { value in
+                                service.handleRotation(value, action: .end)
+                            }
+                    )
             }
         }
     }

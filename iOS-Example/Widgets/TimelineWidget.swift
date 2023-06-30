@@ -48,14 +48,16 @@ class TimelineService : Service {
         let pluginService = context[PluginService.self]
         let viewSizeService = context[ViewSizeService.self]
         let gestureService = context[GestureService.self]
-        gestureService.observeDrag { [weak self] event in
+        gestureService.observe(.drag(.horizontal)) { [weak self] event in
             guard let self = self else { return }
             
-            switch event {
-            case let .changed(value):
+            switch event.action {
+            case .start:
                 
                 guard let item = renderService.player.currentItem else { return }
                 guard item.duration.seconds.isNormal else { return }
+                
+                guard case let .drag(value) = event.value else { return }
                 
                 let percent = value.translation.width / viewSizeService.width
                 let secs = item.duration.seconds * percent
@@ -66,7 +68,7 @@ class TimelineService : Service {
                         .background(Color.white.opacity(0.5))
                         .offset(CGSize(width: 0, height: 50))
                 }
-            case .end(_):
+            case .end:
                 pluginService.dismiss()
                 break
             }
