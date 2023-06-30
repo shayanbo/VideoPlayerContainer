@@ -12,7 +12,7 @@ public class FeatureService : Service {
     
     struct Feature {
         var direction: Direction
-        var viewGetter: ()->any View
+        var viewGetter: ()->AnyView
     }
     
     @ViewState private(set) var feature: Feature?
@@ -41,7 +41,7 @@ public class FeatureService : Service {
         case bottom(Style)
     }
     
-    public func present(_ direction: Direction, viewGetter: @escaping ()-> some View) {
+    public func present(_ direction: Direction, viewGetter: @escaping ()-> AnyView) {
         withAnimation {
             feature = Feature(direction: direction, viewGetter: viewGetter)
         }
@@ -86,15 +86,15 @@ struct FeatureWidget: View {
                 }
                 
                 VStack {
-                    Spacer()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                     if let feature = service.feature, feature.direction == .top(.cover) {
                         AnyView(
                             feature.viewGetter()
                                 .frame(maxWidth: .infinity)
-                                .transition(.move(edge: .bottom))
+                                .transition(.move(edge: .top))
                         )
                     }
+                    Spacer()
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 
                 VStack {
@@ -104,7 +104,7 @@ struct FeatureWidget: View {
                         AnyView(
                             feature.viewGetter()
                                 .frame(maxWidth: .infinity)
-                                .transition(.move(edge: .top))
+                                .transition(.move(edge: .bottom))
                         )
                     }
                 }

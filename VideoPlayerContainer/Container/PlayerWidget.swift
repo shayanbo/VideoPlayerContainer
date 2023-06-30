@@ -9,15 +9,15 @@ import SwiftUI
 
 public class PlayerService: Service {
     
-    @ViewState fileprivate var overlayAfterRender:( ()->any View )?
+    @ViewState fileprivate var overlayAfterRender:( ()->AnyView )?
     
-    @ViewState fileprivate var overlayAfterFeature:( ()->any View )?
+    @ViewState fileprivate var overlayAfterFeature:( ()->AnyView )?
     
-    @ViewState fileprivate var overlayAfterPlugin:( ()->any View )?
+    @ViewState fileprivate var overlayAfterPlugin:( ()->AnyView )?
     
-    @ViewState fileprivate var overlayAfterControl:( ()->any View )?
+    @ViewState fileprivate var overlayAfterControl:( ()->AnyView )?
     
-    @ViewState fileprivate var overlayAfterToast:( ()->any View )?
+    @ViewState fileprivate var overlayAfterToast:( ()->AnyView )?
     
     @StateSync(serviceType: FeatureService.self, keyPath: \.$feature) fileprivate var feature
     
@@ -31,7 +31,7 @@ public class PlayerService: Service {
         self.overlays = overlays
     }
     
-    public func configure(overlay: Overlay, overlayGetter: @escaping ()->some View) {
+    public func configure(overlay: Overlay, overlayGetter: @escaping ()-> AnyView) {
         switch overlay {
         case .render:
             overlayAfterRender = overlayGetter
@@ -75,7 +75,7 @@ public struct PlayerWidget: View {
                         AnyView(
                             feature.viewGetter()
                                 .frame(maxWidth: .infinity)
-                                .transition(.move(edge: .bottom))
+                                .transition(.move(edge: .top))
                         )
                     }
                     
@@ -142,7 +142,7 @@ public struct PlayerWidget: View {
                         AnyView(
                             feature.viewGetter()
                                 .frame(maxWidth: .infinity)
-                                .transition(.move(edge: .top))
+                                .transition(.move(edge: .bottom))
                         )
                     }
                 }

@@ -14,22 +14,25 @@ public class ControlService : Service {
     
     @ViewState fileprivate var horizontalSpacing = 10.0
     
-    @ViewState fileprivate var shadowForTopBar: LinearGradient? = .init(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .top, endPoint: .bottom)
-    @ViewState fileprivate var shadowForBottomBar: LinearGradient? = .init(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .bottom, endPoint: .top)
-    
     fileprivate struct ControlBar {
         
         static func horizontal(_ views: [IdentifableView]) -> any View {
             HStack { ForEach(views) { $0 } }
         }
-        static func vertical(_ views: [IdentifableView]) -> any View {
-            VStack { ForEach(views) { $0 } }
+        static func leftVertical(_ views: [IdentifableView]) -> any View {
+            VStack(alignment: .leading) { ForEach(views) { $0 } }
+        }
+        static func rightVertical(_ views: [IdentifableView]) -> any View {
+            VStack(alignment: .trailing) { ForEach(views) { $0 } }
         }
         
-        var top = horizontal
-        var left = vertical
-        var right = vertical
-        var bottom = horizontal
+        var top1 = horizontal
+        var top2 = horizontal
+        var left = leftVertical
+        var right = rightVertical
+        var bottom1 = horizontal
+        var bottom2 = horizontal
+        var bottom3 = horizontal
         var center = horizontal
     }
     
@@ -38,10 +41,13 @@ public class ControlService : Service {
     @ViewState fileprivate var portraitScreenControlBar = ControlBar()
     
     fileprivate struct ControlBarItems {
-        var top = { [IdentifableView]() }
+        var top1 = { [IdentifableView]() }
+        var top2 = { [IdentifableView]() }
         var left = { [IdentifableView]() }
         var right = { [IdentifableView]() }
-        var bottom = { [IdentifableView]() }
+        var bottom1 = { [IdentifableView]() }
+        var bottom2 = { [IdentifableView]() }
+        var bottom3 = { [IdentifableView]() }
         var center = { [IdentifableView]() }
     }
     
@@ -61,15 +67,29 @@ public class ControlService : Service {
     @ViewState fileprivate var fullScreenTransition = Transition()
     @ViewState fileprivate var portraitScreenTransition = Transition()
     
-    public enum ControlStyle {
+    fileprivate struct Shadow {
+        var top: AnyView? = AnyView(LinearGradient(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .top, endPoint: .bottom))
+        var left: AnyView? = nil
+        var right: AnyView? = nil
+        var bottom: AnyView? = AnyView(LinearGradient(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .bottom, endPoint: .top))
+        var center: AnyView? = nil
+    }
+    
+    @ViewState fileprivate var halfScreenShadow = Shadow()
+    @ViewState fileprivate var fullScreenShadow = Shadow()
+    @ViewState fileprivate var portraitScreenShadow = Shadow()
+    
+    public enum DisplayStyle {
         case always
         case never
-        case auto(firstAppear: Bool, duration: DispatchTimeInterval)
-        case manual(firstAppear: Bool)
+        case auto(firstAppear: Bool, animation: Animation?, duration: DispatchTimeInterval)
+        case manual(firstAppear: Bool, animation: Animation?)
+        case custom(animation: Animation?)
     }
     
     @ViewState fileprivate var hidden = true
-    fileprivate var controlStyle = ControlStyle.auto(firstAppear: false, duration: .seconds(3))
+    
+    fileprivate var displayStyle = DisplayStyle.auto(firstAppear: false, animation: .default, duration: .seconds(3))
     
     @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
     
@@ -80,39 +100,92 @@ public class ControlService : Service {
         service.observe(.tap(.all)) { _ in
             withAnimation {
                 let service = context[ControlService.self]
-                service.didClick()
+                service.onClick()
             }
         }.store(in: &cancellables)
     }
     
-    private func didClick() {
-        switch self.controlStyle {
-        case .always: break
-        case .never: break
-        case .manual:
-            withAnimation { hidden.toggle() }
-        case let .auto(_, duration):
-            withAnimation { hidden.toggle() }
+    private func onClick() {
+        switch displayStyle {
+        case let .manual(firstAppear: _, animation: animation):
+            withAnimation(animation) {
+                self.hidden.toggle()
+            }
+        case let .auto(firstAppear: _, animation: animation, duration: duration):
+            withAnimation(animation) {
+                self.hidden.toggle()
+            }
+            if !hidden {
+                DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
+                    withAnimation { self?.hidden.toggle() }
+                }
+            }
+        default: break
+        }
+    }
+    
+    public func present() {
+        switch displayStyle {
+        case let .manual(firstAppear: _, animation: animation):
+            withAnimation(animation) {
+                self.hidden = false
+            }
+        case let .auto(firstAppear: _, animation: animation, duration: duration):
+            withAnimation(animation) {
+                self.hidden = false
+            }
             if !hidden {
                 DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
                     withAnimation { self?.hidden = true }
                 }
             }
+        case let .custom(animation: animation):
+            withAnimation(animation) {
+                self.hidden = true
+            }
+        default: break
         }
     }
     
-    public func configure(controlStyle: ControlStyle) {
-        self.controlStyle = controlStyle
+    public func dismiss() {
+        switch displayStyle {
+        case let .manual(firstAppear: _, animation: animation):
+            withAnimation(animation) {
+                self.hidden = true
+            }
+        case let .auto(firstAppear: _, animation: animation, duration: _):
+            withAnimation(animation) {
+                self.hidden = true
+            }
+        case let .custom(animation: animation):
+            withAnimation(animation) {
+                self.hidden = true
+            }
+        default: break
+        }
+    }
+    
+    public func toggle() {
+        if hidden {
+            present()
+        } else {
+            dismiss()
+        }
+    }
+    
+    public func configure(displayStyle: DisplayStyle) {
+        self.displayStyle = displayStyle
         
-        switch controlStyle {
+        switch displayStyle {
         case .always: hidden = false
         case .never: hidden = true
-        case .manual(let firstAppear): hidden = !firstAppear
-        case .auto(let firstAppear, _): hidden = !firstAppear
+        case .manual(let firstAppear, _): hidden = !firstAppear
+        case .auto(let firstAppear, _, _): hidden = !firstAppear
+        case .custom: break
         }
     }
     
-    public func configure(_ location: Location, transition: AnyTransition) {
+    public func configure(_ location: RawLocation, transition: AnyTransition) {
         switch location {
         case let .halfScreen(direction):
             switch direction {
@@ -162,12 +235,18 @@ public class ControlService : Service {
             switch direction {
             case .left:
                 self.fullScreenControlBar.left = layout
-            case .top:
-                self.fullScreenControlBar.top = layout
+            case .top1:
+                self.fullScreenControlBar.top1 = layout
+            case .top2:
+                self.fullScreenControlBar.top2 = layout
             case .right:
                 self.fullScreenControlBar.right = layout
-            case .bottom:
-                self.fullScreenControlBar.bottom = layout
+            case .bottom1:
+                self.fullScreenControlBar.bottom1 = layout
+            case .bottom2:
+                self.fullScreenControlBar.bottom2 = layout
+            case .bottom3:
+                self.fullScreenControlBar.bottom3 = layout
             case .center:
                 self.fullScreenControlBar.center = layout
             }
@@ -175,12 +254,18 @@ public class ControlService : Service {
             switch direction {
             case .left:
                 self.halfScreenControlBar.left = layout
-            case .top:
-                self.halfScreenControlBar.top = layout
+            case .top1:
+                self.halfScreenControlBar.top1 = layout
+            case .top2:
+                self.halfScreenControlBar.top2 = layout
             case .right:
                 self.halfScreenControlBar.right = layout
-            case .bottom:
-                self.halfScreenControlBar.bottom = layout
+            case .bottom1:
+                self.halfScreenControlBar.bottom1 = layout
+            case .bottom2:
+                self.halfScreenControlBar.bottom2 = layout
+            case .bottom3:
+                self.halfScreenControlBar.bottom3 = layout
             case .center:
                 self.halfScreenControlBar.center = layout
             }
@@ -188,12 +273,18 @@ public class ControlService : Service {
             switch direction {
             case .left:
                 self.portraitScreenControlBar.left = layout
-            case .top:
-                self.portraitScreenControlBar.top = layout
+            case .top1:
+                self.portraitScreenControlBar.top1 = layout
+            case .top2:
+                self.portraitScreenControlBar.top2 = layout
             case .right:
                 self.portraitScreenControlBar.right = layout
-            case .bottom:
-                self.portraitScreenControlBar.bottom = layout
+            case .bottom1:
+                self.portraitScreenControlBar.bottom1 = layout
+            case .bottom2:
+                self.portraitScreenControlBar.bottom2 = layout
+            case .bottom3:
+                self.portraitScreenControlBar.bottom3 = layout
             case .center:
                 self.portraitScreenControlBar.center = layout
             }
@@ -205,52 +296,105 @@ public class ControlService : Service {
         switch location {
         case let .halfScreen(direction):
             switch direction {
-            case .top:
-                self.halfScreenControlBarItems.top = itemsGetter
+            case .top1:
+                self.halfScreenControlBarItems.top1 = itemsGetter
+            case .top2:
+                self.halfScreenControlBarItems.top2 = itemsGetter
             case .left:
                 self.halfScreenControlBarItems.left = itemsGetter
             case .right:
                 self.halfScreenControlBarItems.right = itemsGetter
-            case .bottom:
-                self.halfScreenControlBarItems.bottom = itemsGetter
+            case .bottom1:
+                self.halfScreenControlBarItems.bottom1 = itemsGetter
+            case .bottom2:
+                self.halfScreenControlBarItems.bottom2 = itemsGetter
+            case .bottom3:
+                self.halfScreenControlBarItems.bottom3 = itemsGetter
             case .center:
                 self.halfScreenControlBarItems.center = itemsGetter
             }
         case let .fullScreen(direction):
             switch direction {
-            case .top:
-                self.fullScreenControlBarItems.top = itemsGetter
+            case .top1:
+                self.fullScreenControlBarItems.top1 = itemsGetter
+            case .top2:
+                self.fullScreenControlBarItems.top2 = itemsGetter
             case .left:
                 self.fullScreenControlBarItems.left = itemsGetter
             case .right:
                 self.fullScreenControlBarItems.right = itemsGetter
-            case .bottom:
-                self.fullScreenControlBarItems.bottom = itemsGetter
+            case .bottom1:
+                self.fullScreenControlBarItems.bottom1 = itemsGetter
+            case .bottom2:
+                self.fullScreenControlBarItems.bottom2 = itemsGetter
+            case .bottom3:
+                self.fullScreenControlBarItems.bottom3 = itemsGetter
             case .center:
                 self.fullScreenControlBarItems.center = itemsGetter
             }
         case let .portrait(direction):
             switch direction {
-            case .top:
-                self.portraitScreenControlBarItems.top = itemsGetter
+            case .top1:
+                self.portraitScreenControlBarItems.top1 = itemsGetter
+            case .top2:
+                self.portraitScreenControlBarItems.top2 = itemsGetter
             case .left:
                 self.portraitScreenControlBarItems.left = itemsGetter
             case .right:
                 self.portraitScreenControlBarItems.right = itemsGetter
-            case .bottom:
-                self.portraitScreenControlBarItems.bottom = itemsGetter
+            case .bottom1:
+                self.portraitScreenControlBarItems.bottom1 = itemsGetter
+            case .bottom2:
+                self.portraitScreenControlBarItems.bottom2 = itemsGetter
+            case .bottom3:
+                self.portraitScreenControlBarItems.bottom3 = itemsGetter
             case .center:
                 self.portraitScreenControlBarItems.center = itemsGetter
             }
         }
     }
     
-    public func configure(shadow: Shadow) {
-        switch shadow {
-        case let .top(gradient):
-            shadowForTopBar = gradient
-        case let .bottom(gradient):
-            shadowForBottomBar = gradient
+    public func configure(_ location: RawLocation, shadow: AnyView?) {
+        switch location {
+        case let .halfScreen(direction):
+            switch direction {
+            case .top:
+                self.halfScreenShadow.top = shadow
+            case .left:
+                self.halfScreenShadow.left = shadow
+            case .right:
+                self.halfScreenShadow.right = shadow
+            case .bottom:
+                self.halfScreenShadow.bottom = shadow
+            case .center:
+                self.halfScreenShadow.center = shadow
+            }
+        case let .fullScreen(direction):
+            switch direction {
+            case .top:
+                self.fullScreenShadow.top = shadow
+            case .left:
+                self.fullScreenShadow.left = shadow
+            case .right:
+                self.fullScreenShadow.right = shadow
+            case .bottom:
+                self.fullScreenShadow.bottom = shadow
+            case .center:
+                self.fullScreenShadow.center = shadow
+            }
+        case let .portrait(direction):
+            switch direction {
+            case .top:
+                self.portraitScreenShadow.top = shadow
+            case .left:
+                self.portraitScreenShadow.left = shadow
+            case .right:
+                self.portraitScreenShadow.right = shadow
+            case .bottom:
+                self.portraitScreenShadow.bottom = shadow
+            case .center:
+                self.portraitScreenShadow.center = shadow
+            }
         }
     }
     
@@ -261,20 +405,24 @@ public class ControlService : Service {
 
 public extension ControlService {
     
+    enum RawDirection {
+        case top, left, right, bottom, center
+    }
+    
+    enum Direction {
+        case top1, top2, left, right, bottom1, bottom2, bottom3, center
+    }
+    
+    enum RawLocation {
+        case fullScreen(RawDirection)
+        case halfScreen(RawDirection)
+        case portrait(RawDirection)
+    }
+    
     enum Location {
-        
-        public enum Direction {
-            case top, left, right, bottom, center
-        }
-        
         case fullScreen(Direction)
         case halfScreen(Direction)
         case portrait(Direction)
-    }
-    
-    enum Shadow {
-        case top(LinearGradient?)
-        case bottom(LinearGradient?)
     }
 }
 
@@ -284,19 +432,37 @@ struct ControlWidget: View {
         WithService(ControlService.self) { service in
             if !service.hidden {
                 
-                Group {
+                VStack {
                     switch service.status {
                     case .halfScreen:
-                        AnyView( service.halfScreenControlBar.top(service.halfScreenControlBarItems.top()) )
+                        AnyView( service.halfScreenControlBar.top1(service.halfScreenControlBarItems.top1()) )
                     case .fullScreen:
-                        AnyView( service.fullScreenControlBar.top(service.fullScreenControlBarItems.top()) )
+                        AnyView( service.fullScreenControlBar.top1(service.fullScreenControlBarItems.top1()) )
                     case .portrait:
-                        AnyView( service.portraitScreenControlBar.top(service.portraitScreenControlBarItems.top()) )
+                        AnyView( service.portraitScreenControlBar.top1(service.portraitScreenControlBarItems.top1()) )
+                    }
+                    
+                    switch service.status {
+                    case .halfScreen:
+                        AnyView( service.halfScreenControlBar.top2(service.halfScreenControlBarItems.top2()) )
+                    case .fullScreen:
+                        AnyView( service.fullScreenControlBar.top2(service.fullScreenControlBarItems.top2()) )
+                    case .portrait:
+                        AnyView( service.portraitScreenControlBar.top2(service.portraitScreenControlBarItems.top2()) )
                     }
                 }
                 .padding([.leading, .trailing], service.horizontalSpacing)
                 .frame(maxWidth: .infinity)
-                .background(service.shadowForTopBar)
+                .background({ () -> AnyView? in 
+                    switch service.status {
+                    case .halfScreen:
+                        return service.halfScreenShadow.top
+                    case .fullScreen:
+                        return service.fullScreenShadow.top
+                    case .portrait:
+                        return service.portraitScreenShadow.top
+                    }
+                }())
                 .transition({
                     switch service.status {
                     case .halfScreen:
@@ -326,6 +492,16 @@ struct ControlWidget: View {
                             AnyView( service.portraitScreenControlBar.left(service.portraitScreenControlBarItems.left()) )
                         }
                     }
+                    .background({ () -> AnyView? in
+                        switch service.status {
+                        case .halfScreen:
+                            return service.halfScreenShadow.left
+                        case .fullScreen:
+                            return service.fullScreenShadow.left
+                        case .portrait:
+                            return service.portraitScreenShadow.left
+                        }
+                    }())
                     .transition({
                         switch service.status {
                         case .halfScreen:
@@ -351,6 +527,16 @@ struct ControlWidget: View {
                             AnyView( service.portraitScreenControlBar.center(service.portraitScreenControlBarItems.center()) )
                         }
                     }
+                    .background({ () -> AnyView? in
+                        switch service.status {
+                        case .halfScreen:
+                            return service.halfScreenShadow.center
+                        case .fullScreen:
+                            return service.fullScreenShadow.center
+                        case .portrait:
+                            return service.portraitScreenShadow.center
+                        }
+                    }())
                     .transition({
                         switch service.status {
                         case .halfScreen:
@@ -376,6 +562,16 @@ struct ControlWidget: View {
                             AnyView( service.portraitScreenControlBar.right(service.portraitScreenControlBarItems.right()) )
                         }
                     }
+                    .background({ () -> AnyView? in
+                        switch service.status {
+                        case .halfScreen:
+                            return service.halfScreenShadow.right
+                        case .fullScreen:
+                            return service.fullScreenShadow.right
+                        case .portrait:
+                            return service.portraitScreenShadow.right
+                        }
+                    }())
                     .transition({
                         switch service.status {
                         case .halfScreen:
@@ -397,18 +593,45 @@ struct ControlWidget: View {
         WithService(ControlService.self) { service in
             if !service.hidden {
                 
-                Group {
+                VStack {
                     switch service.status {
                     case .halfScreen:
-                        AnyView( service.halfScreenControlBar.bottom(service.halfScreenControlBarItems.bottom()) )
+                        AnyView( service.halfScreenControlBar.bottom3(service.halfScreenControlBarItems.bottom3()) )
                     case .fullScreen:
-                        AnyView( service.fullScreenControlBar.bottom(service.fullScreenControlBarItems.bottom()) )
+                        AnyView( service.fullScreenControlBar.bottom3(service.fullScreenControlBarItems.bottom3()) )
                     case .portrait:
-                        AnyView( service.portraitScreenControlBar.bottom(service.portraitScreenControlBarItems.bottom()) )
+                        AnyView( service.portraitScreenControlBar.bottom3(service.portraitScreenControlBarItems.bottom3()) )
+                    }
+                    
+                    switch service.status {
+                    case .halfScreen:
+                        AnyView( service.halfScreenControlBar.bottom2(service.halfScreenControlBarItems.bottom2()) )
+                    case .fullScreen:
+                        AnyView( service.fullScreenControlBar.bottom2(service.fullScreenControlBarItems.bottom2()) )
+                    case .portrait:
+                        AnyView( service.portraitScreenControlBar.bottom2(service.portraitScreenControlBarItems.bottom2()) )
+                    }
+                    
+                    switch service.status {
+                    case .halfScreen:
+                        AnyView( service.halfScreenControlBar.bottom1(service.halfScreenControlBarItems.bottom1()) )
+                    case .fullScreen:
+                        AnyView( service.fullScreenControlBar.bottom1(service.fullScreenControlBarItems.bottom1()) )
+                    case .portrait:
+                        AnyView( service.portraitScreenControlBar.bottom1(service.portraitScreenControlBarItems.bottom1()) )
                     }
                 }
                 .padding([.leading, .trailing], service.horizontalSpacing)
-                .background {service.shadowForBottomBar }
+                .background({ () -> AnyView? in
+                    switch service.status {
+                    case .halfScreen:
+                        return service.halfScreenShadow.bottom
+                    case .fullScreen:
+                        return service.fullScreenShadow.bottom
+                    case .portrait:
+                        return service.portraitScreenShadow.bottom
+                    }
+                }())
                 .frame(maxWidth: .infinity)
                 .transition({
                     switch service.status {

@@ -88,7 +88,7 @@ public class GestureService : Service {
         observable.send(event)
     }
     
-    fileprivate var lastDragGesture: GestureEvent?
+    private var lastDragGesture: GestureEvent?
     
     fileprivate func handleDrag(_ value: DragGesture.Value, action: GestureEvent.Action) {
         

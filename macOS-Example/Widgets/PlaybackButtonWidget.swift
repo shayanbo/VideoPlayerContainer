@@ -53,7 +53,7 @@ class PlaybackButtonService: Service {
         }
         
         let gestureService = context[GestureService.self]
-        gestureService.observeDoubleTap { [weak self] in
+        gestureService.observe(.doubleTap(.all)) { [weak self] _ in
             self?.didClick()
         }.store(in: &cancellables)
     }

@@ -43,24 +43,34 @@ struct ContentView: View {
                 //MARK: HalfScreen Configuration
                 
                 /// halfScreen top
-                controlService.configure(.halfScreen(.top)) {[
+                controlService.configure(.halfScreen(.top1)) {[
                     IdentifableView(id: "back") { BackButtonWidget() },
                     IdentifableView(id: "title") { TitleWidget() },
                     IdentifableView(id: "space") { Spacer() },
                     IdentifableView(id: "playback") {  Button("Hello World") {
                         context[FeatureService.self].present(.right(.squeeze(0))) {
-                            Form {
-                                Text("World")
-                                Text("World")
-                                Text("World")
-                            }.frame(width: 100)
+                            AnyView(
+                                Form {
+                                    Text("World")
+                                    Text("World")
+                                    Text("World")
+                                }.frame(width: 100)
+                            )
                         }
                     } },
                     IdentifableView(id: "more") {  MoreButtonWidget() }
                 ]}
                 
+                controlService.configure(.halfScreen(.bottom2)) {[
+                    IdentifableView(id: "A") { Image(systemName: "scribble") },
+                    IdentifableView(id: "B") { Image(systemName: "eraser") },
+                    IdentifableView(id: "C") { Image(systemName: "paperplane") },
+                    IdentifableView(id: "D") { Image(systemName: "bookmark") },
+                    IdentifableView(id: "E") { Image(systemName: "arrowshape.turn.up.right") },
+                ]}
+                
                 /// halfScreen bottom
-                controlService.configure(.halfScreen(.bottom)) {[
+                controlService.configure(.halfScreen(.bottom1)) {[
                     IdentifableView(id: "playback") {  PlaybackButtonWidget() },
                     IdentifableView(id: "progress") {  SeekBarWidget()   },
                     IdentifableView(id: "timeline") {  TimelineWidget()   }
@@ -70,11 +80,13 @@ struct ContentView: View {
                 controlService.configure(.halfScreen(.center)) {[
                     IdentifableView(id: "playback") {  Button("Hello World") {
                         context[FeatureService.self].present(.top(.cover)) {
-                            Form {
-                                Text("Hello")
-                                Text("Hello")
-                                Text("Hello")
-                            }.frame(height: 100)
+                            AnyView(
+                                Form {
+                                    Text("Hello")
+                                    Text("Hello")
+                                    Text("Hello")
+                                }.frame(height: 100)
+                            )
                         }
                     } },
                 ]}
@@ -82,7 +94,7 @@ struct ContentView: View {
                 //MARK: FullScreen Configuration
                 
                 /// fullScreen top
-                controlService.configure(.fullScreen(.top)) {[
+                controlService.configure(.fullScreen(.top1)) {[
                     IdentifableView(id: "back") { BackButtonWidget() },
                     IdentifableView(id: "title") { TitleWidget() },
                     IdentifableView(id: "space") { Spacer() },
@@ -95,7 +107,7 @@ struct ContentView: View {
                 ]}
                 
                 /// fullScreen bottom
-                controlService.configure(.fullScreen(.bottom)) {[
+                controlService.configure(.fullScreen(.bottom1)) {[
                     IdentifableView(id: "playback") {  PlaybackButtonWidget() },
                     IdentifableView(id: "progress") {  SeekBarWidget()   },
                     IdentifableView(id: "timeline") {  TimelineWidget()   }
@@ -126,7 +138,7 @@ struct ContentView: View {
                 }
                 
                 // configure control style
-                context[ControlService.self].configure(controlStyle: .manual(firstAppear: true))
+                context[ControlService.self].configure(displayStyle: .manual(firstAppear: true, animation: nil))
             }
     }
 }

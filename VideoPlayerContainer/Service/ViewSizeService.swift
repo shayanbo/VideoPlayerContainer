@@ -21,5 +21,9 @@ public class ViewSizeService : Service {
     
     public func updateViewSize(_ size: CGSize) {
         self.size = size
+        
+        if size.height > size.width {
+            context[StatusService.self].toPortrait()
+        }
     }
 }

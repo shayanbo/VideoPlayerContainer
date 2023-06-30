@@ -27,24 +27,26 @@ struct ContentView: View {
                 let controlService = context[ControlService.self]
                 
                 /// halfScreen top
-                controlService.configure(.halfScreen(.top)) {[
+                controlService.configure(.halfScreen(.top1)) {[
                     IdentifableView(id: "back") { BackButtonWidget() },
                     IdentifableView(id: "title") { TitleWidget() },
                     IdentifableView(id: "space") { Spacer() },
                     IdentifableView(id: "playback") {  Button("Hello World") {
                         context[FeatureService.self].present(.right(.squeeze(0))) {
-                            Form {
-                                Text("World")
-                                Text("World")
-                                Text("World")
-                            }.frame(width: 100)
+                            AnyView(
+                                Form {
+                                    Text("World")
+                                    Text("World")
+                                    Text("World")
+                                }.frame(width: 100)
+                            )
                         }
                     } },
                     IdentifableView(id: "more") {  MoreButtonWidget() }
                 ]}
                 
                 /// halfScreen bottom
-                controlService.configure(.halfScreen(.bottom)) {[
+                controlService.configure(.halfScreen(.bottom1)) {[
                     IdentifableView(id: "playback") {  PlaybackButtonWidget() },
                     IdentifableView(id: "progress") {  SeekBarWidget()   },
                     IdentifableView(id: "timeline") {  TimelineWidget()   }
@@ -54,11 +56,13 @@ struct ContentView: View {
                 controlService.configure(.halfScreen(.center)) {[
                     IdentifableView(id: "playback") {  Button("Hello World") {
                         context[FeatureService.self].present(.left(.cover)) {
-                            Form {
-                                Text("Hello")
-                                Text("Hello")
-                                Text("Hello")
-                            }.frame(width: 100)
+                            AnyView(
+                                Form {
+                                    Text("Hello")
+                                    Text("Hello")
+                                    Text("Hello")
+                                }.frame(width: 100)
+                            )
                         }
                     } },
                 ]}
