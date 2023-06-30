@@ -40,6 +40,12 @@ struct ContentView: View {
                         }
                     }
                     
+                    controlService.configure(.portrait(.center)) {[
+                        IdentifableView(id: "ar", content: {
+                            Spacer().frame(width: 50)
+                        })
+                    ]}
+                    
                     controlService.configure(.portrait(.right)) {[
                         IdentifableView(id: "space", content: { Spacer() }),
                         IdentifableView(id: "person", content: {
@@ -107,7 +113,7 @@ struct ContentView: View {
                     
                     let player = context[RenderService.self].player
                     
-                    player.replaceCurrentItem(with: AVPlayerItem(url: URL(string: "file:///Users/shayanbo/Downloads/v0300fg10000ci7tkf3c77u0ougn22s0.MP4")!))
+                    player.replaceCurrentItem(with: AVPlayerItem(url: URL(string: "https://devstreaming-cdn.apple.com/videos/wwdc/2023/10036/4/BB960BFD-F982-4800-8060-5674B049AC5A/cmaf/hvc/2160p_16800/hvc_2160p_16800.m3u8")!))
                     player.play()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

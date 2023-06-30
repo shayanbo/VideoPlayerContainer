@@ -479,7 +479,7 @@ struct ControlWidget: View {
     
     @ViewBuilder var sides: some View {
         WithService(ControlService.self) { service in
-            HStack {
+            HStack(spacing:0) {
                 
                 if !service.hidden {
                     Group {
@@ -514,7 +514,7 @@ struct ControlWidget: View {
                     }())
                 }
                 
-                Spacer()
+                Spacer(minLength: 0)
                 
                 if !service.hidden {
                     Group {
@@ -549,7 +549,7 @@ struct ControlWidget: View {
                     }())
                 }
                 
-                Spacer()
+                Spacer(minLength: 0)
                 
                 if !service.hidden {
                     Group {
@@ -648,7 +648,7 @@ struct ControlWidget: View {
     }
     
     var body: some View {
-        VStack {
+        VStack(spacing:0) {
             top
             sides
             bottom
