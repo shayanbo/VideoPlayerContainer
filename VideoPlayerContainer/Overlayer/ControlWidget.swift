@@ -70,10 +70,10 @@ public class ControlService : Service {
     @ViewState fileprivate var portraitScreenTransition = Transition()
     
     fileprivate struct Shadow {
-        var top: AnyView? = AnyView(LinearGradient(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .top, endPoint: .bottom))
+        var top: AnyView? = AnyView(LinearGradient(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .top, endPoint: .bottom).allowsHitTesting(false))
         var left: AnyView? = nil
         var right: AnyView? = nil
-        var bottom: AnyView? = AnyView(LinearGradient(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .bottom, endPoint: .top))
+        var bottom: AnyView? = AnyView(LinearGradient(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .bottom, endPoint: .top).allowsHitTesting(false))
         var center: AnyView? = nil
     }
     
