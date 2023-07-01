@@ -34,6 +34,13 @@
 		D4130F202A4A65FE007DAFFE /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */; };
 		D4130F212A4A65FE007DAFFE /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */; };
 		D4130F262A4A6E5F007DAFFE /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F252A4A6E5F007DAFFE /* ExampleApp.swift */; };
+		D474DC412A5067B300EF8957 /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC402A5067B300EF8957 /* SeekBarWidget.swift */; };
+		D474DC432A50694600EF8957 /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC422A50694600EF8957 /* TimelineWidget.swift */; };
+		D474DC452A5069E600EF8957 /* PlaybackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC442A5069E600EF8957 /* PlaybackWidget.swift */; };
+		D474DC472A506A0800EF8957 /* StepForwardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC462A506A0800EF8957 /* StepForwardWidget.swift */; };
+		D474DC492A506A1200EF8957 /* StepBackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC482A506A1200EF8957 /* StepBackWidget.swift */; };
+		D474DC4C2A50884300EF8957 /* VideoPlayerContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; };
+		D474DC4E2A508D0400EF8957 /* CommentWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC4D2A508D0400EF8957 /* CommentWidget.swift */; };
 		D49604102A4D224F00AD3FE6 /* TikTok_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D496040F2A4D224F00AD3FE6 /* TikTok_ExampleApp.swift */; };
 		D49604122A4D224F00AD3FE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604112A4D224F00AD3FE6 /* ContentView.swift */; };
 		D49604142A4D225000AD3FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604132A4D225000AD3FE6 /* Assets.xcassets */; };
@@ -71,6 +78,13 @@
 			remoteInfo = VideoPlayerContainer;
 		};
 		D4061C4E2A4B260100CDD1FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D49986102A389FEF00384185 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4061C232A4B257800CDD1FF;
+			remoteInfo = VideoPlayerContainer;
+		};
+		D474DC4A2A50883F00EF8957 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D49986102A389FEF00384185 /* Project object */;
 			proxyType = 1;
@@ -128,6 +142,12 @@
 		D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 		D4130F252A4A6E5F007DAFFE /* ExampleApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
+		D474DC402A5067B300EF8957 /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
+		D474DC422A50694600EF8957 /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
+		D474DC442A5069E600EF8957 /* PlaybackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackWidget.swift; sourceTree = "<group>"; };
+		D474DC462A506A0800EF8957 /* StepForwardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepForwardWidget.swift; sourceTree = "<group>"; };
+		D474DC482A506A1200EF8957 /* StepBackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBackWidget.swift; sourceTree = "<group>"; };
+		D474DC4D2A508D0400EF8957 /* CommentWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWidget.swift; sourceTree = "<group>"; };
 		D496040D2A4D224F00AD3FE6 /* TikTok-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TikTok-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D496040F2A4D224F00AD3FE6 /* TikTok_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikTok_ExampleApp.swift; sourceTree = "<group>"; };
 		D49604112A4D224F00AD3FE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -187,6 +207,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D474DC4C2A50884300EF8957 /* VideoPlayerContainer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -320,10 +341,16 @@
 		D49604202A4D228700AD3FE6 /* Youtube-Example */ = {
 			isa = PBXGroup;
 			children = (
+				D474DC422A50694600EF8957 /* TimelineWidget.swift */,
+				D474DC402A5067B300EF8957 /* SeekBarWidget.swift */,
 				D49604212A4D228700AD3FE6 /* Youtube_ExampleApp.swift */,
 				D49604232A4D228700AD3FE6 /* ContentView.swift */,
 				D49604252A4D228800AD3FE6 /* Assets.xcassets */,
 				D49604272A4D228800AD3FE6 /* Preview Content */,
+				D474DC442A5069E600EF8957 /* PlaybackWidget.swift */,
+				D474DC462A506A0800EF8957 /* StepForwardWidget.swift */,
+				D474DC482A506A1200EF8957 /* StepBackWidget.swift */,
+				D474DC4D2A508D0400EF8957 /* CommentWidget.swift */,
 			);
 			path = "Youtube-Example";
 			sourceTree = "<group>";
@@ -501,6 +528,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D474DC4B2A50883F00EF8957 /* PBXTargetDependency */,
 			);
 			name = "Youtube-Example";
 			productName = "Youtube-Example";
@@ -705,8 +733,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D474DC492A506A1200EF8957 /* StepBackWidget.swift in Sources */,
 				D49604242A4D228700AD3FE6 /* ContentView.swift in Sources */,
 				D49604222A4D228700AD3FE6 /* Youtube_ExampleApp.swift in Sources */,
+				D474DC432A50694600EF8957 /* TimelineWidget.swift in Sources */,
+				D474DC472A506A0800EF8957 /* StepForwardWidget.swift in Sources */,
+				D474DC4E2A508D0400EF8957 /* CommentWidget.swift in Sources */,
+				D474DC412A5067B300EF8957 /* SeekBarWidget.swift in Sources */,
+				D474DC452A5069E600EF8957 /* PlaybackWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -747,6 +781,11 @@
 			isa = PBXTargetDependency;
 			target = D4061C232A4B257800CDD1FF /* VideoPlayerContainer */;
 			targetProxy = D4061C4E2A4B260100CDD1FF /* PBXContainerItemProxy */;
+		};
+		D474DC4B2A50883F00EF8957 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4061C232A4B257800CDD1FF /* VideoPlayerContainer */;
+			targetProxy = D474DC4A2A50883F00EF8957 /* PBXContainerItemProxy */;
 		};
 		D4C4508F2A4ECFBC00731503 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

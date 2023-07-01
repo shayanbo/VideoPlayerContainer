@@ -12,7 +12,9 @@ public class ControlService : Service {
     
     private var cancellables = [AnyCancellable]()
     
-    @ViewState fileprivate var horizontalSpacing = 10.0
+    @ViewState fileprivate var halfScreenInsets = EdgeInsets()
+    @ViewState fileprivate var fullScreenInsets = EdgeInsets()
+    @ViewState fileprivate var portraitScreenInsets = EdgeInsets()
     
     fileprivate struct ControlBar {
         
@@ -182,6 +184,17 @@ public class ControlService : Service {
         case .manual(let firstAppear, _): hidden = !firstAppear
         case .auto(let firstAppear, _, _): hidden = !firstAppear
         case .custom: break
+        }
+    }
+    
+    public func configure(_ status: ScreenStatus, insets: EdgeInsets) {
+        switch status {
+        case .halfScreen:
+            halfScreenInsets = insets
+        case .fullScreen:
+            fullScreenInsets = insets
+        case .portrait:
+            portraitScreenInsets = insets
         }
     }
     
@@ -397,16 +410,16 @@ public class ControlService : Service {
             }
         }
     }
-    
-    public func configure(spacing: CGFloat) {
-        horizontalSpacing = spacing
-    }
 }
 
 public extension ControlService {
     
     enum RawDirection {
         case top, left, right, bottom, center
+    }
+    
+    enum ScreenStatus {
+        case halfScreen, fullScreen, portrait
     }
     
     enum Direction {
@@ -451,7 +464,36 @@ struct ControlWidget: View {
                         AnyView( service.portraitScreenControlBar.top2(service.portraitScreenControlBarItems.top2()) )
                     }
                 }
-                .padding([.leading, .trailing], service.horizontalSpacing)
+                .padding(.leading, {
+                    switch service.status {
+                    case .halfScreen:
+                        return service.halfScreenInsets.leading
+                    case .fullScreen:
+                        return service.fullScreenInsets.leading
+                    case .portrait:
+                        return service.portraitScreenInsets.leading
+                    }
+                }())
+                .padding(.trailing, {
+                    switch service.status {
+                    case .halfScreen:
+                        return service.halfScreenInsets.trailing
+                    case .fullScreen:
+                        return service.fullScreenInsets.trailing
+                    case .portrait:
+                        return service.portraitScreenInsets.trailing
+                    }
+                }())
+                .padding(.top, {
+                    switch service.status {
+                    case .halfScreen:
+                        return service.halfScreenInsets.top
+                    case .fullScreen:
+                        return service.fullScreenInsets.top
+                    case .portrait:
+                        return service.portraitScreenInsets.top
+                    }
+                }())
                 .frame(maxWidth: .infinity)
                 .background({ () -> AnyView? in 
                     switch service.status {
@@ -492,6 +534,16 @@ struct ControlWidget: View {
                             AnyView( service.portraitScreenControlBar.left(service.portraitScreenControlBarItems.left()) )
                         }
                     }
+                    .padding(.leading, {
+                        switch service.status {
+                        case .halfScreen:
+                            return service.halfScreenInsets.leading
+                        case .fullScreen:
+                            return service.fullScreenInsets.leading
+                        case .portrait:
+                            return service.portraitScreenInsets.leading
+                        }
+                    }())
                     .background({ () -> AnyView? in
                         switch service.status {
                         case .halfScreen:
@@ -562,6 +614,16 @@ struct ControlWidget: View {
                             AnyView( service.portraitScreenControlBar.right(service.portraitScreenControlBarItems.right()) )
                         }
                     }
+                    .padding(.trailing, {
+                        switch service.status {
+                        case .halfScreen:
+                            return service.halfScreenInsets.trailing
+                        case .fullScreen:
+                            return service.fullScreenInsets.trailing
+                        case .portrait:
+                            return service.portraitScreenInsets.trailing
+                        }
+                    }())
                     .background({ () -> AnyView? in
                         switch service.status {
                         case .halfScreen:
@@ -584,7 +646,6 @@ struct ControlWidget: View {
                     }())
                 }
             }
-            .padding([.leading, .trailing], service.horizontalSpacing)
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
     }
@@ -621,7 +682,36 @@ struct ControlWidget: View {
                         AnyView( service.portraitScreenControlBar.bottom1(service.portraitScreenControlBarItems.bottom1()) )
                     }
                 }
-                .padding([.leading, .trailing], service.horizontalSpacing)
+                .padding(.leading, {
+                    switch service.status {
+                    case .halfScreen:
+                        return service.halfScreenInsets.leading
+                    case .fullScreen:
+                        return service.fullScreenInsets.leading
+                    case .portrait:
+                        return service.portraitScreenInsets.leading
+                    }
+                }())
+                .padding(.trailing, {
+                    switch service.status {
+                    case .halfScreen:
+                        return service.halfScreenInsets.trailing
+                    case .fullScreen:
+                        return service.fullScreenInsets.trailing
+                    case .portrait:
+                        return service.portraitScreenInsets.trailing
+                    }
+                }())
+                .padding(.bottom, {
+                    switch service.status {
+                    case .halfScreen:
+                        return service.halfScreenInsets.bottom
+                    case .fullScreen:
+                        return service.fullScreenInsets.bottom
+                    case .portrait:
+                        return service.portraitScreenInsets.bottom
+                    }
+                }())
                 .background({ () -> AnyView? in
                     switch service.status {
                     case .halfScreen:

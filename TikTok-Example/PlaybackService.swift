@@ -28,7 +28,7 @@ class PlaybackService : Service {
                 pluginService.dismiss()
             } else {
                 player.pause()
-                pluginService.present(.center, transition: .scale) {
+                pluginService.present(.center, transition: .scale(scale: 1.5).combined(with: .opacity)) {
                     Image(systemName: "play.fill").resizable()
                         .foregroundColor(.white)
                         .scaledToFit()
