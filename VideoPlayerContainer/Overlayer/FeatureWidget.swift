@@ -12,7 +12,7 @@ public class FeatureService : Service {
     
     struct Feature {
         var direction: Direction
-        var viewGetter: ()->AnyView
+        var content: ()->AnyView
     }
     
     @ViewState private(set) var feature: Feature?
@@ -41,14 +41,14 @@ public class FeatureService : Service {
         case bottom(Style)
     }
     
-    public func present(_ direction: Direction, viewGetter: @escaping ()-> AnyView) {
-        withAnimation {
-            feature = Feature(direction: direction, viewGetter: viewGetter)
+    public func present(_ direction: Direction, animation: Animation? = .default, content: @escaping ()-> AnyView) {
+        withAnimation(animation) {
+            feature = Feature(direction: direction, content: content)
         }
     }
     
-    public func dismiss() {
-        withAnimation {
+    public func dismiss(animation: Animation? = .default) {
+        withAnimation(animation) {
             feature = nil
         }
     }
@@ -66,7 +66,7 @@ struct FeatureWidget: View {
                         .frame(maxWidth: .infinity, maxHeight: 0)
                     if let feature = service.feature, feature.direction == .left(.cover) {
                         AnyView(
-                            feature.viewGetter()
+                            feature.content()
                                 .frame(maxHeight: .infinity)
                                 .transition(.move(edge: .leading))
                         )
@@ -78,7 +78,7 @@ struct FeatureWidget: View {
                         .frame(maxWidth: .infinity, maxHeight: 0)
                     if let feature = service.feature, feature.direction == .right(.cover) {
                         AnyView(
-                            feature.viewGetter()
+                            feature.content()
                                 .frame(maxHeight: .infinity)
                                 .transition(.move(edge: .trailing))
                         )
@@ -88,7 +88,7 @@ struct FeatureWidget: View {
                 VStack {
                     if let feature = service.feature, feature.direction == .top(.cover) {
                         AnyView(
-                            feature.viewGetter()
+                            feature.content()
                                 .frame(maxWidth: .infinity)
                                 .transition(.move(edge: .top))
                         )
@@ -102,7 +102,7 @@ struct FeatureWidget: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     if let feature = service.feature, feature.direction == .bottom(.cover) {
                         AnyView(
-                            feature.viewGetter()
+                            feature.content()
                                 .frame(maxWidth: .infinity)
                                 .transition(.move(edge: .bottom))
                         )

@@ -15,6 +15,7 @@ struct SeekBarWidget : View {
     
     var body: some View {
         
+        /// put WithService inside the GeometryReader
         GeometryReader { proxy in
             WithService(SeekBarService.self) { service in
             

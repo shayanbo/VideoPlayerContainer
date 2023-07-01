@@ -11,11 +11,14 @@ import Combine
 struct PluginWidget: View {
     var body: some View {
         WithService(PluginService.self) { service in
-            if let plugin = service.plugin {
-                ZStack(alignment: plugin.alignment) {
-                    AnyView(plugin.viewGetter())
+            
+            ZStack(alignment: service.plugin?.alignment ?? .center) {
+                Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                if let plugin = service.plugin {
+                    AnyView(plugin.content())
+                        .transition(plugin.transition)
                 }
-                .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
     }
@@ -23,19 +26,23 @@ struct PluginWidget: View {
 
 public class PluginService : Service {
     
-    public struct Plugin {
+    fileprivate struct Plugin {
         let alignment: Alignment
-        let viewGetter: ()->any View
+        let transition: AnyTransition
+        let content: ()->any View
     }
     
     @ViewState fileprivate var plugin: Plugin?
     
-    public func present(_ alignment: Alignment, viewGetter: @escaping ()-> some View) {
-        self.plugin = Plugin(alignment: alignment, viewGetter: viewGetter)
+    public func present(_ alignment: Alignment, animation: Animation? = .default, transition: AnyTransition = .opacity, content: @escaping ()-> some View) {
+        withAnimation(animation) {
+            self.plugin = Plugin(alignment: alignment, transition: transition, content: content)
+        }
     }
     
-    public func dismiss() {
-        self.plugin = nil
+    public func dismiss(animation: Animation? = .default) {
+        withAnimation(animation) {
+            self.plugin = nil
+        }
     }
 }
-

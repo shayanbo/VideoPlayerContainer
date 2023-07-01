@@ -59,7 +59,7 @@ public struct PlayerWidget: View {
             HStack {
                 if let feature = service.feature, case .left(.squeeze) = feature.direction {
                     AnyView(
-                        feature.viewGetter()
+                        feature.content()
                             .frame(maxHeight: .infinity)
                             .transition(.move(edge: .leading))
                     )
@@ -73,7 +73,7 @@ public struct PlayerWidget: View {
                     
                     if let feature = service.feature, case .top(.squeeze) = feature.direction {
                         AnyView(
-                            feature.viewGetter()
+                            feature.content()
                                 .frame(maxWidth: .infinity)
                                 .transition(.move(edge: .top))
                         )
@@ -140,7 +140,7 @@ public struct PlayerWidget: View {
                     
                     if let feature = service.feature, case .bottom(.squeeze) = feature.direction {
                         AnyView(
-                            feature.viewGetter()
+                            feature.content()
                                 .frame(maxWidth: .infinity)
                                 .transition(.move(edge: .bottom))
                         )
@@ -153,7 +153,7 @@ public struct PlayerWidget: View {
                 
                 if let feature = service.feature, case .right(.squeeze) = feature.direction {
                     AnyView(
-                        feature.viewGetter()
+                        feature.content()
                             .frame(maxHeight: .infinity)
                             .transition(.move(edge: .trailing))
                     )
