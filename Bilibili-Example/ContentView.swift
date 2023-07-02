@@ -16,6 +16,7 @@ struct ContentView: View {
     var body: some View {
         
         PlayerWidget()
+            .frame(height: 300)
             .bindContext(context)
             .ignoresSafeArea(.all)
             .background(.black)
@@ -23,7 +24,27 @@ struct ContentView: View {
                 
                 let controlService = context[ControlService.self]
                 
-                context[StatusService.self].toFullScreen()
+//                context[StatusService.self].toFullScreen()
+                
+                controlService.configure(.halfScreen(.bottom), transition: .opacity)
+                controlService.configure(.halfScreen(.top), transition: .opacity)
+                
+                controlService.configure(.halfScreen, insets: .init(top: 10, leading: 5, bottom: 10, trailing: 5))
+                
+                controlService.configure(.halfScreen(.top1)) {[
+                    IdentifableView(id: "a", content: { Image(systemName: "chevron.left").foregroundColor(.white).frame(width: 30, height: 30) }),
+                    IdentifableView(id: "b", content: { Spacer() }),
+                    IdentifableView(id: "c", content: { Image(systemName: "music.quarternote.3").foregroundColor(.white).frame(width: 30, height: 30) }),
+                    IdentifableView(id: "d", content: { Image(systemName: "airplayvideo").foregroundColor(.white).frame(width: 30, height: 30) }),
+                    IdentifableView(id: "e", content: { Image(systemName: "ellipsis").foregroundColor(.white).frame(width: 30, height: 30).rotationEffect(.degrees(90)) }),
+                ]}
+                
+                controlService.configure(.halfScreen(.bottom1)) {[
+                    IdentifableView(id: "a", content: { PlaybackWidget() }),
+                    IdentifableView(id: "b", content: { SeekBarWidget() }),
+                    IdentifableView(id: "c", content: { TimelineWidget() }),
+                    IdentifableView(id: "d", content: { Image(systemName: "arrow.up.left.and.arrow.down.right").frame(width: 30, height: 30).foregroundColor(.white) }),
+                ]}
                 
                 controlService.configure(.fullScreen, insets: .init(top: 0, leading: 60, bottom: 34, trailing: 60))
                 

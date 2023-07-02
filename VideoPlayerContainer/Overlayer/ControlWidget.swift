@@ -89,9 +89,9 @@ public class ControlService : Service {
         case custom(animation: Animation?)
     }
     
-    @ViewState fileprivate var hidden = true
+    @ViewState fileprivate var hidden = false
     
-    fileprivate var displayStyle = DisplayStyle.auto(firstAppear: false, animation: .default, duration: .seconds(3))
+    fileprivate var displayStyle = DisplayStyle.auto(firstAppear: true, animation: .default, duration: .seconds(5))
     
     @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
     
