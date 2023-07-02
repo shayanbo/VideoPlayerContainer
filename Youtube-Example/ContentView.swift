@@ -18,14 +18,65 @@ struct ContentView: View {
     var body: some View {
         
         PlayerWidget()
+            .frame(height: 300)
             .bindContext(context)
             .ignoresSafeArea(edges: .all)
             .background(.black)
             .onAppear {
                 
-                context[StatusService.self].toFullScreen()
+//                context[StatusService.self].toFullScreen()
                 
                 let controlService = context[ControlService.self]
+                
+                controlService.configure(.halfScreen(.top), transition: .opacity)
+                controlService.configure(.halfScreen(.bottom), transition: .opacity)
+                
+                controlService.configure(.halfScreen, insets: .init(top: 0, leading: 10, bottom: 0, trailing: 10))
+                
+                controlService.configure(.halfScreen(.top1)) {[
+                    IdentifableView(id: "a", content: {
+                        Image(systemName: "chevron.down").frame(width: 25, height: 35).foregroundColor(.white)
+                    }),
+                    IdentifableView(id: "b", content: {
+                        Spacer()
+                    }),
+                    IdentifableView(id: "c", content: {
+                        Image(systemName: "switch.2").frame(width: 25, height: 35).foregroundColor(.white)
+                    }),
+                    IdentifableView(id: "d", content: {
+                        Image(systemName: "airplayvideo").frame(width: 25, height: 35).foregroundColor(.white)
+                    }),
+                    IdentifableView(id: "e", content: {
+                        Spacer().frame(width: 50)
+                    }),
+                    IdentifableView(id: "f", content: {
+                        Image(systemName: "gearshape").frame(width: 25, height: 35).foregroundColor(.white)
+                    }),
+                ]}
+                
+                controlService.configure(.halfScreen(.bottom1)) {[
+                    IdentifableView(id: "a", content: { SeekBarWidget() }),
+                ]}
+                
+                controlService.configure(.halfScreen(.bottom2)) {[
+                    IdentifableView(id: "a", content: { TimelineWidget() }),
+                    IdentifableView(id: "b", content: { Spacer() }),
+                    IdentifableView(id: "c", content: {
+                        Image(systemName: "square.on.square").frame(width: 25, height: 25).foregroundColor(.white)
+                    }),
+                ]}
+                
+                controlService.configure(.halfScreen(.center)) { views in
+                    HStack(spacing: 30) {
+                        ForEach(views) { $0 }
+                    }
+                }
+                
+                controlService.configure(.halfScreen(.center)) {[
+                    IdentifableView(id: "a", content: { StepBackWidget() }),
+                    IdentifableView(id: "b", content: { PlaybackWidget() }),
+                    IdentifableView(id: "c", content: { StepForwardWidget() }),
+                ]}
                 
                 controlService.configure(.fullScreen(.top1)) {[
                     IdentifableView(id: "a", content: {
@@ -38,7 +89,7 @@ struct ContentView: View {
                         Toggle("", isOn: $toggle).fixedSize().frame(width: 50)
                     }),
                     IdentifableView(id: "d", content: {
-                        Image(systemName: "airplayvideo").frame(width: 25, height: 25).foregroundColor(.white)
+                        Image(systemName: "airplayvideo").frame(width: 25, height: 35).foregroundColor(.white)
                     }),
                     IdentifableView(id: "e", content: {
                         Image(systemName: "captions.bubble").frame(width: 25, height: 35).foregroundColor(.white)
