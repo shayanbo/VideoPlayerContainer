@@ -98,7 +98,7 @@ public class GestureService : Service {
                 return direction
             }
             
-            let horizontal = value.translation.width > value.translation.height
+            let horizontal = abs(value.translation.width) > abs(value.translation.height)
             if horizontal {
                 return .horizontal
             }

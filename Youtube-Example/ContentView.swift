@@ -21,7 +21,7 @@ struct ContentView: View {
             .frame(height: 300)
             .bindContext(context)
             .ignoresSafeArea(edges: .all)
-//            .background(.black)
+            .background(.black)
             .onAppear {
                 
 //                context[StatusService.self].toFullScreen()
