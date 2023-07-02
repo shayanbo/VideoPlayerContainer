@@ -34,6 +34,12 @@
 		D4130F202A4A65FE007DAFFE /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */; };
 		D4130F212A4A65FE007DAFFE /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */; };
 		D4130F262A4A6E5F007DAFFE /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F252A4A6E5F007DAFFE /* ExampleApp.swift */; };
+		D46141572A512D3000D84E62 /* VideoPlayerContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; };
+		D46141592A51330A00D84E62 /* DanmakuWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46141582A51330A00D84E62 /* DanmakuWidget.swift */; };
+		D461415B2A51332300D84E62 /* PlaybackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461415A2A51332300D84E62 /* PlaybackWidget.swift */; };
+		D461415E2A5133DE00D84E62 /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461415C2A5133DE00D84E62 /* SeekBarWidget.swift */; };
+		D461415F2A5133DE00D84E62 /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461415D2A5133DE00D84E62 /* TimelineWidget.swift */; };
+		D46141612A51341C00D84E62 /* DurationWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46141602A51341C00D84E62 /* DurationWidget.swift */; };
 		D474DC412A5067B300EF8957 /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC402A5067B300EF8957 /* SeekBarWidget.swift */; };
 		D474DC432A50694600EF8957 /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC422A50694600EF8957 /* TimelineWidget.swift */; };
 		D474DC452A5069E600EF8957 /* PlaybackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC442A5069E600EF8957 /* PlaybackWidget.swift */; };
@@ -78,6 +84,13 @@
 			remoteInfo = VideoPlayerContainer;
 		};
 		D4061C4E2A4B260100CDD1FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D49986102A389FEF00384185 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4061C232A4B257800CDD1FF;
+			remoteInfo = VideoPlayerContainer;
+		};
+		D46141552A512D2D00D84E62 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D49986102A389FEF00384185 /* Project object */;
 			proxyType = 1;
@@ -142,6 +155,11 @@
 		D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 		D4130F252A4A6E5F007DAFFE /* ExampleApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
+		D46141582A51330A00D84E62 /* DanmakuWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanmakuWidget.swift; sourceTree = "<group>"; };
+		D461415A2A51332300D84E62 /* PlaybackWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackWidget.swift; sourceTree = "<group>"; };
+		D461415C2A5133DE00D84E62 /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
+		D461415D2A5133DE00D84E62 /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
+		D46141602A51341C00D84E62 /* DurationWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationWidget.swift; sourceTree = "<group>"; };
 		D474DC402A5067B300EF8957 /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D474DC422A50694600EF8957 /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 		D474DC442A5069E600EF8957 /* PlaybackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackWidget.swift; sourceTree = "<group>"; };
@@ -215,6 +233,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D46141572A512D3000D84E62 /* VideoPlayerContainer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +389,11 @@
 				D49604352A4D22AF00AD3FE6 /* ContentView.swift */,
 				D49604372A4D22B000AD3FE6 /* Assets.xcassets */,
 				D49604392A4D22B000AD3FE6 /* Preview Content */,
+				D46141582A51330A00D84E62 /* DanmakuWidget.swift */,
+				D461415A2A51332300D84E62 /* PlaybackWidget.swift */,
+				D461415C2A5133DE00D84E62 /* SeekBarWidget.swift */,
+				D461415D2A5133DE00D84E62 /* TimelineWidget.swift */,
+				D46141602A51341C00D84E62 /* DurationWidget.swift */,
 			);
 			path = "Bilibili-Example";
 			sourceTree = "<group>";
@@ -546,6 +570,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D46141562A512D2D00D84E62 /* PBXTargetDependency */,
 			);
 			name = "Bilibili-Example";
 			productName = "Bilibili-Example";
@@ -748,8 +773,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D461415F2A5133DE00D84E62 /* TimelineWidget.swift in Sources */,
+				D461415E2A5133DE00D84E62 /* SeekBarWidget.swift in Sources */,
 				D49604362A4D22AF00AD3FE6 /* ContentView.swift in Sources */,
 				D49604342A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift in Sources */,
+				D461415B2A51332300D84E62 /* PlaybackWidget.swift in Sources */,
+				D46141612A51341C00D84E62 /* DurationWidget.swift in Sources */,
+				D46141592A51330A00D84E62 /* DanmakuWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -781,6 +811,11 @@
 			isa = PBXTargetDependency;
 			target = D4061C232A4B257800CDD1FF /* VideoPlayerContainer */;
 			targetProxy = D4061C4E2A4B260100CDD1FF /* PBXContainerItemProxy */;
+		};
+		D46141562A512D2D00D84E62 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4061C232A4B257800CDD1FF /* VideoPlayerContainer */;
+			targetProxy = D46141552A512D2D00D84E62 /* PBXContainerItemProxy */;
 		};
 		D474DC4B2A50883F00EF8957 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;

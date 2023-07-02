@@ -16,6 +16,7 @@ struct CommentWidget: View {
             Text("The greatest entertainer in the world, of all time. Please don't ever let his music die.")
         }
         .padding(.trailing, 60)
+        .background(.white)
     }
 }
 

@@ -17,6 +17,8 @@ public class FeatureService : Service {
     
     @ViewState private(set) var feature: Feature?
     
+    @ViewState fileprivate var dismissOnClick = false
+    
     private var cancellables = [AnyCancellable]()
     
     public required init(_ context: Context) {
@@ -24,7 +26,10 @@ public class FeatureService : Service {
         
         let gestureService = context[GestureService.self]
         gestureService.observe(.tap(.all)) { [weak self] event in
-            self?.dismiss()
+            guard let dismissOnClick = self?.dismissOnClick else { return }
+            if dismissOnClick {
+                self?.dismiss()
+            }
         }.store(in: &cancellables)
     }
     
@@ -39,6 +44,10 @@ public class FeatureService : Service {
         case right(Style)
         case top(Style)
         case bottom(Style)
+    }
+    
+    public func configure(dismissOnClick: Bool) {
+        self.dismissOnClick = dismissOnClick
     }
     
     public func present(_ direction: Direction, animation: Animation? = .default, content: @escaping ()-> AnyView) {

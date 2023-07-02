@@ -7,15 +7,15 @@
 
 import SwiftUI
 
-public extension ToastService {
+extension ToastService {
     
     struct Toast: Identifiable, Equatable {
         
-        public let title: String
+        public let object: Any
         public let id = UUID().uuidString
         
-        public init(title: String) {
-            self.title = title
+        public init(object: Any) {
+            self.object = object
         }
         
         public static func == (a: Toast, b: Toast) -> Bool {
@@ -34,11 +34,7 @@ public class ToastService: Service {
     
     fileprivate var duration: DispatchTimeInterval = .seconds(3)
     
-    fileprivate var toastGetter: (Toast)->any View = { toast in
-        Button(toast.title) {}
-            .padding([.leading], 20)
-            .buttonStyle(.borderedProminent)
-    }
+    fileprivate var content: ( (Any)->any View )?
     
     public required init(_ context: Context) {
         super.init(context)
@@ -52,16 +48,17 @@ public class ToastService: Service {
         self.insets = insets
     }
     
-    public func configure(toastView: @escaping (Toast)->some View) {
-        toastGetter = toastView
+    public func configure(content: @escaping (Any)->some View) {
+        self.content = content
     }
     
     public func configure(lineSpacing: CGFloat) {
         self.lineSpacing = lineSpacing
     }
     
-    public func toast(_ toast: Toast) {
+    public func toast(_ object: Any) {
         withAnimation {
+            let toast = Toast(object: object)
             toasts.append(toast)
             DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
                 withAnimation {
@@ -79,10 +76,13 @@ struct ToastWidget: View {
         WithService(ToastService.self) { service in
             ToastLayout(service.lineSpacing) {
                 Spacer()
-                ForEach(service.toasts) { toast in
-                    AnyView(service.toastGetter(toast))
-                        .padding(.leading, service.insets.leading)
-                        .transition(.asymmetric(insertion: .move(edge: .leading), removal: .opacity))
+                
+                if let content = service.content {
+                    ForEach(service.toasts) { toast in
+                        AnyView(content(toast.object))
+                            .padding(.leading, service.insets.leading)
+                            .transition(.asymmetric(insertion: .move(edge: .leading), removal: .opacity))
+                    }
                 }
             }
             .padding(EdgeInsets(top: service.insets.top, leading: 0, bottom: service.insets.bottom, trailing: service.insets.trailing))
