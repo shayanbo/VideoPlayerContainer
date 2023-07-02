@@ -77,6 +77,8 @@ public class ControlService : Service {
         var center: AnyView? = nil
     }
     
+    @ViewState fileprivate var shadow: AnyView?
+    
     @ViewState fileprivate var halfScreenShadow = Shadow()
     @ViewState fileprivate var fullScreenShadow = Shadow()
     @ViewState fileprivate var portraitScreenShadow = Shadow()
@@ -304,67 +306,71 @@ public class ControlService : Service {
         }
     }
     
-    public func configure(_ location: Location, itemsGetter: @escaping ()->[IdentifableView]) {
+    public func configure(_ location: Location, content: @escaping ()->[IdentifableView]) {
         
         switch location {
         case let .halfScreen(direction):
             switch direction {
             case .top1:
-                self.halfScreenControlBarItems.top1 = itemsGetter
+                self.halfScreenControlBarItems.top1 = content
             case .top2:
-                self.halfScreenControlBarItems.top2 = itemsGetter
+                self.halfScreenControlBarItems.top2 = content
             case .left:
-                self.halfScreenControlBarItems.left = itemsGetter
+                self.halfScreenControlBarItems.left = content
             case .right:
-                self.halfScreenControlBarItems.right = itemsGetter
+                self.halfScreenControlBarItems.right = content
             case .bottom1:
-                self.halfScreenControlBarItems.bottom1 = itemsGetter
+                self.halfScreenControlBarItems.bottom1 = content
             case .bottom2:
-                self.halfScreenControlBarItems.bottom2 = itemsGetter
+                self.halfScreenControlBarItems.bottom2 = content
             case .bottom3:
-                self.halfScreenControlBarItems.bottom3 = itemsGetter
+                self.halfScreenControlBarItems.bottom3 = content
             case .center:
-                self.halfScreenControlBarItems.center = itemsGetter
+                self.halfScreenControlBarItems.center = content
             }
         case let .fullScreen(direction):
             switch direction {
             case .top1:
-                self.fullScreenControlBarItems.top1 = itemsGetter
+                self.fullScreenControlBarItems.top1 = content
             case .top2:
-                self.fullScreenControlBarItems.top2 = itemsGetter
+                self.fullScreenControlBarItems.top2 = content
             case .left:
-                self.fullScreenControlBarItems.left = itemsGetter
+                self.fullScreenControlBarItems.left = content
             case .right:
-                self.fullScreenControlBarItems.right = itemsGetter
+                self.fullScreenControlBarItems.right = content
             case .bottom1:
-                self.fullScreenControlBarItems.bottom1 = itemsGetter
+                self.fullScreenControlBarItems.bottom1 = content
             case .bottom2:
-                self.fullScreenControlBarItems.bottom2 = itemsGetter
+                self.fullScreenControlBarItems.bottom2 = content
             case .bottom3:
-                self.fullScreenControlBarItems.bottom3 = itemsGetter
+                self.fullScreenControlBarItems.bottom3 = content
             case .center:
-                self.fullScreenControlBarItems.center = itemsGetter
+                self.fullScreenControlBarItems.center = content
             }
         case let .portrait(direction):
             switch direction {
             case .top1:
-                self.portraitScreenControlBarItems.top1 = itemsGetter
+                self.portraitScreenControlBarItems.top1 = content
             case .top2:
-                self.portraitScreenControlBarItems.top2 = itemsGetter
+                self.portraitScreenControlBarItems.top2 = content
             case .left:
-                self.portraitScreenControlBarItems.left = itemsGetter
+                self.portraitScreenControlBarItems.left = content
             case .right:
-                self.portraitScreenControlBarItems.right = itemsGetter
+                self.portraitScreenControlBarItems.right = content
             case .bottom1:
-                self.portraitScreenControlBarItems.bottom1 = itemsGetter
+                self.portraitScreenControlBarItems.bottom1 = content
             case .bottom2:
-                self.portraitScreenControlBarItems.bottom2 = itemsGetter
+                self.portraitScreenControlBarItems.bottom2 = content
             case .bottom3:
-                self.portraitScreenControlBarItems.bottom3 = itemsGetter
+                self.portraitScreenControlBarItems.bottom3 = content
             case .center:
-                self.portraitScreenControlBarItems.center = itemsGetter
+                self.portraitScreenControlBarItems.center = content
             }
         }
+    }
+    
+    public func configure(shadow: AnyView?) {
+        self.shadow = shadow
     }
     
     public func configure(_ location: RawLocation, shadow: AnyView?) {
@@ -738,12 +744,23 @@ struct ControlWidget: View {
     }
     
     var body: some View {
-        VStack(spacing:0) {
-            top
-            sides
-            bottom
+        WithService(ControlService.self) { service in
+            ZStack {
+                
+                if let shadow = service.shadow, !service.hidden {
+                    shadow
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .transition(.opacity)
+                }
+                
+                VStack(spacing:0) {
+                    top
+                    sides
+                    bottom
+                }
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 

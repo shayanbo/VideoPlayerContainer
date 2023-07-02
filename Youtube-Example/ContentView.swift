@@ -21,12 +21,20 @@ struct ContentView: View {
             .frame(height: 300)
             .bindContext(context)
             .ignoresSafeArea(edges: .all)
-            .background(.black)
+//            .background(.black)
             .onAppear {
                 
 //                context[StatusService.self].toFullScreen()
                 
                 let controlService = context[ControlService.self]
+                
+                controlService.configure(.halfScreen(.top), shadow: nil)
+                controlService.configure(.halfScreen(.bottom), shadow: nil)
+                controlService.configure(.fullScreen(.top), shadow: nil)
+                controlService.configure(.fullScreen(.bottom), shadow: nil)
+                controlService.configure(shadow: AnyView(
+                    Rectangle().fill(.black.opacity(0.2)).allowsHitTesting(false)
+                ))
                 
                 controlService.configure(.halfScreen(.top), transition: .opacity)
                 controlService.configure(.halfScreen(.bottom), transition: .opacity)
@@ -55,7 +63,10 @@ struct ContentView: View {
                 ]}
                 
                 controlService.configure(.halfScreen(.bottom1)) {[
-                    IdentifableView(id: "a", content: { SeekBarWidget() }),
+                    IdentifableView(id: "a", content: {
+                        SeekBarWidget()
+                            .padding(.horizontal, -20)
+                    }),
                 ]}
                 
                 controlService.configure(.halfScreen(.bottom2)) {[

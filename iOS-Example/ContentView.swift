@@ -129,12 +129,12 @@ struct ContentView: View {
                 
                 // configure toast view
                 context[ToastService.self].configure { toast in
-                    Text(toast.title)
+                    Text( toast as! String )
                 }
                 
                 // configure more widget
                 context[MoreButtonService.self].bindClickHandler { [weak context] in
-                    context?[ToastService.self].toast(ToastService.Toast(title: "Hahahahaha"))
+                    context?[ToastService.self].toast("Hahahahaha")
                 }
                 
                 // configure control style
