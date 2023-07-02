@@ -138,7 +138,9 @@ struct ContentView: View {
                 }
                 
                 // configure control style
-                context[ControlService.self].configure(displayStyle: .manual(firstAppear: true, animation: nil))
+                context[ControlService.self].configure(displayStyle: .always)
+                
+                context[FeatureService.self].configure(dismissOnClick: true)
             }
     }
 }
