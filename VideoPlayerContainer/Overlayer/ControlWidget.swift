@@ -86,14 +86,15 @@ public class ControlService : Service {
     public enum DisplayStyle {
         case always
         case never
-        case auto(firstAppear: Bool, animation: Animation?, duration: DispatchTimeInterval)
+        case auto(firstAppear: Bool, animation: Animation?, duration: TimeInterval)
         case manual(firstAppear: Bool, animation: Animation?)
         case custom(animation: Animation?)
     }
     
     @ViewState fileprivate var hidden = true
+    private var autoHiddenTimer: Timer?
     
-    fileprivate var displayStyle = DisplayStyle.auto(firstAppear: false, animation: .default, duration: .seconds(5))
+    fileprivate var displayStyle = DisplayStyle.auto(firstAppear: false, animation: .default, duration: 5)
     
     @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
     
@@ -104,77 +105,55 @@ public class ControlService : Service {
         service.observe(.tap(.all)) { _ in
             withAnimation {
                 let service = context[ControlService.self]
-                service.onClick()
+                service.handleTap()
             }
         }.store(in: &cancellables)
     }
     
-    private func onClick() {
+    private func handleTap() {
         switch displayStyle {
         case let .manual(firstAppear: _, animation: animation):
             withAnimation(animation) {
                 self.hidden.toggle()
             }
         case let .auto(firstAppear: _, animation: animation, duration: duration):
+            
+            autoHiddenTimer?.invalidate()
+            
             withAnimation(animation) {
                 self.hidden.toggle()
             }
             if !hidden {
-                DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
-                    withAnimation { self?.hidden.toggle() }
-                }
+                autoHiddenTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: false, block: { [weak self] timer in
+                    withAnimation {
+                        self?.hidden.toggle()
+                    }
+                })
             }
         default: break
         }
     }
     
     public func present() {
-        switch displayStyle {
-        case let .manual(firstAppear: _, animation: animation):
+        handleTap()
+        if case let .custom(animation: animation) = displayStyle {
             withAnimation(animation) {
                 self.hidden = false
             }
-        case let .auto(firstAppear: _, animation: animation, duration: duration):
-            withAnimation(animation) {
-                self.hidden = false
-            }
-            if !hidden {
-                DispatchQueue.main.asyncAfter(deadline: .now() + duration) { [weak self] in
-                    withAnimation { self?.hidden = true }
-                }
-            }
-        case let .custom(animation: animation):
-            withAnimation(animation) {
-                self.hidden = true
-            }
-        default: break
         }
     }
     
     public func dismiss() {
-        switch displayStyle {
-        case let .manual(firstAppear: _, animation: animation):
+        handleTap()
+        if case let .custom(animation: animation) = displayStyle {
             withAnimation(animation) {
                 self.hidden = true
             }
-        case let .auto(firstAppear: _, animation: animation, duration: _):
-            withAnimation(animation) {
-                self.hidden = true
-            }
-        case let .custom(animation: animation):
-            withAnimation(animation) {
-                self.hidden = true
-            }
-        default: break
         }
     }
     
-    public func toggle() {
-        if hidden {
-            present()
-        } else {
-            dismiss()
-        }
+    public var isPresented: Bool {
+        !hidden
     }
     
     public func configure(displayStyle: DisplayStyle) {

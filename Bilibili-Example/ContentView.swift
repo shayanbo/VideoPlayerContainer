@@ -16,7 +16,6 @@ struct ContentView: View {
     var body: some View {
         
         PlayerWidget()
-            .frame(height: 300)
             .bindContext(context)
             .ignoresSafeArea(.all)
             .background(.black)
@@ -24,7 +23,7 @@ struct ContentView: View {
                 
                 let controlService = context[ControlService.self]
                 
-//                context[StatusService.self].toFullScreen()
+                context[StatusService.self].toFullScreen()
                 
                 controlService.configure(.halfScreen(.bottom), transition: .opacity)
                 controlService.configure(.halfScreen(.top), transition: .opacity)

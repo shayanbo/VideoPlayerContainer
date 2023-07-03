@@ -65,29 +65,28 @@ public struct PlayerWidget: View {
             WithService(PlayerService.self) { service in
                 
                 HStack {
-                    if let feature = service.feature, case .left(.squeeze) = feature.direction {
+                    
+                    if let feature = service.feature, case let .left(.squeeze(spacing)) = feature.direction {
+                        
                         AnyView(
                             feature.content()
                                 .frame(maxHeight: .infinity)
                                 .transition(.move(edge: .leading))
                         )
-                    }
-                    
-                    if let feature = service.feature, case let .left(.squeeze(spacing)) = feature.direction {
+                        
                         Spacer().frame(width: spacing)
                     }
                     
                     VStack {
                         
-                        if let feature = service.feature, case .top(.squeeze) = feature.direction {
+                        if let feature = service.feature, case let .top(.squeeze(spacing)) = feature.direction {
+                            
                             AnyView(
                                 feature.content()
                                     .frame(maxWidth: .infinity)
                                     .transition(.move(edge: .top))
                             )
-                        }
-                        
-                        if let feature = service.feature, case let .top(.squeeze(spacing)) = feature.direction {
+                            
                             Spacer().frame(height: spacing)
                         }
                         
@@ -135,10 +134,9 @@ public struct PlayerWidget: View {
                         }
                         
                         if let feature = service.feature, case let .bottom(.squeeze(spacing)) = feature.direction {
+                            
                             Spacer().frame(height: spacing)
-                        }
-                        
-                        if let feature = service.feature, case .bottom(.squeeze) = feature.direction {
+                            
                             AnyView(
                                 feature.content()
                                     .frame(maxWidth: .infinity)
@@ -148,10 +146,9 @@ public struct PlayerWidget: View {
                     }
                     
                     if let feature = service.feature, case let .right(.squeeze(spacing)) = feature.direction {
+                        
                         Spacer().frame(width: spacing)
-                    }
-                    
-                    if let feature = service.feature, case .right(.squeeze) = feature.direction {
+                        
                         AnyView(
                             feature.content()
                                 .frame(maxHeight: .infinity)
