@@ -135,7 +135,13 @@ public class ControlService : Service {
     }
     
     public func present() {
+        
+        guard !isPresented else {
+            return
+        }
+        
         handleTap()
+        
         if case let .custom(animation: animation) = displayStyle {
             withAnimation(animation) {
                 self.hidden = false
@@ -144,7 +150,13 @@ public class ControlService : Service {
     }
     
     public func dismiss() {
+        
+        guard isPresented else {
+            return
+        }
+        
         handleTap()
+        
         if case let .custom(animation: animation) = displayStyle {
             withAnimation(animation) {
                 self.hidden = true

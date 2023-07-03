@@ -112,6 +112,10 @@ struct ContentView: View {
                         .buttonStyle(.borderedProminent),
                     Spacer(),
                 ]}
+                
+                let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
+                context[RenderService.self].player.replaceCurrentItem(with: item)
+                context[RenderService.self].player.play()
             }
     }
 }

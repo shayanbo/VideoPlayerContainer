@@ -138,7 +138,8 @@ struct ContentView: View {
                 controlService.configure(.fullScreen, insets: .init(top: 20, leading: 60, bottom: 34, trailing: 60))
                 
                 let player = context[RenderService.self].player
-                player.replaceCurrentItem(with: AVPlayerItem(url: URL(string: "https://devstreaming-cdn.apple.com/videos/wwdc/2023/10036/4/BB960BFD-F982-4800-8060-5674B049AC5A/cmaf/hvc/2160p_16800/hvc_2160p_16800.m3u8")!))
+                let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
+                player.replaceCurrentItem(with: item)
                 player.play()
             }
     }

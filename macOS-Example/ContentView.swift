@@ -9,8 +9,6 @@ import SwiftUI
 import AVKit
 import VideoPlayerContainer
 
-let wwdcVideo = "https://devstreaming-cdn.apple.com/videos/wwdc/2023/10036/4/BB960BFD-F982-4800-8060-5674B049AC5A/cmaf/hvc/2160p_16800/hvc_2160p_16800.m3u8"
-
 struct ContentView: View {
     
     @StateObject var context = Context()
@@ -72,7 +70,7 @@ struct ContentView: View {
                 context[TitleService.self].setTitle("WWDC Video")
                 
                 // load video item
-                let item = AVPlayerItem(url: URL(string:wwdcVideo)!)
+                let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
                 context[RenderService.self].player.replaceCurrentItem(with: item)
                 
                 // configure toast view
