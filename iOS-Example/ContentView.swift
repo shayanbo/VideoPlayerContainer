@@ -22,7 +22,7 @@ struct ContentView: View {
         
         PlayerWidget()
             .ignoresSafeArea(edges: .vertical)
-            .frame(maxWidth: .infinity, maxHeight: orientation.isLandscape ? .infinity : 300)
+            .frame(maxHeight: orientation.isLandscape ? .infinity : 300)
             .bindContext(context, launch: [
                 LoadingService.self,
             ])

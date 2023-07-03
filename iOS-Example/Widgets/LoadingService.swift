@@ -19,8 +19,9 @@ class LoadingService : Service {
         status = context[RenderService.self].player.observe(\.timeControlStatus) { player, change in
             if player.timeControlStatus == .waitingToPlayAtSpecifiedRate {
                 context[PluginService.self].present(.center) {
-                    ProgressView()
-                        .allowsHitTesting(false)
+                    AnyView(
+                        ProgressView().allowsHitTesting(false)
+                    )
                 }
             } else {
                 context[PluginService.self].dismiss()

@@ -13,12 +13,24 @@ struct ContentView: View {
     
     @StateObject var context = Context()
     
+    @State var orientation = UIDevice.current.orientation
+    
     var body: some View {
         
         PlayerWidget()
-            .bindContext(context)
             .ignoresSafeArea(.all)
+            .frame(maxHeight: orientation.isLandscape ? .infinity : 300)
+            .bindContext(context)
             .background(.black)
+            .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification), perform: { _ in
+                self.orientation = UIDevice.current.orientation
+                
+                if UIDevice.current.orientation.isLandscape {
+                    context[StatusService.self].toFullScreen()
+                } else {
+                    context[StatusService.self].toHalfScreen()
+                }
+            })
             .onAppear {
                 
                 let controlService = context[ControlService.self]
