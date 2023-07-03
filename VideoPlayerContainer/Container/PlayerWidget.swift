@@ -54,41 +54,42 @@ public struct PlayerWidget: View {
     @EnvironmentObject private var context: Context
     
     public var body: some View {
-        WithService(PlayerService.self) { service in
+        
+        GeometryReader { proxy in
             
-            HStack {
-                if let feature = service.feature, case .left(.squeeze) = feature.direction {
-                    AnyView(
-                        feature.content()
-                            .frame(maxHeight: .infinity)
-                            .transition(.move(edge: .leading))
-                    )
-                }
+            let _ = {
+                let service = context[ViewSizeService.self]
+                service.updateViewSize(proxy.size)
+            }()
+            
+            WithService(PlayerService.self) { service in
                 
-                if let feature = service.feature, case let .left(.squeeze(spacing)) = feature.direction {
-                    Spacer().frame(width: spacing)
-                }
-                
-                VStack {
-                    
-                    if let feature = service.feature, case .top(.squeeze) = feature.direction {
+                HStack {
+                    if let feature = service.feature, case .left(.squeeze) = feature.direction {
                         AnyView(
                             feature.content()
-                                .frame(maxWidth: .infinity)
-                                .transition(.move(edge: .top))
+                                .frame(maxHeight: .infinity)
+                                .transition(.move(edge: .leading))
                         )
                     }
                     
-                    if let feature = service.feature, case let .top(.squeeze(spacing)) = feature.direction {
-                        Spacer().frame(height: spacing)
+                    if let feature = service.feature, case let .left(.squeeze(spacing)) = feature.direction {
+                        Spacer().frame(width: spacing)
                     }
                     
-                    GeometryReader { proxy in
+                    VStack {
                         
-                        let _ = {
-                            let service = context[ViewSizeService.self]
-                            service.updateViewSize(proxy.size)
-                        }()
+                        if let feature = service.feature, case .top(.squeeze) = feature.direction {
+                            AnyView(
+                                feature.content()
+                                    .frame(maxWidth: .infinity)
+                                    .transition(.move(edge: .top))
+                            )
+                        }
+                        
+                        if let feature = service.feature, case let .top(.squeeze(spacing)) = feature.direction {
+                            Spacer().frame(height: spacing)
+                        }
                         
                         ZStack {
                             
@@ -132,34 +133,34 @@ public struct PlayerWidget: View {
                                 AnyView(overlay())
                             }
                         }
+                        
+                        if let feature = service.feature, case let .bottom(.squeeze(spacing)) = feature.direction {
+                            Spacer().frame(height: spacing)
+                        }
+                        
+                        if let feature = service.feature, case .bottom(.squeeze) = feature.direction {
+                            AnyView(
+                                feature.content()
+                                    .frame(maxWidth: .infinity)
+                                    .transition(.move(edge: .bottom))
+                            )
+                        }
                     }
                     
-                    if let feature = service.feature, case let .bottom(.squeeze(spacing)) = feature.direction {
-                        Spacer().frame(height: spacing)
+                    if let feature = service.feature, case let .right(.squeeze(spacing)) = feature.direction {
+                        Spacer().frame(width: spacing)
                     }
                     
-                    if let feature = service.feature, case .bottom(.squeeze) = feature.direction {
+                    if let feature = service.feature, case .right(.squeeze) = feature.direction {
                         AnyView(
                             feature.content()
-                                .frame(maxWidth: .infinity)
-                                .transition(.move(edge: .bottom))
+                                .frame(maxHeight: .infinity)
+                                .transition(.move(edge: .trailing))
                         )
                     }
                 }
-                
-                if let feature = service.feature, case let .right(.squeeze(spacing)) = feature.direction {
-                    Spacer().frame(width: spacing)
-                }
-                
-                if let feature = service.feature, case .right(.squeeze) = feature.direction {
-                    AnyView(
-                        feature.content()
-                            .frame(maxHeight: .infinity)
-                            .transition(.move(edge: .trailing))
-                    )
-                }
+                .clipped()
             }
-            .clipped()
         }
     }
 }
