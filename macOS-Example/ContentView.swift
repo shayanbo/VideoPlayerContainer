@@ -21,6 +21,7 @@ struct ContentView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .bindContext(context, launch: [
                 LoadingService.self,
+                HoverService.self,
             ])
             .onAppear {
                 
@@ -85,7 +86,7 @@ struct ContentView: View {
                 }
                 
                 // configure control style
-//                context[ControlService.self].configure(controlStyle: .manual(firstAppear: true))
+                context[ControlService.self].configure(displayStyle: .manual(firstAppear: true, animation: .default))
             }
     }
 }

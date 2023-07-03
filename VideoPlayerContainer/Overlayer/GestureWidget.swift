@@ -40,6 +40,7 @@ public class GestureService : Service {
         case longPress(Location)
         case rotate
         case pinch
+        case hover
     }
     
     private let observable = PassthroughSubject<GestureEvent, Never>()
@@ -57,6 +58,7 @@ public class GestureService : Service {
             case longPress(CGPoint)
             case rotate(RotationGesture.Value)
             case pinch(MagnificationGesture.Value)
+            case hover
         }
         
         public let gesture: Gesture
@@ -133,6 +135,11 @@ public class GestureService : Service {
         let event = GestureEvent(gesture: .rotate, action: action, value: .rotate(value))
         observable.send(event)
     }
+    
+    fileprivate func handleHover(action: GestureEvent.Action) {
+        let event = GestureEvent(gesture: .hover, action: action, value: .hover)
+        observable.send(event)
+    }
 }
 
 struct GestureWidget: View {
@@ -173,6 +180,9 @@ struct GestureWidget: View {
                                 service.handleRotation(value, action: .end)
                             }
                     )
+                    .onHover { changeOrEnd in
+                        service.handleHover(action: changeOrEnd ? .start : .end)
+                    }
             }
         }
     }

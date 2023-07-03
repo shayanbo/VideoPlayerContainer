@@ -66,6 +66,7 @@
 		D4C450902A4ECFC300731503 /* VideoPlayerContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; };
 		D4C450922A4EE50B00731503 /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C450912A4EE50B00731503 /* SeekBarWidget.swift */; };
 		D4C450942A4EE51F00731503 /* PlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C450932A4EE51F00731503 /* PlaybackService.swift */; };
+		D4C450962A52E9FD00731503 /* HoverService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C450952A52E9FD00731503 /* HoverService.swift */; };
 		D4FA61592A49D33100B28EAE /* MoreButtonWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FA61472A49D26400B28EAE /* MoreButtonWidget.swift */; };
 		D4FA615A2A49D33100B28EAE /* LoadingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FA61482A49D26400B28EAE /* LoadingService.swift */; };
 		D4FA615B2A49D33100B28EAE /* PlaybackButtonWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4FA61492A49D26400B28EAE /* PlaybackButtonWidget.swift */; };
@@ -188,6 +189,7 @@
 		D49986222A389FF000384185 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D4C450912A4EE50B00731503 /* SeekBarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D4C450932A4EE51F00731503 /* PlaybackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackService.swift; sourceTree = "<group>"; };
+		D4C450952A52E9FD00731503 /* HoverService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HoverService.swift; sourceTree = "<group>"; };
 		D4FA61472A49D26400B28EAE /* MoreButtonWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreButtonWidget.swift; sourceTree = "<group>"; };
 		D4FA61482A49D26400B28EAE /* LoadingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingService.swift; sourceTree = "<group>"; };
 		D4FA61492A49D26400B28EAE /* PlaybackButtonWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackButtonWidget.swift; sourceTree = "<group>"; };
@@ -332,6 +334,7 @@
 				D4130F172A4A65FE007DAFFE /* BackButtonWidget.swift */,
 				D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */,
 				D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */,
+				D4C450952A52E9FD00731503 /* HoverService.swift */,
 			);
 			path = Widgets;
 			sourceTree = "<group>";
@@ -731,6 +734,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4C450962A52E9FD00731503 /* HoverService.swift in Sources */,
 				D4130F262A4A6E5F007DAFFE /* ExampleApp.swift in Sources */,
 				D4130F1F2A4A65FE007DAFFE /* BackButtonWidget.swift in Sources */,
 				D4130F1D2A4A65FE007DAFFE /* PlaybackButtonWidget.swift in Sources */,
