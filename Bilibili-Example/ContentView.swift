@@ -35,8 +35,6 @@ struct ContentView: View {
                 
                 let controlService = context[ControlService.self]
                 
-                context[StatusService.self].toFullScreen()
-                
                 controlService.configure(.halfScreen(.bottom), transition: .opacity)
                 controlService.configure(.halfScreen(.top), transition: .opacity)
                 

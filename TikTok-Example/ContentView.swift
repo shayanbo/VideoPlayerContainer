@@ -93,7 +93,7 @@ struct ContentView: View {
                         Spacer().frame(height: 0),
                     ]}
                     
-                    context[RenderService.self].fill()
+                    context[RenderService.self].fit()
                     
                     let player = context[RenderService.self].player
                     let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)

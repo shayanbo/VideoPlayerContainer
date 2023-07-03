@@ -52,15 +52,15 @@
 		D474DC492A506A1200EF8957 /* StepBackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC482A506A1200EF8957 /* StepBackWidget.swift */; };
 		D474DC4C2A50884300EF8957 /* VideoPlayerContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; };
 		D474DC4E2A508D0400EF8957 /* CommentWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC4D2A508D0400EF8957 /* CommentWidget.swift */; };
-		D49604102A4D224F00AD3FE6 /* TikTok_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D496040F2A4D224F00AD3FE6 /* TikTok_ExampleApp.swift */; };
+		D49604102A4D224F00AD3FE6 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D496040F2A4D224F00AD3FE6 /* ExampleApp.swift */; };
 		D49604122A4D224F00AD3FE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604112A4D224F00AD3FE6 /* ContentView.swift */; };
 		D49604142A4D225000AD3FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604132A4D225000AD3FE6 /* Assets.xcassets */; };
 		D49604172A4D225000AD3FE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604162A4D225000AD3FE6 /* Preview Assets.xcassets */; };
-		D49604222A4D228700AD3FE6 /* Youtube_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604212A4D228700AD3FE6 /* Youtube_ExampleApp.swift */; };
+		D49604222A4D228700AD3FE6 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604212A4D228700AD3FE6 /* ExampleApp.swift */; };
 		D49604242A4D228700AD3FE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604232A4D228700AD3FE6 /* ContentView.swift */; };
 		D49604262A4D228800AD3FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604252A4D228800AD3FE6 /* Assets.xcassets */; };
 		D49604292A4D228800AD3FE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604282A4D228800AD3FE6 /* Preview Assets.xcassets */; };
-		D49604342A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604332A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift */; };
+		D49604342A4D22AF00AD3FE6 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604332A4D22AF00AD3FE6 /* ExampleApp.swift */; };
 		D49604362A4D22AF00AD3FE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604352A4D22AF00AD3FE6 /* ContentView.swift */; };
 		D49604382A4D22B000AD3FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604372A4D22B000AD3FE6 /* Assets.xcassets */; };
 		D496043B2A4D22B000AD3FE6 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D496043A2A4D22B000AD3FE6 /* Preview Assets.xcassets */; };
@@ -174,17 +174,17 @@
 		D474DC482A506A1200EF8957 /* StepBackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBackWidget.swift; sourceTree = "<group>"; };
 		D474DC4D2A508D0400EF8957 /* CommentWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWidget.swift; sourceTree = "<group>"; };
 		D496040D2A4D224F00AD3FE6 /* TikTok-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TikTok-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D496040F2A4D224F00AD3FE6 /* TikTok_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TikTok_ExampleApp.swift; sourceTree = "<group>"; };
+		D496040F2A4D224F00AD3FE6 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		D49604112A4D224F00AD3FE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D49604132A4D225000AD3FE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D49604162A4D225000AD3FE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D496041F2A4D228700AD3FE6 /* Youtube-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Youtube-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D49604212A4D228700AD3FE6 /* Youtube_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Youtube_ExampleApp.swift; sourceTree = "<group>"; };
+		D49604212A4D228700AD3FE6 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		D49604232A4D228700AD3FE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D49604252A4D228800AD3FE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D49604282A4D228800AD3FE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D49604312A4D22AF00AD3FE6 /* Bilibili-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bilibili-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D49604332A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bilibili_ExampleApp.swift; sourceTree = "<group>"; };
+		D49604332A4D22AF00AD3FE6 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		D49604352A4D22AF00AD3FE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D49604372A4D22B000AD3FE6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D496043A2A4D22B000AD3FE6 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -356,7 +356,7 @@
 		D496040E2A4D224F00AD3FE6 /* TikTok-Example */ = {
 			isa = PBXGroup;
 			children = (
-				D496040F2A4D224F00AD3FE6 /* TikTok_ExampleApp.swift */,
+				D496040F2A4D224F00AD3FE6 /* ExampleApp.swift */,
 				D49604112A4D224F00AD3FE6 /* ContentView.swift */,
 				D49604132A4D225000AD3FE6 /* Assets.xcassets */,
 				D49604152A4D225000AD3FE6 /* Preview Content */,
@@ -379,7 +379,7 @@
 			children = (
 				D474DC422A50694600EF8957 /* TimelineWidget.swift */,
 				D474DC402A5067B300EF8957 /* SeekBarWidget.swift */,
-				D49604212A4D228700AD3FE6 /* Youtube_ExampleApp.swift */,
+				D49604212A4D228700AD3FE6 /* ExampleApp.swift */,
 				D49604232A4D228700AD3FE6 /* ContentView.swift */,
 				D49604252A4D228800AD3FE6 /* Assets.xcassets */,
 				D49604272A4D228800AD3FE6 /* Preview Content */,
@@ -402,7 +402,7 @@
 		D49604322A4D22AF00AD3FE6 /* Bilibili-Example */ = {
 			isa = PBXGroup;
 			children = (
-				D49604332A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift */,
+				D49604332A4D22AF00AD3FE6 /* ExampleApp.swift */,
 				D49604352A4D22AF00AD3FE6 /* ContentView.swift */,
 				D49604372A4D22B000AD3FE6 /* Assets.xcassets */,
 				D49604392A4D22B000AD3FE6 /* Preview Content */,
@@ -773,7 +773,7 @@
 			files = (
 				D4C450942A4EE51F00731503 /* PlaybackService.swift in Sources */,
 				D49604122A4D224F00AD3FE6 /* ContentView.swift in Sources */,
-				D49604102A4D224F00AD3FE6 /* TikTok_ExampleApp.swift in Sources */,
+				D49604102A4D224F00AD3FE6 /* ExampleApp.swift in Sources */,
 				D4C450922A4EE50B00731503 /* SeekBarWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -784,7 +784,7 @@
 			files = (
 				D474DC492A506A1200EF8957 /* StepBackWidget.swift in Sources */,
 				D49604242A4D228700AD3FE6 /* ContentView.swift in Sources */,
-				D49604222A4D228700AD3FE6 /* Youtube_ExampleApp.swift in Sources */,
+				D49604222A4D228700AD3FE6 /* ExampleApp.swift in Sources */,
 				D474DC432A50694600EF8957 /* TimelineWidget.swift in Sources */,
 				D474DC472A506A0800EF8957 /* StepForwardWidget.swift in Sources */,
 				D474DC4E2A508D0400EF8957 /* CommentWidget.swift in Sources */,
@@ -800,7 +800,7 @@
 				D461415F2A5133DE00D84E62 /* TimelineWidget.swift in Sources */,
 				D461415E2A5133DE00D84E62 /* SeekBarWidget.swift in Sources */,
 				D49604362A4D22AF00AD3FE6 /* ContentView.swift in Sources */,
-				D49604342A4D22AF00AD3FE6 /* Bilibili_ExampleApp.swift in Sources */,
+				D49604342A4D22AF00AD3FE6 /* ExampleApp.swift in Sources */,
 				D461415B2A51332300D84E62 /* PlaybackWidget.swift in Sources */,
 				D46141612A51341C00D84E62 /* DurationWidget.swift in Sources */,
 				D46141592A51330A00D84E62 /* DanmakuWidget.swift in Sources */,
