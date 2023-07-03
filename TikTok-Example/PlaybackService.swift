@@ -29,10 +29,12 @@ class PlaybackService : Service {
             } else {
                 player.pause()
                 pluginService.present(.center, transition: .scale(scale: 1.5).combined(with: .opacity)) {
-                    Image(systemName: "play.fill").resizable()
-                        .foregroundColor(.white)
-                        .scaledToFit()
-                        .frame(width: 50, height: 50).opacity(0.5)
+                    AnyView(
+                        Image(systemName: "play.fill").resizable()
+                            .foregroundColor(.white)
+                            .scaledToFit()
+                            .frame(width: 50, height: 50).opacity(0.5)
+                    )
                 }
             }
             

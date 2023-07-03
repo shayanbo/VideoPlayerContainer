@@ -31,9 +31,7 @@ struct ContentView: View {
                     controlService.configure(.portrait(.bottom), shadow: nil)
                     
                     controlService.configure(.portrait(.bottom1)) {[
-                        IdentifableView(id: "seek") {
-                            SeekBarWidget()
-                        }
+                        SeekBarWidget()
                     ]}
                     
                     controlService.configure(.portrait(.right)) { views in
@@ -43,47 +41,38 @@ struct ContentView: View {
                     }
                     
                     controlService.configure(.portrait(.center)) {[
-                        IdentifableView(id: "ar", content: {
-                            Spacer().frame(width: 50)
-                        })
+                        Spacer().frame(width: 50)
                     ]}
                     
                     controlService.configure(.portrait(.right)) {[
-                        IdentifableView(id: "space", content: { Spacer() }),
-                        IdentifableView(id: "person", content: {
-                            Image(systemName: "person.fill.badge.plus").resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30)
-                        }),
-                        IdentifableView(id: "heart", content: {
-                            Image(systemName: "heart.fill").resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30)
-                        }),
-                        IdentifableView(id: "msg", content: {
-                            Image(systemName: "ellipsis.message.fill")
-                                .resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30)
-                                .allowsHitTesting(true)
-                                .onTapGesture {
-                                    context[FeatureService.self].present(.bottom(.squeeze(0))) {
-                                        AnyView(
-                                            Form {
-                                                Text("hello")
-                                                Text("hello")
-                                                Text("hello")
-                                            }.frame(height: 400)
-                                        )
-                                    }
+                        Spacer(),
+                        
+                        Image(systemName: "person.fill.badge.plus").resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30),
+                        
+                        Image(systemName: "heart.fill").resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30),
+                        
+                        Image(systemName: "ellipsis.message.fill")
+                            .resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30)
+                            .allowsHitTesting(true)
+                            .onTapGesture {
+                                context[FeatureService.self].present(.bottom(.squeeze(0))) {
+                                    AnyView(
+                                        Form {
+                                            Text("hello")
+                                            Text("hello")
+                                            Text("hello")
+                                        }.frame(height: 400)
+                                    )
                                 }
-                        }),
-                        IdentifableView(id: "star", content: {
-                            Image(systemName: "star.fill").resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30)
-                        }),
-                        IdentifableView(id: "share", content: {
-                            Image(systemName: "arrowshape.turn.up.right.fill").resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30)
-                        }),
-                        IdentifableView(id: "album", content: {
-                            Image(systemName: "circle.fill").resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30)
-                        }),
-                        IdentifableView(id: "margin1", content: {
-                            Spacer().frame(height: 0)
-                        }),
+                            },
+                        
+                        Image(systemName: "star.fill").resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30),
+                        
+                        Image(systemName: "arrowshape.turn.up.right.fill").resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30),
+                        
+                        Image(systemName: "circle.fill").resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30),
+                        
+                        Spacer().frame(height: 0),
                     ]}
                     
                     controlService.configure(.portrait(.left)) { views in
@@ -93,22 +82,15 @@ struct ContentView: View {
                     }
                     
                     controlService.configure(.portrait(.left)) {[
-                        IdentifableView(id: "margin", content: {
-                            Spacer()
-                        }),
-                        IdentifableView(id: "title", content: {
-                            Text("@Taylor Swift")
-                                .fontWeight(.medium)
-                                .foregroundColor(.white)
-                        }),
-                        IdentifableView(id: "desc", content: {
-                            Text("HahahahahhahahahhahahahhahahahhahahahhahahahhahahahHahahahahhahahahhahahahhahahahhahahahhahahahhahahah")
-                                .fontWeight(.regular)
-                                .foregroundColor(.white)
-                        }),
-                        IdentifableView(id: "bottom", content: {
-                            Spacer().frame(height: 0)
-                        }),
+                        
+                        Spacer(),
+                        Text("@Taylor Swift").fontWeight(.medium).foregroundColor(.white),
+                        
+                        Text("HahahahahhahahahhahahahhahahahhahahahhahahahhahahahHahahahahhahahahhahahahhahahahhahahahhahahahhahahah")
+                            .fontWeight(.regular)
+                            .foregroundColor(.white),
+                        
+                        Spacer().frame(height: 0),
                     ]}
                     
                     context[RenderService.self].fill()

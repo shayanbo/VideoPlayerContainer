@@ -16,7 +16,7 @@ struct PluginWidget: View {
                 Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
                 
                 if let plugin = service.plugin {
-                    AnyView(plugin.content())
+                    plugin.content()
                         .transition(plugin.transition)
                 }
             }
@@ -29,12 +29,12 @@ public class PluginService : Service {
     fileprivate struct Plugin {
         let alignment: Alignment
         let transition: AnyTransition
-        let content: ()->any View
+        let content: ()->AnyView
     }
     
     @ViewState fileprivate var plugin: Plugin?
     
-    public func present(_ alignment: Alignment, animation: Animation? = .default, transition: AnyTransition = .opacity, content: @escaping ()-> some View) {
+    public func present(_ alignment: Alignment, animation: Animation? = .default, transition: AnyTransition = .opacity, content: @escaping ()-> AnyView) {
         withAnimation(animation) {
             self.plugin = Plugin(alignment: alignment, transition: transition, content: content)
         }

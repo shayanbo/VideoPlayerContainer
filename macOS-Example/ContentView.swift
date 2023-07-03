@@ -28,10 +28,10 @@ struct ContentView: View {
                 
                 /// halfScreen top
                 controlService.configure(.halfScreen(.top1)) {[
-                    IdentifableView(id: "back") { BackButtonWidget() },
-                    IdentifableView(id: "title") { TitleWidget() },
-                    IdentifableView(id: "space") { Spacer() },
-                    IdentifableView(id: "playback") {  Button("Hello World") {
+                    BackButtonWidget(),
+                    TitleWidget(),
+                    Spacer(),
+                    Button("Hello World") {
                         context[FeatureService.self].present(.right(.squeeze(0))) {
                             AnyView(
                                 Form {
@@ -41,20 +41,20 @@ struct ContentView: View {
                                 }.frame(width: 100)
                             )
                         }
-                    } },
-                    IdentifableView(id: "more") {  MoreButtonWidget() }
+                    },
+                    MoreButtonWidget()
                 ]}
                 
                 /// halfScreen bottom
                 controlService.configure(.halfScreen(.bottom1)) {[
-                    IdentifableView(id: "playback") {  PlaybackButtonWidget() },
-                    IdentifableView(id: "progress") {  SeekBarWidget()   },
-                    IdentifableView(id: "timeline") {  TimelineWidget()   }
+                    PlaybackButtonWidget(),
+                    SeekBarWidget(),
+                    TimelineWidget()
                 ]}
                 
                 /// halfScreen center
                 controlService.configure(.halfScreen(.center)) {[
-                    IdentifableView(id: "playback") {  Button("Hello World") {
+                    Button("Hello World") {
                         context[FeatureService.self].present(.left(.cover)) {
                             AnyView(
                                 Form {
@@ -64,7 +64,7 @@ struct ContentView: View {
                                 }.frame(width: 100)
                             )
                         }
-                    } },
+                    },
                 ]}
                 
                 // configure title
@@ -76,12 +76,12 @@ struct ContentView: View {
                 
                 // configure toast view
                 context[ToastService.self].configure { toast in
-                    Text(toast.title)
+                    Text( toast as! String)
                 }
                 
                 // configure more widget
                 context[MoreButtonService.self].bindClickHandler { [weak context] in
-                    context?[ToastService.self].toast(ToastService.Toast(title: "Hahahahaha"))
+                    context?[ToastService.self].toast("Hahahahaha")
                 }
                 
                 // configure control style

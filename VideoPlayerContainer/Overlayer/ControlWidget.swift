@@ -43,14 +43,14 @@ public class ControlService : Service {
     @ViewState fileprivate var portraitScreenControlBar = ControlBar()
     
     fileprivate struct ControlBarItems {
-        var top1 = { [IdentifableView]() }
-        var top2 = { [IdentifableView]() }
-        var left = { [IdentifableView]() }
-        var right = { [IdentifableView]() }
-        var bottom1 = { [IdentifableView]() }
-        var bottom2 = { [IdentifableView]() }
-        var bottom3 = { [IdentifableView]() }
-        var center = { [IdentifableView]() }
+        var top1 = [IdentifableView]()
+        var top2 = [IdentifableView]()
+        var left = [IdentifableView]()
+        var right = [IdentifableView]()
+        var bottom1 = [IdentifableView]()
+        var bottom2 = [IdentifableView]()
+        var bottom3 = [IdentifableView]()
+        var center = [IdentifableView]()
     }
     
     @ViewState fileprivate var halfScreenControlBarItems = ControlBarItems()
@@ -306,65 +306,69 @@ public class ControlService : Service {
         }
     }
     
-    public func configure(_ location: Location, content: @escaping ()->[IdentifableView]) {
+    public func configure(_ location: Location, content: @escaping ()->[any View]) {
+        
+        let items = content().map { view in
+            IdentifableView(id: UUID().uuidString) { view }
+        }
         
         switch location {
         case let .halfScreen(direction):
             switch direction {
             case .top1:
-                self.halfScreenControlBarItems.top1 = content
+                self.halfScreenControlBarItems.top1 = items
             case .top2:
-                self.halfScreenControlBarItems.top2 = content
+                self.halfScreenControlBarItems.top2 = items
             case .left:
-                self.halfScreenControlBarItems.left = content
+                self.halfScreenControlBarItems.left = items
             case .right:
-                self.halfScreenControlBarItems.right = content
+                self.halfScreenControlBarItems.right = items
             case .bottom1:
-                self.halfScreenControlBarItems.bottom1 = content
+                self.halfScreenControlBarItems.bottom1 = items
             case .bottom2:
-                self.halfScreenControlBarItems.bottom2 = content
+                self.halfScreenControlBarItems.bottom2 = items
             case .bottom3:
-                self.halfScreenControlBarItems.bottom3 = content
+                self.halfScreenControlBarItems.bottom3 = items
             case .center:
-                self.halfScreenControlBarItems.center = content
+                self.halfScreenControlBarItems.center = items
             }
         case let .fullScreen(direction):
             switch direction {
             case .top1:
-                self.fullScreenControlBarItems.top1 = content
+                self.fullScreenControlBarItems.top1 = items
             case .top2:
-                self.fullScreenControlBarItems.top2 = content
+                self.fullScreenControlBarItems.top2 = items
             case .left:
-                self.fullScreenControlBarItems.left = content
+                self.fullScreenControlBarItems.left = items
             case .right:
-                self.fullScreenControlBarItems.right = content
+                self.fullScreenControlBarItems.right = items
             case .bottom1:
-                self.fullScreenControlBarItems.bottom1 = content
+                self.fullScreenControlBarItems.bottom1 = items
             case .bottom2:
-                self.fullScreenControlBarItems.bottom2 = content
+                self.fullScreenControlBarItems.bottom2 = items
             case .bottom3:
-                self.fullScreenControlBarItems.bottom3 = content
+                self.fullScreenControlBarItems.bottom3 = items
             case .center:
-                self.fullScreenControlBarItems.center = content
+                self.fullScreenControlBarItems.center = items
             }
         case let .portrait(direction):
             switch direction {
             case .top1:
-                self.portraitScreenControlBarItems.top1 = content
+                self.portraitScreenControlBarItems.top1 = items
             case .top2:
-                self.portraitScreenControlBarItems.top2 = content
+                self.portraitScreenControlBarItems.top2 = items
             case .left:
-                self.portraitScreenControlBarItems.left = content
+                self.portraitScreenControlBarItems.left = items
             case .right:
-                self.portraitScreenControlBarItems.right = content
+                self.portraitScreenControlBarItems.right = items
             case .bottom1:
-                self.portraitScreenControlBarItems.bottom1 = content
+                self.portraitScreenControlBarItems.bottom1 = items
             case .bottom2:
-                self.portraitScreenControlBarItems.bottom2 = content
+                self.portraitScreenControlBarItems.bottom2 = items
             case .bottom3:
-                self.portraitScreenControlBarItems.bottom3 = content
+                self.portraitScreenControlBarItems.bottom3 = items
             case .center:
-                self.portraitScreenControlBarItems.center = content
+                self.portraitScreenControlBarItems.center = items
             }
         }
     }
@@ -454,20 +458,20 @@ struct ControlWidget: View {
                 VStack {
                     switch service.status {
                     case .halfScreen:
-                        AnyView( service.halfScreenControlBar.top1(service.halfScreenControlBarItems.top1()) )
+                        AnyView( service.halfScreenControlBar.top1(service.halfScreenControlBarItems.top1) )
                     case .fullScreen:
-                        AnyView( service.fullScreenControlBar.top1(service.fullScreenControlBarItems.top1()) )
+                        AnyView( service.fullScreenControlBar.top1(service.fullScreenControlBarItems.top1) )
                     case .portrait:
-                        AnyView( service.portraitScreenControlBar.top1(service.portraitScreenControlBarItems.top1()) )
+                        AnyView( service.portraitScreenControlBar.top1(service.portraitScreenControlBarItems.top1) )
                     }
                     
                     switch service.status {
                     case .halfScreen:
-                        AnyView( service.halfScreenControlBar.top2(service.halfScreenControlBarItems.top2()) )
+                        AnyView( service.halfScreenControlBar.top2(service.halfScreenControlBarItems.top2) )
                     case .fullScreen:
-                        AnyView( service.fullScreenControlBar.top2(service.fullScreenControlBarItems.top2()) )
+                        AnyView( service.fullScreenControlBar.top2(service.fullScreenControlBarItems.top2) )
                     case .portrait:
-                        AnyView( service.portraitScreenControlBar.top2(service.portraitScreenControlBarItems.top2()) )
+                        AnyView( service.portraitScreenControlBar.top2(service.portraitScreenControlBarItems.top2) )
                     }
                 }
                 .padding(.leading, {
@@ -533,11 +537,11 @@ struct ControlWidget: View {
                     Group {
                         switch service.status {
                         case .halfScreen:
-                            AnyView( service.halfScreenControlBar.left(service.halfScreenControlBarItems.left()) )
+                            AnyView( service.halfScreenControlBar.left(service.halfScreenControlBarItems.left) )
                         case .fullScreen:
-                            AnyView( service.fullScreenControlBar.left(service.fullScreenControlBarItems.left()) )
+                            AnyView( service.fullScreenControlBar.left(service.fullScreenControlBarItems.left) )
                         case .portrait:
-                            AnyView( service.portraitScreenControlBar.left(service.portraitScreenControlBarItems.left()) )
+                            AnyView( service.portraitScreenControlBar.left(service.portraitScreenControlBarItems.left) )
                         }
                     }
                     .padding(.leading, {
@@ -578,11 +582,11 @@ struct ControlWidget: View {
                     Group {
                         switch service.status {
                         case .halfScreen:
-                            AnyView( service.halfScreenControlBar.center(service.halfScreenControlBarItems.center()) )
+                            AnyView( service.halfScreenControlBar.center(service.halfScreenControlBarItems.center) )
                         case .fullScreen:
-                            AnyView( service.fullScreenControlBar.center(service.fullScreenControlBarItems.center()) )
+                            AnyView( service.fullScreenControlBar.center(service.fullScreenControlBarItems.center) )
                         case .portrait:
-                            AnyView( service.portraitScreenControlBar.center(service.portraitScreenControlBarItems.center()) )
+                            AnyView( service.portraitScreenControlBar.center(service.portraitScreenControlBarItems.center) )
                         }
                     }
                     .background({ () -> AnyView? in
@@ -613,11 +617,11 @@ struct ControlWidget: View {
                     Group {
                         switch service.status {
                         case .halfScreen:
-                            AnyView( service.halfScreenControlBar.right(service.halfScreenControlBarItems.right()) )
+                            AnyView( service.halfScreenControlBar.right(service.halfScreenControlBarItems.right) )
                         case .fullScreen:
-                            AnyView( service.fullScreenControlBar.right(service.fullScreenControlBarItems.right()) )
+                            AnyView( service.fullScreenControlBar.right(service.fullScreenControlBarItems.right) )
                         case .portrait:
-                            AnyView( service.portraitScreenControlBar.right(service.portraitScreenControlBarItems.right()) )
+                            AnyView( service.portraitScreenControlBar.right(service.portraitScreenControlBarItems.right) )
                         }
                     }
                     .padding(.trailing, {
@@ -663,29 +667,29 @@ struct ControlWidget: View {
                 VStack {
                     switch service.status {
                     case .halfScreen:
-                        AnyView( service.halfScreenControlBar.bottom3(service.halfScreenControlBarItems.bottom3()) )
+                        AnyView( service.halfScreenControlBar.bottom3(service.halfScreenControlBarItems.bottom3) )
                     case .fullScreen:
-                        AnyView( service.fullScreenControlBar.bottom3(service.fullScreenControlBarItems.bottom3()) )
+                        AnyView( service.fullScreenControlBar.bottom3(service.fullScreenControlBarItems.bottom3) )
                     case .portrait:
-                        AnyView( service.portraitScreenControlBar.bottom3(service.portraitScreenControlBarItems.bottom3()) )
+                        AnyView( service.portraitScreenControlBar.bottom3(service.portraitScreenControlBarItems.bottom3) )
                     }
                     
                     switch service.status {
                     case .halfScreen:
-                        AnyView( service.halfScreenControlBar.bottom2(service.halfScreenControlBarItems.bottom2()) )
+                        AnyView( service.halfScreenControlBar.bottom2(service.halfScreenControlBarItems.bottom2) )
                     case .fullScreen:
-                        AnyView( service.fullScreenControlBar.bottom2(service.fullScreenControlBarItems.bottom2()) )
+                        AnyView( service.fullScreenControlBar.bottom2(service.fullScreenControlBarItems.bottom2) )
                     case .portrait:
-                        AnyView( service.portraitScreenControlBar.bottom2(service.portraitScreenControlBarItems.bottom2()) )
+                        AnyView( service.portraitScreenControlBar.bottom2(service.portraitScreenControlBarItems.bottom2) )
                     }
                     
                     switch service.status {
                     case .halfScreen:
-                        AnyView( service.halfScreenControlBar.bottom1(service.halfScreenControlBarItems.bottom1()) )
+                        AnyView( service.halfScreenControlBar.bottom1(service.halfScreenControlBarItems.bottom1) )
                     case .fullScreen:
-                        AnyView( service.fullScreenControlBar.bottom1(service.fullScreenControlBarItems.bottom1()) )
+                        AnyView( service.fullScreenControlBar.bottom1(service.fullScreenControlBarItems.bottom1) )
                     case .portrait:
-                        AnyView( service.portraitScreenControlBar.bottom1(service.portraitScreenControlBarItems.bottom1()) )
+                        AnyView( service.portraitScreenControlBar.bottom1(service.portraitScreenControlBarItems.bottom1) )
                     }
                 }
                 .padding(.leading, {

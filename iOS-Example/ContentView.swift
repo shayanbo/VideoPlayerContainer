@@ -44,10 +44,10 @@ struct ContentView: View {
                 
                 /// halfScreen top
                 controlService.configure(.halfScreen(.top1)) {[
-                    IdentifableView(id: "back") { BackButtonWidget() },
-                    IdentifableView(id: "title") { TitleWidget() },
-                    IdentifableView(id: "space") { Spacer() },
-                    IdentifableView(id: "playback") {  Button("Hello World") {
+                    BackButtonWidget(),
+                    TitleWidget(),
+                    Spacer(),
+                    Button("Hello World") {
                         context[FeatureService.self].present(.right(.squeeze(0))) {
                             AnyView(
                                 Form {
@@ -57,28 +57,28 @@ struct ContentView: View {
                                 }.frame(width: 100)
                             )
                         }
-                    } },
-                    IdentifableView(id: "more") {  MoreButtonWidget() }
+                    },
+                    MoreButtonWidget()
                 ]}
                 
                 controlService.configure(.halfScreen(.bottom2)) {[
-                    IdentifableView(id: "A") { Image(systemName: "scribble") },
-                    IdentifableView(id: "B") { Image(systemName: "eraser") },
-                    IdentifableView(id: "C") { Image(systemName: "paperplane") },
-                    IdentifableView(id: "D") { Image(systemName: "bookmark") },
-                    IdentifableView(id: "E") { Image(systemName: "arrowshape.turn.up.right") },
+                    Image(systemName: "scribble"),
+                    Image(systemName: "eraser"),
+                    Image(systemName: "paperplane"),
+                    Image(systemName: "bookmark"),
+                    Image(systemName: "arrowshape.turn.up.right"),
                 ]}
                 
                 /// halfScreen bottom
                 controlService.configure(.halfScreen(.bottom1)) {[
-                    IdentifableView(id: "playback") {  PlaybackButtonWidget() },
-                    IdentifableView(id: "progress") {  SeekBarWidget()   },
-                    IdentifableView(id: "timeline") {  TimelineWidget()   }
+                    PlaybackButtonWidget(),
+                    SeekBarWidget(),
+                    TimelineWidget()
                 ]}
                 
                 /// halfScreen center
                 controlService.configure(.halfScreen(.center)) {[
-                    IdentifableView(id: "playback") {  Button("Hello World") {
+                    Button("Hello World") {
                         context[FeatureService.self].present(.top(.cover)) {
                             AnyView(
                                 Form {
@@ -88,34 +88,34 @@ struct ContentView: View {
                                 }.frame(height: 100)
                             )
                         }
-                    } },
+                    },
                 ]}
                 
                 //MARK: FullScreen Configuration
                 
                 /// fullScreen top
                 controlService.configure(.fullScreen(.top1)) {[
-                    IdentifableView(id: "back") { BackButtonWidget() },
-                    IdentifableView(id: "title") { TitleWidget() },
-                    IdentifableView(id: "space") { Spacer() },
-                    IdentifableView(id: "A") { Image(systemName: "scribble") },
-                    IdentifableView(id: "B") { Image(systemName: "eraser") },
-                    IdentifableView(id: "C") { Image(systemName: "paperplane") },
-                    IdentifableView(id: "D") { Image(systemName: "bookmark") },
-                    IdentifableView(id: "E") { Image(systemName: "arrowshape.turn.up.right") },
-                    IdentifableView(id: "more") {  MoreButtonWidget() }
+                    BackButtonWidget(),
+                    TitleWidget(),
+                    Spacer(),
+                    Image(systemName: "scribble"),
+                    Image(systemName: "eraser"),
+                    Image(systemName: "paperplane"),
+                    Image(systemName: "bookmark"),
+                    Image(systemName: "arrowshape.turn.up.right"),
+                    MoreButtonWidget()
                 ]}
                 
                 /// fullScreen bottom
                 controlService.configure(.fullScreen(.bottom1)) {[
-                    IdentifableView(id: "playback") {  PlaybackButtonWidget() },
-                    IdentifableView(id: "progress") {  SeekBarWidget()   },
-                    IdentifableView(id: "timeline") {  TimelineWidget()   }
+                    PlaybackButtonWidget(),
+                    SeekBarWidget(),
+                    TimelineWidget()
                 ]}
                 
                 /// fullScreen center
                 controlService.configure(.fullScreen(.left)) {[
-                    IdentifableView(id: "playback") {  Image(systemName: "lock.open") },
+                    Image(systemName: "lock.open"),
                 ]}
                 
                 //MARK: Other
