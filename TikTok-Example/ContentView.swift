@@ -21,6 +21,8 @@ struct ContentView: View {
                 .bindContext(context, launch: [PlaybackService.self])
                 .onAppear {
                     
+                    context[StatusService.self].toPortrait()
+                    
                     let controlService = context[ControlService.self]
                     
                     controlService.configure(displayStyle: .always)
