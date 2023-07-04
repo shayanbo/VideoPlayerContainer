@@ -19,8 +19,8 @@ struct ContentView: View {
     
     var body: some View {
         
-        VStack {
-            GeometryReader { proxy in
+        GeometryReader { proxy in
+            VStack {
                 PlayerWidget()
                     .frame(maxHeight: orientation.isLandscape ? .infinity : proxy.size.width * 0.5625)
                     .bindContext(context)
@@ -143,10 +143,14 @@ struct ContentView: View {
                         player.replaceCurrentItem(with: item)
                         player.play()
                     }
+                
+                if !orientation.isLandscape {
+                    Rectangle().fill(.white)
+                }
             }
-            Spacer()
         }
-        .ignoresSafeArea(edges: orientation.isLandscape ? .all : [])
+        .ignoresSafeArea(edges: orientation.isLandscape ? .all : .bottom)
+        .preferredColorScheme(.dark)
     }
 }
 
