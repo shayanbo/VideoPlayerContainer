@@ -116,6 +116,9 @@ struct ContentView: View {
                     Image(systemName: "lock.open"),
                 ]}
                 
+                /// insets
+                controlService.configure(.halfScreen, insets: .init(top: 0, leading: 10, bottom: 0, trailing: 10))
+                
                 //MARK: Other
                 
                 // configure title
