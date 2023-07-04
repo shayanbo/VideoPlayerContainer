@@ -18,9 +18,6 @@ struct ContentView: View {
     var body: some View {
         
         VStack {
-            
-            Spacer().frame(height: orientation.isLandscape ? 0 : 60)
-            
             GeometryReader { proxy in
                 PlayerWidget()
                     .frame(maxHeight: orientation.isLandscape ? .infinity : proxy.size.width * 0.5625)
@@ -122,7 +119,7 @@ struct ContentView: View {
             }
             Spacer()
         }
-        .ignoresSafeArea(edges: .all)
+        .ignoresSafeArea(edges: orientation.isLandscape ? .all : [])
     }
 }
 
