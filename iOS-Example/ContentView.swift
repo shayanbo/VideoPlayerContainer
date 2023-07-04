@@ -128,7 +128,8 @@ struct ContentView: View {
                 
                 // configure toast view
                 context[ToastService.self].configure { toast in
-                    Text( toast as! String )
+                    Button( toast as! String ) { }
+                        .buttonStyle(.bordered)
                 }
                 
                 // configure more widget
@@ -137,7 +138,7 @@ struct ContentView: View {
                 }
                 
                 // configure control style
-                context[ControlService.self].configure(displayStyle: .always)
+                context[ControlService.self].configure(displayStyle: .manual(firstAppear: true, animation: .default))
                 
                 context[FeatureService.self].configure(dismissOnClick: true)
             }
