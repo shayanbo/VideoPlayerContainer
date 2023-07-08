@@ -18,8 +18,11 @@ struct ContentView: View {
         TabView {
             
             PlayerWidget(context, launch: [PlaybackService.self])
+                .onDisappear {
+                    let player = context[RenderService.self].player
+                    player.pause()
+                }
                 .onAppear {
-                    
                     context[StatusService.self].toPortrait()
                     
                     let controlService = context[ControlService.self]
@@ -54,7 +57,12 @@ struct ContentView: View {
                             .resizable().foregroundColor(.white).scaledToFit().frame(width: 30, height: 30)
                             .allowsHitTesting(true)
                             .onTapGesture {
-                                context[FeatureService.self].present(.bottom(.squeeze(0))) {
+                                
+                                context[FeatureService.self].present(.bottom(.squeeze(0))) { [weak context] in
+                                    context?[ControlService.self].dismiss()
+                                } beforeDismiss: { [weak context] in
+                                    context?[ControlService.self].present()
+                                } content: {
                                     AnyView(
                                         Form {
                                             Text("hello")
@@ -94,11 +102,19 @@ struct ContentView: View {
                     
                     context[FeatureService.self].configure(dismissOnClick: true)
                     
+                    controlService.configure(.portrait(.left), transition: .opacity)
+                    controlService.configure(.portrait(.right), transition: .opacity)
+                    
+                    controlService.configure(displayStyle: .custom(animation: .default))
+                    controlService.present()
+                    
                     context[RenderService.self].fit()
                     
                     let player = context[RenderService.self].player
-                    let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
-                    player.replaceCurrentItem(with: item)
+                    if player.currentItem == nil {
+                        let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
+                        player.replaceCurrentItem(with: item)
+                    }
                     player.play()
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

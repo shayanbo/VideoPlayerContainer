@@ -11,8 +11,16 @@ import Combine
 public class FeatureService : Service {
     
     struct Feature {
-        var direction: Direction
-        var content: ()->AnyView
+        let direction: Direction
+        let content: ()->AnyView
+        let action: Action
+    }
+    
+    struct Action {
+        var beforePresent: ( ()->Void )?
+        var afterPresent: ( ()->Void )?
+        var beforeDismiss: ( ()->Void )?
+        var afterDismiss: ( ()->Void )?
     }
     
     @ViewState private(set) var feature: Feature?
@@ -46,15 +54,33 @@ public class FeatureService : Service {
         self.dismissOnStatusChanged = dismissOnStatusChanged
     }
     
-    public func present(_ direction: Direction, animation: Animation? = .default, content: @escaping ()-> AnyView) {
+    public func present(_ direction: Direction, animation: Animation? = .default, beforePresent: ( ()->Void )? = nil, afterPresent: ( ()->Void )? = nil, beforeDismiss: ( ()->Void )? = nil, afterDismiss: ( ()->Void )? = nil, content: @escaping ()-> AnyView) {
+        
+        let action = Action(beforePresent: beforePresent, afterPresent: afterPresent, beforeDismiss: beforeDismiss, afterDismiss: afterDismiss)
+        let feature = Feature(direction: direction, content: content, action: action)
+        
+        feature.action.beforePresent?()
+        
         withAnimation(animation) {
-            feature = Feature(direction: direction, content: content)
+            self.feature = feature
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) { [weak self] in
+            self?.feature?.action.afterPresent?()
         }
     }
     
     public func dismiss(animation: Animation? = .default) {
+        let action = feature?.action
+        
+        action?.beforeDismiss?()
+        
         withAnimation(animation) {
             feature = nil
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(250)) {
+            action?.afterDismiss?()
         }
     }
 }
