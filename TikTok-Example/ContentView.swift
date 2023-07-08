@@ -92,6 +92,8 @@ struct ContentView: View {
                         Spacer().frame(height: 0),
                     ]}
                     
+                    context[FeatureService.self].configure(dismissOnClick: true)
+                    
                     context[RenderService.self].fit()
                     
                     let player = context[RenderService.self].player

@@ -17,21 +17,13 @@ public class FeatureService : Service {
     
     @ViewState private(set) var feature: Feature?
     
-    @ViewState fileprivate var dismissOnClick = false
+    @ViewState fileprivate var dismissOnClick = true
+    
+    @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
+    
+    fileprivate var dismissOnStatusChanged = true
     
     private var cancellables = [AnyCancellable]()
-    
-    public required init(_ context: Context) {
-        super.init(context)
-        
-        let gestureService = context[GestureService.self]
-        gestureService.observe(.tap(.all)) { [weak self] event in
-            guard let dismissOnClick = self?.dismissOnClick else { return }
-            if dismissOnClick {
-                self?.dismiss()
-            }
-        }.store(in: &cancellables)
-    }
     
     public enum Direction: Equatable {
         
@@ -48,6 +40,10 @@ public class FeatureService : Service {
     
     public func configure(dismissOnClick: Bool) {
         self.dismissOnClick = dismissOnClick
+    }
+    
+    public func configure(dismissOnStatusChanged: Bool) {
+        self.dismissOnStatusChanged = dismissOnStatusChanged
     }
     
     public func present(_ direction: Direction, animation: Animation? = .default, content: @escaping ()-> AnyView) {
@@ -69,6 +65,15 @@ struct FeatureWidget: View {
         
         WithService(FeatureService.self) { service in
             ZStack {
+                
+                if service.feature != nil {
+                    Color.clear.contentShape(Rectangle())
+                        .onTapGesture {
+                            if service.dismissOnClick {
+                                service.dismiss()
+                            }
+                        }
+                }
                 
                 VStack(alignment: .leading) {
                     Spacer()
@@ -116,6 +121,11 @@ struct FeatureWidget: View {
                                 .transition(.move(edge: .bottom))
                         )
                     }
+                }
+            }
+            .onChange(of: service.status) { _ in
+                if service.dismissOnStatusChanged {
+                    service.dismiss()
                 }
             }
         }

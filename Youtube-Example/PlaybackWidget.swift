@@ -6,19 +6,62 @@
 //
 
 import SwiftUI
+import VideoPlayerContainer
+import Combine
 
-struct PlaybackWidget: View {
-    var body: some View {
-        Image(systemName: "play.fill")
-            .resizable()
-            .scaledToFit()
-            .foregroundColor(.white)
-            .frame(width: 50, height: 50)
+class PlaybackService: Service {
+    
+    private var rateObservation: NSKeyValueObservation?
+    
+    private var statusObservation: NSKeyValueObservation?
+    
+    private var cancellables = [AnyCancellable]()
+    
+    @ViewState fileprivate var playOrPaused = false
+    
+    @ViewState fileprivate var clickable = false
+    
+    required init(_ context: Context) {
+        super.init(context)
+        
+        let service = context[RenderService.self]
+        rateObservation = service.player.observe(\.rate, options: [.old, .new, .initial]) { [weak self] player, change in
+            self?.playOrPaused = player.rate > 0
+        }
+        
+        statusObservation = service.player.observe(\.status, options: [.old, .new, .initial]) { [weak self] player, change in
+            self?.clickable = player.status == .readyToPlay
+        }
+        
+        let gestureService = context[GestureService.self]
+        gestureService.observe(.doubleTap(.all)) { [weak self] _ in
+            self?.didClick()
+        }.store(in: &cancellables)
+    }
+    
+    fileprivate func didClick() {
+        
+        let service = context[RenderService.self]
+        if service.player.rate == 0 {
+            service.player.play()
+        } else {
+            service.player.pause()
+        }
     }
 }
 
-struct PlaybackWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        PlaybackWidget()
+struct PlaybackWidget: View {
+    var body: some View {
+        WithService(PlaybackService.self) { service in
+            Image(systemName: service.playOrPaused ? "pause.fill" : "play.fill")
+                .resizable()
+                .scaledToFit()
+                .foregroundColor(.white)
+                .frame(width: 50, height: 50)
+                .disabled(!service.clickable)
+                .onTapGesture {
+                    service.didClick()
+                }
+        }
     }
 }
