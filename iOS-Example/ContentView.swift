@@ -18,12 +18,9 @@ struct ContentView: View {
     
     var body: some View {
         
-        PlayerWidget()
+        PlayerWidget(context, launch: [LoadingService.self])
             .ignoresSafeArea(edges: .vertical)
             .frame(maxHeight: orientation.isLandscape ? .infinity : 300)
-            .bindContext(context, launch: [
-                LoadingService.self,
-            ])
             .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification), perform: { _ in
                 
                 self.orientation = UIDevice.current.orientation
@@ -118,6 +115,7 @@ struct ContentView: View {
                 
                 /// insets
                 controlService.configure(.halfScreen, insets: .init(top: 0, leading: 10, bottom: 0, trailing: 10))
+                controlService.configure(.halfScreen(.top), shadow: nil)
                 
                 //MARK: Other
                 

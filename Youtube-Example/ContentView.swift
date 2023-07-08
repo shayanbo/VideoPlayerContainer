@@ -21,9 +21,8 @@ struct ContentView: View {
         
         GeometryReader { proxy in
             VStack {
-                PlayerWidget()
+                PlayerWidget(context)
                     .frame(maxHeight: orientation.isLandscape ? .infinity : proxy.size.width * 0.5625)
-                    .bindContext(context)
                     .background(.black)
                     .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification), perform: { _ in
                         self.orientation = UIDevice.current.orientation

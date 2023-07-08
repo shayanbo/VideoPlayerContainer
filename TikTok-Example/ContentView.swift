@@ -17,8 +17,7 @@ struct ContentView: View {
         
         TabView {
             
-            PlayerWidget()
-                .bindContext(context, launch: [PlaybackService.self])
+            PlayerWidget(context, launch: [PlaybackService.self])
                 .onAppear {
                     
                     context[StatusService.self].toPortrait()
@@ -84,7 +83,7 @@ struct ContentView: View {
                     controlService.configure(.portrait(.left)) {[
                         
                         Spacer(),
-                        Text("@Taylor Swift").fontWeight(.medium).foregroundColor(.white),
+                        Text("@Street Fighter").fontWeight(.medium).foregroundColor(.white),
                         
                         Text("HahahahahhahahahhahahahhahahahhahahahhahahahhahahahHahahahahhahahahhahahahhahahahhahahahhahahahhahahah")
                             .fontWeight(.regular)

@@ -49,9 +49,15 @@ public class PlayerService: Service {
 
 public struct PlayerWidget: View {
     
-    public init() {}
+    private let context: Context
     
-    @EnvironmentObject private var context: Context
+    public init(_ context: Context, launch services: [Service.Type] = []) {
+        self.context = context
+        
+        services.forEach { serviceType in
+            let _ = context[serviceType]
+        }
+    }
     
     public var body: some View {
         
@@ -159,5 +165,6 @@ public struct PlayerWidget: View {
                 .clipped()
             }
         }
+        .environmentObject(context)
     }
 }

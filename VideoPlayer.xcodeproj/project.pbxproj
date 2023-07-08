@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		D4061C3D2A4B25B900CDD1FF /* ViewSizeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C2C2A4B25B900CDD1FF /* ViewSizeService.swift */; };
 		D4061C3E2A4B25B900CDD1FF /* StatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C2D2A4B25B900CDD1FF /* StatusService.swift */; };
-		D4061C3F2A4B25B900CDD1FF /* ContextBinder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C2F2A4B25B900CDD1FF /* ContextBinder.swift */; };
 		D4061C402A4B25B900CDD1FF /* PlayerWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C302A4B25B900CDD1FF /* PlayerWidget.swift */; };
 		D4061C412A4B25B900CDD1FF /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C322A4B25B900CDD1FF /* ViewState.swift */; };
 		D4061C422A4B25B900CDD1FF /* StateSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C332A4B25B900CDD1FF /* StateSync.swift */; };
@@ -136,7 +135,6 @@
 		D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = VideoPlayerContainer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4061C2C2A4B25B900CDD1FF /* ViewSizeService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSizeService.swift; sourceTree = "<group>"; };
 		D4061C2D2A4B25B900CDD1FF /* StatusService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusService.swift; sourceTree = "<group>"; };
-		D4061C2F2A4B25B900CDD1FF /* ContextBinder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextBinder.swift; sourceTree = "<group>"; };
 		D4061C302A4B25B900CDD1FF /* PlayerWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerWidget.swift; sourceTree = "<group>"; };
 		D4061C322A4B25B900CDD1FF /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
 		D4061C332A4B25B900CDD1FF /* StateSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateSync.swift; sourceTree = "<group>"; };
@@ -279,7 +277,6 @@
 		D4061C2E2A4B25B900CDD1FF /* Container */ = {
 			isa = PBXGroup;
 			children = (
-				D4061C2F2A4B25B900CDD1FF /* ContextBinder.swift */,
 				D4061C302A4B25B900CDD1FF /* PlayerWidget.swift */,
 			);
 			path = Container;
@@ -746,7 +743,6 @@
 				D4061C412A4B25B900CDD1FF /* ViewState.swift in Sources */,
 				D4061C442A4B25B900CDD1FF /* Context.swift in Sources */,
 				D4061C402A4B25B900CDD1FF /* PlayerWidget.swift in Sources */,
-				D4061C3F2A4B25B900CDD1FF /* ContextBinder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

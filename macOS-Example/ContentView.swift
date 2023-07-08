@@ -15,12 +15,11 @@ struct ContentView: View {
     
     var body: some View {
         
-        PlayerWidget()
+        PlayerWidget(context, launch: [
+            LoadingService.self,
+            HoverService.self,
+        ])
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .bindContext(context, launch: [
-                LoadingService.self,
-                HoverService.self,
-            ])
             .onAppear {
                 
                 let controlService = context[ControlService.self]

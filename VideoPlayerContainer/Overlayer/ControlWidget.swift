@@ -20,15 +20,12 @@ public class ControlService : Service {
         
         static func horizontal(_ views: [IdentifableView]) -> any View {
             HStack { ForEach(views) { $0 } }
-                .contentShape(Rectangle())
         }
         static func leftVertical(_ views: [IdentifableView]) -> any View {
             VStack(alignment: .leading) { ForEach(views) { $0 } }
-                .contentShape(Rectangle())
         }
         static func rightVertical(_ views: [IdentifableView]) -> any View {
             VStack(alignment: .trailing) { ForEach(views) { $0 } }
-                .contentShape(Rectangle())
         }
         
         var top1 = horizontal

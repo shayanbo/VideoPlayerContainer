@@ -13,6 +13,7 @@ struct MoreButtonWidget: View {
         WithService(MoreButtonService.self) { service in
             Image(systemName: "ellipsis")
                 .frame(width: 25, height: 25)
+                .contentShape(Rectangle())
                 .onTapGesture {
                     service.didClick()
                 }
