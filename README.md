@@ -62,6 +62,8 @@ Service represents two roles, one role is a ViewModel in MVVM architecture, View
 
 Overlay In the VideoPlayerContainer, overlays are the sub-containers put inside the main container layer by layer and it's the place where widgets sit. we have 5 built-in overlays, from bottom to top, these are render, feature, plugin, control, toast. in addition, we allow users to insert their own overlay
 
+![image](https://github.com/MickeyHub/VideoPlayerContainer/assets/5426838/9570d129-d8c4-4ebb-ac89-b8423a10cbf1)
+
 #### Render Overlay
 
 Render overlay is sitting at the far bottom of the container. it provides playback service and gesture services. you can use `context[RenderService.self]` to fetch `RenderService` or use `context[GestureService.self]` to fetch the `GestureService` respectively in your custom `Widget`. with RenderService, you can access the player instance which is an `AVPlayer`. you can also set up the gravity of the render canvas. with `GestureService`, you can observe predefined events like `tap`, `double-tap`, `long-press`, `drag`. `rotation`, `hover`, and `pinch`. for `tap`, `double-tap`. you can know if the touch is located on the left part or right part of the screen. for `drag`, you can know if the dragging event is done horizontally or vertically(left/right).
@@ -83,6 +85,8 @@ and we predefined 3 statuses as the screen style. these are `half-screen`, `full
 For these 5 parts, you can configure them for different statuses which is quite common. for example, in halfscreen status, the screen is small and we can't attach many widgets to it but in fullscreen status. the video player container makes up the whole screen. we can attach many widgets to it to provide more and more functions.
 
 for these parts, for these statuses, you can customize their shadow, transition, and layout. and other services can fetch the `ControlService` by `context[ControlService.self]` to call present or dismiss programmatically depending on the display style configured.
+
+![image](https://github.com/MickeyHub/VideoPlayerContainer/assets/5426838/421a5401-5615-435b-8fed-f6ef4d8c860c)
 
 #### Toast Overlay
 
