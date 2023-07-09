@@ -32,6 +32,8 @@ struct ContentView: View {
                     controlService.configure(.portrait(.top), shadow: nil)
                     controlService.configure(.portrait(.bottom), shadow: nil)
                     
+                    controlService.configure(.portrait, insets: .init(top: 0, leading: 10, bottom: 0, trailing: 10))
+                    
                     controlService.configure(.portrait(.bottom1)) {[
                         SeekBarWidget()
                     ]}
