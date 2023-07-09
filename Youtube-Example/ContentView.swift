@@ -21,7 +21,7 @@ struct ContentView: View {
         
         GeometryReader { proxy in
             VStack {
-                PlayerWidget(context)
+                PlayerWidget(context, launch: [StepService.self])
                     .frame(maxHeight: orientation.isLandscape ? .infinity : proxy.size.width * 0.5625)
                     .background(.black)
                     .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification), perform: { _ in

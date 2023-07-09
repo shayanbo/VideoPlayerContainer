@@ -15,8 +15,6 @@ class PlaybackService: Service {
     
     private var statusObservation: NSKeyValueObservation?
     
-    private var cancellables = [AnyCancellable]()
-    
     @ViewState fileprivate var playOrPaused = false
     
     @ViewState fileprivate var clickable = false
@@ -32,11 +30,6 @@ class PlaybackService: Service {
         statusObservation = service.player.observe(\.status, options: [.old, .new, .initial]) { [weak self] player, change in
             self?.clickable = player.status == .readyToPlay
         }
-        
-        let gestureService = context[GestureService.self]
-        gestureService.observe(.doubleTap(.all)) { [weak self] _ in
-            self?.didClick()
-        }.store(in: &cancellables)
     }
     
     fileprivate func didClick() {

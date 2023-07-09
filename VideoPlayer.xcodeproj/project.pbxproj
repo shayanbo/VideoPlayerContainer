@@ -33,6 +33,7 @@
 		D4130F202A4A65FE007DAFFE /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */; };
 		D4130F212A4A65FE007DAFFE /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */; };
 		D4130F262A4A6E5F007DAFFE /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4130F252A4A6E5F007DAFFE /* ExampleApp.swift */; };
+		D41A3E012A5A586E0061C1AF /* StepService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41A3E002A5A586E0061C1AF /* StepService.swift */; };
 		D43672042A5316E40083F9DD /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D43672022A5316E40083F9DD /* demo.mp4 */; };
 		D43672052A5317100083F9DD /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D43672022A5316E40083F9DD /* demo.mp4 */; };
 		D43672062A53171A0083F9DD /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D43672022A5316E40083F9DD /* demo.mp4 */; };
@@ -159,6 +160,7 @@
 		D4130F182A4A65FE007DAFFE /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D4130F192A4A65FE007DAFFE /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 		D4130F252A4A6E5F007DAFFE /* ExampleApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
+		D41A3E002A5A586E0061C1AF /* StepService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepService.swift; sourceTree = "<group>"; };
 		D43672022A5316E40083F9DD /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		D46141582A51330A00D84E62 /* DanmakuWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanmakuWidget.swift; sourceTree = "<group>"; };
 		D461415A2A51332300D84E62 /* PlaybackWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackWidget.swift; sourceTree = "<group>"; };
@@ -384,6 +386,7 @@
 				D474DC462A506A0800EF8957 /* StepForwardWidget.swift */,
 				D474DC482A506A1200EF8957 /* StepBackWidget.swift */,
 				D474DC4D2A508D0400EF8957 /* CommentWidget.swift */,
+				D41A3E002A5A586E0061C1AF /* StepService.swift */,
 			);
 			path = "Youtube-Example";
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				D474DC472A506A0800EF8957 /* StepForwardWidget.swift in Sources */,
 				D474DC4E2A508D0400EF8957 /* CommentWidget.swift in Sources */,
 				D474DC412A5067B300EF8957 /* SeekBarWidget.swift in Sources */,
+				D41A3E012A5A586E0061C1AF /* StepService.swift in Sources */,
 				D474DC452A5069E600EF8957 /* PlaybackWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
