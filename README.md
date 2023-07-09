@@ -252,11 +252,11 @@ struct PlaybackWidget: View {
 
 As you can see above, it's a completed Widget. 
 
-* We use fileprivate modifier to tell other users that they're only available on their own Widget. 
-* We use @ViewState to mark the variable that's able to trigger the SwiftUI update mechanism.
-* We use WithService as the Widget's root View to make sure any @ViewState variable changes will make the whole Widget involved in the update mechanism.
-* we use @ViewState variable to condition which image to use in the Widget. (ViewModel's Output)
-* we call service method to complete the widget's work (ViewModel's Input)
+* We use `fileprivate` modifier to mark APIs that's only available for its belonging Widget
+* We use `@ViewState` to mark the variable that's able to trigger the SwiftUI update mechanism (like @Published, @State)
+* We use `WithService` as the Widget's root View to make sure any `@ViewState` variable changes will make the whole Widget involved in the update mechanism
+* We use `@ViewState` variable to condition which image to use in the Widget. (ViewModel's Output)
+* We call service method to complete the widget's work (ViewModel's Input)
 
 ## Idea / Bug / Improvement
 
