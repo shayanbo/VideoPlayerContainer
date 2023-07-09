@@ -1,6 +1,6 @@
 # VideoPlayerContainer
 
-VideoPlayerContainer is a SwiftUI component as a video player. Compared with the system built-in one [VideoPlayer](https://developer.apple.com/documentation/avkit/videoplayer), the VideoPlayerContainer provides much more flexible and extendable abilities that are able to cover most of the common scenes that you can see on the apps such as Tiktok or Youtube.
+VideoPlayerContainer is a video player component with SwiftUI. Compared with the system built-in one [VideoPlayer](https://developer.apple.com/documentation/avkit/videoplayer), the VideoPlayerContainer provides much more flexible and extendable abilities that are able to cover most of the common scenarios that you can see on the app such as Tik Tok or Youtube.
 
 ![Platform](https://img.shields.io/badge/platform-iOS|macOS-orange.svg)
 ![Version](https://img.shields.io/badge/version-16.0|13.0-green.svg)
@@ -16,7 +16,7 @@ VideoPlayerContainer is a SwiftUI component as a video player. Compared with the
 
 ![image](https://github.com/MickeyHub/VideoPlayerContainer/assets/5426838/73fc14f3-9c98-48b6-8d08-fe1a139723bd)
 
-Cloning the repo and opening up the Xcode project, you can see multiple schemas as examples. Run it respectively to feel what abilities this framework can offer and how easy to use this framework to meet your demands.
+After cloning the repo and opening up the Xcode project, you can see multiple schemes as examples. Run it respectively to feel what abilities this framework can offer and how easy to use this framework to meet your demands.
 
 ## Installation
 
@@ -44,43 +44,49 @@ dependencies: [
 
 Since I used some of the new features like custom Layout, the current version is required a minimum `iOS` version of `16.0`, and `macOS` version of `13.0`. But I'm considering lowering the minimum version support to `iOS 14.0` and `macOS 12.4`
 
-## Concept Before Usage
+## Core Concept
 
-#### Context
+### Context
 
-Context is a core component and fully accessible from all of the other components in the VideoPlayerContainer, it holds a service locator which we can use to fetch other services to borrow expertise from other components
+Context is the core component and fully accessible from all of the other components in the VideoPlayerContainer, it holds a service locator which we can use to fetch other services to borrow expertise from other components.
 
-#### Widget
+### Widget
 
 Widget is a View that's inside the VideoPlayerContainer which means it can access the context and in most cases, it has a specific service to handle all of its logic code.
 
-#### Service
+### Service
 
 Service represents two roles, one role is a ViewModel in MVVM architecture, ViewModel handles all of the Output and Input for View. Another role is responsible for communication with other services. We encourage people to write Service and Widget in one source file. This way, we can use `fileprivate`, and `private` to distinguish which APIs are used only for its Widget and which APIs are open to other services.
 
-#### Overlay
+### Overlay
 
-Overlay In the VideoPlayerContainer, overlays are the sub-containers put inside the main container layer by layer and it's the place where widgets sit. We have 5 built-in overlays, from bottom to top, these are render, feature, plugin, control, toast. In addition, we allow users to insert their own overlay
+Overlay In the VideoPlayerContainer, overlays are the sub-containers put inside the main container layer by layer and it's the place where widgets sit. We have 5 built-in overlays, from bottom to top, these are render, feature, plugin, control, and toast. In addition, we allow users to insert their own overlay
 
 ![image](https://github.com/MickeyHub/VideoPlayerContainer/assets/5426838/9570d129-d8c4-4ebb-ac89-b8423a10cbf1)
 
 #### Render Overlay
 
-Render overlay is sitting at the far bottom of the container. It provides playback service and gesture services. You can use `context[RenderService.self]` to fetch `RenderService` or use `context[GestureService.self]` to fetch the `GestureService` respectively in your custom `Widget`. With RenderService, you can access the player instance which is an `AVPlayer`. You can also set up the gravity of the render canvas. With `GestureService`, you can observe predefined events like `tap`, `double-tap`, `long-press`, `drag`. `rotation`, `hover`, and `pinch`. for `tap`, `double-tap`. You can know if the touch is located on the left part or right part of the screen. for `drag`, you can know if the dragging event is done horizontally or vertically(left/right).
+Render overlay is sitting at the far bottom of the container. It provides playback service and gesture services. 
+1. Use `context[RenderService.self]` to fetch `RenderService` or use `context[GestureService.self]` to fetch the `GestureService` respectively in your custom `Widget`.
+2. With RenderService, access the player instance which is an `AVPlayer`.
+3. Set up the gravity of the render canvas. 
+4. With `GestureService`, observe predefined events like `tap`, `double-tap`, `long-press`, `drag`. `rotation`, `hover`, and `pinch`. 
+5. For `tap`, `double-tap`, you can know if the touch is located on the left part or right part of the screen.
+6. For `drag`, you can know if the dragging event is done horizontally or vertically(left/right).
 
 #### Feature Overlay
 
-Feature overlay is used to pop up a panel from 4 directions (`left`, `right`, `top`, `bottom`). And we provide two styles: `cover` or `squeeze`. With squeeze style, when the popup panel shows up, the render canvas will be squeezed to the other side, like Youtube's comments Panel in fullscreen mode.
+Feature overlay is used to pop up a panel from 4 directions (`left`, `right`, `top`, `bottom`). We provide two styles as well: `cover` or `squeeze`. With squeeze style, when the popup panel shows up, the render canvas will be squeezed to the other side, like Youtube's comments Panel in fullscreen mode.
 
 #### Plugin Overlay
 
-Plugin Overlay is a sub-container without constraints on it. When you want to show up a widget that's not suitable for other overlays and you don't want to insert your own custom overlay, that's the right place for you, like a thumbnail preview widget for the seekbar on dragging or a simple widget that's visible only in a short time after being triggered.
+Plugin Overlay is a sub-container without constraints on it. When you want to show up a widget that's not suitable for other overlays and you don't want to insert your own custom overlay, that's the right place for you, like a thumbnail preview widget for the seek bar on dragging or a simple widget that's visible only in a short time after being triggered.
 
 #### Control Overlay
 
-Control overlay is the most sophisticated overlay and the place where most work will be done. The control overlay is divided into 5 parts: `left`, `right`, `top`, `bottom`, and `center`. Before going on, I need to introduce a concept called status: 
+Control overlay is the most sophisticated overlay and the place where most work will be done. The control overlay is divided into 5 parts: `left`, `right`, `top`, `bottom`, and `center`. Before going on, please allow me introduce a concept called status: 
 
-and we predefined 3 statuses as the screen style. these are `halfscreen`, `fullscreen`, and `portrait`. this status change is 100% decided by yourself. But generally, `halfscreen` describes the status of the portrait device. `fullscreen` describes the landscape device and `portrait` describes the video the height is higher than the width.
+We predefined 3 statuses as the screen style, with `halfscreen`, `fullscreen`, and `portrait`. The status changes are 100% decided by you. But generally, `halfscreen` describes the status of the portrait device. `fullscreen` describes the landscape device and `portrait` describes the video the height is higher than the width.
 
 For these 5 parts, you can configure them for different statuses which is quite common. For example, in halfscreen status, the screen is small and we can't attach many widgets to it but in fullscreen status. The video player container makes up the whole screen. We can attach many widgets to it to provide more and more functions.
 
@@ -90,11 +96,11 @@ For these parts, for these statuses, you can customize their shadow, transition,
 
 #### Toast Overlay
 
-Toast Overlay is when you need to toast something in the container, you can use it to show a view on the left side. The view will be disappeared after a configured time. and the toast view is customizable.
+Toast Overlay is a simple overlay that you can use to pop up view on the left side which will be disappeared after a few seconds configured.
 
 ## Usage: Add VideoPlayer
 
-Let's say, we are going to code a player view in a video page, here. We need to import VideoPlayerContainer, and create a Context for the Video Player or the whole video page.
+Let's say, we are going to code a player view in a video scene, here. We need to import VideoPlayerContainer, and create a Context for the Video Player or the whole video scene.
 
 ```swift
 
@@ -110,7 +116,7 @@ struct ContentView: View {
 
 ```
 
-Now, you need to create the PlayerView to make it visible on the page. here, we use the Type `PlayerWidget`. It's the main container and requires a context instance to initialize it.
+Now, you need to create the PlayerView to make it visible on the scene. here, we use the Type `PlayerWidget`. It's the main container and requires a context instance to initialize it.
 
 ```swift
 
@@ -120,7 +126,7 @@ var body: some View {
 
 ```
 
-The VideoPlayerContainer is now attached to the page. But you can't see it cuz we never do any configuration work and also don't pass the video resource item to play. Let's do some more work ( specify the frame and play a video)
+The VideoPlayerContainer is now attached to the scene. But you can't see it cuz we never do any configuration work and also don't pass the video resource item to play. Let's do some more work ( specify the frame and play a video)
 
 ```swift
 
@@ -138,7 +144,7 @@ var body: some View {
 
 ```
 
-Run it, and the video will be playing. now, as you can see in other apps. We want to attach some widgets to it, like a `PlaybackButton` in the center.
+Run it, and the video will be playing. Now, as you can see in other apps. We want to attach some widgets to it, like a `PlaybackButton` in the center.
 
 ## Usage: Write Widgets
 
@@ -186,9 +192,9 @@ var body: some View {
 
 ```
 
-Now, you can see a icon on the center, and in default, you can tap the screen to make it visible or invisible. But you can see that we don't fill in logic code to make the icon works ( play and pause). How?
+Now, you can see an icon in the center, and by default, then you can tap the screen to make it visible or invisible. However, you can see that we don't fill in the logic code to make the icon work (play and pause). How?
 
-When we created the player view and passed in the context instance, the context instance will be put in the environment. So all of the widgets inside the video player container will have access to the context. Instead of accessing context directly on the Widget, we prefer using Service as the ViewModel to handle all of the functions of the Widget.
+When we created the player view and passed in the context instance, the context instance will be put in the environment. Thus, all of the widgets inside the video player container will have access to the context. Instead of accessing context directly on the Widget, we prefer using Service as the ViewModel to handle all the functions of the Widget.
 
 ```swift
 
@@ -246,15 +252,15 @@ struct PlaybackWidget: View {
 
 As you can see above, it's a completed Widget. 
 
-* we use fileprivate modifier to tell other users that they're only available on its own Widget. 
-* we use @ViewState to mark the variable that's able to trigger the SwiftUI update mechanism.
-* we use WithService as the Widget's root View to make sure any @ViewState variable changes will make the whole Widget involved in the update mechanism.
+* We use fileprivate modifier to tell other users that they're only available on their own Widget. 
+* We use @ViewState to mark the variable that's able to trigger the SwiftUI update mechanism.
+* We use WithService as the Widget's root View to make sure any @ViewState variable changes will make the whole Widget involved in the update mechanism.
 * we use @ViewState variable to condition which image to use in the Widget. (ViewModel's Output)
 * we call service method to complete the widget's work (ViewModel's Input)
 
 ## Idea / Bug / Improvement
 
-Please file an issue and I'll discuss it with you
+Feel free to report issues and let's improve it together 😀
  
 ## License
 
