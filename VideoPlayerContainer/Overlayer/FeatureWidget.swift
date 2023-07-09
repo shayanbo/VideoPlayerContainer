@@ -14,13 +14,13 @@ public class FeatureService : Service {
         let direction: Direction
         let content: ()->AnyView
         let action: Action
-    }
-    
-    struct Action {
-        var beforePresent: ( ()->Void )?
-        var afterPresent: ( ()->Void )?
-        var beforeDismiss: ( ()->Void )?
-        var afterDismiss: ( ()->Void )?
+        
+        struct Action {
+            var beforePresent: ( ()->Void )?
+            var afterPresent: ( ()->Void )?
+            var beforeDismiss: ( ()->Void )?
+            var afterDismiss: ( ()->Void )?
+        }
     }
     
     @ViewState private(set) var feature: Feature?
@@ -56,7 +56,7 @@ public class FeatureService : Service {
     
     public func present(_ direction: Direction, animation: Animation? = .default, beforePresent: ( ()->Void )? = nil, afterPresent: ( ()->Void )? = nil, beforeDismiss: ( ()->Void )? = nil, afterDismiss: ( ()->Void )? = nil, content: @escaping ()-> AnyView) {
         
-        let action = Action(beforePresent: beforePresent, afterPresent: afterPresent, beforeDismiss: beforeDismiss, afterDismiss: afterDismiss)
+        let action = Feature.Action(beforePresent: beforePresent, afterPresent: afterPresent, beforeDismiss: beforeDismiss, afterDismiss: afterDismiss)
         let feature = Feature(direction: direction, content: content, action: action)
         
         feature.action.beforePresent?()
