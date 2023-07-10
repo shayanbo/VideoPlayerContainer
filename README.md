@@ -4,7 +4,7 @@ VideoPlayerContainer is a video player component with SwiftUI. Compared with the
 
 ![Platform](https://img.shields.io/badge/platform-iOS|macOS-orange.svg)
 ![Version](https://img.shields.io/badge/version-16.0|13.0-green.svg)
-![Version](https://img.shields.io/badge/deps-CocoaPods|SwiftSPM-purple.svg)
+![Version](https://img.shields.io/badge/deps-CocoaPods|SwiftPM-purple.svg)
 
 ## Showcase
 
@@ -88,7 +88,7 @@ Control overlay is the most sophisticated overlay and the place where most work 
 
 We predefined 3 statuses as the screen style, with `halfscreen`, `fullscreen`, and `portrait`. The status changes are 100% decided by you. But generally, `halfscreen` describes the status of the portrait device. `fullscreen` describes the landscape device and `portrait` describes the video the height is higher than the width.
 
-For these 5 parts, you can configure them for different statuses which is quite common. For example, in halfscreen status, the screen is small and we can't attach many widgets to it but in fullscreen status. The video player container makes up the whole screen. We can attach many widgets to it to provide more and more functions.
+For these 5 parts, you can configure them for different statuses which is quite common. For example, in `halfscreen` status, the screen is small and we can't attach many widgets to it but in fullscreen status. The video player container makes up the whole screen. We can attach many widgets to it to provide more and more functions.
 
 For these parts, for these statuses, you can customize their shadow, transition, and layout. and other services can fetch the `ControlService` by `context[ControlService.self]` to call present or dismiss programmatically depending on the display style configured.
 
