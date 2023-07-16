@@ -4,7 +4,7 @@ VideoPlayerContainer is a video player component with SwiftUI. Compared with the
 
 ![Platform](https://img.shields.io/badge/platform-iOS|macOS-orange.svg)
 ![Version](https://img.shields.io/badge/version-16.0|13.0-green.svg)
-![Version](https://img.shields.io/badge/deps-CocoaPods|SwiftSPM-purple.svg)
+![Version](https://img.shields.io/badge/deps-CocoaPods|SwiftPM-purple.svg)
 
 ## Showcase
 
