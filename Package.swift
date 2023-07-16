@@ -19,7 +19,7 @@ let package = Package(
     targets: [
         .target(
             name: "VideoPlayerContainer",
-            path: "VideoPlayerContainer/VideoPlayerContainer"
+            path: "VideoPlayerContainer"
         )
     ],
     swiftLanguageVersions: [.v5]
