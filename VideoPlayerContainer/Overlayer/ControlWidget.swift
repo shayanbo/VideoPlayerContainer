@@ -411,6 +411,14 @@ public class ControlService : Service {
             }
         }
     }
+    
+    @ViewState fileprivate var opacity: CGFloat = 1.0
+    
+    public func opacity(_ opacity: CGFloat, animation: Animation? = nil) {
+        withAnimation(animation) {
+            self.opacity = opacity
+        }
+    }
 }
 
 public extension ControlService {
@@ -755,6 +763,7 @@ struct ControlWidget: View {
                 }
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
+            .opacity(service.opacity)
         }
     }
 }

@@ -16,6 +16,8 @@ public class GestureService : Service {
         self.enabled = onOrOff
     }
     
+    //MARK: Observe
+    
     public enum Gesture: Equatable {
 
         public enum Location: Equatable {
@@ -37,7 +39,7 @@ public class GestureService : Service {
         case tap(Location)
         case doubleTap(Location)
         case drag(Direction)
-        case longPress(Location)
+        case longPress
         case rotate
         case pinch
         case hover
@@ -55,7 +57,7 @@ public class GestureService : Service {
             case tap(CGPoint)
             case doubleTap(CGPoint)
             case drag(DragGesture.Value)
-            case longPress(CGPoint)
+            case longPress
             case rotate(RotationGesture.Value)
             case pinch(MagnificationGesture.Value)
             case hover
@@ -74,67 +76,127 @@ public class GestureService : Service {
         }
     }
     
-    //MARK: Individual Gesture Handler
+    //MARK: Simultaneous Gesture
     
-    fileprivate func handleTap(_ value: CGPoint, action: GestureEvent.Action) {
+    @ViewState public var simultaneousDragGesture: _EndedGesture<_ChangedGesture<DragGesture>>?
+    
+    @ViewState public var simultaneousTapGesture: _EndedGesture<_ChangedGesture<SpatialTapGesture>>?
+    
+    @ViewState public var simultaneousDoubleTapGesture: _EndedGesture<_ChangedGesture<SpatialTapGesture>>?
+    
+    @ViewState public var simultaneousLongPressGesture: _EndedGesture<LongPressGesture>?
+    
+    @ViewState public var simultaneousPinchGesture: _EndedGesture<_ChangedGesture<MagnificationGesture>>?
+    
+    @ViewState public var simultaneousRotationGesture: _EndedGesture<_ChangedGesture<RotationGesture>>?
+    
+    //MARK: Gestures
+    
+    public private(set) lazy var tapGesture: _EndedGesture<SpatialTapGesture> = {
+        SpatialTapGesture(count: 1)
+            .onEnded { [weak self] value in
+                guard let self = self else { return }
+                let leftSide = value.location.x < self.context[ViewSizeService.self].width * 0.5
+                let event = GestureEvent(gesture: .tap( leftSide ? .left : .right ), action: .end, value: .tap(value.location))
+                self.observable.send(event)
+            }
+    }()
+    
+    public private(set) lazy var doubleTapGesture: _EndedGesture<SpatialTapGesture> = {
+        SpatialTapGesture(count: 2)
+            .onEnded { [weak self] value in
+                guard let self = self else { return }
+                let leftSide = value.location.x < self.context[ViewSizeService.self].width * 0.5
+                let event = GestureEvent(gesture: .doubleTap( leftSide ? .left : .right ), action: .end, value: .doubleTap(value.location))
+                self.observable.send(event)
+            }
+    }()
+    
+    public private(set) lazy var longPressGesture: _EndedGesture<LongPressGesture> = {
+        LongPressGesture()
+            .onEnded { [weak self] value in
+                guard let self = self else { return }
+                let event = GestureEvent(gesture: .longPress, action: .end, value: .longPress)
+                self.observable.send(event)
+            }
+    }()
+    
+    public private(set) lazy var dragGesture: _EndedGesture<_ChangedGesture<DragGesture>> = {
         
-        let leftSide = value.x < context[ViewSizeService.self].width * 0.5
-        let event = GestureEvent(gesture: .tap( leftSide ? .left : .right ), action: action, value: .tap(value))
-        observable.send(event)
-    }
-    
-    fileprivate func handleDoubleTap(_ value: CGPoint, action: GestureEvent.Action) {
-        
-        let leftSide = value.x < context[ViewSizeService.self].width * 0.5
-        let event = GestureEvent(gesture: .doubleTap( leftSide ? .left : .right ), action: action, value: .tap(value))
-        observable.send(event)
-    }
-    
-    private var lastDragGesture: GestureEvent?
-    
-    fileprivate func handleDrag(_ value: DragGesture.Value, action: GestureEvent.Action) {
-        
-        let direction: Gesture.Direction = {
+        let handleDrag: (DragGesture.Value, GestureEvent.Action)->Void = { [weak self] value, action in
+            guard let self = self else { return }
             
-            if let last = lastDragGesture, case let .drag(direction) = last.gesture {
-                return direction
-            }
+            let direction: Gesture.Direction = {
+                
+                if let last = self.lastDragGesture, case let .drag(direction) = last.gesture {
+                    return direction
+                }
+                
+                let horizontal = abs(value.translation.width) > abs(value.translation.height)
+                if horizontal {
+                    return .horizontal
+                }
+                let leftSide = value.startLocation.x < self.context[ViewSizeService.self].width * 0.5
+                if leftSide {
+                    return .vertical(.left)
+                } else {
+                    return .vertical(.right)
+                }
+            }()
             
-            let horizontal = abs(value.translation.width) > abs(value.translation.height)
-            if horizontal {
-                return .horizontal
+            let event = GestureEvent(gesture: .drag(direction), action: action, value: .drag(value))
+            
+            switch action {
+            case .start:
+                if self.lastDragGesture == nil {
+                    self.lastDragGesture = event
+                }
+            case .end:
+                self.lastDragGesture = nil
             }
-            let leftSide = value.startLocation.x < context[ViewSizeService.self].width * 0.5
-            if leftSide {
-                return .vertical(.left)
-            } else {
-                return .vertical(.right)
-            }
-        }()
-        
-        let event = GestureEvent(gesture: .drag(direction), action: action, value: .drag(value))
-        
-        switch action {
-        case .start:
-            if lastDragGesture == nil {
-                lastDragGesture = event
-            }
-        case .end:
-            lastDragGesture = nil
+            self.observable.send(event)
         }
         
-        observable.send(event)
-    }
+        return
+            DragGesture()
+                .onChanged{ value in
+                    handleDrag(value, .start)
+                }
+                .onEnded{ value in
+                    handleDrag(value, .end)
+                }
+        
+    }()
     
-    fileprivate func handlePinch(_ value: MagnificationGesture.Value, action: GestureEvent.Action) {
-        let event = GestureEvent(gesture: .pinch, action: action, value: .pinch(value))
-        observable.send(event)
-    }
+    public private(set) lazy var pinchGesture: _EndedGesture<_ChangedGesture<MagnificationGesture>> = {
+        MagnificationGesture()
+            .onChanged { [weak self] value in
+                guard let self = self else { return }
+                let event = GestureEvent(gesture: .pinch, action: .start, value: .pinch(value))
+                self.observable.send(event)
+            }
+            .onEnded { [weak self] value in
+                guard let self = self else { return }
+                let event = GestureEvent(gesture: .pinch, action: .end, value: .pinch(value))
+                self.observable.send(event)
+            }
+    }()
+        
+    public private(set) lazy var rotationGesture: _EndedGesture<_ChangedGesture<RotationGesture>> = {
+        RotationGesture()
+            .onChanged { [weak self] value in
+                guard let self = self else { return }
+                let event = GestureEvent(gesture: .rotate, action: .start, value: .rotate(value))
+                observable.send(event)
+            }
+            .onEnded { [weak self] value in
+                guard let self = self else { return }
+                let event = GestureEvent(gesture: .rotate, action: .end, value: .rotate(value))
+                observable.send(event)
+            }
+    }()
     
-    fileprivate func handleRotation(_ value: RotationGesture.Value, action: GestureEvent.Action) {
-        let event = GestureEvent(gesture: .rotate, action: action, value: .rotate(value))
-        observable.send(event)
-    }
+    private var lastDragGesture: GestureEvent?
     
     fileprivate func handleHover(action: GestureEvent.Action) {
         let event = GestureEvent(gesture: .hover, action: action, value: .hover)
@@ -147,38 +209,41 @@ struct GestureWidget: View {
         WithService(GestureService.self) { service in
             if service.enabled {
                 Color.clear.contentShape(Rectangle())
-                    .onTapGesture(count: 2) { value in
-                        service.handleDoubleTap(value, action: .end)
-                    }
-                    .onTapGesture(count: 1) { value in
-                        service.handleTap(value, action: .end)
-                    }
                     .gesture(
-                        DragGesture()
-                            .onChanged{ value in
-                                service.handleDrag(value, action: .start)
-                            }
-                            .onEnded{ value in
-                                service.handleDrag(value, action: .end)
-                            }
+                        SimultaneousGesture(
+                            service.doubleTapGesture,
+                            service.simultaneousDoubleTapGesture ?? SpatialTapGesture(count:2).onChanged { _ in }.onEnded { _ in }
+                        )
                     )
                     .gesture(
-                        MagnificationGesture()
-                            .onChanged { value in
-                                service.handlePinch(value, action: .start)
-                            }
-                            .onEnded { value in
-                                service.handlePinch(value, action: .end)
-                            }
+                        SimultaneousGesture(
+                            service.tapGesture,
+                            service.simultaneousTapGesture ?? SpatialTapGesture(count:1).onChanged { _ in }.onEnded { _ in }
+                        )
                     )
                     .gesture(
-                        RotationGesture()
-                            .onChanged { value in
-                                service.handleRotation(value, action: .start)
-                            }
-                            .onEnded { value in
-                                service.handleRotation(value, action: .end)
-                            }
+                        SimultaneousGesture(
+                            service.longPressGesture,
+                            service.simultaneousLongPressGesture ?? LongPressGesture().onEnded{_ in }
+                        )
+                    )
+                    .gesture(
+                        SimultaneousGesture(
+                            service.dragGesture,
+                            service.simultaneousDragGesture ?? DragGesture().onChanged{_ in}.onEnded{_ in}
+                        )
+                    )
+                    .gesture(
+                        SimultaneousGesture(
+                            service.pinchGesture,
+                            service.simultaneousPinchGesture ?? MagnificationGesture().onChanged{_ in}.onEnded{_ in}
+                        )
+                    )
+                    .gesture(
+                        SimultaneousGesture(
+                            service.rotationGesture,
+                            service.simultaneousRotationGesture ?? RotationGesture().onChanged{_ in}.onEnded{_ in}
+                        )
                     )
                     .onHover { changeOrEnd in
                         service.handleHover(action: changeOrEnd ? .start : .end)
