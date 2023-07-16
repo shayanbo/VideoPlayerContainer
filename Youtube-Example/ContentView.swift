@@ -144,11 +144,81 @@ struct ContentView: View {
                     }
                 
                 if !orientation.isLandscape {
-                    Rectangle().fill(.white)
+                    
+                    List {
+                        Group {
+                            Text("Official Evo Moment #37, Daigo vs Justin Evo 2004 in HD")
+                                .fontWeight(.medium)
+                                .multilineTextAlignment(.leading)
+                                .font(.system(size: 18))
+                                .foregroundColor(.black)
+                            Text("6.59M Views 7 years ago ...Unfold")
+                                .fontWeight(.regular)
+                                .font(.system(size: 10))
+                                .foregroundColor(.gray)
+                            HStack {
+                                Image(systemName: "face.smiling.inverse")
+                                    .resizable()
+                                    .frame(width: 30, height: 30)
+                                Text("evo2kvids")
+                                    .fontWeight(.regular)
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.black)
+                                Text("74.4k")
+                                    .fontWeight(.regular)
+                                    .font(.system(size: 10))
+                                    .foregroundColor(.gray)
+                                Spacer()
+                                
+                                Button("Join") {}.buttonStyle(.bordered)
+                                Button("Subscribe") {}.buttonStyle(.bordered)
+                            }
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                LazyHStack {
+                                    ForEach (0..<10) { i in
+                                        Button("Action\(i)") {}.buttonStyle(.bordered)
+                                    }
+                                }
+                            }
+                            ForEach(0..<10) { _ in
+                                VStack {
+                                    Image(systemName: "photo.artframe")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(height: 300)
+                                    HStack {
+                                        Image(systemName: "face.smiling.inverse")
+                                            .resizable()
+                                            .frame(width: 20, height: 20)
+                                        VStack(alignment: .leading) {
+                                            Text("EVO 2004: Daigo Umehara VS. Justin Wong - Alternate Viewpoint!")
+                                                .fontWeight(.regular)
+                                                .multilineTextAlignment(.leading)
+                                                .font(.system(size: 13))
+                                                .foregroundColor(.black)
+                                            Text("MarkMan23・1.02M Views 4 years ago")
+                                                .fontWeight(.regular)
+                                                .font(.system(size: 10))
+                                                .foregroundColor(.gray)
+                                        }
+                                        Image(systemName: "ellipsis")
+                                            .rotationEffect(.degrees(90))
+                                            .frame(width: 30)
+                                    }
+                                }
+                            }
+                        }
+                        .listRowSeparator(.hidden)
+                        .listRowBackground(Color.white)
+                        .foregroundColor(.black)
+                    }
+                    .listStyle(.plain)
+                    .background(.white)
+                    .scrollContentBackground(.hidden)
                 }
             }
         }
-        .ignoresSafeArea(edges: orientation.isLandscape ? .all : .bottom)
+        .ignoresSafeArea(edges: orientation.isLandscape ? .all : [])
         .preferredColorScheme(.dark)
     }
 }
