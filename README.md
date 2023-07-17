@@ -11,10 +11,9 @@ VideoPlayerContainer is a video player component with SwiftUI. Compared with the
 <img src='Resources/Youtube_Fullscreen.png'>
 <img src='Resources/Youtube_Fullscreen_Squeeze.png'>
 <img src='Resources/Bilibili_Fullscreen.png'>
+<img src='https://github.com/MickeyHub/VideoPlayerContainer/assets/5426838/538024df-346c-41ca-95f9-c9d09c7288ba'>
 
 ## Example
-
-![image](https://github.com/MickeyHub/VideoPlayerContainer/assets/5426838/73fc14f3-9c98-48b6-8d08-fe1a139723bd)
 
 After cloning the repo and opening up the Xcode project, you can see multiple schemes as examples. Run it respectively to feel what abilities this framework can offer and how easy to use this framework to meet your demands.
 
