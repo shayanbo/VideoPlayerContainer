@@ -187,12 +187,12 @@ public class GestureService : Service {
             .onChanged { [weak self] value in
                 guard let self = self else { return }
                 let event = GestureEvent(gesture: .rotate, action: .start, value: .rotate(value))
-                observable.send(event)
+                self.observable.send(event)
             }
             .onEnded { [weak self] value in
                 guard let self = self else { return }
                 let event = GestureEvent(gesture: .rotate, action: .end, value: .rotate(value))
-                observable.send(event)
+                self.observable.send(event)
             }
     }()
     
@@ -245,9 +245,11 @@ struct GestureWidget: View {
                             service.simultaneousRotationGesture ?? RotationGesture().onChanged{_ in}.onEnded{_ in}
                         )
                     )
-                    .onHover { changeOrEnd in
+                    #if os(macOS)
+                    .whenHovered { changeOrEnd in
                         service.handleHover(action: changeOrEnd ? .start : .end)
                     }
+                    #endif
             }
         }
     }
