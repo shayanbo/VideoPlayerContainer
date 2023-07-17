@@ -89,6 +89,13 @@
 			remoteGlobalIDString = D4061C232A4B257800CDD1FF;
 			remoteInfo = VideoPlayerContainer;
 		};
+		D4A985712A6590C600B42F39 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D49986102A389FEF00384185 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D4061C232A4B257800CDD1FF;
+			remoteInfo = VideoPlayerContainer;
+		};
 		D4C4508E2A4ECFBC00731503 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D49986102A389FEF00384185 /* Project object */;
@@ -209,7 +216,7 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		D4061C252A4B257800CDD1FF /* VideoPlayerContainer */ = {
+		D4061C252A4B257800CDD1FF /* Source */ = {
 			isa = PBXGroup;
 			children = (
 				D4061C2E2A4B25B900CDD1FF /* Container */,
@@ -217,7 +224,7 @@
 				D4061C362A4B25B900CDD1FF /* Overlayer */,
 				D4061C2B2A4B25B900CDD1FF /* Service */,
 			);
-			path = VideoPlayerContainer;
+			path = Source;
 			sourceTree = "<group>";
 		};
 		D4061C2B2A4B25B900CDD1FF /* Service */ = {
@@ -349,7 +356,7 @@
 			isa = PBXGroup;
 			children = (
 				D43672002A5316E40083F9DD /* Resources */,
-				D4061C252A4B257800CDD1FF /* VideoPlayerContainer */,
+				D4061C252A4B257800CDD1FF /* Source */,
 				D496040E2A4D224F00AD3FE6 /* TikTok-Example */,
 				D49604202A4D228700AD3FE6 /* Youtube-Example */,
 				D49604322A4D22AF00AD3FE6 /* Bilibili-Example */,
@@ -513,6 +520,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				D4A985722A6590C600B42F39 /* PBXTargetDependency */,
 			);
 			name = "QuickTime-Example";
 			productName = "QuickTime-Example";
@@ -716,6 +724,11 @@
 			isa = PBXTargetDependency;
 			target = D4061C232A4B257800CDD1FF /* VideoPlayerContainer */;
 			targetProxy = D474DC4A2A50883F00EF8957 /* PBXContainerItemProxy */;
+		};
+		D4A985722A6590C600B42F39 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D4061C232A4B257800CDD1FF /* VideoPlayerContainer */;
+			targetProxy = D4A985712A6590C600B42F39 /* PBXContainerItemProxy */;
 		};
 		D4C4508F2A4ECFBC00731503 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
