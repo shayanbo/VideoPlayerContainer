@@ -9,25 +9,6 @@ import SwiftUI
 import Combine
 import VideoPlayerContainer
 
-struct PlaybackButtonWidget : View {
-    
-    var body: some View {
-        WithService(PlaybackButtonService.self) { service in
-            Button {
-                service.didClick()
-            } label: {
-                if service.playOrPaused {
-                    Image(systemName: "pause.fill")
-                        .frame(height:40)
-                } else {
-                    Image(systemName: "play.fill")
-                        .frame(height:40)
-                }
-            }
-        }
-    }
-}
-
 class PlaybackButtonService: Service {
     
     private var rateObservation: NSKeyValueObservation?
@@ -65,6 +46,32 @@ class PlaybackButtonService: Service {
             service.player.play()
         } else {
             service.player.pause()
+        }
+    }
+}
+
+struct PlaybackButtonWidget : View {
+    
+    var body: some View {
+        WithService(PlaybackButtonService.self) { service in
+            Group {
+                if service.playOrPaused {
+                    Image(systemName: "pause.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(.white)
+                } else {
+                    Image(systemName: "play.fill")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 25, height: 25)
+                        .foregroundColor(.white)
+                }
+            }
+            .onTapGesture {
+                service.didClick()
+            }
         }
     }
 }

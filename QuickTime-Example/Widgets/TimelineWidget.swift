@@ -16,16 +16,16 @@ struct TimelineWidget : View {
     var body: some View {
         
         WithService(TimelineService.self) { service in
-            Text("\(service.current)/\(service.duration)")
+            Text(service.current)
+                .foregroundColor(.white)
+                .opacity(0.5)
         }
     }
 }
 
 class TimelineService : Service {
     
-    @ViewState fileprivate var current = "00:00:00"
-    
-    @ViewState fileprivate var duration = "00:00:00"
+    @ViewState fileprivate var current = "00:00"
     
     private var cancellables = [AnyCancellable]()
     
@@ -39,10 +39,7 @@ class TimelineService : Service {
             guard let self = self else { return }
             
             let current = CMTimeGetSeconds(time)
-            let duration = CMTimeGetSeconds(renderService.player.currentItem!.duration)
-            
             self.current = self.toDisplay(Int(current))
-            self.duration = duration.isNormal ? self.toDisplay(Int(duration)) : "00:00:00"
         }
         
         let pluginService = context[PluginService.self]
@@ -80,17 +77,10 @@ class TimelineService : Service {
     private func toDisplay(_ seconds: Int) -> String {
         
         if seconds < 0 {
-            return "00:00:00"
+            return "00:00"
         }
         
-        var hours = "", mins = "", secs = ""
-        
-        let numberOfHour = seconds / 3600
-        if numberOfHour >= 10 {
-            hours = "\(numberOfHour)"
-        } else {
-            hours = "0\(numberOfHour)"
-        }
+        var mins = "", secs = ""
         
         let numberOfMin = (seconds % 3600) / 60
         if numberOfMin >= 10 {
@@ -106,7 +96,7 @@ class TimelineService : Service {
             secs = "0\(numberOfSec)"
         }
         
-        return "\(hours):\(mins):\(secs)"
+        return "\(mins):\(secs)"
     }
 }
 
