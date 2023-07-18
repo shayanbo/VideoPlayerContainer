@@ -34,7 +34,7 @@ class StepForwardWidgetService: Service {
 struct StepForwardWidget: View {
     var body: some View {
         WithService(StepForwardWidgetService.self) { service in
-            Image(systemName: "gobackward.10")
+            Image(systemName: "goforward.10")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 30, height: 30)
