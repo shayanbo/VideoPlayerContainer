@@ -9,13 +9,13 @@ import Foundation
 
 public class StatusService : Service {
     
-    enum Status {
+    public enum Status {
         case halfScreen
         case fullScreen
         case portrait
     }
     
-    @ViewState private(set) var status: Status = .halfScreen
+    @ViewState public private(set) var status: Status = .halfScreen
     
     public var isFullScreen: Bool {
         status == .fullScreen

@@ -191,6 +191,12 @@ public class ControlService : Service {
         }
     }
     
+    public func configure(_ locations: [RawLocation], transition: AnyTransition) {
+        locations.forEach { location in
+            configure(location, transition: transition)
+        }
+    }
+    
     public func configure(_ location: RawLocation, transition: AnyTransition) {
         switch location {
         case let .halfScreen(direction):
@@ -232,6 +238,12 @@ public class ControlService : Service {
             case .center:
                 self.portraitScreenTransition.center = transition
             }
+        }
+    }
+    
+    public func configure(_ locations: [Location], layout: @escaping ([IdentifableView]) -> any View) {
+        locations.forEach { location in
+            configure(location, layout: layout)
         }
     }
     
@@ -294,6 +306,12 @@ public class ControlService : Service {
             case .center:
                 self.portraitScreenControlBar.center = layout
             }
+        }
+    }
+    
+    public func configure(_ locations: [Location], content: @escaping ()->[any View]) {
+        locations.forEach { location in
+            configure(location, content: content)
         }
     }
     
@@ -366,6 +384,12 @@ public class ControlService : Service {
     
     public func configure(shadow: AnyView?) {
         self.shadow = shadow
+    }
+    
+    public func configure(_ locations: [RawLocation], shadow: AnyView?) {
+        locations.forEach { location in
+            configure(location, shadow: shadow)
+        }
     }
     
     public func configure(_ location: RawLocation, shadow: AnyView?) {
