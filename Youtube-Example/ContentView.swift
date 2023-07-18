@@ -152,14 +152,17 @@ struct ContentView: View {
                                 .multilineTextAlignment(.leading)
                                 .font(.system(size: 18))
                                 .foregroundColor(.black)
+                                .padding(.all, 10)
                             Text("6.59M Views 7 years ago ...Unfold")
                                 .fontWeight(.regular)
                                 .font(.system(size: 10))
                                 .foregroundColor(.gray)
+                                .padding(.leading, 10)
                             HStack {
-                                Image(systemName: "face.smiling.inverse")
+                                Image("demo")
                                     .resizable()
                                     .frame(width: 30, height: 30)
+                                    .cornerRadius(15)
                                 Text("evo2kvids")
                                     .fontWeight(.regular)
                                     .font(.system(size: 10))
@@ -170,26 +173,52 @@ struct ContentView: View {
                                     .foregroundColor(.gray)
                                 Spacer()
                                 
-                                Button("Join") {}.buttonStyle(.bordered)
-                                Button("Subscribe") {}.buttonStyle(.bordered)
+                                Button { } label: {
+                                    Text("Subscribe")
+                                        .fontWeight(.medium)
+                                        .foregroundColor(.white)
+                                        .padding(.horizontal, 10)
+                                        .padding(.vertical, 5)
+                                        .background(
+                                            Rectangle().fill(.black).cornerRadius(17)
+                                        )
+                                }
                             }
+                            .padding(.all, 10)
+                            
                             ScrollView(.horizontal, showsIndicators: false) {
                                 LazyHStack {
                                     ForEach (0..<10) { i in
-                                        Button("Action\(i)") {}.buttonStyle(.bordered)
+                                        Button { } label: {
+                                        Text("Action_\(i)")
+                                            .fontWeight(.regular)
+                                            .font(.system(size:12))
+                                            .foregroundColor(.black)
+                                            .padding(.horizontal, 10)
+                                            .padding(.vertical, 5)
+                                            .background(
+                                                Rectangle().fill(.gray.opacity(0.15)).cornerRadius(17)
+                                            )
+                                        }
                                     }
                                 }
                             }
+                            .padding(.leading, 10)
+                            .padding(.bottom, 20)
+                            
                             ForEach(0..<10) { _ in
-                                VStack {
-                                    Image(systemName: "photo.artframe")
+                                VStack(spacing:0) {
+                                    Image("demo")
                                         .resizable()
-                                        .scaledToFit()
-                                        .frame(height: 300)
-                                    HStack {
-                                        Image(systemName: "face.smiling.inverse")
+                                        .scaledToFill()
+                                        .frame(width: proxy.size.width, height: proxy.size.width * 0.5625)
+                                        .clipped()
+                                    HStack(spacing:0) {
+                                        Image("demo")
                                             .resizable()
-                                            .frame(width: 20, height: 20)
+                                            .frame(width: 30, height: 30)
+                                            .cornerRadius(15)
+                                        Spacer(minLength: 0)
                                         VStack(alignment: .leading) {
                                             Text("EVO 2004: Daigo Umehara VS. Justin Wong - Alternate Viewpoint!")
                                                 .fontWeight(.regular)
@@ -201,17 +230,21 @@ struct ContentView: View {
                                                 .font(.system(size: 10))
                                                 .foregroundColor(.gray)
                                         }
+                                        Spacer(minLength: 0)
                                         Image(systemName: "ellipsis")
                                             .rotationEffect(.degrees(90))
                                             .frame(width: 30)
                                     }
+                                    .padding(.all, 10)
                                 }
                             }
                         }
                         .listRowSeparator(.hidden)
                         .listRowBackground(Color.white)
+                        .listRowInsets(.init())
                         .foregroundColor(.black)
                     }
+                    .environment(\.defaultMinListRowHeight, 1)
                     .listStyle(.plain)
                     .background(.white)
                     .scrollContentBackground(.hidden)
