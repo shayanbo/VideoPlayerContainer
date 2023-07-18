@@ -38,9 +38,10 @@ struct VolumeWidget: View {
                     } else {
                         Image(systemName: "speaker.wave.3.fill")
                     }
-                }.opacity(0.7)
+                }
             }
             .frame(width: 100)
+            .tint(.white)
         }
     }
 }

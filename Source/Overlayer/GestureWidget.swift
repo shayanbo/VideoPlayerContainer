@@ -198,7 +198,7 @@ public class GestureService : Service {
     
     private var lastDragGesture: GestureEvent?
     
-    fileprivate func handleHover(action: GestureEvent.Action) {
+    func handleHover(action: GestureEvent.Action) {
         let event = GestureEvent(gesture: .hover, action: action, value: .hover)
         observable.send(event)
     }
@@ -245,9 +245,6 @@ struct GestureWidget: View {
                             service.simultaneousRotationGesture ?? RotationGesture().onChanged{_ in}.onEnded{_ in}
                         )
                     )
-                    .onHover { changeOrEnd in
-                        service.handleHover(action: changeOrEnd ? .start : .end)
-                    }
             }
         }
     }

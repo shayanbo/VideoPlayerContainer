@@ -166,5 +166,8 @@ public struct PlayerWidget: View {
             }
         }
         .environmentObject(context)
+        .onHover { changeOrEnd in
+            context[GestureService.self].handleHover(action: changeOrEnd ? .start : .end)
+        }
     }
 }

@@ -26,6 +26,7 @@ struct SeekBarWidget : View {
             }
             .disabled(service.progress == 0)
             .frame(height: 40)
+            .tint(.white)
         }
     }
 }

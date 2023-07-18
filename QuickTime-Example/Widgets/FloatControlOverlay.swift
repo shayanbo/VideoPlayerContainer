@@ -61,7 +61,7 @@ struct FloatControlOverlay: View {
             WithService(FloatControlService.self) { service in
                 ZStack(alignment: .bottom) {
                     Spacer().frame(maxWidth: .infinity, maxHeight: .infinity)
-                    VStack(spacing: 0) {
+                    VStack(spacing: 10) {
                         HStack(spacing: 20) {
                             if let items = service.layer1 {
                                 ForEach(items) { $0 }
@@ -73,7 +73,7 @@ struct FloatControlOverlay: View {
                             }
                         }
                     }
-                    .padding(.init(top: 10, leading: 10, bottom: 0, trailing: 10))
+                    .padding(.init(top: 10, leading: 10, bottom: 10, trailing: 10))
                     .frame(width: proxy.size.width < 450 ? proxy.size.width - 20 : 450)
                     .background(.thickMaterial)
                     .cornerRadius(10.0)

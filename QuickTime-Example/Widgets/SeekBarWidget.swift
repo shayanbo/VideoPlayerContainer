@@ -25,7 +25,7 @@ struct SeekBarWidget : View {
                 service.seekProgress(service.progress)
             }
             .disabled(service.progress == 0)
-            .frame(height: 40)
+            .tint(.white)
         }
     }
 }

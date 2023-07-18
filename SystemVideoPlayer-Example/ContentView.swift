@@ -32,7 +32,9 @@ struct ContentView: View {
                 
                 controlService.configure([.portrait(.top), .fullScreen(.top), .fullScreen(.bottom), .portrait(.bottom)], shadow: nil)
                 controlService.configure(.portrait, insets: .init(top: 10, leading: 10, bottom: 10, trailing: 10))
-                controlService.configure([.portrait(.top), .portrait(.bottom)], transition: .opacity)
+                controlService.configure([.portrait(.top), .portrait(.bottom), .fullScreen(.top), .fullScreen(.bottom)], transition: .opacity)
+                
+                controlService.configure(.fullScreen, insets: .init(top: 20, leading: 0, bottom: 0, trailing: 0))
                 
                 controlService.configure([.portrait(.top1), .fullScreen(.top1)]) {[
                     CloseWidget(),
@@ -57,7 +59,7 @@ struct ContentView: View {
                     DurationWidget(),
                 ]}
 
-                controlService.configure([.portrait(.center), .fullScreen(.bottom1)]) {[
+                controlService.configure([.portrait(.center), .fullScreen(.center)]) {[
                     StepBackWidget(),
                     PlaybackButtonWidget(),
                     StepForwardWidget(),
