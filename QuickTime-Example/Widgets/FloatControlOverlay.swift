@@ -11,7 +11,7 @@ import Combine
 
 class FloatControlService : Service {
     
-    @ViewState fileprivate var base = CGSize.zero
+    @ViewState fileprivate var base = CGSize(width: 0, height: -50)
     @ViewState fileprivate var offset = CGSize(width: 0, height: -50)
     @ViewState fileprivate var opacity = 1.0
     
