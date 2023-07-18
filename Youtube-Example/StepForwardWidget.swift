@@ -8,7 +8,7 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class StepForwardService: Service {
+class StepForwardWidgetService: Service {
     
     private var observation: NSKeyValueObservation?
     
@@ -33,7 +33,7 @@ class StepForwardService: Service {
 
 struct StepForwardWidget: View {
     var body: some View {
-        WithService(StepForwardService.self) { service in
+        WithService(StepForwardWidgetService.self) { service in
             Image(systemName: "forward.end.circle")
                 .resizable()
                 .scaledToFit()

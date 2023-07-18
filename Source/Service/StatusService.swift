@@ -30,15 +30,11 @@ public class StatusService : Service {
     }
     
     public func toFullScreen() {
-        if status == .halfScreen {
-            status = .fullScreen
-        }
+        status = .fullScreen
     }
     
     public func toHalfScreen() {
-        if status == .fullScreen {
-            status = .halfScreen
-        }
+        status = .halfScreen
     }
     
     public func toPortrait() {

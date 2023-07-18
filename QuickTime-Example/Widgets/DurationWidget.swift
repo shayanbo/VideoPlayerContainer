@@ -15,7 +15,7 @@ struct DurationWidget : View {
     
     var body: some View {
         
-        WithService(DurationService.self) { service in
+        WithService(DurationWidgetService.self) { service in
             Text(service.duration)
                 .foregroundColor(.white)
                 .opacity(0.5)
@@ -23,7 +23,7 @@ struct DurationWidget : View {
     }
 }
 
-class DurationService : Service {
+class DurationWidgetService : Service {
     
     @ViewState fileprivate var duration = "00:00"
     

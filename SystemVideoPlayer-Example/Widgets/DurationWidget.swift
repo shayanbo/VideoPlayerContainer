@@ -11,17 +11,6 @@ import Combine
 import SwiftUI
 import VideoPlayerContainer
 
-struct DurationWidget : View {
-    
-    var body: some View {
-        
-        WithService(DurationWidgetService.self) { service in
-            Text(service.duration)
-                .foregroundColor(.white)
-        }
-    }
-}
-
 class DurationWidgetService : Service {
     
     @ViewState fileprivate var duration = "00:00"
@@ -68,3 +57,14 @@ class DurationWidgetService : Service {
     }
 }
 
+struct DurationWidget : View {
+    
+    var body: some View {
+        WithService(DurationWidgetService.self) { service in
+            Text(service.duration)
+                .font(.system(size:12))
+                .foregroundColor(.white)
+                .opacity(0.7)
+        }
+    }
+}

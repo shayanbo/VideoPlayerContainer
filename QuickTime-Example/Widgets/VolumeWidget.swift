@@ -8,7 +8,7 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class VolumeService : Service {
+class VolumeWidgetService : Service {
     
     @ViewState fileprivate var slideValue: Float = 1.0 {
         didSet {
@@ -20,7 +20,7 @@ class VolumeService : Service {
 
 struct VolumeWidget: View {
     var body: some View {
-        WithService(VolumeService.self) { service in
+        WithService(VolumeWidgetService.self) { service in
             Slider(value: Binding(get: {
                 service.slideValue
             }, set: {

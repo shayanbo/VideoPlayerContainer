@@ -8,14 +8,13 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class VolumeService : Service {
-    
+class VolumeWidgetService : Service {
     @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
 }
 
 struct VolumeWidget: View {
     var body: some View {
-        WithService(VolumeService.self) { service in
+        WithService(VolumeWidgetService.self) { service in
             HStack {
                 if service.status == .fullScreen {
                     Rectangle()

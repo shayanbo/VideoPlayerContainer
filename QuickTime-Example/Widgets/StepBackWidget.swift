@@ -8,7 +8,7 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class StepBackwardService: Service {
+class StepBackwardWidgetService: Service {
     
     private var observation: NSKeyValueObservation?
     
@@ -33,7 +33,7 @@ class StepBackwardService: Service {
 
 struct StepBackWidget: View {
     var body: some View {
-        WithService(StepBackwardService.self) { service in
+        WithService(StepBackwardWidgetService.self) { service in
             Image(systemName: "backward.fill")
                 .resizable()
                 .scaledToFit()

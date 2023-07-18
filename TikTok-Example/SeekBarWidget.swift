@@ -17,7 +17,7 @@ struct SeekBarWidget : View {
         
         /// put WithService inside the GeometryReader
         GeometryReader { proxy in
-            WithService(SeekBarService.self) { service in
+            WithService(SeekBarWidgetService.self) { service in
             
                 ZStack(alignment: .leading) {
                     Rectangle().fill(.gray)
@@ -34,7 +34,7 @@ struct SeekBarWidget : View {
     }
 }
 
-class SeekBarService : Service {
+class SeekBarWidgetService : Service {
     
     @ViewState fileprivate var progress = 0.0
     

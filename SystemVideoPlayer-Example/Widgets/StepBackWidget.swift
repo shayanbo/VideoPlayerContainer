@@ -34,21 +34,15 @@ class StepBackwardWidgetService: Service {
 struct StepBackWidget: View {
     var body: some View {
         WithService(StepBackwardWidgetService.self) { service in
-            Image(systemName: "backward.end.circle")
+            Image(systemName: "goforward.10")
                 .resizable()
                 .scaledToFit()
-                .foregroundColor(.white)
                 .frame(width: 30, height: 30)
+                .foregroundColor(.white)
                 .disabled(!service.enabled)
                 .onTapGesture {
                     service.stepBackward()
                 }
         }
-    }
-}
-
-struct StepBackWidget_Previews: PreviewProvider {
-    static var previews: some View {
-        StepBackWidget()
     }
 }

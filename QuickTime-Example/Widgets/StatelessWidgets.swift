@@ -9,7 +9,8 @@ import SwiftUI
 
 struct PiPWidget: View {
     var body: some View {
-        Image(systemName: "pip.enter").resizable()
+        Image(systemName: "pip.enter")
+            .resizable()
             .scaledToFit()
             .frame(width: 20, height: 20)
             .foregroundColor(.white)
@@ -19,7 +20,8 @@ struct PiPWidget: View {
 
 struct ShareWidget: View {
     var body: some View {
-        Image(systemName: "square.and.arrow.up").resizable()
+        Image(systemName: "square.and.arrow.up")
+            .resizable()
             .scaledToFit()
             .frame(width: 20, height: 20)
             .foregroundColor(.white)
@@ -29,7 +31,8 @@ struct ShareWidget: View {
 
 struct MoreWidget: View {
     var body: some View {
-        Image(systemName: "chevron.right.2").resizable()
+        Image(systemName: "chevron.right.2")
+            .resizable()
             .scaledToFit()
             .frame(width: 20, height: 20)
             .foregroundColor(.white)

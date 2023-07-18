@@ -15,14 +15,14 @@ struct TimelineWidget : View {
     
     var body: some View {
         
-        WithService(TimelineService.self) { service in
+        WithService(TimelineWidgetService.self) { service in
             Text("\(service.current)/\(service.duration)")
                 .foregroundColor(.white)
         }
     }
 }
 
-class TimelineService : Service {
+class TimelineWidgetService : Service {
     
     @ViewState fileprivate var current = "00:00"
     

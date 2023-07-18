@@ -11,18 +11,6 @@ import Combine
 import SwiftUI
 import VideoPlayerContainer
 
-struct TimelineWidget : View {
-    
-    var body: some View {
-        
-        WithService(TimelineWidgetService.self) { service in
-            Text(service.current)
-                .foregroundColor(.white)
-                .opacity(0.5)
-        }
-    }
-}
-
 class TimelineWidgetService : Service {
     
     @ViewState fileprivate var current = "00:00"
@@ -100,3 +88,14 @@ class TimelineWidgetService : Service {
     }
 }
 
+struct TimelineWidget : View {
+    
+    var body: some View {
+        WithService(TimelineWidgetService.self) { service in
+            Text(service.current)
+                .font(.system(size:12))
+                .foregroundColor(.white)
+                .opacity(0.7)
+        }
+    }
+}
