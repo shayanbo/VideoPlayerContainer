@@ -11,7 +11,12 @@ import VideoPlayerContainer
 class MoreWidgetService : Service {
     
     enum Rate: String, CaseIterable, Identifiable {
-        case x0_5, x1_0, x1_25, x1_5, x2_0
+        case x0_5 = "0.5x"
+        case x1_0 = "1.0x"
+        case x1_25 = "1.25x"
+        case x1_5 = "1.5x"
+        case x2_0 = "2.0x"
+        
         var id: Self { self }
     }
     
@@ -29,11 +34,11 @@ struct MoreWidget: View {
                 })) {
                     ForEach(MoreWidgetService.Rate.allCases) { rate in
                         Text(rate.rawValue)
-                            .tag(service.rate)
                     }
                 } label: {
                     Label("Playback Speed", systemImage: "gauge.high")
                 }
+                .pickerStyle(.menu)
             } label: {
                 Image(systemName: "ellipsis.circle").foregroundColor(.white)
             }
