@@ -208,11 +208,8 @@ struct ContentView: View {
                             
                             ForEach(0..<10) { _ in
                                 VStack(spacing:0) {
-                                    Image("demo")
-                                        .resizable()
-                                        .scaledToFill()
+                                    Rectangle().fill(.gray.opacity(0.15))
                                         .frame(width: proxy.size.width, height: proxy.size.width * 0.5625)
-                                        .clipped()
                                     HStack(spacing:0) {
                                         Image("demo")
                                             .resizable()
