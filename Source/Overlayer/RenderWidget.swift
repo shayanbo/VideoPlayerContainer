@@ -16,16 +16,16 @@ import AppKit
 
 public class RenderService : Service {
     
-    @ViewState fileprivate var gravity: AVLayerVideoGravity = .resizeAspect
-    
     public let player = AVPlayer()
     
+    public let layer = AVPlayerLayer()
+    
     public func fill() {
-        gravity = .resizeAspectFill
+        layer.videoGravity = .resizeAspectFill
     }
     
     public func fit() {
-        gravity = .resizeAspect
+        layer.videoGravity = .resizeAspect
     }
 }
 
@@ -34,7 +34,7 @@ struct RenderWidget : View {
     var body: some View {
         WithService(RenderService.self) { service in
             ZStack {
-                RenderView(player: service.player, gravity: service.gravity)
+                RenderView(player: service.player, layer: service.layer)
                 GestureWidget()
             }
         }
@@ -46,17 +46,17 @@ struct RenderWidget : View {
 struct RenderView : UIViewRepresentable {
 
     let player: AVPlayer
-    let gravity: AVLayerVideoGravity
+    let layer: AVPlayerLayer
     
     func makeUIView(context: UIViewRepresentableContext<Self>) -> PlayerView {
         let playerView = PlayerView()
+        playerView.playerLayer = layer
         playerView.player = player
-        playerView.videoGravity = gravity
         return playerView
     }
 
     func updateUIView(_ uiView: PlayerView, context: UIViewRepresentableContext<Self>) {
-        uiView.videoGravity = gravity
+        
     }
 }
 
@@ -75,8 +75,21 @@ class PlayerView: UIView {
     
     var player: AVPlayer? {
         didSet {
-            let canvas = self.layer as! AVPlayerLayer
+            let canvas = self.layer.sublayers?.first as! AVPlayerLayer
             canvas.player = player
+        }
+    }
+    
+    var playerLayer: AVPlayerLayer? {
+        didSet {
+            self.layer.sublayers?.forEach {
+                $0.removeFromSuperlayer()
+            }
+            guard let layer = playerLayer else {
+                return
+            }
+            self.layer.addSublayer(layer)
+            layer.frame = self.layer.bounds
         }
     }
     

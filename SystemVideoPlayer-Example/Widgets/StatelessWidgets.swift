@@ -7,13 +7,6 @@
 
 import SwiftUI
 
-struct PiPWidget: View {
-    var body: some View {
-        Image(systemName: "pip.enter")
-            .foregroundColor(.white)
-    }
-}
-
 struct CloseWidget: View {
     var body: some View {
         Image(systemName: "xmark")
