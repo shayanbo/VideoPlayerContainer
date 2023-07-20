@@ -55,28 +55,16 @@ struct RenderView : UIViewRepresentable {
         return playerView
     }
 
-    func updateUIView(_ uiView: PlayerView, context: UIViewRepresentableContext<Self>) {
-        
-    }
+    func updateUIView(_ uiView: PlayerView, context: UIViewRepresentableContext<Self>) { }
 }
 
 class PlayerView: UIView {
     
-    var videoGravity: AVLayerVideoGravity {
-        get {
-            let canvas = self.layer as! AVPlayerLayer
-            return canvas.videoGravity
-        }
-        set {
-            let canvas = self.layer as! AVPlayerLayer
-            canvas.videoGravity = newValue
-        }
-    }
-    
     var player: AVPlayer? {
         didSet {
-            let canvas = self.layer.sublayers?.first as! AVPlayerLayer
-            canvas.player = player
+            if let canvas = self.layer.sublayers?.first as? AVPlayerLayer {
+                canvas.player = player
+            }
         }
     }
     
@@ -89,12 +77,14 @@ class PlayerView: UIView {
                 return
             }
             self.layer.addSublayer(layer)
-            layer.frame = self.layer.bounds
+            layer.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+            layer.player = player
         }
     }
     
-    override class var layerClass: AnyClass {
-        return AVPlayerLayer.self
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        playerLayer?.frame = self.bounds
     }
 }
 
@@ -103,18 +93,16 @@ class PlayerView: UIView {
 struct RenderView : NSViewRepresentable {
     
     let player: AVPlayer
-    let gravity: AVLayerVideoGravity
+    let layer: AVPlayerLayer
     
     func makeNSView(context: NSViewRepresentableContext<Self>) -> PlayerView {
         let playerView = PlayerView()
         playerView.player = player
-        playerView.videoGravity = gravity
+        playerView.playerLayer = layer
         return playerView
     }
 
-    func updateNSView(_ uiView: PlayerView, context: NSViewRepresentableContext<Self>) {
-        uiView.videoGravity = gravity
-    }
+    func updateNSView(_ uiView: PlayerView, context: NSViewRepresentableContext<Self>) { }
 }
 
 class PlayerView: NSView {
@@ -132,22 +120,31 @@ class PlayerView: NSView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var videoGravity: AVLayerVideoGravity {
-        get {
-            let canvas = self.layer as! AVPlayerLayer
-            return canvas.videoGravity
-        }
-        set {
-            let canvas = self.layer as! AVPlayerLayer
-            canvas.videoGravity = newValue
+    var player: AVPlayer? {
+        didSet {
+            if let canvas = self.layer?.sublayers?.first as? AVPlayerLayer {
+                canvas.player = player
+            }
         }
     }
     
-    var player: AVPlayer? {
+    var playerLayer: AVPlayerLayer? {
         didSet {
-            let canvas = self.layer as! AVPlayerLayer
-            canvas.player = player
+            self.layer?.sublayers?.forEach {
+                $0.removeFromSuperlayer()
+            }
+            guard let layer = playerLayer else {
+                return
+            }
+            self.layer?.addSublayer(layer)
+            layer.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
+            layer.player = player
         }
+    }
+    
+    override func layoutSubtreeIfNeeded() {
+        super.layoutSubtreeIfNeeded()
+        playerLayer?.frame = self.bounds
     }
 }
 
