@@ -12,32 +12,25 @@ import AVKit
 class PiPWidgetService : Service {
     
     private var PiPController: AVPictureInPictureController?
-    private var PiPControllerDelegate: Delegate?
+    private var delegateObject: DelegateProxy?
+    @ViewState fileprivate var isActive = false
+    @ViewState fileprivate var isSupported = false
     
     required init(_ context: Context) {
         super.init(context)
         
+        isSupported = AVPictureInPictureController.isPictureInPictureSupported()
+        if !isSupported {
+            return
+        }
+        
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         
         PiPController = AVPictureInPictureController(playerLayer: context[RenderService.self].layer)
-        PiPControllerDelegate = Delegate(context)
-        PiPController?.delegate = PiPControllerDelegate
-    }
-    
-    fileprivate func startPiP() {
-        PiPController?.startPictureInPicture()
-    }
-    
-    class Delegate : NSObject, AVPictureInPictureControllerDelegate {
-        
-        weak var context: Context?
-        
-        init(_ context: Context) {
-            self.context = context
-        }
-        
-        func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-            guard let context = context else { return }
+        delegateObject = DelegateProxy()
+        delegateObject?.willStart = { [weak context, weak self] in
+            guard let context = context, let self = self else { return }
+            self.isActive = true
             context[PluginService.self].present(.center) {
                 AnyView(
                     Image(systemName: "pip")
@@ -48,10 +41,37 @@ class PiPWidgetService : Service {
                 )
             }
         }
+        delegateObject?.didStop = { [weak context, weak self] in
+            guard let context = context, let self = self else { return }
+            self.isActive = false
+            context[PluginService.self].dismiss()
+        }
+        PiPController?.delegate = delegateObject
+    }
+    
+    fileprivate func didClick() {
+        
+        guard let controller = PiPController else {
+            return
+        }
+        if controller.isPictureInPictureActive {
+            controller.stopPictureInPicture()
+        } else {
+            controller.startPictureInPicture()
+        }
+    }
+    
+    private class DelegateProxy : NSObject, AVPictureInPictureControllerDelegate {
+        
+        var willStart: ( ()->Void )?
+        var didStop: ( ()->Void )?
+        
+        func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
+            willStart?()
+        }
         
         func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-            guard let context = context else { return }
-            context[PluginService.self].dismiss()
+            didStop?()
         }
         
         func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
@@ -63,10 +83,11 @@ class PiPWidgetService : Service {
 struct PiPWidget: View {
     var body: some View {
         WithService(PiPWidgetService.self) { service in
-            Image(systemName: "pip.enter")
-                .foregroundColor(.white)
+            Image(systemName: service.isActive ? "pip.exit" : "pip.enter")
+                .foregroundColor(service.isSupported ? .white : .gray)
+                .allowsHitTesting(service.isSupported)
                 .onTapGesture {
-                    service.startPiP()
+                    service.didClick()
                 }
         }
     }
