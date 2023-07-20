@@ -12,7 +12,8 @@ import AVKit
 class PiPWidgetService : Service {
     
     private var PiPController: AVPictureInPictureController?
-    private var delegateObject: DelegateProxy?
+    private var activeObservation: NSKeyValueObservation?
+    
     @ViewState fileprivate var isActive = false
     @ViewState fileprivate var isSupported = false
     
@@ -27,55 +28,22 @@ class PiPWidgetService : Service {
         try? AVAudioSession.sharedInstance().setCategory(.playback)
         
         PiPController = AVPictureInPictureController(playerLayer: context[RenderService.self].layer)
-        delegateObject = DelegateProxy()
-        delegateObject?.willStart = { [weak context, weak self] in
-            guard let context = context, let self = self else { return }
-            self.isActive = true
-            context[PluginService.self].present(.center) {
-                AnyView(
-                    Image(systemName: "pip")
-                        .resizable()
-                        .scaledToFit()
-                        .foregroundColor(.white)
-                        .frame(width: 300, height: 300)
-                )
-            }
+        
+        activeObservation = PiPController?.observe(\.isPictureInPictureActive, options: [.old, .new, .initial]) { [weak self] controller, change in
+            self?.isActive = controller.isPictureInPictureActive
         }
-        delegateObject?.didStop = { [weak context, weak self] in
-            guard let context = context, let self = self else { return }
-            self.isActive = false
-            context[PluginService.self].dismiss()
-        }
-        PiPController?.delegate = delegateObject
     }
     
     fileprivate func didClick() {
-        
         guard let controller = PiPController else {
             return
         }
+        context[ControlService.self].dismiss()
+        
         if controller.isPictureInPictureActive {
             controller.stopPictureInPicture()
         } else {
             controller.startPictureInPicture()
-        }
-    }
-    
-    private class DelegateProxy : NSObject, AVPictureInPictureControllerDelegate {
-        
-        var willStart: ( ()->Void )?
-        var didStop: ( ()->Void )?
-        
-        func pictureInPictureControllerWillStartPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-            willStart?()
-        }
-        
-        func pictureInPictureControllerDidStopPictureInPicture(_ pictureInPictureController: AVPictureInPictureController) {
-            didStop?()
-        }
-        
-        func pictureInPictureController(_ pictureInPictureController: AVPictureInPictureController, restoreUserInterfaceForPictureInPictureStopWithCompletionHandler completionHandler: @escaping (Bool) -> Void) {
-            completionHandler(true)
         }
     }
 }
