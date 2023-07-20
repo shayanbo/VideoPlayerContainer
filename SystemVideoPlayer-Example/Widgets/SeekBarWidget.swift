@@ -16,11 +16,7 @@ struct SeekBarWidget : View {
     var body: some View {
     
         WithService(SeekBarWidgetService.self) { service in
-            Slider(value: Binding(get: {
-                service.progress
-            }, set: { value, _ in
-                service.updateProgress(value)
-            })) { startOrEnd in
+            Slider(value: service.seekProgressBinding) { startOrEnd in
                 service.acceptProgress = !startOrEnd
                 service.seekProgress(service.progress)
             }
@@ -33,13 +29,21 @@ struct SeekBarWidget : View {
 
 class SeekBarWidgetService : Service {
     
-    @ViewState fileprivate var progress = 0.0
+    @ViewState fileprivate var progress: Float = 0.0
     
     private var cancellables = [AnyCancellable]()
     
     private var timeObserver: Any?
     
     fileprivate var acceptProgress = true
+    
+    fileprivate var seekProgressBinding: Binding<Float> {
+        Binding(get: {
+            self.progress
+        }, set: {
+            self.updateProgress($0)
+        })
+    }
     
     required init(_ context: Context) {
         super.init(context)
@@ -51,7 +55,7 @@ class SeekBarWidgetService : Service {
             guard let self = self else { return }
             
             if self.acceptProgress {
-                self.progress = time.seconds / item.duration.seconds
+                self.progress = Float(time.seconds / item.duration.seconds)
             }
         }
         
@@ -76,11 +80,11 @@ class SeekBarWidgetService : Service {
         }.store(in: &cancellables)
     }
     
-    fileprivate func updateProgress(_ progress: CGFloat) {
+    fileprivate func updateProgress(_ progress: Float) {
         self.progress = progress
     }
     
-    fileprivate func seekProgress(_ progress: CGFloat) {
+    fileprivate func seekProgress(_ progress: Float) {
         
         let service = context[RenderService.self]
         
