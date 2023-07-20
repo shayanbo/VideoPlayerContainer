@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+extension Slider where ThumbContent == Never {
+    
+    init(value: Binding<Float>, clickable: Bool = false, trackTintColor: Color = .gray, thumbTintColor: Color = .white, animation: Animation? = nil, onEditingChanged: @escaping (Bool)->Void = { _ in }) {
+        self._value = value
+        self.clickable = clickable
+        self.trackTintColor = trackTintColor
+        self.thumbTintColor = thumbTintColor
+        self.animation = animation
+        self.onEditingChanged = onEditingChanged
+    }
+}
+
 struct Slider<ThumbContent>: View where ThumbContent : View {
     
     private class SliderObservable : ObservableObject {
@@ -15,70 +27,54 @@ struct Slider<ThumbContent>: View where ThumbContent : View {
         var sliding = false
     }
     
+    private let sliderHeight = 5.0
+    
     @StateObject private var o = SliderObservable()
     
-    @State private var thumbWidth: CGFloat = 0.0
+    @State private var thumbSize: CGSize = .zero
     
     @Binding var value: Float
     
-    @State var clickable = false
+    var clickable = false
     
-    @State var trackTintColor: Color = .gray
+    var trackTintColor: Color = .gray
     
-    @State var thumbTintColor: Color = .white
+    var thumbTintColor: Color = .white
     
-    @State var thumbContent: ThumbContent? = nil
+    var thumbContent: ThumbContent? = nil
     
-    @State var animation: Animation? = nil
+    var animation: Animation? = nil
     
-    @State var onEditingChanged: (Bool)->Void = { _ in }
-    
-    init(
-        value: Binding<Float>,
-        clickable: Bool = false,
-        trackTintColor: Color = .gray,
-        thumbTintColor: Color = .white,
-        animation: Animation? = nil,
-        onEditingChanged: @escaping (Bool)->Void = { _ in }
-    )
-    where ThumbContent == Never {
-        
-        self._value = value
-        self.thumbContent = thumbContent
-        self.clickable = clickable
-        self.trackTintColor = trackTintColor
-        self.thumbTintColor = thumbTintColor
-        self.onEditingChanged = onEditingChanged
-        self.animation = animation
-    }
+    var onEditingChanged: (Bool)->Void = { _ in }
     
     var body: some View {
         GeometryReader { proxy in
             ZStack(alignment: .leading) {
                 Rectangle()
                     .fill(trackTintColor)
-                    .frame(height:5)
+                    .frame(height:sliderHeight)
                     .cornerRadius(2.5)
-                    .padding(.horizontal, thumbWidth * 0.5)
+                    .padding(.horizontal, thumbSize.width * 0.5)
                 Rectangle()
                     .fill(thumbTintColor)
-                    .frame(width: (proxy.size.width - thumbWidth) * CGFloat(value), height:5)
+                    .frame(width: (proxy.size.width - thumbSize.width) * CGFloat(value), height:sliderHeight)
                     .cornerRadius(2.5)
-                    .padding(.horizontal, thumbWidth * 0.5)
+                    .padding(.horizontal, thumbSize.width * 0.5)
                 thumbContent?
-                    .offset(CGSize(width: (proxy.size.width - thumbWidth) * CGFloat(value), height: 0))
+                    .offset(CGSize(width: (proxy.size.width - thumbSize.width) * CGFloat(value), height: 0))
                     .background(
                         GeometryReader { proxy in
                             Color.clear.onAppear {
-                                thumbWidth = proxy.size.width
+                                thumbSize = proxy.size
                             }
                         }
                     )
             }
             .gesture(
-                DragGesture()
+                DragGesture(minimumDistance: 1)
                     .onChanged { value in
-                        o.offset = Float(value.translation.width / (proxy.size.width - thumbWidth))
+                        print(value.translation.width)
+                        o.offset = Float(value.translation.width / (proxy.size.width - thumbSize.width))
                         withAnimation(animation) {
                             self.value = min(max(o.progress + o.offset, 0.0), 1.0)
                         }
@@ -100,12 +96,13 @@ struct Slider<ThumbContent>: View where ThumbContent : View {
             )
             .onTapGesture { location in
                 if clickable {
-                    o.progress = Float(location.x / (proxy.size.width - thumbWidth))
+                    o.progress = Float(location.x / (proxy.size.width - thumbSize.width))
                     withAnimation(animation) {
-                        value = Float(location.x / (proxy.size.width - thumbWidth))
+                        value = Float(location.x / (proxy.size.width - thumbSize.width))
                     }
                 }
             }
         }
+        .frame(height: max(thumbSize.height, sliderHeight))
     }
 }

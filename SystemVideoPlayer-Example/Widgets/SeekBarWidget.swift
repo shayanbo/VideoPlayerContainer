@@ -16,7 +16,7 @@ struct SeekBarWidget : View {
     var body: some View {
     
         WithService(SeekBarWidgetService.self) { service in
-            Slider(value: service.seekProgressBinding) { startOrEnd in
+            Slider(value: service.seekProgressBinding, clickable: true) { startOrEnd in
                 service.acceptProgress = !startOrEnd
                 service.seekProgress(service.progress)
             }

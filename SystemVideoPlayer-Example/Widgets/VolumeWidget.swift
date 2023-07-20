@@ -40,7 +40,7 @@ struct VolumeWidget: View {
         WithService(VolumeWidgetService.self) { service in
             HStack {
                 if service.status == .fullScreen {
-                    Slider(value: service.volumeBinding)
+                    Slider(value: service.volumeBinding, clickable: true)
                         .frame(width: 100)
                 }
                 Group {
