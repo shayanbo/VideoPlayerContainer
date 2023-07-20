@@ -70,8 +70,6 @@ struct ContentView: View {
                         ForEach(views) { $0 }
                     }
                 }
-                
-                context[GestureService.self].configure(false)
 
                 controlService.configure(displayStyle: .auto(firstAppear: true, animation: .default, duration: 5))
 
