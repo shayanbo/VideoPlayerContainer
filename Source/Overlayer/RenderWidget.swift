@@ -77,7 +77,6 @@ class PlayerView: UIView {
                 return
             }
             self.layer.addSublayer(layer)
-            layer.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
             layer.player = player
         }
     }
@@ -137,14 +136,9 @@ class PlayerView: NSView {
                 return
             }
             self.layer?.addSublayer(layer)
-            layer.frame = CGRect(x: 0, y: 0, width: 300, height: 300)
             layer.player = player
+            layer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
         }
-    }
-    
-    override func layoutSubtreeIfNeeded() {
-        super.layoutSubtreeIfNeeded()
-        playerLayer?.frame = self.bounds
     }
 }
 
