@@ -18,20 +18,35 @@ class MoreWidgetService : Service {
         case x2_0 = "2.0x"
         
         var id: Self { self }
+        
+        var float: Float {
+            switch self {
+            case .x0_5: return 0.5
+            case .x1_0: return 1.0
+            case .x1_25: return 1.25
+            case .x1_5: return 1.5
+            case .x2_0: return 2.0
+            }
+        }
     }
     
-    @ViewState fileprivate var rate: Rate = .x1_0
+    @ViewState fileprivate var rate: Rate = .x1_0 {
+        didSet {
+            let player = context[RenderService.self].player
+            player.rate = rate.float
+        }
+    }
+    
+    fileprivate var rateBinding: Binding<Rate> {
+        Binding { self.rate } set: { self.rate = $0 }
+    }
 }
 
 struct MoreWidget: View {
     var body: some View {
         WithService(MoreWidgetService.self) { service in
             Menu {
-                Picker(selection: Binding(get: {
-                    service.rate
-                }, set: {
-                    service.rate = $0
-                })) {
+                Picker(selection: service.rateBinding) {
                     ForEach(MoreWidgetService.Rate.allCases) { rate in
                         Text(rate.rawValue)
                     }
