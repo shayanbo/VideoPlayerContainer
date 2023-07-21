@@ -39,7 +39,11 @@ class CountdownWidgetService : Service {
             let current = CMTimeGetSeconds(time)
             let duration = CMTimeGetSeconds(renderService.player.currentItem!.duration)
             
-            self.current = self.toDisplay(Int(duration - current))
+            if duration.isNaN {
+                self.current = "00:00"
+            } else {
+                self.current = self.toDisplay(Int(duration - current))
+            }
         }
     }
     
