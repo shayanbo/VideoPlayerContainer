@@ -80,9 +80,9 @@ public class GestureService : Service {
     
     @ViewState public var simultaneousDragGesture: _EndedGesture<_ChangedGesture<DragGesture>>?
     
-    @ViewState public var simultaneousTapGesture: _EndedGesture<_ChangedGesture<SpatialTapGesture>>?
+    @ViewState public var simultaneousTapGesture: _EndedGesture<SpatialTapGesture>?
     
-    @ViewState public var simultaneousDoubleTapGesture: _EndedGesture<_ChangedGesture<SpatialTapGesture>>?
+    @ViewState public var simultaneousDoubleTapGesture: _EndedGesture<SpatialTapGesture>?
     
     @ViewState public var simultaneousLongPressGesture: _EndedGesture<LongPressGesture>?
     
@@ -212,13 +212,13 @@ struct GestureWidget: View {
                     .gesture(
                         SimultaneousGesture(
                             service.doubleTapGesture,
-                            service.simultaneousDoubleTapGesture ?? SpatialTapGesture(count:2).onChanged { _ in }.onEnded { _ in }
+                            service.simultaneousDoubleTapGesture ?? SpatialTapGesture(count:2).onEnded { _ in }
                         )
                     )
                     .gesture(
                         SimultaneousGesture(
                             service.tapGesture,
-                            service.simultaneousTapGesture ?? SpatialTapGesture(count:1).onChanged { _ in }.onEnded { _ in }
+                            service.simultaneousTapGesture ?? SpatialTapGesture(count:1).onEnded { _ in }
                         )
                     )
                     .gesture(

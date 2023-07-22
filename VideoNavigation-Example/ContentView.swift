@@ -60,16 +60,16 @@ struct ContentView: View {
                                     .background(.gray)
                                     .cornerRadius(10)
                                     .frame(width: 200, height: 200 / video.aspectRatio)
-                                    .simultaneousGesture(
-                                        TapGesture()
+                                    .onAppear {
+                                        let context = vm.context(video: video)
+                                        let controlService = context[ControlService.self]
+                                        let gestureService = context[GestureService.self]
+                                        
+                                        gestureService.simultaneousTapGesture = SpatialTapGesture()
                                             .onEnded { _ in
                                                 vm.push(video)
                                                 vm.activeVideo = video
                                             }
-                                    )
-                                    .onAppear {
-                                        let context = vm.context(video: video)
-                                        let controlService = context[ControlService.self]
                                         
                                         controlService.configure(displayStyle: .always)
                                         controlService.configure(.halfScreen, insets: .init(top: 0, leading: 5, bottom: 10, trailing: 5))
