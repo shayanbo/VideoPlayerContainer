@@ -87,6 +87,14 @@ struct VideoDetail: View {
                     
                     let renderService = context[RenderService.self]
                     renderService.attach(player: player)
+                    
+                    if player.currentItem == nil {
+                        let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
+                        player.replaceCurrentItem(with: item)
+                        player.play()
+                    } else if player.rate == 0 {
+                        player.play()
+                    }
                 }
             Spacer()
         }

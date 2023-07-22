@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import AVKit
 import VideoPlayerContainer
 import SwiftUI
 
@@ -76,5 +77,28 @@ class FeedsViewModel : ObservableObject {
     
     //MARK: Active Video
     
-    var activeVideo: Video?
+    var activeVideo: Video? {
+        willSet {
+            guard activeVideo != newValue else { return }
+            
+            if let activeVideo = activeVideo {
+                let ctx = context(video: activeVideo)
+                let player = ctx[RenderService.self].player
+                if player.rate > 0 {
+                    player.pause()
+                }
+            }
+            if let newValue = newValue {
+                let ctx = context(video: newValue)
+                let player = ctx[RenderService.self].player
+                if player.currentItem == nil {
+                    let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
+                    player.replaceCurrentItem(with: item)
+                    player.play()
+                } else {
+                    player.play()
+                }
+            }
+        }
+    }
 }

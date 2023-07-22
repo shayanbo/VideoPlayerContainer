@@ -64,6 +64,7 @@ struct ContentView: View {
                                         TapGesture()
                                             .onEnded { _ in
                                                 vm.push(video)
+                                                vm.activeVideo = video
                                             }
                                     )
                                     .onAppear {
@@ -167,24 +168,7 @@ struct ContentView: View {
                         return
                     }
                     
-                    videoFrames.forEach { v in
-                        let context = self.vm.context(video: v.video)
-                        let player = context[RenderService.self].player
-                        let isActive = v == videoFrame
-                        
-                        if isActive {
-                            if self.vm.activeVideo?.videoId ?? 0 != videoFrame.video.videoId {
-                                self.vm.activeVideo = videoFrame.video
-                                let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
-                                player.replaceCurrentItem(with: item)
-                                player.play()
-                            }
-                        } else {
-                            if player.rate > 0 {
-                                player.pause()
-                            }
-                        }
-                    }
+                    vm.activeVideo = videoFrame.video
                 }
             }
         }
