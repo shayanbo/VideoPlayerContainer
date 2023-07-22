@@ -181,7 +181,7 @@ struct ContentView: View {
                 controlService.configure(displayStyle: .custom(animation: .default))
                 controlService.present()
                 
-                context[RenderService.self].fit()
+                context[RenderService.self].layer.videoGravity = .resizeAspect
                 
                 context[GestureService.self].simultaneousDragGesture = viewModel.dragGesture
             }

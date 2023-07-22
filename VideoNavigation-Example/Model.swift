@@ -9,6 +9,7 @@ import Foundation
 
 struct Video : Codable, Hashable {
     let videoId : Int
+    let aspectRatio : Double
     let avatarUrl: String
     let author: String
     let date: String

@@ -13,7 +13,9 @@ struct VideoDetail: View {
     
     let video: Video
     
-    let namespace: Namespace.ID
+    let player: AVPlayer
+    
+    var dismissCompletion: () -> Void = {}
     
     @StateObject private var context = Context()
     
@@ -39,6 +41,10 @@ struct VideoDetail: View {
                     controlService.configure(.halfScreen(.bottom), transition: .opacity)
                     
                     controlService.configure(.halfScreen, insets: .init(top: 0, leading: 10, bottom: 0, trailing: 10))
+                    
+                    context[BackWidgetService.self].bind {
+                        self.dismissCompletion()
+                    }
                     
                     controlService.configure(.halfScreen(.top1)) {[
                         BackWidget(),
@@ -83,14 +89,11 @@ struct VideoDetail: View {
                             .frame(width: 30, height: 30),
                     ]}
                     
-                    controlService.configure(displayStyle: .manual(firstAppear: true, animation: .default))
+                    controlService.configure(displayStyle: .manual(firstAppear: false, animation: .default))
                     
-                    let player = context[RenderService.self].player
-                    let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
-                    player.replaceCurrentItem(with: item)
-                    player.play()
+                    let renderService = context[RenderService.self]
+                    renderService.attach(player: player)
                 }
-                .matchedGeometryEffect(id: video.videoId, in: namespace)
             Spacer()
         }
         .navigationBarHidden(true)

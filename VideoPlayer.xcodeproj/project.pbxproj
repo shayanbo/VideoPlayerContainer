@@ -38,6 +38,7 @@
 		D474DC492A506A1200EF8957 /* StepBackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC482A506A1200EF8957 /* StepBackWidget.swift */; };
 		D474DC4C2A50884300EF8957 /* VideoPlayerContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; };
 		D474DC4E2A508D0400EF8957 /* CommentWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D474DC4D2A508D0400EF8957 /* CommentWidget.swift */; };
+		D4929A8B2A6BA826005DF4A6 /* VideoFramePreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4929A8A2A6BA826005DF4A6 /* VideoFramePreferenceKey.swift */; };
 		D49604102A4D224F00AD3FE6 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D496040F2A4D224F00AD3FE6 /* ExampleApp.swift */; };
 		D49604122A4D224F00AD3FE6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D49604112A4D224F00AD3FE6 /* ContentView.swift */; };
 		D49604142A4D225000AD3FE6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D49604132A4D225000AD3FE6 /* Assets.xcassets */; };
@@ -178,6 +179,7 @@
 		D474DC462A506A0800EF8957 /* StepForwardWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepForwardWidget.swift; sourceTree = "<group>"; };
 		D474DC482A506A1200EF8957 /* StepBackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepBackWidget.swift; sourceTree = "<group>"; };
 		D474DC4D2A508D0400EF8957 /* CommentWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentWidget.swift; sourceTree = "<group>"; };
+		D4929A8A2A6BA826005DF4A6 /* VideoFramePreferenceKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoFramePreferenceKey.swift; sourceTree = "<group>"; };
 		D496040D2A4D224F00AD3FE6 /* TikTok-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TikTok-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D496040F2A4D224F00AD3FE6 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		D49604112A4D224F00AD3FE6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -484,6 +486,7 @@
 				D4A8FBF92A6A3C9800DBE29E /* feeds.json */,
 				D4A8FC022A6A864200DBE29E /* VideoDetail.swift */,
 				D4A8FC042A6A8DCD00DBE29E /* BackWidget.swift */,
+				D4929A8A2A6BA826005DF4A6 /* VideoFramePreferenceKey.swift */,
 			);
 			path = "VideoNavigation-Example";
 			sourceTree = "<group>";
@@ -922,6 +925,7 @@
 				D4A8FBEA2A6A390500DBE29E /* ContentView.swift in Sources */,
 				D4A8FC012A6A6BBD00DBE29E /* LabelStyle.swift in Sources */,
 				D4A8FBF62A6A39DC00DBE29E /* Model.swift in Sources */,
+				D4929A8B2A6BA826005DF4A6 /* VideoFramePreferenceKey.swift in Sources */,
 				D4A8FC052A6A8DCD00DBE29E /* BackWidget.swift in Sources */,
 				D4A8FBF82A6A3B5100DBE29E /* FeedsViewModel.swift in Sources */,
 				D4A8FBE82A6A390500DBE29E /* ExampleApp.swift in Sources */,

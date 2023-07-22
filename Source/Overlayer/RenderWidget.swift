@@ -16,16 +16,13 @@ import AppKit
 
 public class RenderService : Service {
     
-    public let player = AVPlayer()
+    public private(set) var player = AVPlayer()
     
     public let layer = AVPlayerLayer()
     
-    public func fill() {
-        layer.videoGravity = .resizeAspectFill
-    }
-    
-    public func fit() {
-        layer.videoGravity = .resizeAspect
+    public func attach(player: AVPlayer) {
+        self.player = player
+        layer.player = player
     }
 }
 
@@ -112,7 +109,7 @@ class PlayerView: NSView {
     }
     
     override func makeBackingLayer() -> CALayer {
-        AVPlayerLayer()
+        CALayer()
     }
     
     required init?(coder: NSCoder) {

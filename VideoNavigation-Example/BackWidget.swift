@@ -6,18 +6,33 @@
 //
 
 import SwiftUI
+import VideoPlayerContainer
+
+class BackWidgetService : Service {
+    
+    typealias Handler = ()->Void
+    
+    fileprivate var completionHandler: Handler?
+    
+    func bind(completion: Handler?) {
+        self.completionHandler = completion
+    }
+}
 
 struct BackWidget: View {
     
     @Environment(\.dismiss) fileprivate var dismiss
     
     var body: some View {
-        Image(systemName: "chevron.backward")
-            .frame(width: 25, height: 35)
-            .contentShape(Rectangle())
-            .foregroundColor(.white)
-            .onTapGesture {
-                dismiss()
-            }
+        WithService(BackWidgetService.self) { service in
+            Image(systemName: "chevron.backward")
+                .frame(width: 25, height: 35)
+                .contentShape(Rectangle())
+                .foregroundColor(.white)
+                .onTapGesture {
+                    dismiss()
+                    service.completionHandler?()
+                }
+        }
     }
 }
