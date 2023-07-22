@@ -15,8 +15,6 @@ struct VideoDetail: View {
     
     let player: AVPlayer
     
-    var dismissCompletion: () -> Void = {}
-    
     @StateObject private var context = Context()
     
     @Environment(\.dismiss) private var dismiss
@@ -41,10 +39,6 @@ struct VideoDetail: View {
                     controlService.configure(.halfScreen(.bottom), transition: .opacity)
                     
                     controlService.configure(.halfScreen, insets: .init(top: 0, leading: 10, bottom: 0, trailing: 10))
-                    
-                    context[BackWidgetService.self].bind {
-                        self.dismissCompletion()
-                    }
                     
                     controlService.configure(.halfScreen(.top1)) {[
                         BackWidget(),

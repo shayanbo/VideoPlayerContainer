@@ -11,12 +11,6 @@ import VideoPlayerContainer
 class BackWidgetService : Service {
     
     typealias Handler = ()->Void
-    
-    fileprivate var completionHandler: Handler?
-    
-    func bind(completion: Handler?) {
-        self.completionHandler = completion
-    }
 }
 
 struct BackWidget: View {
@@ -31,7 +25,6 @@ struct BackWidget: View {
                 .foregroundColor(.white)
                 .onTapGesture {
                     dismiss()
-                    service.completionHandler?()
                 }
         }
     }

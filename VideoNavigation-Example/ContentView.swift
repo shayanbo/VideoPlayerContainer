@@ -154,9 +154,7 @@ struct ContentView: View {
                     let renderService = context[RenderService.self]
                     let player = renderService.player
                     
-                    VideoDetail(video: video, player: player) {
-                        renderService.attach(player: player)
-                    }
+                    VideoDetail(video: video, player: player)
                 })
                 .onPreferenceChange(VideoFramePreferenceKey.self) { videoFrames in
                     let listBounds = proxy.frame(in: .local)
