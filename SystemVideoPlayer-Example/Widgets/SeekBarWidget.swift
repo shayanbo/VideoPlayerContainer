@@ -16,10 +16,12 @@ struct SeekBarWidget : View {
     var body: some View {
     
         WithService(SeekBarWidgetService.self) { service in
-            Slider(value: service.seekProgressBinding, clickable: true) { startOrEnd in
+            Slider(value: service.seekProgressBinding, clickable: true, thumbContent: {
+                Circle().fill(.white).frame(width:15, height:15)
+            }, onEditingChanged: { startOrEnd in
                 service.acceptProgress = !startOrEnd
                 service.seekProgress(service.progress)
-            }
+            })
             .disabled(service.progress == 0)
             .frame(height: 40)
             .tint(.white)

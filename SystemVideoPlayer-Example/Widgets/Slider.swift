@@ -41,7 +41,7 @@ struct Slider<ThumbContent>: View where ThumbContent : View {
     
     var thumbTintColor: Color = .white
     
-    var thumbContent: ThumbContent? = nil
+    var thumbContent: ( ()->ThumbContent )?
     
     var animation: Animation? = nil
     
@@ -60,7 +60,7 @@ struct Slider<ThumbContent>: View where ThumbContent : View {
                     .frame(width: (proxy.size.width - thumbSize.width) * CGFloat(value), height:sliderHeight)
                     .cornerRadius(2.5)
                     .padding(.horizontal, thumbSize.width * 0.5)
-                thumbContent?
+                thumbContent?()
                     .offset(CGSize(width: (proxy.size.width - thumbSize.width) * CGFloat(value), height: 0))
                     .background(
                         GeometryReader { proxy in
@@ -70,13 +70,13 @@ struct Slider<ThumbContent>: View where ThumbContent : View {
                         }
                     )
             }
+            .contentShape(Rectangle())
             .gesture(
                 DragGesture(minimumDistance: 1)
                     .onChanged { value in
-                        print(value.translation.width)
-                        o.offset = Float(value.translation.width / (proxy.size.width - thumbSize.width))
+                        o.offset = Float(value.translation.width / (proxy.size.width - thumbSize.width)).clamp()
                         withAnimation(animation) {
-                            self.value = min(max(o.progress + o.offset, 0.0), 1.0)
+                            self.value = (o.progress + o.offset).clamp()
                         }
                         
                         if !o.sliding {
@@ -96,13 +96,19 @@ struct Slider<ThumbContent>: View where ThumbContent : View {
             )
             .onTapGesture { location in
                 if clickable {
-                    o.progress = Float(location.x / (proxy.size.width - thumbSize.width))
+                    o.progress = Float(location.x / (proxy.size.width - thumbSize.width)).clamp()
                     withAnimation(animation) {
-                        value = Float(location.x / (proxy.size.width - thumbSize.width))
+                        value = Float(location.x / (proxy.size.width - thumbSize.width)).clamp()
                     }
                 }
             }
         }
         .frame(height: max(thumbSize.height, sliderHeight))
+    }
+}
+
+extension Float {
+    func clamp() -> Self {
+        min(max(self, 0.0), 1.0)
     }
 }
