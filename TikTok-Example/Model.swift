@@ -7,6 +7,15 @@
 
 import Foundation
 
+struct VideoData: Hashable {
+    
+    let videoUrl: String
+    let author: String
+    let description: String
+    let comments: [String]
+    let id = UUID().uuidString
+}
+
 let mockedVideos: [VideoData] = [
     VideoData(
         videoUrl: Bundle.main.path(forResource: "demo", ofType: "mp4")!,

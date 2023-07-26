@@ -73,45 +73,44 @@ struct ToastWidget: View {
     
     var body: some View {
         
-//        WithService(ToastService.self) { service in
-//            ToastLayout(service.lineSpacing) {
-//                Spacer()
-//
-//                if let content = service.content {
-//                    ForEach(service.toasts) { toast in
-//                        AnyView(content(toast.object))
-//                            .padding(.leading, service.insets.leading)
-//                            .transition(.asymmetric(insertion: .move(edge: .leading), removal: .opacity))
-//                    }
-//                }
-//            }
-//            .padding(EdgeInsets(top: service.insets.top, leading: 0, bottom: service.insets.bottom, trailing: service.insets.trailing))
-//            .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        }
-        Text("")
+        WithService(ToastService.self) { service in
+            ToastLayout(service.lineSpacing) {
+                Spacer()
+
+                if let content = service.content {
+                    ForEach(service.toasts) { toast in
+                        AnyView(content(toast.object))
+                            .padding(.leading, service.insets.leading)
+                            .transition(.asymmetric(insertion: .move(edge: .leading), removal: .opacity))
+                    }
+                }
+            }
+            .padding(EdgeInsets(top: service.insets.top, leading: 0, bottom: service.insets.bottom, trailing: service.insets.trailing))
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
     }
 }
 
-//struct ToastLayout : Layout {
-//
-//    let lineSpacing: CGFloat
-//
-//    init(_ lineSpacing: CGFloat) {
-//        self.lineSpacing = lineSpacing
-//    }
-//
-//    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
-//
-//        var y = 0.0
-//        for subview in subviews.reversed() {
-//            let viewSize = subview.sizeThatFits(proposal)
-//            y = y + lineSpacing + viewSize.height
-//            subview.place(at: CGPoint(x: 0, y: bounds.minY + (proposal.height ?? 0) - y), proposal: proposal)
-//        }
-//    }
-//
-//    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
-//        CGSize(width: proposal.width ?? 0, height: proposal.height ?? 0)
-//    }
-//}
-//
+struct ToastLayout : Layout {
+
+    let lineSpacing: CGFloat
+
+    init(_ lineSpacing: CGFloat) {
+        self.lineSpacing = lineSpacing
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+
+        var y = 0.0
+        for subview in subviews.reversed() {
+            let viewSize = subview.sizeThatFits(proposal)
+            y = y + lineSpacing + viewSize.height
+            subview.place(at: CGPoint(x: 0, y: bounds.minY + (proposal.height ?? 0) - y), proposal: proposal)
+        }
+    }
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        CGSize(width: proposal.width ?? 0, height: proposal.height ?? 0)
+    }
+}
+

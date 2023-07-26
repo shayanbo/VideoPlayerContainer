@@ -85,10 +85,11 @@
 		D4A9856D2A65837500B42F39 /* StepBackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9856B2A65837500B42F39 /* StepBackWidget.swift */; };
 		D4A9856E2A65837500B42F39 /* StepForwardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9856C2A65837500B42F39 /* StepForwardWidget.swift */; };
 		D4A985702A65842600B42F39 /* StatelessWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9856F2A65842600B42F39 /* StatelessWidgets.swift */; };
+		D4AAC4F82A7152C600D2A225 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AAC4F72A7152C600D2A225 /* ViewModel.swift */; };
 		D4C450902A4ECFC300731503 /* VideoPlayerContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; };
 		D4C450922A4EE50B00731503 /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C450912A4EE50B00731503 /* SeekBarWidget.swift */; };
 		D4C450942A4EE51F00731503 /* PlaybackService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4C450932A4EE51F00731503 /* PlaybackService.swift */; };
-		D4CE6DED2A62577E00DAF8A8 /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CE6DEC2A62577E00DAF8A8 /* MockData.swift */; };
+		D4CE6DED2A62577E00DAF8A8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4CE6DEC2A62577E00DAF8A8 /* Model.swift */; };
 		D4DC26EA2A663F950010780D /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DC26E32A663F950010780D /* SeekBarWidget.swift */; };
 		D4DC26EB2A663F950010780D /* VolumeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DC26E42A663F950010780D /* VolumeWidget.swift */; };
 		D4DC26EC2A663F950010780D /* StepForwardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4DC26E52A663F950010780D /* StepForwardWidget.swift */; };
@@ -232,9 +233,10 @@
 		D4A9856B2A65837500B42F39 /* StepBackWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepBackWidget.swift; sourceTree = "<group>"; };
 		D4A9856C2A65837500B42F39 /* StepForwardWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepForwardWidget.swift; sourceTree = "<group>"; };
 		D4A9856F2A65842600B42F39 /* StatelessWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatelessWidgets.swift; sourceTree = "<group>"; };
+		D4AAC4F72A7152C600D2A225 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		D4C450912A4EE50B00731503 /* SeekBarWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D4C450932A4EE51F00731503 /* PlaybackService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaybackService.swift; sourceTree = "<group>"; };
-		D4CE6DEC2A62577E00DAF8A8 /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
+		D4CE6DEC2A62577E00DAF8A8 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		D4DC26E32A663F950010780D /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D4DC26E42A663F950010780D /* VolumeWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolumeWidget.swift; sourceTree = "<group>"; };
 		D4DC26E52A663F950010780D /* StepForwardWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepForwardWidget.swift; sourceTree = "<group>"; };
@@ -378,11 +380,12 @@
 				D49604152A4D225000AD3FE6 /* Preview Content */,
 				D4C450912A4EE50B00731503 /* SeekBarWidget.swift */,
 				D4C450932A4EE51F00731503 /* PlaybackService.swift */,
-				D4CE6DEC2A62577E00DAF8A8 /* MockData.swift */,
+				D4CE6DEC2A62577E00DAF8A8 /* Model.swift */,
 				D49F20CD2A63FF4A0074D656 /* MessageWidget.swift */,
 				D49F20CF2A6400810074D656 /* TitleWidget.swift */,
 				D49F20D12A6400900074D656 /* DescriptionWidget.swift */,
 				D49F20D32A6400970074D656 /* DataService.swift */,
+				D4AAC4F72A7152C600D2A225 /* ViewModel.swift */,
 			);
 			path = "TikTok-Example";
 			sourceTree = "<group>";
@@ -880,6 +883,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D4AAC4F82A7152C600D2A225 /* ViewModel.swift in Sources */,
 				D49F20D42A6400970074D656 /* DataService.swift in Sources */,
 				D4C450942A4EE51F00731503 /* PlaybackService.swift in Sources */,
 				D49604122A4D224F00AD3FE6 /* ContentView.swift in Sources */,
@@ -888,7 +892,7 @@
 				D49F20CE2A63FF4A0074D656 /* MessageWidget.swift in Sources */,
 				D4C450922A4EE50B00731503 /* SeekBarWidget.swift in Sources */,
 				D49F20D02A6400810074D656 /* TitleWidget.swift in Sources */,
-				D4CE6DED2A62577E00DAF8A8 /* MockData.swift in Sources */,
+				D4CE6DED2A62577E00DAF8A8 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
