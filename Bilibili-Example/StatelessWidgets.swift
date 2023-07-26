@@ -7,6 +7,29 @@
 
 import SwiftUI
 
+struct PlaybackWidget: View {
+    var body: some View {
+        Image(systemName: "play.fill")
+            .foregroundColor(.white)
+            .frame(width: 30, height: 30)
+    }
+}
+
+struct DanmakuWidget: View {
+    var body: some View {
+        ZStack(alignment: .leading) {
+            Rectangle()
+                .fill(.white)
+                .cornerRadius(10)
+                .frame(height: 40)
+            Text("发个友善的弹幕见证当下")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+                .padding(.leading, 20)
+        }
+    }
+}
+
 struct BackWidget: View {
     var body: some View {
         Image(systemName: "chevron.left").foregroundColor(.white).frame(width: 30, height: 30)
@@ -39,7 +62,7 @@ struct MoreWidget: View {
 
 struct FullscreenWidget: View {
     var body: some View {
-        Image(systemName: "arrow.up.left.and.arrow.down.right").frame(width: 30, height: 30).foregroundColor(.white),
+        Image(systemName: "arrow.up.left.and.arrow.down.right").frame(width: 30, height: 30).foregroundColor(.white)
     }
 }
 
@@ -93,7 +116,7 @@ struct ChargeWidget: View {
 
 struct ShareWidget: View {
     var body: some View {
-        Image(systemName: "arrowshape.turn.up.right").foregroundColor(.white).frame(width: 30, height: 30),Image(systemName: "ellipsis").foregroundColor(.white).frame(width: 30, height: 30).rotationEffect(.degrees(90))
+        Image(systemName: "arrowshape.turn.up.right").foregroundColor(.white).frame(width: 30, height: 30)
     }
 }
 

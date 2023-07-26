@@ -26,8 +26,6 @@
 		D43672082A5317200083F9DD /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D43672022A5316E40083F9DD /* demo.mp4 */; };
 		D43ACAF82A68391300F6E598 /* PiPWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43ACAF72A68391300F6E598 /* PiPWidget.swift */; };
 		D46141572A512D3000D84E62 /* VideoPlayerContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; };
-		D46141592A51330A00D84E62 /* DanmakuWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46141582A51330A00D84E62 /* DanmakuWidget.swift */; };
-		D461415B2A51332300D84E62 /* PlaybackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461415A2A51332300D84E62 /* PlaybackWidget.swift */; };
 		D461415E2A5133DE00D84E62 /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461415C2A5133DE00D84E62 /* SeekBarWidget.swift */; };
 		D461415F2A5133DE00D84E62 /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D461415D2A5133DE00D84E62 /* TimelineWidget.swift */; };
 		D46141612A51341C00D84E62 /* DurationWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D46141602A51341C00D84E62 /* DurationWidget.swift */; };
@@ -70,6 +68,9 @@
 		D4A8FC052A6A8DCD00DBE29E /* BackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8FC042A6A8DCD00DBE29E /* BackWidget.swift */; };
 		D4A8FC632A7107AD00DBE29E /* VideoPlayerContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; };
 		D4A8FC652A7124ED00DBE29E /* StatelessWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8FC642A7124ED00DBE29E /* StatelessWidgets.swift */; };
+		D4A8FC672A713C8000DBE29E /* VideoDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8FC662A713C8000DBE29E /* VideoDetail.swift */; };
+		D4A8FC692A713E5900DBE29E /* StatelessWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8FC682A713E5900DBE29E /* StatelessWidgets.swift */; };
+		D4A8FC6B2A71451700DBE29E /* ReviewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A8FC6A2A71451700DBE29E /* ReviewWidget.swift */; };
 		D4A9854E2A657CCA00B42F39 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9854D2A657CCA00B42F39 /* ContentView.swift */; };
 		D4A985502A657CCA00B42F39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4A9854F2A657CCA00B42F39 /* Assets.xcassets */; };
 		D4A985532A657CCA00B42F39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D4A985522A657CCA00B42F39 /* Preview Assets.xcassets */; };
@@ -169,8 +170,6 @@
 		D43672022A5316E40083F9DD /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		D43ACAF72A68391300F6E598 /* PiPWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiPWidget.swift; sourceTree = "<group>"; };
 		D43ACAF92A68441B00F6E598 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		D46141582A51330A00D84E62 /* DanmakuWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DanmakuWidget.swift; sourceTree = "<group>"; };
-		D461415A2A51332300D84E62 /* PlaybackWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaybackWidget.swift; sourceTree = "<group>"; };
 		D461415C2A5133DE00D84E62 /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D461415D2A5133DE00D84E62 /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 		D46141602A51341C00D84E62 /* DurationWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationWidget.swift; sourceTree = "<group>"; };
@@ -214,6 +213,9 @@
 		D4A8FC022A6A864200DBE29E /* VideoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetail.swift; sourceTree = "<group>"; };
 		D4A8FC042A6A8DCD00DBE29E /* BackWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackWidget.swift; sourceTree = "<group>"; };
 		D4A8FC642A7124ED00DBE29E /* StatelessWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatelessWidgets.swift; sourceTree = "<group>"; };
+		D4A8FC662A713C8000DBE29E /* VideoDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetail.swift; sourceTree = "<group>"; };
+		D4A8FC682A713E5900DBE29E /* StatelessWidgets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatelessWidgets.swift; sourceTree = "<group>"; };
+		D4A8FC6A2A71451700DBE29E /* ReviewWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewWidget.swift; sourceTree = "<group>"; };
 		D4A985492A657CCA00B42F39 /* QuickTime-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "QuickTime-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4A9854D2A657CCA00B42F39 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D4A9854F2A657CCA00B42F39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -407,6 +409,9 @@
 				D474DC482A506A1200EF8957 /* StepBackWidget.swift */,
 				D474DC4D2A508D0400EF8957 /* CommentWidget.swift */,
 				D41A3E002A5A586E0061C1AF /* StepService.swift */,
+				D4A8FC662A713C8000DBE29E /* VideoDetail.swift */,
+				D4A8FC682A713E5900DBE29E /* StatelessWidgets.swift */,
+				D4A8FC6A2A71451700DBE29E /* ReviewWidget.swift */,
 			);
 			path = "Youtube-Example";
 			sourceTree = "<group>";
@@ -426,8 +431,6 @@
 				D49604352A4D22AF00AD3FE6 /* ContentView.swift */,
 				D49604372A4D22B000AD3FE6 /* Assets.xcassets */,
 				D49604392A4D22B000AD3FE6 /* Preview Content */,
-				D46141582A51330A00D84E62 /* DanmakuWidget.swift */,
-				D461415A2A51332300D84E62 /* PlaybackWidget.swift */,
 				D461415C2A5133DE00D84E62 /* SeekBarWidget.swift */,
 				D461415D2A5133DE00D84E62 /* TimelineWidget.swift */,
 				D46141602A51341C00D84E62 /* DurationWidget.swift */,
@@ -896,12 +899,15 @@
 				D474DC492A506A1200EF8957 /* StepBackWidget.swift in Sources */,
 				D49604242A4D228700AD3FE6 /* ContentView.swift in Sources */,
 				D49604222A4D228700AD3FE6 /* ExampleApp.swift in Sources */,
+				D4A8FC692A713E5900DBE29E /* StatelessWidgets.swift in Sources */,
 				D474DC432A50694600EF8957 /* TimelineWidget.swift in Sources */,
 				D474DC472A506A0800EF8957 /* StepForwardWidget.swift in Sources */,
 				D474DC4E2A508D0400EF8957 /* CommentWidget.swift in Sources */,
+				D4A8FC672A713C8000DBE29E /* VideoDetail.swift in Sources */,
 				D474DC412A5067B300EF8957 /* SeekBarWidget.swift in Sources */,
 				D41A3E012A5A586E0061C1AF /* StepService.swift in Sources */,
 				D474DC452A5069E600EF8957 /* PlaybackWidget.swift in Sources */,
+				D4A8FC6B2A71451700DBE29E /* ReviewWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -914,9 +920,7 @@
 				D461415E2A5133DE00D84E62 /* SeekBarWidget.swift in Sources */,
 				D49604362A4D22AF00AD3FE6 /* ContentView.swift in Sources */,
 				D49604342A4D22AF00AD3FE6 /* ExampleApp.swift in Sources */,
-				D461415B2A51332300D84E62 /* PlaybackWidget.swift in Sources */,
 				D46141612A51341C00D84E62 /* DurationWidget.swift in Sources */,
-				D46141592A51330A00D84E62 /* DanmakuWidget.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1035,7 +1039,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -1075,7 +1079,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
 				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu11 gnu++20";
@@ -1471,6 +1475,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shayanbo.videoplayercontainer.QuickTime-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1499,6 +1504,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 12.4;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.shayanbo.videoplayercontainer.QuickTime-Example";
 				PRODUCT_NAME = "$(TARGET_NAME)";

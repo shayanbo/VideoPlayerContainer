@@ -80,9 +80,9 @@ public class GestureService : Service {
     
     @ViewState public var simultaneousDragGesture: _EndedGesture<_ChangedGesture<DragGesture>>?
     
-    @ViewState public var simultaneousTapGesture: _EndedGesture<SpatialTapGesture>?
-    
-    @ViewState public var simultaneousDoubleTapGesture: _EndedGesture<SpatialTapGesture>?
+//    @ViewState public var simultaneousTapGesture: _EndedGesture<SpatialTapGesture>?
+//
+//    @ViewState public var simultaneousDoubleTapGesture: _EndedGesture<SpatialTapGesture>?
     
     @ViewState public var simultaneousLongPressGesture: _EndedGesture<LongPressGesture>?
     
@@ -92,25 +92,25 @@ public class GestureService : Service {
     
     //MARK: Gestures
     
-    public private(set) lazy var tapGesture: _EndedGesture<SpatialTapGesture> = {
-        SpatialTapGesture(count: 1)
-            .onEnded { [weak self] value in
-                guard let self = self else { return }
-                let leftSide = value.location.x < self.context[ViewSizeService.self].width * 0.5
-                let event = GestureEvent(gesture: .tap( leftSide ? .left : .right ), action: .end, value: .tap(value.location))
-                self.observable.send(event)
-            }
-    }()
-    
-    public private(set) lazy var doubleTapGesture: _EndedGesture<SpatialTapGesture> = {
-        SpatialTapGesture(count: 2)
-            .onEnded { [weak self] value in
-                guard let self = self else { return }
-                let leftSide = value.location.x < self.context[ViewSizeService.self].width * 0.5
-                let event = GestureEvent(gesture: .doubleTap( leftSide ? .left : .right ), action: .end, value: .doubleTap(value.location))
-                self.observable.send(event)
-            }
-    }()
+//    public private(set) lazy var tapGesture: _EndedGesture<SpatialTapGesture> = {
+//        SpatialTapGesture(count: 1)
+//            .onEnded { [weak self] value in
+//                guard let self = self else { return }
+//                let leftSide = value.location.x < self.context[ViewSizeService.self].width * 0.5
+//                let event = GestureEvent(gesture: .tap( leftSide ? .left : .right ), action: .end, value: .tap(value.location))
+//                self.observable.send(event)
+//            }
+//    }()
+//
+//    public private(set) lazy var doubleTapGesture: _EndedGesture<SpatialTapGesture> = {
+//        SpatialTapGesture(count: 2)
+//            .onEnded { [weak self] value in
+//                guard let self = self else { return }
+//                let leftSide = value.location.x < self.context[ViewSizeService.self].width * 0.5
+//                let event = GestureEvent(gesture: .doubleTap( leftSide ? .left : .right ), action: .end, value: .doubleTap(value.location))
+//                self.observable.send(event)
+//            }
+//    }()
     
     public private(set) lazy var longPressGesture: _EndedGesture<LongPressGesture> = {
         LongPressGesture()
@@ -209,18 +209,18 @@ struct GestureWidget: View {
         WithService(GestureService.self) { service in
             if service.enabled {
                 Color.clear.contentShape(Rectangle())
-                    .gesture(
-                        SimultaneousGesture(
-                            service.doubleTapGesture,
-                            service.simultaneousDoubleTapGesture ?? SpatialTapGesture(count:2).onEnded { _ in }
-                        )
-                    )
-                    .gesture(
-                        SimultaneousGesture(
-                            service.tapGesture,
-                            service.simultaneousTapGesture ?? SpatialTapGesture(count:1).onEnded { _ in }
-                        )
-                    )
+//                    .gesture(
+//                        SimultaneousGesture(
+//                            service.doubleTapGesture,
+//                            service.simultaneousDoubleTapGesture ?? SpatialTapGesture(count:2).onEnded { _ in }
+//                        )
+//                    )
+//                    .gesture(
+//                        SimultaneousGesture(
+//                            service.tapGesture,
+//                            service.simultaneousTapGesture ?? SpatialTapGesture(count:1).onEnded { _ in }
+//                        )
+//                    )
                     .gesture(
                         SimultaneousGesture(
                             service.longPressGesture,

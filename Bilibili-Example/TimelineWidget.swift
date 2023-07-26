@@ -12,9 +12,7 @@ import SwiftUI
 import VideoPlayerContainer
 
 struct TimelineWidget : View {
-    
     var body: some View {
-        
         WithService(TimelineWidgetService.self) { service in
             Text(service.current)
                 .foregroundColor(.white)

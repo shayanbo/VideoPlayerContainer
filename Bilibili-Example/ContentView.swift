@@ -23,13 +23,17 @@ struct ContentView: View {
             VStack {
                 PlayerWidget(context)
                     .frame(maxHeight: orientation.isLandscape ? .infinity : proxy.size.width * 0.5625)
+                    /// background modifier will cover the top safe area which make the VideoPlayerContainer looks better
                     .background(.black)
+                    /// observe the device orientation and update status accordingly
                     .onReceive(NotificationCenter.default.publisher(for: UIDevice.orientationDidChangeNotification), perform: { _ in
                         self.orientation = UIDevice.current.orientation
                         
                         if UIDevice.current.orientation.isLandscape {
+                            /// update the status to Fullscreen, it will trigger the Control overlay UI updates. removing the Halfscreen widgets and present fullscreen widgets
                             context[StatusService.self].toFullScreen()
                         } else {
+                            /// update the status to Halfscreen, it will trigger the Control overlay UI updates. removing the fullscreen widgets and present portrait widgets
                             context[StatusService.self].toHalfScreen()
                         }
                     })

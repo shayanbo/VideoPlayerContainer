@@ -12,9 +12,7 @@ import SwiftUI
 import VideoPlayerContainer
 
 struct DurationWidget : View {
-    
     var body: some View {
-        
         WithService(DurationWidgetService.self) { service in
             Text(service.duration)
                 .foregroundColor(.white)
