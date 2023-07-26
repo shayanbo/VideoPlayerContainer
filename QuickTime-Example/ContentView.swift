@@ -14,8 +14,7 @@ struct ContentView: View {
     /// create Context and let it have the same lifecycle with its enclosing underlying view
     @StateObject var context = Context()
     
-    @ObservedObject var menuViewModel = MenuViewModel.shared
-    
+    /// user-selected video file URL
     @State var fileURL: URL?
     
     var body: some View {
@@ -67,19 +66,26 @@ struct ContentView: View {
             } else {
                 ZStack {
                     Rectangle().fill(.black)
-                    Text("⌘+O")
+                    Text("Drag Video File Here")
                         .font(.system(size: 60))
-                        .onTapGesture {
-                            self.menuViewModel.isOpenFilePresented.toggle()
-                        }
                 }
-            }
-        }
-        .fileImporter(isPresented: $menuViewModel.isOpenFilePresented, allowedContentTypes: [
-            .quickTimeMovie, .mpeg, .mpeg2Video, .mpeg4Movie
-        ]) { result in
-            if case let .success(url) = result {
-                self.fileURL = url
+                /// users can play the video by drag and drop
+                .onDrop(of: ["public.file-url"], isTargeted: nil) { providers in
+                    providers.forEach { provider in
+                        _ = provider.loadObject(ofClass: URL.self) { url, _ in
+                            guard let url else {
+                                return
+                            }
+                            guard let ut = try? url.resourceValues(forKeys: [.typeIdentifierKey]).typeIdentifier else {
+                                return
+                            }
+                            if ut == "com.apple.quicktime-movie" {
+                                fileURL = url
+                            }
+                        }
+                    }
+                    return true
+                }
             }
         }
         .colorScheme(.dark)
