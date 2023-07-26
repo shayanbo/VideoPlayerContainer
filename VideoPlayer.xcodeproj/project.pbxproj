@@ -80,7 +80,6 @@
 		D4A985652A657CFD00B42F39 /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9855D2A657CFD00B42F39 /* TimelineWidget.swift */; };
 		D4A985662A657CFD00B42F39 /* DurationWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9855E2A657CFD00B42F39 /* DurationWidget.swift */; };
 		D4A985672A657CFD00B42F39 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9855F2A657CFD00B42F39 /* ExampleApp.swift */; };
-		D4A985682A657CFD00B42F39 /* MenuViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A985602A657CFD00B42F39 /* MenuViewModel.swift */; };
 		D4A9856A2A6580A600B42F39 /* VolumeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A985692A6580A600B42F39 /* VolumeWidget.swift */; };
 		D4A9856D2A65837500B42F39 /* StepBackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9856B2A65837500B42F39 /* StepBackWidget.swift */; };
 		D4A9856E2A65837500B42F39 /* StepForwardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4A9856C2A65837500B42F39 /* StepForwardWidget.swift */; };
@@ -227,7 +226,6 @@
 		D4A9855D2A657CFD00B42F39 /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 		D4A9855E2A657CFD00B42F39 /* DurationWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationWidget.swift; sourceTree = "<group>"; };
 		D4A9855F2A657CFD00B42F39 /* ExampleApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
-		D4A985602A657CFD00B42F39 /* MenuViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewModel.swift; sourceTree = "<group>"; };
 		D4A985692A6580A600B42F39 /* VolumeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeWidget.swift; sourceTree = "<group>"; };
 		D4A9856B2A65837500B42F39 /* StepBackWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepBackWidget.swift; sourceTree = "<group>"; };
 		D4A9856C2A65837500B42F39 /* StepForwardWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepForwardWidget.swift; sourceTree = "<group>"; };
@@ -508,7 +506,6 @@
 			isa = PBXGroup;
 			children = (
 				D4A9855F2A657CFD00B42F39 /* ExampleApp.swift */,
-				D4A985602A657CFD00B42F39 /* MenuViewModel.swift */,
 				D4A985582A657CFD00B42F39 /* Widgets */,
 				D4A9854D2A657CCA00B42F39 /* ContentView.swift */,
 				D4A9854F2A657CCA00B42F39 /* Assets.xcassets */,
@@ -950,7 +947,6 @@
 				D4A9856E2A65837500B42F39 /* StepForwardWidget.swift in Sources */,
 				D4A985652A657CFD00B42F39 /* TimelineWidget.swift in Sources */,
 				D4A985612A657CFD00B42F39 /* LoadingService.swift in Sources */,
-				D4A985682A657CFD00B42F39 /* MenuViewModel.swift in Sources */,
 				D4A985632A657CFD00B42F39 /* FloatControlOverlay.swift in Sources */,
 				D4A985642A657CFD00B42F39 /* PlaybackButtonWidget.swift in Sources */,
 				D4A985702A65842600B42F39 /* StatelessWidgets.swift in Sources */,

@@ -14,19 +14,5 @@ struct ExampleApp: App {
             ContentView()
                 .frame(minWidth: 350, minHeight: 350)
         }
-        .commands {
-            Menu()
-        }
-    }
-}
-
-struct Menu : Commands {
-    
-    var body: some Commands {
-        CommandGroup(after: .newItem) {
-            Button("Open File ...") {
-                MenuViewModel.shared.isOpenFilePresented.toggle()
-            }.keyboardShortcut("o", modifiers: .command)
-        }
     }
 }
