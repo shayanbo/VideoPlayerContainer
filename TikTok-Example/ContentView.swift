@@ -19,7 +19,7 @@ struct ContentView: View {
         
         /// fetch the corresponding context from the viewModel by the video data
         /// launch PlaybackService.
-        /// services in the launch parameters will be created at the beginning, we can do some task in the constructor of service
+        /// services in the launch parameter will be created at the beginning, we can do some task in the constructor of service
         PlayerWidget(viewModel.findOrCreateContext(video), launch: [PlaybackService.self])
             .onAppear {
                 

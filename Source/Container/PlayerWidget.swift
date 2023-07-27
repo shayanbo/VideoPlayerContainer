@@ -7,6 +7,11 @@
 
 import SwiftUI
 
+/// Service used by ``PlayerWidget``
+///
+/// This service offers some configuration that applies on the PlayerWidget.
+/// Developers can use this Service to enable or diable overlays and add custom overlays
+///
 public class PlayerService: Service {
     
     @ViewState fileprivate var overlayAfterRender:( ()->AnyView )?
@@ -23,14 +28,37 @@ public class PlayerService: Service {
     
     @ViewState fileprivate var overlays = Overlay.allCases
     
+    /// Reference used by other API like ``enable(overlays:)`` or ``configure(overlay:overlayGetter:)``
     public enum Overlay: CaseIterable {
-        case render, feature, plugin, control, toast
+        
+        /// Reference to RenderWidget
+        case render
+        /// Reference to FeatureWidget
+        case feature
+        /// Reference to PluginWidget
+        case plugin
+        /// Reference to ControlWidget
+        case control
+        /// Reference to ToastWidget
+        case toast
     }
     
+    /// Enable only parts of the built-in overlays
+    ///
+    /// In default, all of built-in overlays will be added into PlayerWidget, users can call this method
+    /// to remove some of them
+    ///
+    /// - Parameter overlays: ``Overlay`` set to added. Overlays not included in the set won't be added into the PlayerWidget
+    ///
     public func enable(overlays: [Overlay]) {
         self.overlays = overlays
     }
     
+    /// Add custom overlay
+    ///
+    /// - Parameter overlay: location of new overlay, the added overlay will be added above it.
+    /// - Parameter overlayGetter: closure to return a overlay instance
+    ///
     public func configure(overlay: Overlay, overlayGetter: @escaping ()-> AnyView) {
         switch overlay {
         case .render:
@@ -47,10 +75,31 @@ public class PlayerService: Service {
     }
 }
 
+/// Primary View of VideoPlayerContainer
+///
+/// It's the entry for the VideoPlayerContainer, when developers use this framework, the first thing is to create the PlayerWidget passed in Context instance and optional service types.
+/// When created, it adds built-in overlay as needed [See: ``PlayerService/enable(overlays:)``] all of which play important roles. the Overlay is the widget container with different rules.
+///
+/// Responsibilities overview for built-in overlay:
+/// 1. Render: control over the playback and render detail
+/// 2. Feature: pop up a panel from 4 directions
+/// 3. Plugin: like a graffiti wall, you can present any ``Widget`` with a specific location
+/// 4. Control: this overlay is probably the place you have to pay more attention to, it displays Widgets at a fixed location, like Seekbar, PlaybackWidget and etc.
+/// 5. Toast: fly in from the left edge and dismiss after few seconds, developers can use it to show some tips or warnings
+///
+/// Besides the built-in overlay, developers can insert custom overlay to extend the VideoPlayerContainer. See ``PlayerService/configure(overlay:overlayGetter:)``
+///
 public struct PlayerWidget: View {
     
     private let context: Context
     
+    /// Contructor for PlayerWidget
+    ///
+    /// - Parameter context: Context instance that's responsible for holding all of services.
+    /// - Parameter launch: Optional Service Set needed to be created when PlayerWidget is created.
+    /// - Returns: Instance of PlayerWidget
+    /// - Attention:PlayerWidget is not responsible for maintaining Context lifecycle. developers should take on it. For example, take it as an @StateObject property in the enclosing View
+    ///
     public init(_ context: Context, launch services: [Service.Type] = []) {
         self.context = context
         

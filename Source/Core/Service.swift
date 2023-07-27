@@ -17,18 +17,19 @@ import Combine
 ///
 public typealias Widget = View
 
-/// The base class for other services, it keeps a reference to its context to make sure the custom service have access to other services
+/// The base class for other services, it keeps a reference to its context to make sure the custom service have access to other services.
 ///
-/// Inside Service, we provides two useful propertyWrapper: @``ViewState`` and @``StateSync``
+/// Inside Service, we provides two useful propertyWrapper: @``ViewState`` and @``StateSync``.
 /// Both @ViewState and @StateSync are used to trigger the UI update mechanism, like @State.
-/// The difference is the @ViewState is used to modify its own state while the @StateSync is used to sync state (that you wanna trigger your Widget's UI update) from other services
+///
+/// The difference is the @ViewState is used to modify its own state while the @StateSync is used to sync state (that you wanna trigger your Widget's UI update) from other services.
 ///
 /// There are two kinds of Service:
-/// 1. Widget Service:
+/// 1. **Widget Service**:
 ///     Widget Service is used by a specific Widget.
 ///     it's used as the ViewModel, handling all of the logic used by its Widget
 ///     it's also responsible for communicating with other Services, since sometimes the Widget needs to expose out some API used by other Widget
-/// 2. Non-Widget Service:
+/// 2. **Non-Widget Service**:
 ///     Non-Widget Service is used by other Services. it's served as a public service,  exposing out API used by other services.
 ///
 open class Service : ObservableObject {
@@ -42,7 +43,7 @@ open class Service : ObservableObject {
 
 /// WithService is used as the root view inside Widgets
 ///
-/// it serves with two abilities:
+/// It serves with two abilities:
 /// 1. since one of the roles for Widget Service is ViewModel. therefore, taking it as the root view and call service's API to complete tasks of Widget.
 /// 2. When the service's state changes, the Widget will trigger the UI update mechanism
 ///
