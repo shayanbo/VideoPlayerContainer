@@ -10,7 +10,7 @@ import SwiftUI
 /// Service used by ``PlayerWidget``
 ///
 /// This service offers some configuration that applies on the PlayerWidget.
-/// Developers can use this Service to enable or diable overlays and add custom overlays
+/// Developers can use this Service to enable or disable overlays and add custom overlays
 ///
 public class PlayerService: Service {
     

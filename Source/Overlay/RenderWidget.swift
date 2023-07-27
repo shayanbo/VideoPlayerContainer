@@ -14,12 +14,22 @@ import UIKit
 import AppKit
 #endif
 
+/// Service used by RenderWidget
+///
+/// RenderService offers the AVPlayer to control over the playback, and AVPlayerLayer to control the detail of render
+/// It also support changing the default AVPlayer. This way, you can pass the AVPlayer from one Context to another.
+///
 public class RenderService : Service {
     
+    /// AVPlayer instance
     public private(set) var player = AVPlayer()
     
+    /// AVPlayerLayer instance
     public let layer = AVPlayerLayer()
     
+    /// Change to another AVPlayer instance
+    /// - Parameter player: AVPlayer instance
+    ///
     public func attach(player: AVPlayer) {
         self.player = player
         layer.player = player
@@ -40,7 +50,7 @@ struct RenderWidget : View {
 
 #if os(iOS) || os(watchOS) || os(tvOS)
 
-struct RenderView : UIViewRepresentable {
+fileprivate struct RenderView : UIViewRepresentable {
 
     let player: AVPlayer
     let layer: AVPlayerLayer
@@ -55,7 +65,7 @@ struct RenderView : UIViewRepresentable {
     func updateUIView(_ uiView: PlayerView, context: UIViewRepresentableContext<Self>) { }
 }
 
-class PlayerView: UIView {
+fileprivate class PlayerView: UIView {
     
     var player: AVPlayer? {
         didSet {
@@ -86,7 +96,7 @@ class PlayerView: UIView {
 
 #elseif os(macOS)
 
-struct RenderView : NSViewRepresentable {
+fileprivate struct RenderView : NSViewRepresentable {
     
     let player: AVPlayer
     let layer: AVPlayerLayer
@@ -101,7 +111,7 @@ struct RenderView : NSViewRepresentable {
     func updateNSView(_ uiView: PlayerView, context: NSViewRepresentableContext<Self>) { }
 }
 
-class PlayerView: NSView {
+fileprivate class PlayerView: NSView {
     
     init() {
         super.init(frame: .zero)
