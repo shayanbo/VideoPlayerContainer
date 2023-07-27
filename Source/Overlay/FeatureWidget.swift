@@ -68,17 +68,30 @@ public class FeatureService : Service {
     
     /// Present a panel from a direction
     ///
-    /// - Parameter direction: The panel fly in from this direction
-    /// - Parameter animation: Animation applied on the panel when presenting
-    /// - Parameter beforePresent: The action to perform before the presentation of panel
-    /// - Parameter afterPresent: The action to perform after the presentation of panel
-    /// - Parameter beforeDismiss: The action to perform before the dismissal of panel
-    /// - Parameter afterDismiss: The action to perform after the dismissal of panel
-    /// - Parameter content: View builder that creates the content of panel
+    /// - Parameters:
+    ///     - direction: The panel fly in from this direction
+    ///     - animation: Animation applied on the panel when presenting
+    ///     - beforePresent: The action to perform before the presentation of panel
+    ///     - afterPresent: The action to perform after the presentation of panel
+    ///     - beforeDismiss: The action to perform before the dismissal of panel
+    ///     - afterDismiss: The action to perform after the dismissal of panel
+    ///     - content: View builder that creates the content of panel
     ///
-    public func present(_ direction: Direction, animation: Animation? = .default, beforePresent: ( ()->Void )? = nil, afterPresent: ( ()->Void )? = nil, beforeDismiss: ( ()->Void )? = nil, afterDismiss: ( ()->Void )? = nil, content: @escaping ()-> AnyView) {
-        
-        let action = Feature.Action(beforePresent: beforePresent, afterPresent: afterPresent, beforeDismiss: beforeDismiss, afterDismiss: afterDismiss)
+    public func present(
+        _ direction: Direction,
+        animation: Animation? = .default,
+        beforePresent: ( ()->Void )? = nil,
+        afterPresent: ( ()->Void )? = nil,
+        beforeDismiss: ( ()->Void )? = nil,
+        afterDismiss: ( ()->Void )? = nil,
+        content: @escaping ()-> AnyView
+    ){  
+        let action = Feature.Action(
+            beforePresent: beforePresent,
+            afterPresent: afterPresent,
+            beforeDismiss: beforeDismiss,
+            afterDismiss: afterDismiss
+        )
         let feature = Feature(direction: direction, content: content, action: action)
         
         feature.action.beforePresent?()
