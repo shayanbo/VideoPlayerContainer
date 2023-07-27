@@ -138,11 +138,15 @@ struct ContentView: View {
                 .tabItem {
                     Label("Home", systemImage: "house.circle.fill")
                 }
-            
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarBackground(Color.black, for: .tabBar)
+
             Text("Second Page")
                 .tabItem {
                     Label("Friends", systemImage: "link.circle.fill")
                 }
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarBackground(Color.black, for: .tabBar)
             
             Text("Third Page")
                 .tabItem {
