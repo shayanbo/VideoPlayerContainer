@@ -10,14 +10,16 @@ import SwiftUI
 import Combine
 
 /// Widget is actually the SwiftUI's View, it serves as a visible and interactive components inside the VideoPlayerContainer.
-/// Commonly, most of Widget used inside VideoPlayerContainer will has its own Service and take the `WithService` as its root View to use the service
-/// When you have to other service API, we encourage developers to use its own service as the bridge, instead of putting many `WithService`s inside the Widget
-/// We also provide `@StateSync` to sync state from other service so that the Widget can refresh itself when other service's state changes.
+///
+/// Commonly, most of Widget used inside VideoPlayerContainer will has its own Service and take the ``WithService`` as its root View to use the service
+/// When you have to other service API, we encourage developers to use its own service as the bridge, instead of putting many WithService`s inside the Widget
+/// We also provide @``StateSync`` to sync state from other service so that the Widget can refresh itself when other service's state changes.
 ///
 public typealias Widget = View
 
 /// The base class for other services, it keeps a reference to its context to make sure the custom service have access to other services
-/// Inside Service, we provides two useful propertyWrapper: @ViewState and @StateSync
+///
+/// Inside Service, we provides two useful propertyWrapper: @``ViewState`` and @``StateSync``
 /// Both @ViewState and @StateSync are used to trigger the UI update mechanism, like @State.
 /// The difference is the @ViewState is used to modify its own state while the @StateSync is used to sync state (that you wanna trigger your Widget's UI update) from other services
 ///
@@ -38,7 +40,9 @@ open class Service : ObservableObject {
     }
 }
 
-/// WithService is a View with the two abilities:
+/// WithService is used as the root view inside Widgets
+///
+/// it serves with two abilities:
 /// 1. since one of the roles for Widget Service is ViewModel. therefore, taking it as the root view and call service's API to complete tasks of Widget.
 /// 2. When the service's state changes, the Widget will trigger the UI update mechanism
 ///

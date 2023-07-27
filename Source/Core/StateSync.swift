@@ -10,25 +10,25 @@ import Combine
 
 private let lock = NSRecursiveLock()
 
-/// StateSync is bit like ViewState, it's used to update its enclosing Widget. but the state being modified is from other service.
-/// For example, when you are coding a Widget that need to update when the status changes, like from 'Halfscreen' to 'Fullscreen'
+/// StateSync is bit like ``ViewState``, it's used to update its enclosing Widget. but the state being modified is from other service.
 ///
+/// For example, when you are coding a ``Widget`` that need to update when the status changes, like from 'Halfscreen' to 'Fullscreen'
 /// ```swift
-///     class DemoService : Service {
-///         @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
-///     }
+/// class DemoService : Service {
+///     @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
+/// }
 ///
-///     struct DemoWidget : Widget {
-///         var body: some View {
-///             WithService(DemoService.self) { service in
-///                 if service.status == .fullScreen {
-///                     Text("state: fullscreen")
-///                 } else {
-///                     Text("state: halfscreen")
-///                 }
+/// struct DemoWidget : Widget {
+///     var body: some View {
+///         WithService(DemoService.self) { service in
+///             if service.status == .fullScreen {
+///                 Text("state: fullscreen")
+///             } else {
+///                 Text("state: halfscreen")
 ///             }
 ///         }
 ///     }
+/// }
 /// ```
 /// This way, when the status changes, the DemoWidget will update itself, showing corresponding View as needed.
 ///

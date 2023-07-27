@@ -306,7 +306,7 @@
 			children = (
 				D4061C2E2A4B25B900CDD1FF /* Container */,
 				D4061C312A4B25B900CDD1FF /* Core */,
-				D4061C362A4B25B900CDD1FF /* Overlayer */,
+				D4061C362A4B25B900CDD1FF /* Overlay */,
 				D4061C2B2A4B25B900CDD1FF /* Service */,
 			);
 			path = Source;
@@ -340,7 +340,7 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
-		D4061C362A4B25B900CDD1FF /* Overlayer */ = {
+		D4061C362A4B25B900CDD1FF /* Overlay */ = {
 			isa = PBXGroup;
 			children = (
 				D4061C372A4B25B900CDD1FF /* ControlWidget.swift */,
@@ -350,7 +350,7 @@
 				D4061C3B2A4B25B900CDD1FF /* GestureWidget.swift */,
 				D4061C3C2A4B25B900CDD1FF /* RenderWidget.swift */,
 			);
-			path = Overlayer;
+			path = Overlay;
 			sourceTree = "<group>";
 		};
 		D43672002A5316E40083F9DD /* Resources */ = {

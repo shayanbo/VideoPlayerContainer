@@ -9,27 +9,28 @@ import Foundation
 import Combine
 
 /// ViewState is like @Published insides Observable.
-/// we use @ViewState to modify the state in service. When the property changes, its enclosing Widget will update
+/// 
+/// we use @ViewState to modify the state in service. When the property changes, its enclosing ``Widget`` will update
 /// Here's an example, demonstrating how the @ViewState make differences to its enclosing Widget
 ///
 /// ```swift
-///     class DemoService : Service {
-///         @ViewState var hideOrShow = false
-///     }
+/// class DemoService : Service {
+///     @ViewState var hideOrShow = false
+/// }
 ///
-///     struct DemoWidget : Widget {
-///         var body: some View {
-///             WithService(DemoService.self) { service in
-///                 if service.hideOrShow {
-///                     Text("Demo is showing")
-///                 } else {
-///                     Image(systemName:"pencil")
-///                 }
+/// struct DemoWidget : Widget {
+///     var body: some View {
+///         WithService(DemoService.self) { service in
+///             if service.hideOrShow {
+///                 Text("Demo is showing")
+///             } else {
+///                 Image(systemName:"pencil")
 ///             }
 ///         }
 ///     }
+/// }
 /// ```
-/// 
+///
 @propertyWrapper
 public struct ViewState<Value> {
     
