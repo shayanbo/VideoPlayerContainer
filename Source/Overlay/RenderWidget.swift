@@ -1,0 +1,142 @@
+//
+//  RenderWidget.swift
+//  VideoPlayer
+//
+//  Created by shayanbo on 2023/6/15.
+//
+
+import Foundation
+import SwiftUI
+import AVKit
+#if os(iOS) || os(watchOS) || os(tvOS)
+import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
+
+public class RenderService : Service {
+    
+    public private(set) var player = AVPlayer()
+    
+    public let layer = AVPlayerLayer()
+    
+    public func attach(player: AVPlayer) {
+        self.player = player
+        layer.player = player
+    }
+}
+
+struct RenderWidget : View {
+    
+    var body: some View {
+        WithService(RenderService.self) { service in
+            ZStack {
+                RenderView(player: service.player, layer: service.layer)
+                GestureWidget()
+            }
+        }
+    }
+}
+
+#if os(iOS) || os(watchOS) || os(tvOS)
+
+struct RenderView : UIViewRepresentable {
+
+    let player: AVPlayer
+    let layer: AVPlayerLayer
+    
+    func makeUIView(context: UIViewRepresentableContext<Self>) -> PlayerView {
+        let playerView = PlayerView()
+        playerView.playerLayer = layer
+        playerView.player = player
+        return playerView
+    }
+
+    func updateUIView(_ uiView: PlayerView, context: UIViewRepresentableContext<Self>) { }
+}
+
+class PlayerView: UIView {
+    
+    var player: AVPlayer? {
+        didSet {
+            if let canvas = self.layer.sublayers?.first as? AVPlayerLayer {
+                canvas.player = player
+            }
+        }
+    }
+    
+    var playerLayer: AVPlayerLayer? {
+        didSet {
+            self.layer.sublayers?.forEach {
+                $0.removeFromSuperlayer()
+            }
+            guard let layer = playerLayer else {
+                return
+            }
+            self.layer.addSublayer(layer)
+            layer.player = player
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        playerLayer?.frame = self.bounds
+    }
+}
+
+#elseif os(macOS)
+
+struct RenderView : NSViewRepresentable {
+    
+    let player: AVPlayer
+    let layer: AVPlayerLayer
+    
+    func makeNSView(context: NSViewRepresentableContext<Self>) -> PlayerView {
+        let playerView = PlayerView()
+        playerView.player = player
+        playerView.playerLayer = layer
+        return playerView
+    }
+
+    func updateNSView(_ uiView: PlayerView, context: NSViewRepresentableContext<Self>) { }
+}
+
+class PlayerView: NSView {
+    
+    init() {
+        super.init(frame: .zero)
+        wantsLayer = true
+    }
+    
+    override func makeBackingLayer() -> CALayer {
+        CALayer()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    var player: AVPlayer? {
+        didSet {
+            if let canvas = self.layer?.sublayers?.first as? AVPlayerLayer {
+                canvas.player = player
+            }
+        }
+    }
+    
+    var playerLayer: AVPlayerLayer? {
+        didSet {
+            self.layer?.sublayers?.forEach {
+                $0.removeFromSuperlayer()
+            }
+            guard let layer = playerLayer else {
+                return
+            }
+            self.layer?.addSublayer(layer)
+            layer.player = player
+            layer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
+        }
+    }
+}
+
+#endif

@@ -12,5 +12,5 @@ Pod::Spec.new do |s|
 
   s.swift_versions = ['5']
 
-  s.source_files = 'VideoPlayerContainer/**/*.swift'
+  s.source_files = 'Source/**/*.swift'
 end

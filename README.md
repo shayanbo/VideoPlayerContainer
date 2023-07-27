@@ -11,10 +11,9 @@ VideoPlayerContainer is a video player component with SwiftUI. Compared with the
 <img src='Resources/Youtube_Fullscreen.png'>
 <img src='Resources/Youtube_Fullscreen_Squeeze.png'>
 <img src='Resources/Bilibili_Fullscreen.png'>
+<img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/538024df-346c-41ca-95f9-c9d09c7288ba'>
 
 ## Example
-
-![image](https://github.com/MickeyHub/VideoPlayerContainer/assets/5426838/73fc14f3-9c98-48b6-8d08-fe1a139723bd)
 
 After cloning the repo and opening up the Xcode project, you can see multiple schemes as examples. Run it respectively to feel what abilities this framework can offer and how easy to use this framework to meet your demands.
 
@@ -27,7 +26,7 @@ VideoPlayerContainer supports multiple methods for installing the library in a p
 To integrate VideoPlayerContainer into your Xcode project using CocoaPods, specify it in your `Podfile`:
 
 ```
-pod 'VideoPlayerContainer', :git => 'https://github.com/MickeyHub/VideoPlayerContainer.git'
+pod 'VideoPlayerContainer', :git => 'https://github.com/shayanbo/VideoPlayerContainer.git'
 ```
 
 #### Installation with Swift Package Manager
@@ -36,7 +35,7 @@ Once you have your Swift package set up, adding VideoPlayerContainer as a depend
 
 ```
 dependencies: [
-    .package(url: "https://github.com/MickeyHub/VideoPlayerContainer.git", .upToNextMajor(from: "1.0.0"))
+    .package(url: "https://github.com/shayanbo/VideoPlayerContainer.git", .upToNextMajor(from: "1.0.0"))
 ]
 ```
 
@@ -62,7 +61,7 @@ Service represents two roles, one role is a ViewModel in MVVM architecture, View
 
 Overlay In the VideoPlayerContainer, overlays are the sub-containers put inside the main container layer by layer and it's the place where widgets sit. We have 5 built-in overlays, from bottom to top, these are render, feature, plugin, control, and toast. In addition, we allow users to insert their own overlay
 
-![image](https://github.com/MickeyHub/VideoPlayerContainer/assets/5426838/9570d129-d8c4-4ebb-ac89-b8423a10cbf1)
+![image](https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/9570d129-d8c4-4ebb-ac89-b8423a10cbf1)
 
 #### Render Overlay
 
@@ -92,7 +91,7 @@ For these 5 parts, you can configure them for different statuses which is quite 
 
 For these parts, for these statuses, you can customize their shadow, transition, and layout. and other services can fetch the `ControlService` by `context[ControlService.self]` to call present or dismiss programmatically depending on the display style configured.
 
-![image](https://github.com/MickeyHub/VideoPlayerContainer/assets/5426838/421a5401-5615-435b-8fed-f6ef4d8c860c)
+![image](https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/421a5401-5615-435b-8fed-f6ef4d8c860c)
 
 #### Toast Overlay
 
