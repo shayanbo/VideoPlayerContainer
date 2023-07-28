@@ -7,11 +7,11 @@
 
 import Foundation
 
-/// Context is the core concept, serving as a hub that's able to be accessed by all ``Service``s and ``Widget``s
+/// Context is the core concept, serving as a hub that's able to be accessed by all ``Service``s and ``Widget``s.
 ///
 /// It maintains a service locator which developers can fetch other Service with it.
 /// Developers are responsible for maintaing the Context instance and pass it to the ``PlayerWidget`` ( primary view in VideoPlayerContainer ).
-/// Generally, the context lifecycle is the same as its enclosing underlying view
+/// Generally, the context lifecycle is the same as its enclosing underlying view.
 ///
 public class Context : ObservableObject {
     
@@ -19,13 +19,13 @@ public class Context : ObservableObject {
     
     private var services = [String: Service]()
     
-    /// Obtain service instance by its Type
+    /// Obtain service instance by its Type.
     ///
     /// This method serves as a specialized service locator with a speicific cache policy, developers don't have to register before fetching.
-    /// It accepts Service.Type as input and return a service instance as needed, making sure there's a maximum of one instance for each ``Service`` type in one Context instance
+    /// It accepts Service.Type as input and return a service instance as needed, making sure there's a maximum of one instance for each ``Service`` type in one Context instance.
     ///
-    /// - Parameter type: Type of services. For example, DemoService.self
-    /// - Returns: the service instance corresponding to the type passed in
+    /// - Parameter type: Type of services. For example, DemoService.self.
+    /// - Returns: the service instance corresponding to the type passed in.
     ///
     public func service<ServiceType>(_ type:ServiceType.Type) -> ServiceType where ServiceType: Service {
         
@@ -40,7 +40,7 @@ public class Context : ObservableObject {
         }
     }
     
-    /// Convenient API for ``service(_:)``
+    /// Convenient API for ``service(_:)``.
     public subscript<ServiceType>(_ type:ServiceType.Type) -> ServiceType where ServiceType: Service {
         service(type)
     }

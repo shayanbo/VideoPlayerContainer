@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-/// Service used by FeatureWidget
+/// Service used by FeatureWidget.
 ///
 /// FeatureService is used to pop up panels from 4 directions in the FeatureWidget.
 /// 
@@ -40,9 +40,9 @@ public class FeatureService : Service {
     public enum Direction: Equatable {
         
         public enum Style: Equatable {
-            /// The panel presents over the other views without affecting others
+            /// The panel presents over the other views without affecting others.
             case cover
-            /// The panel presents with squeezing the space of render view
+            /// The panel presents with squeezing the space of render view.
             case squeeze(CGFloat)
         }
         
@@ -52,30 +52,30 @@ public class FeatureService : Service {
         case bottom(Style)
     }
     
-    /// Configure if the tap action will dismiss the panel
-    /// - Parameter dismissOnClick: flag to determine if the click will dismiss the panel
+    /// Configure if the tap action will dismiss the panel.
+    /// - Parameter dismissOnClick: The boolean value that indicates whether the click will dismiss the panel.
     ///
     public func configure(dismissOnClick: Bool) {
         self.dismissOnClick = dismissOnClick
     }
     
-    /// Configure if the status change will dismiss the panel
-    /// - Parameter dismissOnStatusChanged: flag to determine if the status change will dismiss the panel
+    /// Configure if the status change will dismiss the panel.
+    /// - Parameter dismissOnStatusChanged: The boolean value that indicates whether the status change will dismiss the panel.
     ///
     public func configure(dismissOnStatusChanged: Bool) {
         self.dismissOnStatusChanged = dismissOnStatusChanged
     }
     
-    /// Present a panel from a direction
+    /// Present a panel from a direction.
     ///
     /// - Parameters:
-    ///     - direction: The panel fly in from this direction
-    ///     - animation: Animation applied on the panel when presenting
-    ///     - beforePresent: The action to perform before the presentation of panel
-    ///     - afterPresent: The action to perform after the presentation of panel
-    ///     - beforeDismiss: The action to perform before the dismissal of panel
-    ///     - afterDismiss: The action to perform after the dismissal of panel
-    ///     - content: View builder that creates the content of panel
+    ///     - direction: The panel fly in from this direction.
+    ///     - animation: Animation applied on the panel when presenting.
+    ///     - beforePresent: The action to perform before the presentation of panel.
+    ///     - afterPresent: The action to perform after the presentation of panel.
+    ///     - beforeDismiss: The action to perform before the dismissal of panel.
+    ///     - afterDismiss: The action to perform after the dismissal of panel.
+    ///     - content: View builder that creates the content of panel.
     ///
     public func present(
         _ direction: Direction,
@@ -105,8 +105,8 @@ public class FeatureService : Service {
         }
     }
     
-    /// Dismiss the presenting panel
-    /// - Parameter animation: Animation applied on the panel when dismissing
+    /// Dismiss the presenting panel.
+    /// - Parameter animation: Animation applied on the panel when dismissing.
     ///
     public func dismiss(animation: Animation? = .default) {
         let action = feature?.action

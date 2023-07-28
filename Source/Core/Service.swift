@@ -41,11 +41,11 @@ open class Service : ObservableObject {
     }
 }
 
-/// WithService is used as the root view inside Widgets
+/// WithService is used as the root view inside Widgets.
 ///
 /// It serves with two abilities:
 /// 1. since one of the roles for Widget Service is ViewModel. therefore, taking it as the root view and call service's API to complete tasks of Widget.
-/// 2. When the service's state changes, the Widget will trigger the UI update mechanism
+/// 2. When the service's state changes, the Widget will trigger the UI update mechanism.
 ///
 public struct WithService<Content, S> : View where Content: View, S: Service {
     

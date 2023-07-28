@@ -14,21 +14,21 @@ import UIKit
 import AppKit
 #endif
 
-/// Service used by RenderWidget
+/// Service used by RenderWidget.
 ///
-/// RenderService offers the AVPlayer to control over the playback, and AVPlayerLayer to control the detail of render
+/// RenderService offers the AVPlayer to control over the playback, and AVPlayerLayer to control the detail of render.
 /// It also support changing the default AVPlayer. This way, you can pass the AVPlayer from one Context to another.
 ///
 public class RenderService : Service {
     
-    /// AVPlayer instance
+    /// AVPlayer instance.
     public private(set) var player = AVPlayer()
     
-    /// AVPlayerLayer instance
+    /// AVPlayerLayer instance.
     public let layer = AVPlayerLayer()
     
-    /// Change to another AVPlayer instance
-    /// - Parameter player: AVPlayer instance
+    /// Change to another AVPlayer instance.
+    /// - Parameter player: AVPlayer instance.
     ///
     public func attach(player: AVPlayer) {
         self.player = player

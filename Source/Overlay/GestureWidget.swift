@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-/// Service used by GestureWidget
+/// Service used by GestureWidget.
 ///
 /// The GestureService comes with multiple gestures: tap, double-tap, drag, long-press, rotate, pinch and hover.
 /// Other service can easily use the observe method to bind action to the gesture.
@@ -57,7 +57,7 @@ public class GestureService : Service {
     
     private let observable = PassthroughSubject<GestureEvent, Never>()
     
-    /// Gesture Info received by users when event occurs
+    /// Gesture Info received by users when event occurs.
     public struct GestureEvent {
         
         public enum Action {
@@ -81,7 +81,7 @@ public class GestureService : Service {
     
     /// Observe the specific gesture and bind action on it.
     /// - Parameters:
-    ///     - gesture: Gesture to observed
+    ///     - gesture: Gesture to observed.
     ///     - handler: The action to perform when the specific gesture occurs.
     ///
     public func observe(_ gesture: Gesture, handler: @escaping (GestureEvent)->Void) -> AnyCancellable {
@@ -94,34 +94,34 @@ public class GestureService : Service {
     
     //MARK: Simultaneous Gesture
     
-    /// Drag Gesture
-    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events
+    /// Drag Gesture.
+    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
     @ViewState public var simultaneousDragGesture: _EndedGesture<_ChangedGesture<DragGesture>>?
     
-    /// Tap Gesture
-    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events
+    /// Tap Gesture.
+    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
     @ViewState public var simultaneousTapGesture: _EndedGesture<SpatialTapGesture>?
 
-    /// DoubleTap Gesture
-    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events
+    /// DoubleTap Gesture.
+    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
     @ViewState public var simultaneousDoubleTapGesture: _EndedGesture<SpatialTapGesture>?
     
-    /// LongPress Gesture
-    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events
+    /// LongPress Gesture.
+    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
     @ViewState public var simultaneousLongPressGesture: _EndedGesture<LongPressGesture>?
     
-    /// Pinch Gesture
-    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events
+    /// Pinch Gesture.
+    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
     @ViewState public var simultaneousPinchGesture: _EndedGesture<_ChangedGesture<MagnificationGesture>>?
     
-    /// Rotation Gesture
-    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events
+    /// Rotation Gesture.
+    /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
     @ViewState public var simultaneousRotationGesture: _EndedGesture<_ChangedGesture<RotationGesture>>?
     
     //MARK: Gestures
     
-    /// Tap Gesture
-    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Tap gesture
+    /// Tap Gesture.
+    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Tap gesture.
     public private(set) lazy var tapGesture: some SwiftUI.Gesture = {
         SpatialTapGesture(count: 1)
             .onEnded { [weak self] value in
@@ -132,8 +132,8 @@ public class GestureService : Service {
             }
     }()
 
-    /// Double-Tap Gesture
-    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Double-Tap gesture
+    /// Double-Tap Gesture.
+    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Double-Tap gesture.
     public private(set) lazy var doubleTapGesture: some SwiftUI.Gesture = {
         SpatialTapGesture(count: 2)
             .onEnded { [weak self] value in
@@ -144,8 +144,8 @@ public class GestureService : Service {
             }
     }()
     
-    /// LongPress Gesture
-    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Long-Press gesture
+    /// LongPress Gesture.
+    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Long-Press gesture.
     public private(set) lazy var longPressGesture: some SwiftUI.Gesture = {
         LongPressGesture()
             .onEnded { [weak self] value in
@@ -155,8 +155,8 @@ public class GestureService : Service {
             }
     }()
     
-    /// Drag Gesture
-    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Drag gesture
+    /// Drag Gesture.
+    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Drag gesture.
     public private(set) lazy var dragGesture: some SwiftUI.Gesture = {
         
         let handleDrag: (DragGesture.Value, GestureEvent.Action)->Void = { [weak self] value, action in
@@ -204,8 +204,8 @@ public class GestureService : Service {
         
     }()
     
-    /// Pinch Gesture
-    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Pinch gesture
+    /// Pinch Gesture.
+    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Pinch gesture.
     public private(set) lazy var pinchGesture: some SwiftUI.Gesture = {
         MagnificationGesture()
             .onChanged { [weak self] value in
@@ -220,8 +220,8 @@ public class GestureService : Service {
             }
     }()
 
-    /// Rotation Gesture
-    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Rotation gesture
+    /// Rotation Gesture.
+    /// Widgets inside the VideoPlayerContainer can use it as the simulataneous gesture to pass through the gesture to the built-in Rotation gesture.
     public private(set) lazy var rotationGesture: some SwiftUI.Gesture = {
         RotationGesture()
             .onChanged { [weak self] value in

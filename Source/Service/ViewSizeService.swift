@@ -7,19 +7,22 @@
 
 import Foundation
 
+/// Non-Widget Service maintaining size of VideoPlayerContainer.
 public class ViewSizeService : Service {
     
     private(set) var size = CGSize.zero
     
+    /// Width of VideoPlayerContainer.
     public var width: Double {
         size.width
     }
     
+    /// Height of VideoPlayerContainer.
     public var height: Double {
         size.height
     }
     
-    public func updateViewSize(_ size: CGSize) {
+    func updateViewSize(_ size: CGSize) {
         self.size = size
     }
 }

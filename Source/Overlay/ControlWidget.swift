@@ -8,6 +8,17 @@
 import SwiftUI
 import Combine
 
+/// Service used by ControlWidget.
+///
+/// Control overlay is the most sophisticated overlay and the place where most work will be done.
+/// The control overlay is divided into 5 parts: left, right, top, bottom, and center. Before going on, please allow me introduce a concept called status:
+///
+/// For these 5 parts, you can configure them for different statuses which is quite common.
+/// For example, in halfscreen status, the screen is small and we can't attach many widgets to it but in fullscreen status. The video player container makes up the whole screen. We can attach many widgets to it to provide more and more functions.
+///
+/// For these parts, for these statuses, you can customize their shadow, transition, and layout.
+/// And other services can fetch the ControlService by context[ControlService.self] to call present or dismiss programmatically depending on the display style configured.
+///
 public class ControlService : Service {
     
     private var cancellables = [AnyCancellable]()
@@ -83,11 +94,25 @@ public class ControlService : Service {
     @ViewState fileprivate var fullScreenShadow = Shadow()
     @ViewState fileprivate var portraitScreenShadow = Shadow()
     
+    ///Display style for the Control overlay.
     public enum DisplayStyle {
+        /// The Control overlay will be presenting all the time.
         case always
+        /// The Control overlay won't be presenting all the time.
         case never
+        /// The Control overlay is able to present and dismiss by user's tap, and it'll dismiss automatically after few seconds.
+        /// - Parameters:
+        ///     - firstAppear: A boolean value that indicates whether the Control overlay presents when VideoPlayerContainer appears for the first time.
+        ///     - animation: The animation to apply to animatable values within this Control overlay.
+        ///     - duration: The value of how long the Control overlay stays on the screen before disappearing.
         case auto(firstAppear: Bool, animation: Animation?, duration: TimeInterval)
+        /// The Control overlay is able to present and dismiss by user's tap but it won't dismiss automatically after few seconds.
+        /// - Parameters:
+        ///     - firstAppear: A boolean value that indicates whether the Control overlay presents when VideoPlayerContainer appears for the first time.
+        ///     - animation: The animation to apply to animatable values within this Control overlay.
         case manual(firstAppear: Bool, animation: Animation?)
+        /// The Control overlay is only able to present and dismiss programmatically.
+        /// - Parameter animation: The animation to apply to animatable values within this Control overlay.
         case custom(animation: Animation?)
     }
     
@@ -134,6 +159,9 @@ public class ControlService : Service {
         }
     }
     
+    /// Try to present the Control overlay.
+    ///
+    /// It has no effect when the display style is always or never.
     public func present() {
         
         guard !isPresented else {
@@ -149,6 +177,9 @@ public class ControlService : Service {
         }
     }
     
+    /// Try to dismiss the Control overlay.
+    ///
+    /// It has no effect when the display style is always or never.
     public func dismiss() {
         
         guard isPresented else {
@@ -164,10 +195,13 @@ public class ControlService : Service {
         }
     }
     
+    /// A boolean value that indicates whether the Control overlay is presented.
     public var isPresented: Bool {
         !hidden
     }
     
+    /// Configure the display style.
+    /// - Parameter displayStyle: Display style value.
     public func configure(displayStyle: DisplayStyle) {
         self.displayStyle = displayStyle
         
@@ -180,6 +214,11 @@ public class ControlService : Service {
         }
     }
     
+    /// Configure the insets for the specific status.
+    /// - Parameters:
+    ///     - status: Status to configure.
+    ///     - insets: padding insets to the VideoPlayerContainer.
+    ///
     public func configure(_ status: ScreenStatus, insets: EdgeInsets) {
         switch status {
         case .halfScreen:
@@ -191,12 +230,22 @@ public class ControlService : Service {
         }
     }
     
+    /// Configure the transition for Control overlay's presentation and dismissal.
+    /// - Parameters:
+    ///     - locations: The location to configure the transition, It accepts an array to configure them in batch. See Also ``configure(_:transition:)-uvh3``.
+    ///     - transition: The transition for Control overlay's presentation and dismissal.
+    ///
     public func configure(_ locations: [RawLocation], transition: AnyTransition) {
         locations.forEach { location in
             configure(location, transition: transition)
         }
     }
     
+    /// Configure the transition for Control overlay's presentation and dismissal.
+    /// - Parameters:
+    ///     - location: The location to configure the transition, If you would like to configure them in batch. See Also ``configure(_:transition:)-829bt``.
+    ///     - transition: The transition for Control overlay's presentation and dismissal.
+    ///
     public func configure(_ location: RawLocation, transition: AnyTransition) {
         switch location {
         case let .halfScreen(direction):
@@ -241,12 +290,22 @@ public class ControlService : Service {
         }
     }
     
+    /// Custom the layout for a specific location.
+    /// - Parameters:
+    ///     - locations: The location to custom the layout, It accepts an array to custom them in batch. See Also ``configure(_:layout:)-7zbld``.
+    ///     - layout: The view builder to create the layout.
+    ///
     public func configure(_ locations: [Location], layout: @escaping ([IdentifableView]) -> any View) {
         locations.forEach { location in
             configure(location, layout: layout)
         }
     }
     
+    /// Custom the layout for a specific location.
+    /// - Parameters:
+    ///     - locations: The location to custom the layout, If you would like to custom them in batch. See Also ``configure(_:layout:)-sdh``.
+    ///     - layout: The view builder to create the layout.
+    ///
     public func configure(_ location: Location, layout: @escaping ([IdentifableView]) -> any View) {
         switch location {
         case let .fullScreen(direction):
@@ -309,12 +368,22 @@ public class ControlService : Service {
         }
     }
     
+    /// Add the widgets for a specific location and status.
+    /// - Parameters:
+    ///     - locations: The location to add widgets, It accepts an array to add widgets in batch. See Also ``configure(_:content:)-6jptf``.
+    ///     - content: The widgets builder to return an array of widgets.
+    ///
     public func configure(_ locations: [Location], content: @escaping ()->[any View]) {
         locations.forEach { location in
             configure(location, content: content)
         }
     }
     
+    /// Add the widgets for a specific location and status.
+    /// - Parameters:
+    ///     - locations: The location to add widgets, If you would like to add widgets in batch. See Also ``configure(_:content:)-1r67b``.
+    ///     - content: The widgets builder to return an array of widgets.
+    ///
     public func configure(_ location: Location, content: @escaping ()->[any View]) {
         
         let items = content().map { view in
@@ -382,16 +451,29 @@ public class ControlService : Service {
         }
     }
     
+    /// Add a shadow over the whole Control overlay.
+    /// - Parameter shadow: The shadow to added over the whole Control overlay.
+    ///
     public func configure(shadow: AnyView?) {
         self.shadow = shadow
     }
     
+    /// Add a shadow for a specific location and status.
+    /// - Parameters:
+    ///     - locations: The location to add shadows, It accepts an array to add shadows in batch. See Also ``configure(_:shadow:)-5d7q8``.
+    ///     - shadow: The shadow to added.
+    ///
     public func configure(_ locations: [RawLocation], shadow: AnyView?) {
         locations.forEach { location in
             configure(location, shadow: shadow)
         }
     }
     
+    /// Add a shadow for a specific location and status.
+    /// - Parameters:
+    ///     - locations: The location to add shadows, If you would like to add shadows in batch. See Also ``configure(_:shadow:)-9ovj4``.
+    ///     - shadow: The shadow to added.
+    ///
     public func configure(_ location: RawLocation, shadow: AnyView?) {
         switch location {
         case let .halfScreen(direction):
@@ -438,6 +520,11 @@ public class ControlService : Service {
     
     @ViewState fileprivate var opacity: CGFloat = 1.0
     
+    /// Set the opacity of whole Control overlay.
+    /// - Parameters:
+    ///     - opacity: Opacity to set.
+    ///     - animation: The animation to apply during the change of opacity.
+    ///
     public func opacity(_ opacity: CGFloat, animation: Animation? = nil) {
         withAnimation(animation) {
             self.opacity = opacity

@@ -24,10 +24,10 @@ fileprivate extension ToastService {
     }
 }
 
-/// Service used by ToastWidget
+/// Service used by ToastWidget.
 ///
 /// the widget flies in from the left edge and dismiss after few seconds.
-/// Developers can use it to show some tips or warnings
+/// Developers can use it to show some tips or warnings.
 ///
 public class ToastService: Service {
     
@@ -45,32 +45,32 @@ public class ToastService: Service {
         super.init(context)
     }
     
-    /// Configure how long the toast widget stays on the screen before disappears
+    /// Configure how long the toast widget stays on the screen before disappears.
     public func configure(duration: DispatchTimeInterval) {
         self.duration = duration
     }
     
-    /// Configure the padding insets
-    /// - Parameter insets: Padding insets of the whole Toast overlay
+    /// Configure the padding insets.
+    /// - Parameter insets: Padding insets of the whole Toast overlay.
     public func configure(insets: EdgeInsets) {
         self.insets = insets
     }
     
-    /// Configure the toast view builder
-    /// - Parameter content: The view builder to create toast view
+    /// Configure the toast view builder.
+    /// - Parameter content: The view builder to create toast view.
     public func configure(content: @escaping (Any)->some View) {
         self.content = content
     }
     
-    /// Configure the veritcal distance between toasts
-    /// - Parameter lineSpacing: Vertical distance
+    /// Configure the veritcal distance between toasts.
+    /// - Parameter lineSpacing: Vertical distance.
     public func configure(lineSpacing: CGFloat) {
         self.lineSpacing = lineSpacing
     }
     
     /// Present a toast
     /// - Parameter object: Any object representing the toast view.
-    /// The toast object will be passed to the content from the ``configure(content:)``
+    /// The toast object will be passed to the content from the ``configure(content:)``.
     ///
     public func toast(_ object: Any) {
         withAnimation {
