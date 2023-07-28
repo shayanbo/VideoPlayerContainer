@@ -79,7 +79,7 @@ struct ContentView: View {
                             guard let ut = try? url.resourceValues(forKeys: [.typeIdentifierKey]).typeIdentifier else {
                                 return
                             }
-                            if ut == "com.apple.quicktime-movie" {
+                            if ut == "com.apple.quicktime-movie" || ut == "public.mpeg-4" {
                                 fileURL = url
                             }
                         }
