@@ -25,6 +25,13 @@ VideoPlayerContainer is a video player component with SwiftUI. Compared with the
 
 After cloning the repo and opening up the Xcode project, you can see multiple schemes as examples. Run it respectively to feel what abilities this framework can offer and how easy to use this framework to meet your demands.
 
+* [Youtube-Example](Youtube-Example)
+* [Bilibili-Example](Bilibili-Example)
+* [TikTok-Example](TikTok-Example)
+* [SystemVideoPlayer-Example](SystemVideoPlayer-Example)
+* [VideoNavigation-Example](VideoNavigation-Example)
+* [QuickTime-Example](QuickTime-Example)
+
 ## Installation
 
 VideoPlayerContainer supports multiple methods for installing the library in a project.
