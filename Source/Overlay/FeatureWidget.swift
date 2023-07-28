@@ -29,7 +29,7 @@ public class FeatureService : Service {
     
     @ViewState private(set) var feature: Feature?
     
-    @ViewState fileprivate var dismissOnClick = true
+    @ViewState fileprivate var dismissOnTap = true
     
     @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
     
@@ -53,10 +53,10 @@ public class FeatureService : Service {
     }
     
     /// Configure if the tap action will dismiss the panel.
-    /// - Parameter dismissOnClick: The boolean value that indicates whether the click will dismiss the panel.
+    /// - Parameter dismissOnTap: The boolean value that indicates whether the click will dismiss the panel.
     ///
-    public func configure(dismissOnClick: Bool) {
-        self.dismissOnClick = dismissOnClick
+    public func configure(dismissOnTap: Bool) {
+        self.dismissOnTap = dismissOnTap
     }
     
     /// Configure if the status change will dismiss the panel.
@@ -133,7 +133,7 @@ struct FeatureWidget: View {
                 if service.feature != nil {
                     Color.clear.contentShape(Rectangle())
                         .onTapGesture {
-                            if service.dismissOnClick {
+                            if service.dismissOnTap {
                                 service.dismiss()
                             }
                         }

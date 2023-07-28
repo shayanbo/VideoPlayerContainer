@@ -200,7 +200,7 @@ public class ControlService : Service {
         !hidden
     }
     
-    /// Configure the display style.
+    /// Specifies the display style.
     /// - Parameter displayStyle: Display style value.
     public func configure(displayStyle: DisplayStyle) {
         self.displayStyle = displayStyle
@@ -214,7 +214,7 @@ public class ControlService : Service {
         }
     }
     
-    /// Configure the insets for the specific status.
+    /// Specifies the insets for the specific status.
     /// - Parameters:
     ///     - status: Status to configure.
     ///     - insets: padding insets to the VideoPlayerContainer.
@@ -230,7 +230,7 @@ public class ControlService : Service {
         }
     }
     
-    /// Configure the transition for Control overlay's presentation and dismissal.
+    /// Specifies the transition for Control overlay's presentation and dismissal.
     /// - Parameters:
     ///     - locations: The location to configure the transition, It accepts an array to configure them in batch. See Also ``configure(_:transition:)-uvh3``.
     ///     - transition: The transition for Control overlay's presentation and dismissal.
@@ -241,7 +241,7 @@ public class ControlService : Service {
         }
     }
     
-    /// Configure the transition for Control overlay's presentation and dismissal.
+    /// Specifies the transition for Control overlay's presentation and dismissal.
     /// - Parameters:
     ///     - location: The location to configure the transition, If you would like to configure them in batch. See Also ``configure(_:transition:)-829bt``.
     ///     - transition: The transition for Control overlay's presentation and dismissal.
@@ -290,7 +290,7 @@ public class ControlService : Service {
         }
     }
     
-    /// Custom the layout for a specific location.
+    /// Specifies the layout for a specific location.
     /// - Parameters:
     ///     - locations: The location to custom the layout, It accepts an array to custom them in batch. See Also ``configure(_:layout:)-7zbld``.
     ///     - layout: The view builder to create the layout.
@@ -301,7 +301,7 @@ public class ControlService : Service {
         }
     }
     
-    /// Custom the layout for a specific location.
+    /// Specifies the layout for a specific location.
     /// - Parameters:
     ///     - locations: The location to custom the layout, If you would like to custom them in batch. See Also ``configure(_:layout:)-sdh``.
     ///     - layout: The view builder to create the layout.
@@ -520,7 +520,7 @@ public class ControlService : Service {
     
     @ViewState fileprivate var opacity: CGFloat = 1.0
     
-    /// Set the opacity of whole Control overlay.
+    /// Specifies the opacity of whole Control overlay.
     /// - Parameters:
     ///     - opacity: Opacity to set.
     ///     - animation: The animation to apply during the change of opacity.
