@@ -232,7 +232,7 @@ public class ControlService : Service {
     
     /// Specifies the transition for Control overlay's presentation and dismissal.
     /// - Parameters:
-    ///     - locations: The location to configure the transition, It accepts an array to configure them in batch. See Also ``configure(_:transition:)-uvh3``.
+    ///     - locations: The location to configure the transition. It accepts an array to configure them in batch, see also ``configure(_:transition:)-uvh3``.
     ///     - transition: The transition for Control overlay's presentation and dismissal.
     ///
     public func configure(_ locations: [RawLocation], transition: AnyTransition) {
@@ -243,7 +243,7 @@ public class ControlService : Service {
     
     /// Specifies the transition for Control overlay's presentation and dismissal.
     /// - Parameters:
-    ///     - location: The location to configure the transition, If you would like to configure them in batch. See Also ``configure(_:transition:)-829bt``.
+    ///     - location: The location to configure the transition. If you would like to configure them in batch, see also ``configure(_:transition:)-829bt``.
     ///     - transition: The transition for Control overlay's presentation and dismissal.
     ///
     public func configure(_ location: RawLocation, transition: AnyTransition) {
@@ -292,7 +292,7 @@ public class ControlService : Service {
     
     /// Specifies the layout for a specific location.
     /// - Parameters:
-    ///     - locations: The location to custom the layout, It accepts an array to custom them in batch. See Also ``configure(_:layout:)-7zbld``.
+    ///     - locations: The location to custom the layout. It accepts an array to custom them in batch, see also ``configure(_:layout:)-7zbld``.
     ///     - layout: The view builder to create the layout.
     ///
     public func configure(_ locations: [Location], layout: @escaping ([IdentifableView]) -> any View) {
@@ -303,7 +303,7 @@ public class ControlService : Service {
     
     /// Specifies the layout for a specific location.
     /// - Parameters:
-    ///     - locations: The location to custom the layout, If you would like to custom them in batch. See Also ``configure(_:layout:)-sdh``.
+    ///     - locations: The location to custom the layout. If you would like to custom them in batch, see also ``configure(_:layout:)-sdh``.
     ///     - layout: The view builder to create the layout.
     ///
     public func configure(_ location: Location, layout: @escaping ([IdentifableView]) -> any View) {
@@ -370,7 +370,7 @@ public class ControlService : Service {
     
     /// Add the widgets for a specific location and status.
     /// - Parameters:
-    ///     - locations: The location to add widgets, It accepts an array to add widgets in batch. See Also ``configure(_:content:)-6jptf``.
+    ///     - locations: The location to add widgets. It accepts an array to add widgets in batch, see also ``configure(_:content:)-6jptf``.
     ///     - content: The widgets builder to return an array of widgets.
     ///
     public func configure(_ locations: [Location], content: @escaping ()->[any View]) {
@@ -381,7 +381,7 @@ public class ControlService : Service {
     
     /// Add the widgets for a specific location and status.
     /// - Parameters:
-    ///     - locations: The location to add widgets, If you would like to add widgets in batch. See Also ``configure(_:content:)-1r67b``.
+    ///     - locations: The location to add widgets. If you would like to add widgets in batch, see also ``configure(_:content:)-1r67b``.
     ///     - content: The widgets builder to return an array of widgets.
     ///
     public func configure(_ location: Location, content: @escaping ()->[any View]) {
@@ -460,7 +460,7 @@ public class ControlService : Service {
     
     /// Add a shadow for a specific location and status.
     /// - Parameters:
-    ///     - locations: The location to add shadows, It accepts an array to add shadows in batch. See Also ``configure(_:shadow:)-5d7q8``.
+    ///     - locations: The location to add shadows. It accepts an array to add shadows in batch, see also ``configure(_:shadow:)-5d7q8``.
     ///     - shadow: The shadow to added.
     ///
     public func configure(_ locations: [RawLocation], shadow: AnyView?) {
@@ -471,7 +471,7 @@ public class ControlService : Service {
     
     /// Add a shadow for a specific location and status.
     /// - Parameters:
-    ///     - locations: The location to add shadows, If you would like to add shadows in batch. See Also ``configure(_:shadow:)-9ovj4``.
+    ///     - locations: The location to add shadows. If you would like to add shadows in batch, see also ``configure(_:shadow:)-9ovj4``.
     ///     - shadow: The shadow to added.
     ///
     public func configure(_ location: RawLocation, shadow: AnyView?) {
