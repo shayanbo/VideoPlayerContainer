@@ -8,10 +8,18 @@ VideoPlayerContainer is a video player component with SwiftUI. Compared with the
 
 ## Showcase
 
-<img src='Resources/Youtube_Fullscreen.png'>
-<img src='Resources/Youtube_Fullscreen_Squeeze.png'>
-<img src='Resources/Bilibili_Fullscreen.png'>
-<img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/538024df-346c-41ca-95f9-c9d09c7288ba'>
+<img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/a1a121f9-8273-4ba3-b604-ff264cecc65b'><br/>
+<table>
+    <tr>
+        <img width="50%" src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/b85380ff-167a-42ba-bcb5-bf563dc90e87'>
+        <img width="50%" src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/4df22d15-9d1b-4fcd-b381-01d05e223552'>
+    </tr>
+</table>
+    
+<img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/40740310-1694-45f3-ac76-ad94a12019a1'><br/>
+<img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/e567ac32-f03b-4d68-9ecd-fc808c4cae63'><br/>
+<img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/c778bf0f-51bd-4153-bfa3-2030edc6bb82'><br/>
+
 
 ## Example
 
