@@ -24,7 +24,7 @@ struct Slider<ThumbContent>: View where ThumbContent : View {
     private class SliderObservable : ObservableObject {
         var progress: Float = 0
         var offset: Float = 0
-        var sliding = false
+        var dragging = false
     }
     
     private let sliderHeight = 5.0
@@ -57,11 +57,11 @@ struct Slider<ThumbContent>: View where ThumbContent : View {
                     .padding(.horizontal, thumbSize.width * 0.5)
                 Rectangle()
                     .fill(thumbTintColor)
-                    .frame(width: (proxy.size.width - thumbSize.width) * CGFloat(value), height:sliderHeight)
+                    .frame(width: (proxy.size.width - thumbSize.width) * CGFloat(value.clamp()), height:sliderHeight)
                     .cornerRadius(2.5)
                     .padding(.horizontal, thumbSize.width * 0.5)
                 thumbContent?()
-                    .offset(CGSize(width: (proxy.size.width - thumbSize.width) * CGFloat(value), height: 0))
+                    .offset(CGSize(width: (proxy.size.width - thumbSize.width) * CGFloat(value.clamp()), height: 0))
                     .background(
                         GeometryReader { proxy in
                             Color.clear.onAppear {
@@ -74,13 +74,13 @@ struct Slider<ThumbContent>: View where ThumbContent : View {
             .gesture(
                 DragGesture(minimumDistance: 1)
                     .onChanged { value in
-                        o.offset = Float(value.translation.width / (proxy.size.width - thumbSize.width)).clamp()
+                        o.offset = Float(value.translation.width / (proxy.size.width - thumbSize.width))
                         withAnimation(animation) {
                             self.value = (o.progress + o.offset).clamp()
                         }
                         
-                        if !o.sliding {
-                            o.sliding = true
+                        if !o.dragging {
+                            o.dragging = true
                             onEditingChanged(true)
                         }
                     }
@@ -88,18 +88,19 @@ struct Slider<ThumbContent>: View where ThumbContent : View {
                         o.progress += o.offset
                         o.offset = 0
                         
-                        if o.sliding {
-                            o.sliding = false
+                        if o.dragging {
+                            o.dragging = false
                             onEditingChanged(false)
                         }
                     }
             )
             .onTapGesture { location in
                 if clickable {
-                    o.progress = Float(location.x / (proxy.size.width - thumbSize.width)).clamp()
+                    o.progress = Float(location.x / (proxy.size.width - thumbSize.width))
                     withAnimation(animation) {
                         value = Float(location.x / (proxy.size.width - thumbSize.width)).clamp()
                     }
+                    onEditingChanged(true)
                 }
             }
         }

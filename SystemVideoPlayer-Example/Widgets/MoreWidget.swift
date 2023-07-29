@@ -8,7 +8,7 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class MoreWidgetService : Service {
+fileprivate class MoreWidgetService : Service {
     
     enum Rate: String, CaseIterable, Identifiable {
         case x0_5 = "0.5x"
@@ -30,14 +30,14 @@ class MoreWidgetService : Service {
         }
     }
     
-    @ViewState fileprivate var rate: Rate = .x1_0 {
+    @ViewState var rate: Rate = .x1_0 {
         didSet {
             let player = context[RenderService.self].player
             player.rate = rate.float
         }
     }
     
-    fileprivate var rateBinding: Binding<Rate> {
+    var rateBinding: Binding<Rate> {
         Binding { self.rate } set: { self.rate = $0 }
     }
 }

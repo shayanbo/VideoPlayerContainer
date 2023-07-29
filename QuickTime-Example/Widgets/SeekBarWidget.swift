@@ -30,15 +30,15 @@ struct SeekBarWidget : View {
     }
 }
 
-class SeekBarWidgetService : Service {
+fileprivate class SeekBarWidgetService : Service {
     
-    @ViewState fileprivate var progress = 0.0
+    @ViewState var progress = 0.0
     
     private var cancellables = [AnyCancellable]()
     
     private var timeObserver: Any?
     
-    fileprivate var acceptProgress = true
+    var acceptProgress = true
     
     required init(_ context: Context) {
         super.init(context)
@@ -75,11 +75,11 @@ class SeekBarWidgetService : Service {
         }.store(in: &cancellables)
     }
     
-    fileprivate func updateProgress(_ progress: CGFloat) {
+    func updateProgress(_ progress: CGFloat) {
         self.progress = progress
     }
     
-    fileprivate func seekProgress(_ progress: CGFloat) {
+    func seekProgress(_ progress: CGFloat) {
         
         let service = context[RenderService.self]
         

@@ -8,9 +8,9 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class DescriptionService: Service {
+fileprivate class DescriptionService: Service {
     
-    fileprivate var description: String {
+    var description: String {
         context[DataService.self].description ?? "--"
     }
 }

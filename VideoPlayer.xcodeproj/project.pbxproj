@@ -71,7 +71,7 @@
 		D4AAC50F2A717E6900D2A225 /* CommentWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AAC5072A717E6900D2A225 /* CommentWidget.swift */; };
 		D4AAC5102A717E6900D2A225 /* SeekBarWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AAC5082A717E6900D2A225 /* SeekBarWidget.swift */; };
 		D4AAC5112A717E6900D2A225 /* StepForwardWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AAC5092A717E6900D2A225 /* StepForwardWidget.swift */; };
-		D4AAC5122A717E6900D2A225 /* ReviewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AAC50A2A717E6900D2A225 /* ReviewWidget.swift */; };
+		D4AAC5122A717E6900D2A225 /* MessageWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AAC50A2A717E6900D2A225 /* MessageWidget.swift */; };
 		D4AAC5132A717E6900D2A225 /* StatelessWidgets.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AAC50B2A717E6900D2A225 /* StatelessWidgets.swift */; };
 		D4AAC5142A717E6900D2A225 /* StepBackWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AAC50C2A717E6900D2A225 /* StepBackWidget.swift */; };
 		D4AAC5152A717E6900D2A225 /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4AAC50D2A717E6900D2A225 /* TimelineWidget.swift */; };
@@ -214,7 +214,7 @@
 		D4AAC5072A717E6900D2A225 /* CommentWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommentWidget.swift; sourceTree = "<group>"; };
 		D4AAC5082A717E6900D2A225 /* SeekBarWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SeekBarWidget.swift; sourceTree = "<group>"; };
 		D4AAC5092A717E6900D2A225 /* StepForwardWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepForwardWidget.swift; sourceTree = "<group>"; };
-		D4AAC50A2A717E6900D2A225 /* ReviewWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReviewWidget.swift; sourceTree = "<group>"; };
+		D4AAC50A2A717E6900D2A225 /* MessageWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageWidget.swift; sourceTree = "<group>"; };
 		D4AAC50B2A717E6900D2A225 /* StatelessWidgets.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatelessWidgets.swift; sourceTree = "<group>"; };
 		D4AAC50C2A717E6900D2A225 /* StepBackWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepBackWidget.swift; sourceTree = "<group>"; };
 		D4AAC50D2A717E6900D2A225 /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
@@ -494,7 +494,7 @@
 				D4AAC5072A717E6900D2A225 /* CommentWidget.swift */,
 				D4AAC5082A717E6900D2A225 /* SeekBarWidget.swift */,
 				D4AAC5092A717E6900D2A225 /* StepForwardWidget.swift */,
-				D4AAC50A2A717E6900D2A225 /* ReviewWidget.swift */,
+				D4AAC50A2A717E6900D2A225 /* MessageWidget.swift */,
 				D4AAC50B2A717E6900D2A225 /* StatelessWidgets.swift */,
 				D4AAC50C2A717E6900D2A225 /* StepBackWidget.swift */,
 				D4AAC50D2A717E6900D2A225 /* TimelineWidget.swift */,
@@ -867,7 +867,7 @@
 				D4AAC5112A717E6900D2A225 /* StepForwardWidget.swift in Sources */,
 				D49604242A4D228700AD3FE6 /* ContentView.swift in Sources */,
 				D49604222A4D228700AD3FE6 /* ExampleApp.swift in Sources */,
-				D4AAC5122A717E6900D2A225 /* ReviewWidget.swift in Sources */,
+				D4AAC5122A717E6900D2A225 /* MessageWidget.swift in Sources */,
 				D4AAC5152A717E6900D2A225 /* TimelineWidget.swift in Sources */,
 				D4AAC50F2A717E6900D2A225 /* CommentWidget.swift in Sources */,
 				D4A8FC672A713C8000DBE29E /* VideoDetail.swift in Sources */,

@@ -8,9 +8,9 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class CommentService: Service {
+fileprivate class CommentService: Service {
     
-    fileprivate func closeButtonDidTapped() {
+    func closeButtonDidTapped() {
         context[FeatureService.self].dismiss()
     }
 }

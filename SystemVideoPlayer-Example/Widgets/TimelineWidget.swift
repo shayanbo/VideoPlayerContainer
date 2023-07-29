@@ -11,9 +11,9 @@ import Combine
 import SwiftUI
 import VideoPlayerContainer
 
-class TimelineWidgetService : Service {
+fileprivate class TimelineWidgetService : Service {
     
-    @ViewState fileprivate var current = "00:00"
+    @ViewState var current = "00:00"
     
     private var cancellables = [AnyCancellable]()
     

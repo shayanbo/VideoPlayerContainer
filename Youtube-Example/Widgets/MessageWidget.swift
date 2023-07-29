@@ -8,9 +8,9 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class MessageWidgetService: Service {
+fileprivate class MessageWidgetService: Service {
     
-    fileprivate func launchComments() {
+    func launchComments() {
         context[FeatureService.self].present(.right(.squeeze(0))) {
             AnyView(CommentWidget())
         }

@@ -8,11 +8,11 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class StepForwardWidgetService: Service {
+fileprivate class StepForwardWidgetService: Service {
     
     private var observation: NSKeyValueObservation?
     
-    @ViewState fileprivate var enabled = false
+    @ViewState var enabled = false
         
     required init(_ context: Context) {
         super.init(context)
@@ -24,7 +24,7 @@ class StepForwardWidgetService: Service {
         }
     }
     
-    fileprivate func stepForward() {
+    func stepForward() {
         let player = context[RenderService.self].player
         player.currentItem?.step(byCount: 30 * 5)
         player.play()

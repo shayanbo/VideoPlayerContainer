@@ -8,16 +8,16 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class VolumeWidgetService : Service {
+fileprivate class VolumeWidgetService : Service {
     
-    @ViewState fileprivate var slideValue: Float = 1.0 {
+    @ViewState var slideValue: Float = 1.0 {
         didSet {
             let player = context[RenderService.self].player
             player.volume = slideValue
         }
     }
     
-    fileprivate var slideBinding: Binding<Float> {
+    var slideBinding: Binding<Float> {
         Binding {
             self.slideValue
         } set: {

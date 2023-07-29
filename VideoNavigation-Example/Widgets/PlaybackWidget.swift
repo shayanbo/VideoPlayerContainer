@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import VideoPlayerContainer
 
-class PlaybackWidgetService: Service {
+fileprivate class PlaybackWidgetService: Service {
     
     private var rateObservation: NSKeyValueObservation?
     
@@ -17,9 +17,9 @@ class PlaybackWidgetService: Service {
     
     private var cancellables = [AnyCancellable]()
     
-    @ViewState fileprivate var playOrPaused = false
+    @ViewState var playOrPaused = false
     
-    @ViewState fileprivate var clickable = false
+    @ViewState var clickable = false
     
     required init(_ context: Context) {
         super.init(context)
@@ -39,7 +39,7 @@ class PlaybackWidgetService: Service {
         }.store(in: &cancellables)
     }
     
-    fileprivate func didClick() {
+    func didClick() {
         
         let service = context[RenderService.self]
         if service.player.rate == 0 {

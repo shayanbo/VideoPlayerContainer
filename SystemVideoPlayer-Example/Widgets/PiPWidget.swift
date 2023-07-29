@@ -9,13 +9,13 @@ import SwiftUI
 import VideoPlayerContainer
 import AVKit
 
-class PiPWidgetService : Service {
+fileprivate class PiPWidgetService : Service {
     
     private var PiPController: AVPictureInPictureController?
     private var activeObservation: NSKeyValueObservation?
     
-    @ViewState fileprivate var isActive = false
-    @ViewState fileprivate var isSupported = false
+    @ViewState var isActive = false
+    @ViewState var isSupported = false
     
     required init(_ context: Context) {
         super.init(context)
@@ -34,7 +34,7 @@ class PiPWidgetService : Service {
         }
     }
     
-    fileprivate func didClick() {
+    func didClick() {
         guard let controller = PiPController else {
             return
         }

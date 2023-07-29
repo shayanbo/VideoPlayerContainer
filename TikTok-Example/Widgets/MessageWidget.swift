@@ -8,9 +8,9 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class MesssageService: Service {
+fileprivate class MesssageService: Service {
     
-    fileprivate func onClick() {
+    func onClick() {
         context[FeatureService.self].present(.bottom(.squeeze(0))) { [weak context] in
             context?[ControlService.self].dismiss()
         } beforeDismiss: { [weak context] in

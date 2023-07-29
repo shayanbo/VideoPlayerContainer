@@ -8,9 +8,9 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class TitleService: Service {
+fileprivate class TitleService: Service {
     
-    fileprivate var title: String {
+    var title: String {
         "@\(context[DataService.self].author ?? "--")"
     }
 }

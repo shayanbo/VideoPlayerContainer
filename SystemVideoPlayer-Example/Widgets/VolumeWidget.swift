@@ -8,25 +8,25 @@
 import SwiftUI
 import VideoPlayerContainer
 
-class VolumeWidgetService : Service {
+fileprivate class VolumeWidgetService : Service {
     
-    @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
+    @StateSync(serviceType: StatusService.self, keyPath: \.$status) var status
     
-    @ViewState fileprivate var volume: Float = 1 {
+    @ViewState var volume: Float = 1 {
         didSet {
             let player = context[RenderService.self].player
             player.volume = volume
         }
     }
     
-    @ViewState fileprivate var mute = false {
+    @ViewState var mute = false {
         didSet {
             let player = context[RenderService.self].player
             player.isMuted = mute
         }
     }
     
-    fileprivate var volumeBinding: Binding<Float> {
+    var volumeBinding: Binding<Float> {
         Binding {
             self.volume
         } set: {

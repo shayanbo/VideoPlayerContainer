@@ -29,17 +29,17 @@ struct SeekBarWidget : View {
     }
 }
 
-class SeekBarWidgetService : Service {
+fileprivate class SeekBarWidgetService : Service {
     
-    @ViewState fileprivate var progress: Float = 0.0
+    @ViewState var progress: Float = 0.0
     
     private var cancellables = [AnyCancellable]()
     
     private var timeObserver: Any?
     
-    fileprivate var acceptProgress = true
+    var acceptProgress = true
     
-    fileprivate var seekProgressBinding: Binding<Float> {
+    var seekProgressBinding: Binding<Float> {
         Binding(get: {
             self.progress
         }, set: {
@@ -82,11 +82,11 @@ class SeekBarWidgetService : Service {
         }.store(in: &cancellables)
     }
     
-    fileprivate func updateProgress(_ progress: Float) {
+    func updateProgress(_ progress: Float) {
         self.progress = progress
     }
     
-    fileprivate func seekProgress(_ progress: Float) {
+    func seekProgress(_ progress: Float) {
         
         let service = context[RenderService.self]
         
