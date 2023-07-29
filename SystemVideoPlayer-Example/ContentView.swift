@@ -86,6 +86,8 @@ struct ContentView: View {
                     HStack(spacing: 60) {
                         ForEach(views) { $0 }
                     }
+                    /// since the the bottom height is great than top height ( there's 3 layer widgets in the bottom), we need to lower the center layout to make it center in the whole VideoPlayerContainer
+                    .offset(CGSize(width: 0, height: 23))
                 }
 
                 /// the Control overlay presents when the VideoPlayerContainer display at the first time
