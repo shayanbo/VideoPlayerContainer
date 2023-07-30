@@ -76,7 +76,7 @@ Actually, there're two kinds of Service: **Widget Service**, **Non-Widget Servic
 
 ### Overlay
 
-Overlay In the VideoPlayerContainer, overlays are the sub-containers put inside the main container layer by layer and it's the place where widgets sit. We have 5 built-in overlays, from bottom to top, these are render, feature, plugin, control, and toast. In addition, we allow users to insert their own overlay
+Overlays are the sub-containers inside the VideoPlayerContainer layer by layer and it's the place where widgets sit. We have 5 built-in overlays, from bottom to top, these are render, feature, plugin, control, and toast. In addition, we allow adopters to insert their own overlays
 
 ![image](https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/9570d129-d8c4-4ebb-ac89-b8423a10cbf1)
 
