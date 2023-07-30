@@ -272,6 +272,14 @@ As you can see above, it's a completed Widget.
 * We use `@ViewState` variable to condition which image to use in the Widget. (ViewModel's Output)
 * We call service method to complete the widget's work (ViewModel's Input)
 
+## Access Modifiers in Service
+
+We encourage adopters to author Widget and its Service in the same source file. In this way, we can make full use of access modifiers on Service.
+
+1. If you are creating a **Widget Service** that is only used by its Widget, `fileprivate` is better to modify the Service class. Since it's only able to be accessed by the Widget in the same source file. Also, keep using `private` to modify those properties and methods that are used only inside the Service.
+2. If you are creating a **Widget Service** that offers some API for other services, `internal` or `public` is better to modify the Service class. Since other services have to access your Service Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the Service and using `fileprivate` to modify those properties and methods that are used only by its Widget.
+3. If you are creating a **Non-Widget Service** that offers some API for other services, `internal` or `public` is better to modify the Service class. Since other services have to access your Service Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the Service
+
 ## Idea / Bug / Improvement
 
 Feel free to report issues and let's improve it together 😀
