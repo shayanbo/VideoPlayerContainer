@@ -17,6 +17,8 @@ public class Context : ObservableObject {
     
     public init() {}
     
+    private let lock = NSRecursiveLock()
+    
     private var services = [String: Service]()
     
     /// Obtain service instance by its Type.
@@ -29,10 +31,15 @@ public class Context : ObservableObject {
     ///
     public func service<ServiceType>(_ type:ServiceType.Type) -> ServiceType where ServiceType: Service {
         
+        lock.lock()
+        defer { lock.unlock() }
+        
         let typeKey = String(describing: type)
         if let service = services[typeKey] {
-            assert(service is ServiceType)
-            return service as! ServiceType
+            guard let service = service as? ServiceType else {
+                fatalError()
+            }
+            return service
         } else {
             let service = type.init(self)
             services[typeKey] = service
