@@ -70,7 +70,9 @@ Widget is a View that's inside the VideoPlayerContainer which means it can acces
 
 ### Service
 
-Service represents two roles, one role is a ViewModel in MVVM architecture, ViewModel handles all of the Output and Input for View. Another role is responsible for communication with other services. We encourage people to write Service and Widget in one source file. This way, we can use `fileprivate`, and `private` to distinguish which APIs are used only for its Widget and which APIs are open to other services.
+Service represents two roles, one is the ViewModel in MVVM architecture, ViewModel handles all of the Output and Input for View. Another role is responsible for communicating with other services. We encourage people to write Service and Widget in one source file. This way, we can use `fileprivate`, and `private` to distinguish which APIs are used only for its Widget and which APIs are open to other services.
+
+Actually, there're two kinds of Service: **Widget Service**, **Non-Widget Service**. **Widget Service** is the service used by a specific Widget while **Non-Widget Service** is the service used by other services.
 
 ### Overlay
 
