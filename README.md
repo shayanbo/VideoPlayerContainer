@@ -140,7 +140,7 @@ var body: some View {
 
 ```
 
-The VideoPlayerContainer is now attached to the scene. But you can't see it cuz we never do any configuration work and also don't pass the video resource item to play. Let's do some more work ( specify the frame and play a video)
+The VideoPlayerContainer is now attached to the scene. But you can't see it cuz we never do any configuration work and also don't pass the video resource item to play. Let's do some more work ( specify the frame and play a video).
 
 ```swift
 
@@ -162,7 +162,7 @@ Run it, and the video will be playing. Now, as you can see in other apps. We wan
 
 ## Usage: Write Widgets
 
-As I said above, we need to write a PlaybackButton and attach it to the center of the Player View. First of all, we need to create a SwiftUI source file named PlaybackButtonWidget and write a basic UI
+As I said above, we need to write a PlaybackButton and attach it to the center of the Player View. First of all, we need to create a SwiftUI source file named PlaybackButtonWidget and write a basic UI.
 
 ```swift
 
@@ -266,11 +266,11 @@ struct PlaybackWidget: View {
 
 As you can see above, it's a completed Widget. 
 
-* We use `fileprivate` modifier to mark APIs that's only available for its belonging Widget
-* We use `@ViewState` to mark the variable that's able to trigger the SwiftUI update mechanism (like @Published, @State)
-* We use `WithService` as the Widget's root View to make sure any `@ViewState` variable changes will make the whole Widget involved in the update mechanism
-* We use `@ViewState` variable to condition which image to use in the Widget. (ViewModel's Output)
-* We call service method to complete the widget's work (ViewModel's Input)
+* We use `fileprivate` modifier to mark APIs that's only available for its belonging Widget.
+* We use `@ViewState` to mark the variable that's able to trigger the SwiftUI update mechanism (like @Published, @State).
+* We use `WithService` as the Widget's root View to make sure any `@ViewState` variable changes will make the whole Widget involved in the update mechanism.
+* We use `@ViewState` variable to condition which image to use in the Widget. (ViewModel's Output).
+* We call service method to complete the widget's work (ViewModel's Input).
 
 ## Access Modifiers in Service
 
@@ -278,11 +278,11 @@ We encourage adopters to author Widget and its Service in the same source file. 
 
 1. If you are creating a **Widget Service** that is only used by its Widget, `fileprivate` is better to modify the Service class. Since it's only able to be accessed by the Widget in the same source file. Also, keep using `private` to modify those properties and methods that are used only inside the Service.
 2. If you are creating a **Widget Service** that offers some API for other services, `internal` or `public` is better to modify the Service class. Since other services have to access your Service Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the Service and using `fileprivate` to modify those properties and methods that are used only by its Widget.
-3. If you are creating a **Non-Widget Service** that offers some API for other services, `internal` or `public` is better to modify the Service class. Since other services have to access your Service Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the Service
+3. If you are creating a **Non-Widget Service** that offers some API for other services, `internal` or `public` is better to modify the Service class. Since other services have to access your Service Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the Service.
 
 ## Idea / Bug / Improvement
 
-Feel free to report issues and let's improve it together 😀
+Feel free to report issues and let's improve it together 😀.
  
 ## License
 
