@@ -103,9 +103,9 @@ extension String : Identifiable {
 struct PlaylistWidget: View {
     var body: some View {
         WithService(PlaylistWidgetService.self) { service in
-            VStack {
+            VStack(spacing: 0) {
                 Text("Playlist")
-                    .padding(.top, 10)
+                    .padding(.vertical, 10)
                     .font(.system(size: 20))
                     .fontWeight(.medium)
                 
@@ -118,7 +118,9 @@ struct PlaylistWidget: View {
                         Text(
                             fileName
                         )
+                        Spacer()
                     }
+                    .contentShape(Rectangle())
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.visible)
                     .listRowSeparatorTint(.white.opacity(0.2))
