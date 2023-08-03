@@ -28,14 +28,3 @@ struct ShareWidget: View {
             .opacity(0.7)
     }
 }
-
-struct MoreWidget: View {
-    var body: some View {
-        Image(systemName: "chevron.right.2")
-            .resizable()
-            .scaledToFit()
-            .frame(width: 20, height: 20)
-            .foregroundColor(.white)
-            .opacity(0.7)
-    }
-}

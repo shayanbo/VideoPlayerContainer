@@ -28,7 +28,7 @@ struct ContentView: View {
                         
                         /// only enable the render overlay (remove other default overlays)
                         let playerService = context[PlayerService.self]
-                        playerService.enable(overlays: [.render, .plugin])
+                        playerService.enable(overlays: [.render, .plugin, .feature])
                         
                         /// insert a custom overlay at the location above the original Control overlay
                         /// this custom overlay is the float panel you can see in the system builtin macOS QuickTime
@@ -54,12 +54,6 @@ struct ContentView: View {
                             SeekBarWidget(),
                             DurationWidget(),
                         ]}
-                        
-                        /// play the user-selected video from the local file system
-                        let player = context[RenderService.self].player
-                        let item = AVPlayerItem(url: url)
-                        player.replaceCurrentItem(with: item)
-                        player.play()
                     }
                     /// display the name of playing video as the title of window
                     .navigationTitle(url.lastPathComponent)
@@ -69,24 +63,25 @@ struct ContentView: View {
                     Text("Drag Video File Here")
                         .font(.system(size: 60))
                 }
-                /// users can play the video by drag and drop
-                .onDrop(of: ["public.file-url"], isTargeted: nil) { providers in
-                    providers.forEach { provider in
-                        _ = provider.loadObject(ofClass: URL.self) { url, _ in
-                            guard let url else {
-                                return
-                            }
-                            guard let ut = try? url.resourceValues(forKeys: [.typeIdentifierKey]).typeIdentifier else {
-                                return
-                            }
-                            if ut == "com.apple.quicktime-movie" || ut == "public.mpeg-4" {
-                                fileURL = url
-                            }
-                        }
+            }
+        }
+        /// users can play the video by drag and drop
+        .onDrop(of: ["public.file-url"], isTargeted: nil) { providers in
+            providers.forEach { provider in
+                _ = provider.loadObject(ofClass: URL.self) { url, _ in
+                    guard let url else {
+                        return
                     }
-                    return true
+                    guard let ut = try? url.resourceValues(forKeys: [.typeIdentifierKey]).typeIdentifier else {
+                        return
+                    }
+                    if ut == "com.apple.quicktime-movie" || ut == "public.mpeg-4" {
+                        context[PlaylistWidgetService.self].play(url)
+                        fileURL = url
+                    }
                 }
             }
+            return true
         }
         .colorScheme(.dark)
     }

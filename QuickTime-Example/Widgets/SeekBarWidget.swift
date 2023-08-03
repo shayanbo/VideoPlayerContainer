@@ -60,8 +60,7 @@ fileprivate class SeekBarWidgetService : Service {
     /// Since we need to keep the knob goes with the mouse when users are dragging
     var acceptProgress = true
     
-    /// Preview Image Generator
-    var imageGenerator: AVAssetImageGenerator?
+    
     
     required init(_ context: Context) {
         super.init(context)
@@ -78,9 +77,6 @@ fileprivate class SeekBarWidgetService : Service {
                 self.progress = time.seconds / item.duration.seconds
             }
         }
-        
-        /// Create ImageGenerator
-        self.imageGenerator = AVAssetImageGenerator(asset: player.currentItem!.asset)
     }
     
     //MARK: Seek
@@ -102,12 +98,7 @@ fileprivate class SeekBarWidgetService : Service {
     
     func adjustPreview(hoverPoint: CGPoint, proxy: GeometryProxy) {
         
-        let player = context[RenderService.self].player
-        guard let item = player.currentItem else {
-            return
-        }
-        
-        guard let imageGenerator = imageGenerator else {
+        guard let item = context[RenderService.self].player.currentItem else {
             return
         }
         
@@ -116,45 +107,20 @@ fileprivate class SeekBarWidgetService : Service {
         
         /// Slider frame located in the whole VideoPlayerContainer
         let sliderFrame = proxy.frame(in: .containerSpace)
-                
+        
         /// Create the timestamp where the mouse hovers on
         let target = item.duration.seconds * Float64(progress)
         let timePoint = CMTime(value: Int64(target), timescale: 1)
         
-        /// Obtain snapshot from the AVPlayer and display as preview
-        imageGenerator.generateCGImageAsynchronously(for: timePoint) { cgImage, time, error in
-            
-            guard let cgImage = cgImage else { return }
-            
-            let displayWidth = 150.0
-            let displayHeight = displayWidth * CGFloat(cgImage.height) / CGFloat(cgImage.width)
-            let displaySize = CGSize(width: displayWidth, height: displayHeight)
-            let offset = CGSize(
-                width: sliderFrame.minX + sliderFrame.width * progress - displayWidth * 0.5,
-                height: sliderFrame.minY - 150
-            )
-            
-            /// Update Preview
-            DispatchQueue.main.async {
-                let previewService = self.context[PreviewWidgetService.self]
-                previewService.previewImage = cgImage
-                previewService.displaySize = displaySize
-                previewService.offset = offset
-            }
-        }
+        let previewService = context[PreviewWidgetService.self]
+        previewService.preview(timePoint, targetRect: sliderFrame, offset: sliderFrame.width * progress)
     }
     
     func presentPreview() {
-        let pluginService = context[PluginService.self]
-        if !pluginService.isBeingPresented {
-            pluginService.present(.topLeading, animation: nil, transition: .identity) {
-                AnyView(PreviewWidget())
-            }
-        }
+        context[PreviewWidgetService.self].present()
     }
     
     func dismissPreview() {
-        let pluginService = context[PluginService.self]
-        pluginService.dismiss(animation: nil)
+        context[PreviewWidgetService.self].dismiss()
     }
 }

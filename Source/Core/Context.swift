@@ -25,11 +25,12 @@ public class Context : ObservableObject {
     ///
     /// This method serves as a specialized service locator with a speicific cache policy, developers don't have to register before fetching.
     /// It accepts Service.Type as input and return a service instance as needed, making sure there's a maximum of one instance for each ``Service`` type in one Context instance.
+    /// Also, you can stop it with ``stopService(_:)`` when you want.
     ///
     /// - Parameter type: Type of services. For example, DemoService.self.
     /// - Returns: the service instance corresponding to the type passed in.
     ///
-    public func service<ServiceType>(_ type:ServiceType.Type) -> ServiceType where ServiceType: Service {
+    public func startService<ServiceType>(_ type:ServiceType.Type) -> ServiceType where ServiceType: Service {
         
         lock.lock()
         defer { lock.unlock() }
@@ -47,8 +48,28 @@ public class Context : ObservableObject {
         }
     }
     
-    /// Convenient API for ``service(_:)``.
+    /// Stop Service when it's no longer needed
+    ///
+    /// Sometimes, we don't need to keep the service alive throughout the VideoPlayerContainer instance.
+    /// For example, we have a Widget that uses a service which performs a **computation-intensive task** or has a **memory cache**.
+    /// So, when this widget is no longer needed, you should call it to release the resources.
+    ///
+    @discardableResult public func stopService<ServiceType>(_ type:ServiceType.Type) -> Bool {
+        
+        lock.lock()
+        defer { lock.unlock() }
+        
+        let typeKey = String(describing: type)
+        if let _ = services[typeKey] {
+            services[typeKey] = nil
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    /// Convenient API for ``startService(_:)``.
     public subscript<ServiceType>(_ type:ServiceType.Type) -> ServiceType where ServiceType: Service {
-        service(type)
+        startService(type)
     }
 }
