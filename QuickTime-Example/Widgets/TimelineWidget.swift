@@ -27,8 +27,6 @@ fileprivate class TimelineWidgetService : Service {
     
     @ViewState var current = "00:00"
     
-    private var cancellables = [AnyCancellable]()
-    
     private var timeObserver: Any?
     
     required init(_ context: Context) {
@@ -41,37 +39,6 @@ fileprivate class TimelineWidgetService : Service {
             let current = CMTimeGetSeconds(time)
             self.current = self.toDisplay(Int(current))
         }
-        
-        let pluginService = context[PluginService.self]
-        let viewSizeService = context[ViewSizeService.self]
-        let gestureService = context[GestureService.self]
-        gestureService.observe(.drag(.horizontal)) { [weak self] event in
-            guard let self = self else { return }
-            
-            switch event.action {
-            case .start:
-                
-                guard let item = renderService.player.currentItem else { return }
-                guard item.duration.seconds.isNormal else { return }
-                
-                guard case let .drag(value) = event.value else { return }
-                
-                let percent = value.translation.width / viewSizeService.width
-                let secs = item.duration.seconds * percent
-                let current = item.currentTime().seconds
-                pluginService.present(.center) {
-                    AnyView(
-                        Text(self.toDisplay(Int(current + secs)))
-                            .padding(8)
-                            .background(Color.white.opacity(0.5))
-                            .offset(CGSize(width: 0, height: 50))
-                    )
-                }
-            case .end:
-                pluginService.dismiss()
-                break
-            }
-        }.store(in: &cancellables)
     }
     
     private func toDisplay(_ seconds: Int) -> String {

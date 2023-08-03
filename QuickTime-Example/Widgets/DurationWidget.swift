@@ -27,8 +27,6 @@ fileprivate class DurationWidgetService : Service {
     
     @ViewState var duration = "00:00"
     
-    private var cancellables = [AnyCancellable]()
-    
     private var timeObserver: Any?
     
     required init(_ context: Context) {

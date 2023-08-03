@@ -20,6 +20,11 @@ public class PluginService : Service {
         let content: ()->AnyView
     }
     
+    /// The boolean value that indicates whether the plugin is presented
+    public var isBeingPresented: Bool {
+        plugin != nil
+    }
+    
     @ViewState fileprivate var plugin: Plugin?
     
     /// Present a plugin widget

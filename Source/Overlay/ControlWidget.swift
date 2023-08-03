@@ -879,6 +879,11 @@ struct ControlWidget: View {
     }
 }
 
+/// Handy view used in somewhere requires an array of View all of which need to conform Identifiable. like ForEach
+///
+/// Generally, you don't have to use it directly if you are just calling the built-in API.
+/// But when you are coding a container-like Widget or Overlay which sometimes requires an array of View, that's the place it works.
+///
 public struct IdentifableView : View, Identifiable {
     
     public let id: String

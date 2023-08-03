@@ -54,7 +54,9 @@ struct PlaybackButtonWidget : View {
     
     var body: some View {
         WithService(PlaybackButtonService.self) { service in
-            Group {
+            Button {
+                service.didClick()
+            } label: {
                 if service.playOrPaused {
                     Image(systemName: "pause.fill")
                         .resizable()
@@ -69,9 +71,8 @@ struct PlaybackButtonWidget : View {
                         .foregroundColor(.white)
                 }
             }
-            .onTapGesture {
-                service.didClick()
-            }
+            .buttonStyle(.plain)
+            .keyboardShortcut(" ", modifiers: [])
         }
     }
 }

@@ -215,8 +215,23 @@ public struct PlayerWidget: View {
             }
         }
         .environmentObject(context)
+        .coordinateSpace(name: CoordinateSpace.containerSpaceName)
         .onHover { changeOrEnd in
             context[GestureService.self].handleHover(action: changeOrEnd ? .start : .end)
         }
+    }
+}
+
+public extension CoordinateSpace {
+    
+    fileprivate static var containerSpaceName: String {
+        "PlayerWidget"
+    }
+    
+    /// Container-wide coordinate space
+    ///
+    /// You can access widget's frame information in the whole VideoPlayerContainer by using it in GeometryProxy.frame(in:)
+    static var containerSpace: CoordinateSpace {
+        .named(containerSpaceName)
     }
 }

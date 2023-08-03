@@ -21,14 +21,14 @@ struct ContentView: View {
         
         Group {
             if let url = fileURL {
-                PlayerWidget(context, launch: [LoadingService.self])
+                PlayerWidget(context)
                     /// make the VideoPlayerContainer full up the window
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .onAppear {
                         
                         /// only enable the render overlay (remove other default overlays)
                         let playerService = context[PlayerService.self]
-                        playerService.enable(overlays: [.render])
+                        playerService.enable(overlays: [.render, .plugin])
                         
                         /// insert a custom overlay at the location above the original Control overlay
                         /// this custom overlay is the float panel you can see in the system builtin macOS QuickTime
