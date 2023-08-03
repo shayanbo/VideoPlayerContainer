@@ -37,12 +37,11 @@ class PreviewWidgetService: Service {
             
             guard let cgImage = cgImage else { return }
             
-            let displayWidth = 150.0
-            let displayHeight = displayWidth * CGFloat(cgImage.height) / CGFloat(cgImage.width)
-            let displaySize = CGSize(width: displayWidth, height: displayHeight)
+            let displaySize = AVMakeRect(aspectRatio: CGSize(width: cgImage.width, height: cgImage.height), insideRect: CGRect(origin: .zero, size: CGSize(width: 150.0, height: 150.0))).size
+            
             let offset = CGSize(
-                width: targetRect.minX - displayWidth * 0.5 + offset,
-                height: targetRect.minY - 150
+                width: targetRect.minX - displaySize.width * 0.5 + offset,
+                height: targetRect.minY - 60 - displaySize.height
             )
             
             /// Update Preview

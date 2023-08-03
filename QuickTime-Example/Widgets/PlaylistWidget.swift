@@ -40,7 +40,7 @@ class PlaylistWidgetService: Service {
     }
     
     func play(_ url: URL) {
-        self.current = url.path(percentEncoded: false)
+        self.current = url.path(percentEncoded: true)
     }
     
     fileprivate func `switch`(_ fileName: String) {
