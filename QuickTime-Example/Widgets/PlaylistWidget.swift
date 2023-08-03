@@ -11,19 +11,16 @@ import AVKit
 
 class PlaylistWidgetService: Service {
     
-    fileprivate var fileDir: String? {
-        guard let current = current else {
-            return nil
-        }
-        return (current as NSString).deletingLastPathComponent
-    }
+    /// Current directory
+    fileprivate var fileDir: String?
     
+    /// Current fileName
     @ViewState fileprivate var current: String? {
         didSet {
             /// play the user-selected video from the local file system
             let player = context[RenderService.self].player
-            if let current = current, let encodedCurrent = current.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) {
-                let item = AVPlayerItem(url: URL(string: "file://\(encodedCurrent)")!)
+            if let current, let fileDir {
+                let item = AVPlayerItem(url: URL(string: "file://\(transform("\(fileDir)/\(current)"))")!)
                 player.replaceCurrentItem(with: item)
                 player.play()
             } else {
@@ -32,22 +29,45 @@ class PlaylistWidgetService: Service {
         }
     }
     
+    private var token: NSObjectProtocol?
+    
+    required init(_ context: Context) {
+        super.init(context)
+
+        /// Play next automatically
+        token = NotificationCenter.default.addObserver(forName: .AVPlayerItemDidPlayToEndTime, object: nil, queue: nil) { [weak self] _ in
+
+            guard let self, let current else {
+                return
+            }
+            guard let index = self.fileNames.firstIndex(of: current) else {
+                return
+            }
+            guard index < self.fileNames.count - 1 else {
+                return
+            }
+            
+            let next = self.fileNames[index+1]
+            self.switch(next)
+        }
+    }
+    
     fileprivate func isCurrent(_ file: String) -> Bool {
         guard let current = current else {
             return false
         }
-        return file == (current as NSString).lastPathComponent
+        return file == current
     }
     
     func play(_ url: URL) {
-        self.current = url.path(percentEncoded: true)
+        let originalPath = url.path(percentEncoded: false)
+        fileDir = (originalPath as NSString).deletingLastPathComponent
+        current = (originalPath as NSString).lastPathComponent
     }
     
+    /// Switch video
     fileprivate func `switch`(_ fileName: String) {
-        guard let fileDir = fileDir else {
-            return
-        }
-        self.current = "\(fileDir)/\(fileName)"
+        self.current = fileName
     }
     
     fileprivate var fileNames: [String] {
@@ -55,8 +75,8 @@ class PlaylistWidgetService: Service {
             return []
         }
         do {
-            return try FileManager.default.contentsOfDirectory(atPath: fileDir).filter { path in
-                guard let url = URL(string: "file://\(fileDir)/\(path)") else {
+            return try FileManager.default.contentsOfDirectory(atPath: fileDir).filter { fileName in
+                guard let url = URL(string: "file://\(transform("\(fileDir)/\(fileName)"))") else {
                     return false
                 }
                 guard let ut = try? url.resourceValues(forKeys: [.typeIdentifierKey]).typeIdentifier else {
@@ -67,6 +87,10 @@ class PlaylistWidgetService: Service {
         } catch {
             return []
         }
+    }
+    
+    private func transform(_ path: String) -> String {
+        path.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? path
     }
 }
 

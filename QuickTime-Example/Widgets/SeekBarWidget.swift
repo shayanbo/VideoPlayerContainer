@@ -108,6 +108,10 @@ fileprivate class SeekBarWidgetService : Service {
         /// Slider frame located in the whole VideoPlayerContainer
         let sliderFrame = proxy.frame(in: .containerSpace)
         
+        if item.duration.seconds.isNaN {
+            return
+        }
+        
         /// Create the timestamp where the mouse hovers on
         let target = item.duration.seconds * Float64(progress)
         let timePoint = CMTime(value: Int64(target), timescale: 1)
