@@ -22,11 +22,10 @@ fileprivate class DurationWidgetService : Service {
     required init(_ context: Context) {
         super.init(context)
         
-        let renderService = context[RenderService.self]
-        timeObserver = renderService.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self] time in
-            guard let self = self else { return }
+        timeObserver = context.render.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self, weak context] time in
+            guard let self, let context else { return }
             
-            let duration = CMTimeGetSeconds(renderService.player.currentItem!.duration)
+            let duration = CMTimeGetSeconds(context.render.player.currentItem!.duration)
             self.duration = duration.isNormal ? self.toDisplay(Int(duration)) : "00:00"
         }
     }

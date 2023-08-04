@@ -65,3 +65,9 @@ struct PluginWidget: View {
         }
     }
 }
+
+public extension Context {
+    var plugin: PluginService {
+        self[PluginService.self]
+    }
+}

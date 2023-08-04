@@ -22,32 +22,28 @@ fileprivate class TimelineWidgetService : Service {
     required init(_ context: Context) {
         super.init(context)
         
-        let renderService = context[RenderService.self]
-        timeObserver = renderService.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self] time in
-            guard let self = self else { return }
+        timeObserver = context.render.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self] time in
+            guard let self else { return }
             
             let current = CMTimeGetSeconds(time)
             self.current = self.toDisplay(Int(current))
         }
         
-        let pluginService = context[PluginService.self]
-        let viewSizeService = context[ViewSizeService.self]
-        let gestureService = context[GestureService.self]
-        gestureService.observe(.drag(.horizontal)) { [weak self] event in
-            guard let self = self else { return }
+        context.gesture.observe(.drag(.horizontal)) { [weak self, weak context] event in
+            guard let self, let context else { return }
             
             switch event.action {
             case .start:
                 
-                guard let item = renderService.player.currentItem else { return }
+                guard let item = context.render.player.currentItem else { return }
                 guard item.duration.seconds.isNormal else { return }
                 
                 guard case let .drag(value) = event.value else { return }
                 
-                let percent = value.translation.width / viewSizeService.width
+                let percent = value.translation.width / context.viewSize.width
                 let secs = item.duration.seconds * percent
                 let current = item.currentTime().seconds
-                pluginService.present(.center) {
+                context.plugin.present(.center) {
                     AnyView(
                         Text(self.toDisplay(Int(current + secs)))
                             .padding(8)
@@ -56,7 +52,7 @@ fileprivate class TimelineWidgetService : Service {
                     )
                 }
             case .end:
-                pluginService.dismiss()
+                context.plugin.dismiss()
                 break
             }
         }.store(in: &cancellables)

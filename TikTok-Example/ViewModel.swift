@@ -29,7 +29,7 @@ class ViewModel: ObservableObject {
     
     func pausePreviousVideo() {
         self.contexts.values.forEach { context in
-            context[RenderService.self].player.pause()
+            context.render.player.pause()
         }
     }
     
@@ -37,7 +37,7 @@ class ViewModel: ObservableObject {
         let index = Int(abs(base) / playerHeight)
         let video = videos[index]
         let context = findOrCreateContext(video)
-        let player = context[RenderService.self].player
+        let player = context.render.player
         let item = AVPlayerItem(url: URL(string: "file://\(video.videoUrl)")!)
         player.replaceCurrentItem(with: item)
         player.play()
@@ -45,15 +45,14 @@ class ViewModel: ObservableObject {
     
     private var playerHeight: CGFloat {
         let context = self.contexts.values.first!
-        let height = context[ViewSizeService.self].height
-        return height
+        return context.viewSize.height
     }
     
     func pauseCurrentVideo() {
         let index = Int(abs(base) / playerHeight)
         let video = videos[index]
         let context = findOrCreateContext(video)
-        let player = context[RenderService.self].player
+        let player = context.render.player
         let item = AVPlayerItem(url: URL(string: "file://\(video.videoUrl)")!)
         player.replaceCurrentItem(with: item)
         player.pause()

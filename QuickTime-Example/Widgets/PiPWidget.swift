@@ -25,7 +25,7 @@ fileprivate class PiPWidgetService : Service {
             return
         }
         
-        PiPController = AVPictureInPictureController(playerLayer: context[RenderService.self].layer)
+        PiPController = AVPictureInPictureController(playerLayer: context.render.layer)
         
         activeObservation = PiPController?.observe(\.isPictureInPictureActive, options: [.old, .new, .initial]) { [weak self] controller, change in
             self?.isActive = controller.isPictureInPictureActive
@@ -36,7 +36,7 @@ fileprivate class PiPWidgetService : Service {
         guard let controller = PiPController else {
             return
         }
-        context[ControlService.self].dismiss()
+        context.control.dismiss()
         
         if controller.isPictureInPictureActive {
             controller.stopPictureInPicture()

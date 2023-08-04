@@ -43,11 +43,10 @@ fileprivate class SeekBarWidgetService : Service {
     required init(_ context: Context) {
         super.init(context)
         
-        let renderService = context[RenderService.self]
-        timeObserver = renderService.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self] time in
-            guard let item = renderService.player.currentItem else { return }
+        timeObserver = context.render.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self, weak context] time in
+            guard let context, let self else { return }
+            guard let item = context.render.player.currentItem else { return }
             guard item.duration.seconds.isNormal else { return }
-            guard let self = self else { return }
             
             self.progress = time.seconds / item.duration.seconds
         }

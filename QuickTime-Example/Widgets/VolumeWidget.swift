@@ -12,8 +12,7 @@ fileprivate class VolumeWidgetService : Service {
     
     @ViewState var slideValue: Float = 1.0 {
         didSet {
-            let player = context[RenderService.self].player
-            player.volume = slideValue
+            context.render.player.volume = slideValue
         }
     }
     

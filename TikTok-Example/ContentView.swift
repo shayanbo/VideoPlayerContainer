@@ -26,30 +26,27 @@ struct ContentView: View {
                 /// hold the reference to the Context, we need to use it frequently below
                 let context = viewModel.findOrCreateContext(video)
                 
-                /// hold the reference to the ControlService, we need to use it frequently below
-                let controlService = context[ControlService.self]
-                
                 /// take Portrait as the initial status, so we can see the portrait-related widgets inside the Control overlay
-                context[StatusService.self].toPortrait()
+                context.status.toPortrait()
                 
                 /// setup DataService with data, DataService is the data provider, other service can fetch original data from it
                 context[DataService.self].load(video)
                 
                 /// make the Control overlay alway presented. not respond to the tap action
-                controlService.configure(displayStyle: .always)
+                context.control.configure(displayStyle: .always)
                 
                 /// remove default shadow for Portrait's top & bottom
-                controlService.configure([.portrait(.top), .portrait(.bottom)], shadow: nil)
+                context.control.configure([.portrait(.top), .portrait(.bottom)], shadow: nil)
                 
                 /// setup insets for the whole Control overlay, since we would like to leave some space at the edges to make it looks better
-                controlService.configure(.portrait, insets: .init(top: 0, leading: 10, bottom: 0, trailing: 10))
+                context.control.configure(.portrait, insets: .init(top: 0, leading: 10, bottom: 0, trailing: 10))
                 
-                controlService.configure(.portrait(.bottom1)) {[
+                context.control.configure(.portrait(.bottom1)) {[
                     SeekBarWidget()
                 ]}
                 
                 /// customize right side layout for portrait status
-                controlService.configure(.portrait(.right)) { views in
+                context.control.configure(.portrait(.right)) { views in
                     VStack(spacing: 20) {
                         ForEach(views) { $0 }
                     }
@@ -58,12 +55,12 @@ struct ContentView: View {
                 /// widgets for center in portrait status
                 /// the spacer here is used to separate left and right, since there's a Text at the left side without specifying its width.
                 /// the left and right side would next to each other
-                controlService.configure(.portrait(.center)) {[
+                context.control.configure(.portrait(.center)) {[
                     SpacerWidget(width: 50)
                 ]}
                 
                 /// widgets for right side in portrait status
-                controlService.configure(.portrait(.right)) {[
+                context.control.configure(.portrait(.right)) {[
                     SpacerWidget(),
                     ProfileWidget(),
                     LikeWidget(),
@@ -75,14 +72,14 @@ struct ContentView: View {
                 ]}
                 
                 /// customize the center layout for portrait
-                controlService.configure(.portrait(.left)) { views in
+                context.control.configure(.portrait(.left)) { views in
                     VStack(alignment: .leading, spacing: 10) {
                         ForEach(views) { $0 }
                     }
                 }
                 
                 /// widgets for left side in portrait status
-                controlService.configure(.portrait(.left)) {[
+                context.control.configure(.portrait(.left)) {[
                     SpacerWidget(),
                     TitleWidget(),
                     DescriptionWidget(),
@@ -90,20 +87,20 @@ struct ContentView: View {
                 ]}
                 
                 /// setup show/dismiss transition for Portrait's top & bottom
-                controlService.configure([.portrait(.left), .portrait(.right)], transition: .opacity)
+                context.control.configure([.portrait(.left), .portrait(.right)], transition: .opacity)
                 
                 /// make the Control overlay only able to hide or show by calling API
-                controlService.configure(displayStyle: .custom(animation: .default))
+                context.control.configure(displayStyle: .custom(animation: .default))
                 
                 /// make the Control overlay presented
-                controlService.present()
+                context.control.present()
                 
                 /// adjust the video render view's content mode to aspectFit
-                context[RenderService.self].layer.videoGravity = .resizeAspect
+                context.render.layer.videoGravity = .resizeAspect
                 
                 /// we encourage developers to use the simultaneous-related API to add gesture over the whole VideoPlayerContainer
                 /// here, we add drag gesture to swipe up and down the feeds view
-                context[GestureService.self].simultaneousDragGesture = viewModel.dragGesture
+                context.gesture.simultaneousDragGesture = viewModel.dragGesture
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
     }

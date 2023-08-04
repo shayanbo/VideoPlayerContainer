@@ -16,7 +16,7 @@ class StepService : Service {
     required init(_ context: Context) {
         super.init(context)
         
-        context[GestureService.self].observe(.doubleTap(.all)) { [weak context] event in
+        context.gesture.observe(.doubleTap(.all)) { [weak context] event in
             guard let player = context?[RenderService.self].player else { return }
             
             switch event.gesture {

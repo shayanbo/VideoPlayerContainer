@@ -125,8 +125,8 @@ public class GestureService : Service {
     public private(set) lazy var tapGesture: some SwiftUI.Gesture = {
         SpatialTapGesture(count: 1)
             .onEnded { [weak self] value in
-                guard let self = self else { return }
-                let leftSide = value.location.x < self.context[ViewSizeService.self].width * 0.5
+                guard let self else { return }
+                let leftSide = value.location.x < self.context.viewSize.width * 0.5
                 let event = GestureEvent(gesture: .tap( leftSide ? .left : .right ), action: .end, value: .tap(value.location))
                 self.observable.send(event)
             }
@@ -137,8 +137,8 @@ public class GestureService : Service {
     public private(set) lazy var doubleTapGesture: some SwiftUI.Gesture = {
         SpatialTapGesture(count: 2)
             .onEnded { [weak self] value in
-                guard let self = self else { return }
-                let leftSide = value.location.x < self.context[ViewSizeService.self].width * 0.5
+                guard let self else { return }
+                let leftSide = value.location.x < self.context.viewSize.width * 0.5
                 let event = GestureEvent(gesture: .doubleTap( leftSide ? .left : .right ), action: .end, value: .doubleTap(value.location))
                 self.observable.send(event)
             }
@@ -149,7 +149,7 @@ public class GestureService : Service {
     public private(set) lazy var longPressGesture: some SwiftUI.Gesture = {
         LongPressGesture()
             .onEnded { [weak self] value in
-                guard let self = self else { return }
+                guard let self else { return }
                 let event = GestureEvent(gesture: .longPress, action: .end, value: .longPress)
                 self.observable.send(event)
             }
@@ -160,7 +160,7 @@ public class GestureService : Service {
     public private(set) lazy var dragGesture: some SwiftUI.Gesture = {
         
         let handleDrag: (DragGesture.Value, GestureEvent.Action)->Void = { [weak self] value, action in
-            guard let self = self else { return }
+            guard let self else { return }
             
             let direction: Gesture.Direction = {
                 
@@ -172,7 +172,7 @@ public class GestureService : Service {
                 if horizontal {
                     return .horizontal
                 }
-                let leftSide = value.startLocation.x < self.context[ViewSizeService.self].width * 0.5
+                let leftSide = value.startLocation.x < self.context.viewSize.width * 0.5
                 if leftSide {
                     return .vertical(.left)
                 } else {
@@ -209,12 +209,12 @@ public class GestureService : Service {
     public private(set) lazy var pinchGesture: some SwiftUI.Gesture = {
         MagnificationGesture()
             .onChanged { [weak self] value in
-                guard let self = self else { return }
+                guard let self else { return }
                 let event = GestureEvent(gesture: .pinch, action: .start, value: .pinch(value))
                 self.observable.send(event)
             }
             .onEnded { [weak self] value in
-                guard let self = self else { return }
+                guard let self else { return }
                 let event = GestureEvent(gesture: .pinch, action: .end, value: .pinch(value))
                 self.observable.send(event)
             }
@@ -225,12 +225,12 @@ public class GestureService : Service {
     public private(set) lazy var rotationGesture: some SwiftUI.Gesture = {
         RotationGesture()
             .onChanged { [weak self] value in
-                guard let self = self else { return }
+                guard let self else { return }
                 let event = GestureEvent(gesture: .rotate, action: .start, value: .rotate(value))
                 self.observable.send(event)
             }
             .onEnded { [weak self] value in
-                guard let self = self else { return }
+                guard let self else { return }
                 let event = GestureEvent(gesture: .rotate, action: .end, value: .rotate(value))
                 self.observable.send(event)
             }
@@ -287,5 +287,11 @@ struct GestureWidget: View {
                     )
             }
         }
+    }
+}
+
+public extension Context {
+    var gesture: GestureService {
+        self[GestureService.self]
     }
 }

@@ -65,13 +65,12 @@ fileprivate class SeekBarWidgetService : Service {
     required init(_ context: Context) {
         super.init(context)
         
-        let player = context[RenderService.self].player
+        let player = context.render.player
         
         /// Sync with AVPlayer timer
-        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self] time in
-            guard let item = player.currentItem else { return }
+        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self, weak player] time in
+            guard let player, let self, let item = player.currentItem else { return }
             guard item.duration.seconds.isNormal else { return }
-            guard let self = self else { return }
             
             if self.acceptProgress {
                 self.progress = time.seconds / item.duration.seconds
@@ -83,13 +82,11 @@ fileprivate class SeekBarWidgetService : Service {
     
     func seekProgress(_ progress: CGFloat) {
         
-        let service = context[RenderService.self]
-        
-        guard let item = service.player.currentItem else { return }
+        guard let item = context.render.player.currentItem else { return }
         guard item.duration.seconds.isNormal else { return }
         
         let target = item.duration.seconds * Float64(progress)
-        service.player.seek(to: CMTime(value: Int64(target), timescale: 1), toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] _ in
+        context.render.player.seek(to: CMTime(value: Int64(target), timescale: 1), toleranceBefore: .zero, toleranceAfter: .zero) { [weak self] _ in
             self?.acceptProgress = true
         }
     }
@@ -98,7 +95,7 @@ fileprivate class SeekBarWidgetService : Service {
     
     func adjustPreview(hoverPoint: CGPoint, proxy: GeometryProxy) {
         
-        guard let item = context[RenderService.self].player.currentItem else {
+        guard let item = context.render.player.currentItem else {
             return
         }
         

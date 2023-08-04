@@ -32,9 +32,8 @@ fileprivate class TimelineWidgetService : Service {
     required init(_ context: Context) {
         super.init(context)
         
-        let renderService = context[RenderService.self]
-        timeObserver = renderService.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self] time in
-            guard let self = self else { return }
+        timeObserver = context.render.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self] time in
+            guard let self else { return }
             
             let current = CMTimeGetSeconds(time)
             self.current = self.toDisplay(Int(current))

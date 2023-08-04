@@ -21,7 +21,7 @@ class PreviewWidgetService: Service {
     required init(_ context: Context) {
         super.init(context)
         
-        if let item = context[RenderService.self].player.currentItem {
+        if let item = context.render.player.currentItem {
             self.imageGenerator = AVAssetImageGenerator(asset: item.asset)
         }
     }
@@ -54,19 +54,15 @@ class PreviewWidgetService: Service {
     }
     
     func present() {
-        
-        let pluginService = context[PluginService.self]
-        if !pluginService.isBeingPresented {
-            pluginService.present(.topLeading, animation: nil, transition: .identity) {
+        if !context.plugin.isBeingPresented {
+            context.plugin.present(.topLeading, animation: nil, transition: .identity) {
                 AnyView(PreviewWidget())
             }
         }
     }
     
     func dismiss() {
-        let pluginService = context[PluginService.self]
-        pluginService.dismiss(animation: nil)
-        
+        context.plugin.dismiss(animation: nil)
         context.stopService(PreviewWidgetService.self)
     }
 }

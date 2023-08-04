@@ -17,17 +17,15 @@ fileprivate class StepBackwardWidgetService: Service {
     required init(_ context: Context) {
         super.init(context)
         
-        let player = context[RenderService.self].player
-        observation = player.observe(\.currentItem) { [weak self] player, changes in
+        observation = context.render.player.observe(\.currentItem) { [weak self] player, changes in
             guard let item = player.currentItem else { return }
             self?.enabled = item.canStepBackward
         }
     }
     
     func stepBackward() {
-        let player = context[RenderService.self].player
-        player.currentItem?.step(byCount: -30 * 5)
-        player.play()
+        context.render.player.currentItem?.step(byCount: -30 * 5)
+        context.render.player.play()
     }
 }
 

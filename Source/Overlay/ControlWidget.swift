@@ -17,7 +17,7 @@ import Combine
 /// For example, in halfscreen status, the screen is small and we can't attach many widgets to it but in fullscreen status. The video player container makes up the whole screen. We can attach many widgets to it to provide more and more functions.
 ///
 /// For these parts, for these statuses, you can customize their shadow, transition, and layout.
-/// And other services can fetch the ControlService by context[ControlService.self] to call present or dismiss programmatically depending on the display style configured.
+/// And other services can fetch the ControlService by context.control to call present or dismiss programmatically depending on the display style configured.
 ///
 public class ControlService : Service {
     
@@ -126,11 +126,9 @@ public class ControlService : Service {
     public required init(_ context: Context) {
         super.init(context)
         
-        let service = context[GestureService.self]
-        service.observe(.tap(.all)) { _ in
+        context.gesture.observe(.tap(.all)) { [weak context] _ in
             withAnimation {
-                let service = context[ControlService.self]
-                service.handleTap()
+                context?.control.handleTap()
             }
         }.store(in: &cancellables)
     }
@@ -896,5 +894,12 @@ public struct IdentifableView : View, Identifiable {
     
     public var body: some View {
         AnyView(self.content())
+    }
+}
+
+
+public extension Context {
+    var control: ControlService {
+        self[ControlService.self]
     }
 }

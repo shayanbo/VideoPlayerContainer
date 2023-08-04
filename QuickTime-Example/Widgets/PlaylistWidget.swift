@@ -18,7 +18,7 @@ class PlaylistWidgetService: Service {
     @ViewState fileprivate(set) var current: String? {
         didSet {
             /// play the user-selected video from the local file system
-            let player = context[RenderService.self].player
+            let player = context.render.player
             if let current, let fileDir {
                 let item = AVPlayerItem(url: URL(string: "file://\(transform("\(fileDir)/\(current)"))")!)
                 player.replaceCurrentItem(with: item)

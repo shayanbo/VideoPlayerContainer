@@ -196,3 +196,8 @@ struct FeatureWidget: View {
     }
 }
 
+public extension Context {
+    var feature: FeatureService {
+        self[FeatureService.self]
+    }
+}

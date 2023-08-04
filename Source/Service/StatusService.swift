@@ -61,3 +61,9 @@ public class StatusService : Service {
         status = .portrait
     }
 }
+
+public extension Context {
+    var status: StatusService {
+        self[StatusService.self]
+    }
+}

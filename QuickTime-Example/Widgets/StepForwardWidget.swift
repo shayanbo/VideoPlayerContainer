@@ -11,9 +11,8 @@ import VideoPlayerContainer
 fileprivate class StepForwardWidgetService: Service {
     
     func stepForward() {
-        let player = context[RenderService.self].player
-        player.currentItem?.step(byCount: 30 * 5)
-        player.play()
+        context.render.player.currentItem?.step(byCount: 30 * 5)
+        context.render.player.play()
     }
 }
 

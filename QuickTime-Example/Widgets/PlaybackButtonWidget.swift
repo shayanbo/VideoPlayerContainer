@@ -24,28 +24,24 @@ fileprivate class PlaybackButtonService: Service {
     required init(_ context: Context) {
         super.init(context)
         
-        let service = context[RenderService.self]
-        rateObservation = service.player.observe(\.rate, options: [.old, .new, .initial]) { [weak self] player, change in
+        rateObservation = context.render.player.observe(\.rate, options: [.old, .new, .initial]) { [weak self] player, change in
             self?.playOrPaused = player.rate > 0
         }
         
-        statusObservation = service.player.observe(\.status, options: [.old, .new, .initial]) { [weak self] player, change in
+        statusObservation = context.render.player.observe(\.status, options: [.old, .new, .initial]) { [weak self] player, change in
             self?.clickable = player.status == .readyToPlay
         }
         
-        let gestureService = context[GestureService.self]
-        gestureService.observe(.doubleTap(.all)) { [weak self] _ in
+        context.gesture.observe(.doubleTap(.all)) { [weak self] _ in
             self?.didClick()
         }.store(in: &cancellables)
     }
     
     func didClick() {
-        
-        let service = context[RenderService.self]
-        if service.player.rate == 0 {
-            service.player.play()
+        if context.render.player.rate == 0 {
+            context.render.player.play()
         } else {
-            service.player.pause()
+            context.render.player.pause()
         }
     }
 }

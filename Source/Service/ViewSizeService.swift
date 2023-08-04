@@ -26,3 +26,9 @@ public class ViewSizeService : Service {
         self.size = size
     }
 }
+
+public extension Context {
+    var viewSize: ViewSizeService {
+        self[ViewSizeService.self]
+    }
+}

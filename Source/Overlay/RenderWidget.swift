@@ -150,3 +150,9 @@ fileprivate class PlayerView: NSView {
 }
 
 #endif
+
+public extension Context {
+    var render: RenderService {
+        self[RenderService.self]
+    }
+}

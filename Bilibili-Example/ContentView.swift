@@ -31,30 +31,27 @@ struct ContentView: View {
                         
                         if UIDevice.current.orientation.isLandscape {
                             /// update the status to Fullscreen, it will trigger the Control overlay UI updates. removing the Halfscreen widgets and present fullscreen widgets
-                            context[StatusService.self].toFullScreen()
+                            context.status.toFullScreen()
                         } else {
                             /// update the status to Halfscreen, it will trigger the Control overlay UI updates. removing the fullscreen widgets and present portrait widgets
-                            context[StatusService.self].toHalfScreen()
+                            context.status.toHalfScreen()
                         }
                     })
                     .onAppear {
                         
-                        /// hold the reference to the ControlService, we need to use it frequently below
-                        let controlService = context[ControlService.self]
-                        
                         /// setup show/dismiss transition for halfscreen and fullscreen
-                        controlService.configure([
+                        context.control.configure([
                             .halfScreen(.bottom), .halfScreen(.top),
                             .fullScreen(.bottom), .fullScreen(.top),
                             .fullScreen(.left), .fullScreen(.right)
                         ], transition: .opacity)
                         
                         /// setup insets for the whole Control overlay, since we would like to leave some space at the edges to make it looks better
-                        controlService.configure(.halfScreen, insets: .init(top: 10, leading: 5, bottom: 10, trailing: 5))
-                        controlService.configure(.fullScreen, insets: .init(top: 0, leading: 60, bottom: 34, trailing: 60))
+                        context.control.configure(.halfScreen, insets: .init(top: 10, leading: 5, bottom: 10, trailing: 5))
+                        context.control.configure(.fullScreen, insets: .init(top: 0, leading: 60, bottom: 34, trailing: 60))
                         
                         /// widgets for highest-top location in halfscreen status
-                        controlService.configure(.halfScreen(.top1)) {[
+                        context.control.configure(.halfScreen(.top1)) {[
                             BackWidget(),
                             SpacerWidget(),
                             MusicWidget(),
@@ -63,7 +60,7 @@ struct ContentView: View {
                         ]}
                         
                         /// widgets for lowest-bottom location in halfscreen status
-                        controlService.configure(.halfScreen(.bottom1)) {[
+                        context.control.configure(.halfScreen(.bottom1)) {[
                             PlaybackWidget(),
                             SeekBarWidget(),
                             TimelineWidget(),
@@ -71,7 +68,7 @@ struct ContentView: View {
                         ]}
                         
                         /// widgets for highest-top location in fullscreen status
-                        controlService.configure(.fullScreen(.top1)) {[
+                        context.control.configure(.fullScreen(.top1)) {[
                             SpacerWidget(),
                             ClockWidget(),
                             SpacerWidget(),
@@ -80,7 +77,7 @@ struct ContentView: View {
                         ]}
                         
                         /// widgets for lowest-top location in fullscreen status
-                        controlService.configure(.fullScreen(.top2)) {[
+                        context.control.configure(.fullScreen(.top2)) {[
                             BackWidget(),
                             TitleWidget(),
                             SpacerWidget(),
@@ -93,7 +90,7 @@ struct ContentView: View {
                         ]}
                         
                         /// widgets for lowest-bottom location in fullscreen status
-                        controlService.configure(.fullScreen(.bottom1)) {[
+                        context.control.configure(.fullScreen(.bottom1)) {[
                             PlaybackWidget(),
                             WhateverWidget1(),
                             WhateverWidget2(),
@@ -104,28 +101,28 @@ struct ContentView: View {
                         ]}
                         
                         /// widgets for medium-bottom location in fullscreen status
-                        controlService.configure(.fullScreen(.bottom2)) {[
+                        context.control.configure(.fullScreen(.bottom2)) {[
                             TimelineWidget(),
                             SeekBarWidget(),
                             DurationWidget(),
                         ]}
                         
                         /// widgets for right side in fullscreen status
-                        controlService.configure(.fullScreen(.right)) {[
+                        context.control.configure(.fullScreen(.right)) {[
                             GiftWidget(),
                             SnapshotWidget(),
                         ]}
                         
                         /// widgets for left side in fullscreen status
-                        controlService.configure(.fullScreen(.left)) {[
+                        context.control.configure(.fullScreen(.left)) {[
                             FollowWidget(),
                             SpacerWidget(),
                         ]}
                         
                         /// play the demo video
                         let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
-                        context[RenderService.self].player.replaceCurrentItem(with: item)
-                        context[RenderService.self].player.play()
+                        context.render.player.replaceCurrentItem(with: item)
+                        context.render.player.play()
                     }
                 
                 /// fill up the remaining space for portrait

@@ -130,3 +130,8 @@ fileprivate struct ToastLayout : Layout {
     }
 }
 
+public extension Context {
+    var toast: ToastService {
+        self[ToastService.self]
+    }
+}

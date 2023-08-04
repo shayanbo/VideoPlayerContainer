@@ -113,8 +113,7 @@ public struct PlayerWidget: View {
         GeometryReader { proxy in
             
             let _ = {
-                let service = context[ViewSizeService.self]
-                service.updateViewSize(proxy.size)
+                context.viewSize.updateViewSize(proxy.size)
             }()
             
             WithService(PlayerService.self) { service in
@@ -217,7 +216,7 @@ public struct PlayerWidget: View {
         .environmentObject(context)
         .coordinateSpace(name: CoordinateSpace.containerSpaceName)
         .onHover { changeOrEnd in
-            context[GestureService.self].handleHover(action: changeOrEnd ? .start : .end)
+            context.gesture.handleHover(action: changeOrEnd ? .start : .end)
         }
     }
 }

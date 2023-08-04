@@ -50,34 +50,31 @@ fileprivate class SeekBarWidgetService : Service {
     required init(_ context: Context) {
         super.init(context)
         
-        let renderService = context[RenderService.self]
-        timeObserver = renderService.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self] time in
-            guard let item = renderService.player.currentItem else { return }
+        timeObserver = context.render.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self, weak context] time in
+            guard let self, let context else { return }
+            guard let item = context.render.player.currentItem else { return }
             guard item.duration.seconds.isNormal else { return }
-            guard let self = self else { return }
             
             if self.acceptProgress {
                 self.progress = Float(time.seconds / item.duration.seconds)
             }
         }
         
-        let gestureService = context[GestureService.self]
-        let viewSizeService = context[ViewSizeService.self]
-        
-        gestureService.observe(.drag(.horizontal)) { event in
+        context.gesture.observe(.drag(.horizontal)) { [weak context] event in
+            guard let context else { return }
             
             switch event.action {
             case .start: break
             case .end:
                 
-                guard let item = renderService.player.currentItem else { return }
+                guard let item = context.render.player.currentItem else { return }
                 guard item.duration.seconds.isNormal else { return }
                 guard case let .drag(value) = event.value else { return }
                 
-                let percent = value.translation.width / viewSizeService.width
+                let percent = value.translation.width / context.viewSize.width
                 let secs = item.duration.seconds * percent
                 let current = item.currentTime().seconds
-                renderService.player.seek(to: CMTime(value: Int64(current + secs), timescale: 1), toleranceBefore: .zero, toleranceAfter: .zero) { _ in }
+                context.render.player.seek(to: CMTime(value: Int64(current + secs), timescale: 1), toleranceBefore: .zero, toleranceAfter: .zero) { _ in }
             }
         }.store(in: &cancellables)
     }
@@ -88,15 +85,10 @@ fileprivate class SeekBarWidgetService : Service {
     
     func seekProgress(_ progress: Float) {
         
-        let service = context[RenderService.self]
-        
-        guard let item = service.player.currentItem else { return }
+        guard let item = context.render.player.currentItem else { return }
         guard item.duration.seconds.isNormal else { return }
         
         let target = item.duration.seconds * Float64(progress)
-        
-        service.player.seek(to: CMTime(value: Int64(target), timescale: 1), toleranceBefore: .zero, toleranceAfter: .zero) { _ in
-            
-        }
+        context.render.player.seek(to: CMTime(value: Int64(target), timescale: 1), toleranceBefore: .zero, toleranceAfter: .zero) { _ in }
     }
 }

@@ -12,9 +12,9 @@ fileprivate class MesssageService: Service {
     
     func onClick() {
         context[FeatureService.self].present(.bottom(.squeeze(0))) { [weak context] in
-            context?[ControlService.self].dismiss()
+            context?.control.dismiss()
         } beforeDismiss: { [weak context] in
-            context?[ControlService.self].present()
+            context?.control.present()
         } content: {
             AnyView(
                 Form {

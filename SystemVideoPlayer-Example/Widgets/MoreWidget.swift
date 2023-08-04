@@ -32,8 +32,7 @@ fileprivate class MoreWidgetService : Service {
     
     @ViewState var rate: Rate = .x1_0 {
         didSet {
-            let player = context[RenderService.self].player
-            player.rate = rate.float
+            context.render.player.rate = rate.float
         }
     }
     

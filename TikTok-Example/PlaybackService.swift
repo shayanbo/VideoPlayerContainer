@@ -19,13 +19,11 @@ class PlaybackService : Service {
     required init(_ context: Context) {
         super.init(context)
         
-        let gestureService = context[GestureService.self]
-        let pluginService = context[PluginService.self]
-        let player = context[RenderService.self].player
+        let player = context.render.player
         
         observation = player.observe(\.rate) { player, changes in
             if player.rate == 0 {
-                pluginService.present(.center, transition: .scale(scale: 1.5).combined(with: .opacity)) {
+                context.plugin.present(.center, transition: .scale(scale: 1.5).combined(with: .opacity)) {
                     AnyView(
                         Image(systemName: "play.fill").resizable()
                             .foregroundColor(.white)
@@ -34,11 +32,11 @@ class PlaybackService : Service {
                     )
                 }
             } else {
-                pluginService.dismiss()
+                context.plugin.dismiss()
             }
         }
         
-        gestureService.observe(.tap(.all)) { [weak player] event in
+        context.gesture.observe(.tap(.all)) { [weak player] event in
             guard let player = player else { return }
             
             if player.rate == 0 {

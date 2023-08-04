@@ -40,15 +40,15 @@ class FloatControlService : Service {
     required init(_ context: Context) {
         super.init(context)
         
-        context[GestureService.self].observe(.tap(.all)) { [weak self] _ in
-            guard let self = self else { return }
+        context.gesture.observe(.tap(.all)) { [weak self] _ in
+            guard let self else { return }
             withAnimation {
                 self.opacity = abs(self.opacity-1)
             }
         }.store(in: &cancellables)
         
-        context[GestureService.self].observe(.hover) { [weak self] event in
-            guard let self = self else { return }
+        context.gesture.observe(.hover) { [weak self] event in
+            guard let self else { return }
             self.opacity = event.action == .start ? 1 : 0
         }.store(in: &cancellables)
     }

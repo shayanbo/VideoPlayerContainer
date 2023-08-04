@@ -62,18 +62,16 @@ struct ContentView: View {
                                     .frame(width: 200, height: 200 / video.aspectRatio)
                                     .onAppear {
                                         let context = vm.context(video: video)
-                                        let controlService = context[ControlService.self]
-                                        let gestureService = context[GestureService.self]
                                         
-                                        gestureService.simultaneousTapGesture = SpatialTapGesture()
+                                        context.gesture.simultaneousTapGesture = SpatialTapGesture()
                                             .onEnded { _ in
                                                 vm.push(video)
                                                 vm.activeVideo = video
                                             }
                                         
-                                        controlService.configure(displayStyle: .always)
-                                        controlService.configure(.halfScreen, insets: .init(top: 0, leading: 5, bottom: 10, trailing: 5))
-                                        controlService.configure(.halfScreen(.bottom1)) {[
+                                        context.control.configure(displayStyle: .always)
+                                        context.control.configure(.halfScreen, insets: .init(top: 0, leading: 5, bottom: 10, trailing: 5))
+                                        context.control.configure(.halfScreen(.bottom1)) {[
                                             CountdownWidget(),
                                             Spacer(),
                                             PlaybackWidget()
@@ -149,14 +147,11 @@ struct ContentView: View {
                     }
                 }
                 .coordinateSpace(name: listCoordinateSpaceName)
-                .navigationDestination(for: Video.self, destination: { video in
+                .navigationDestination(for: Video.self) { video in
                     
                     let context = self.vm.context(video: video)
-                    let renderService = context[RenderService.self]
-                    let player = renderService.player
-                    
-                    VideoDetail(video: video, player: player)
-                })
+                    VideoDetail(video: video, player: context.render.player)
+                }
                 .onPreferenceChange(VideoFramePreferenceKey.self) { videoFrames in
                     let listBounds = proxy.frame(in: .local)
                     
