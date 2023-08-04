@@ -15,7 +15,7 @@ class PlaylistWidgetService: Service {
     fileprivate var fileDir: String?
     
     /// Current fileName
-    @ViewState fileprivate var current: String? {
+    @ViewState fileprivate(set) var current: String? {
         didSet {
             /// play the user-selected video from the local file system
             let player = context[RenderService.self].player

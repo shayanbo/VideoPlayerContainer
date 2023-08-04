@@ -21,6 +21,7 @@
 		D4061C492A4B25B900CDD1FF /* GestureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C3B2A4B25B900CDD1FF /* GestureWidget.swift */; };
 		D4061C4A2A4B25B900CDD1FF /* RenderWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C3C2A4B25B900CDD1FF /* RenderWidget.swift */; };
 		D41A3E012A5A586E0061C1AF /* StepService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41A3E002A5A586E0061C1AF /* StepService.swift */; };
+		D42C541E2A7CA9E100827BCC /* PiPWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42C541D2A7CA9E100827BCC /* PiPWidget.swift */; };
 		D43672062A53171A0083F9DD /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D43672022A5316E40083F9DD /* demo.mp4 */; };
 		D43672072A53171D0083F9DD /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D43672022A5316E40083F9DD /* demo.mp4 */; };
 		D43672082A5317200083F9DD /* demo.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = D43672022A5316E40083F9DD /* demo.mp4 */; };
@@ -165,6 +166,7 @@
 		D4061C3B2A4B25B900CDD1FF /* GestureWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureWidget.swift; sourceTree = "<group>"; };
 		D4061C3C2A4B25B900CDD1FF /* RenderWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderWidget.swift; sourceTree = "<group>"; };
 		D41A3E002A5A586E0061C1AF /* StepService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepService.swift; sourceTree = "<group>"; };
+		D42C541D2A7CA9E100827BCC /* PiPWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PiPWidget.swift; sourceTree = "<group>"; };
 		D43672022A5316E40083F9DD /* demo.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = demo.mp4; sourceTree = "<group>"; };
 		D43ACAF72A68391300F6E598 /* PiPWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PiPWidget.swift; sourceTree = "<group>"; };
 		D43ACAF92A68441B00F6E598 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -466,6 +468,7 @@
 		D4A985582A657CFD00B42F39 /* Widgets */ = {
 			isa = PBXGroup;
 			children = (
+				D42C541D2A7CA9E100827BCC /* PiPWidget.swift */,
 				D4A9856B2A65837500B42F39 /* StepBackWidget.swift */,
 				D4A9856C2A65837500B42F39 /* StepForwardWidget.swift */,
 				D4A9855A2A657CFD00B42F39 /* SeekBarWidget.swift */,
@@ -929,6 +932,7 @@
 				D43D774D2A7BC51900A18813 /* MoreWidget.swift in Sources */,
 				D4A985632A657CFD00B42F39 /* FloatControlOverlay.swift in Sources */,
 				D4A985642A657CFD00B42F39 /* PlaybackButtonWidget.swift in Sources */,
+				D42C541E2A7CA9E100827BCC /* PiPWidget.swift in Sources */,
 				D4A985702A65842600B42F39 /* StatelessWidgets.swift in Sources */,
 				D4A9854E2A657CCA00B42F39 /* ContentView.swift in Sources */,
 				D4A985662A657CFD00B42F39 /* DurationWidget.swift in Sources */,

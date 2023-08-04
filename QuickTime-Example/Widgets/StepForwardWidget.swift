@@ -10,20 +10,6 @@ import VideoPlayerContainer
 
 fileprivate class StepForwardWidgetService: Service {
     
-    private var observation: NSKeyValueObservation?
-    
-    @ViewState var enabled = false
-        
-    required init(_ context: Context) {
-        super.init(context)
-        
-        let player = context[RenderService.self].player
-        observation = player.observe(\.currentItem) { [weak self] player, changes in
-            guard let item = player.currentItem else { return }
-            self?.enabled = item.canStepForward
-        }
-    }
-    
     func stepForward() {
         let player = context[RenderService.self].player
         player.currentItem?.step(byCount: 30 * 5)
@@ -34,15 +20,17 @@ fileprivate class StepForwardWidgetService: Service {
 struct StepForwardWidget: View {
     var body: some View {
         WithService(StepForwardWidgetService.self) { service in
-            Image(systemName: "forward.fill")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 25, height: 25)
-                .foregroundColor(.white)
-                .disabled(!service.enabled)
-                .onTapGesture {
-                    service.stepForward()
-                }
+            Button {
+                service.stepForward()
+            } label: {
+                Image(systemName: "forward.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 25, height: 25)
+                    .foregroundColor(.white)
+            }
+            .buttonStyle(.plain)
+            .keyboardShortcut(.rightArrow, modifiers: [])
         }
     }
 }

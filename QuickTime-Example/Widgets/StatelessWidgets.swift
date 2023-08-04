@@ -7,17 +7,6 @@
 
 import SwiftUI
 
-struct PiPWidget: View {
-    var body: some View {
-        Image(systemName: "pip.enter")
-            .resizable()
-            .scaledToFit()
-            .frame(width: 20, height: 20)
-            .foregroundColor(.white)
-            .opacity(0.7)
-    }
-}
-
 struct ShareWidget: View {
     var body: some View {
         Image(systemName: "square.and.arrow.up")

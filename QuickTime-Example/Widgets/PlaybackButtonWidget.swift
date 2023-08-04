@@ -72,7 +72,7 @@ struct PlaybackButtonWidget : View {
                 }
             }
             .buttonStyle(.plain)
-            .keyboardShortcut(" ", modifiers: [])
+            .keyboardShortcut(.space, modifiers: [])
         }
     }
 }

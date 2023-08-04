@@ -8,6 +8,7 @@
 import SwiftUI
 import AVKit
 import VideoPlayerContainer
+import Combine
 
 struct ContentView: View {
     
@@ -15,12 +16,12 @@ struct ContentView: View {
     @StateObject var context = Context()
     
     /// user-selected video file URL
-    @State var fileURL: URL?
+    @State var current: String?
     
     var body: some View {
         
         Group {
-            if let url = fileURL {
+            if let fileName = current {
                 PlayerWidget(context)
                     /// make the VideoPlayerContainer full up the window
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -56,7 +57,7 @@ struct ContentView: View {
                         ]}
                     }
                     /// display the name of playing video as the title of window
-                    .navigationTitle(url.lastPathComponent)
+                    .navigationTitle(fileName)
             } else {
                 ZStack {
                     Rectangle().fill(.black)
@@ -64,6 +65,10 @@ struct ContentView: View {
                         .font(.system(size: 60))
                 }
             }
+        }
+        /// sync state from context' service to make current view refresh when the state changes ( like StateSync propertyWrapper used in service)
+        .onReceive(context[PlaylistWidgetService.self][keyPath: \.$current]) { output in
+            self[keyPath:\.current] = output
         }
         /// users can play the video by drag and drop
         .onDrop(of: ["public.file-url"], isTargeted: nil) { providers in
@@ -76,8 +81,9 @@ struct ContentView: View {
                         return
                     }
                     if ut == "com.apple.quicktime-movie" || ut == "public.mpeg-4" {
-                        context[PlaylistWidgetService.self].play(url)
-                        fileURL = url
+                        DispatchQueue.main.async {
+                            context[PlaylistWidgetService.self].play(url)
+                        }
                     }
                 }
             }
