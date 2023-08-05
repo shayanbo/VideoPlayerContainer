@@ -184,7 +184,6 @@
 		D4061C3B2A4B25B900CDD1FF /* GestureWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GestureWidget.swift; sourceTree = "<group>"; };
 		D4061C3C2A4B25B900CDD1FF /* RenderWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RenderWidget.swift; sourceTree = "<group>"; };
 		D40808232A7E850D002AACA0 /* VisionPro-Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "VisionPro-Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		D40808262A7E850D002AACA0 /* RealityKitContent */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = RealityKitContent; sourceTree = "<group>"; };
 		D40808292A7E850D002AACA0 /* ExampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleApp.swift; sourceTree = "<group>"; };
 		D408082B2A7E850D002AACA0 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D408082D2A7E8510002AACA0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -408,14 +407,6 @@
 			path = "VisionPro-Example";
 			sourceTree = "<group>";
 		};
-		D40808252A7E850D002AACA0 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				D40808262A7E850D002AACA0 /* RealityKitContent */,
-			);
-			path = Packages;
-			sourceTree = "<group>";
-		};
 		D408082F2A7E8510002AACA0 /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,7 +486,6 @@
 				D4E9114B2A661A18002BED4A /* SystemVideoPlayer-Example */,
 				D4A8FBE62A6A390500DBE29E /* VideoNavigation-Example */,
 				D40808242A7E850D002AACA0 /* VisionPro-Example */,
-				D40808252A7E850D002AACA0 /* Packages */,
 				D49986192A389FEF00384185 /* Products */,
 				D4FA61572A49D28E00B28EAE /* Frameworks */,
 			);
