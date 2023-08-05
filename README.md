@@ -9,7 +9,7 @@ VideoPlayerContainer is a video player component for SwiftUI. Compared with the 
 ## Showcase
 
 <img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/57a33161-0f59-4106-82f0-a81085c4e90e'><br/>
-<img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/60030c62-b78e-422d-bb2b-d72fa8194681'><br/>
+<img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/07ace6fd-8fec-4761-8ed7-793bb588bb48'><br/>
 <table>
     <tr>
         <img width="50%" src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/b85380ff-167a-42ba-bcb5-bf563dc90e87'>
@@ -31,6 +31,7 @@ After cloning the repo and opening up the Xcode project, you can see multiple sc
 * [SystemVideoPlayer-Example](SystemVideoPlayer-Example)
 * [VideoNavigation-Example](VideoNavigation-Example)
 * [QuickTime-Example](QuickTime-Example)
+* [VisionPro-Example](VisionPro-Example)
 
 ## Installation
 
