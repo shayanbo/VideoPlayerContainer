@@ -11,20 +11,20 @@ import Combine
 import SwiftUI
 import VideoPlayerContainer
 
-fileprivate class TimelineWidgetService : Service {
+fileprivate class DurationWidgetService : Service {
     
-    @ViewState var current = "00:00"
+    @ViewState var duration = "00:00"
     
     private var timeObserver: Any?
     
     required init(_ context: Context) {
         super.init(context)
         
-        timeObserver = context.render.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self] time in
-            guard let self else { return }
+        timeObserver = context.render.player.addPeriodicTimeObserver(forInterval: CMTime(value: 1, timescale: 1), queue: nil) { [weak self, weak context] time in
+            guard let self, let context else { return }
             
-            let current = CMTimeGetSeconds(time)
-            self.current = self.toDisplay(Int(current))
+            let duration = CMTimeGetSeconds(context.render.player.currentItem!.duration)
+            self.duration = duration.isNormal ? self.toDisplay(Int(duration)) : "00:00"
         }
     }
     
@@ -54,12 +54,12 @@ fileprivate class TimelineWidgetService : Service {
     }
 }
 
-struct TimelineWidget : View {
+struct DurationWidget : View {
     
     var body: some View {
-        WithService(TimelineWidgetService.self) { service in
-            Text(service.current)
-                .font(.system(size:12))
+        WithService(DurationWidgetService.self) { service in
+            Text(service.duration)
+                .font(.system(size:14))
                 .foregroundColor(.white)
                 .opacity(0.7)
         }

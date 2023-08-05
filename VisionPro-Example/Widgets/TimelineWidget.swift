@@ -59,7 +59,7 @@ struct TimelineWidget : View {
     var body: some View {
         WithService(TimelineWidgetService.self) { service in
             Text(service.current)
-                .font(.system(size:12))
+                .font(.system(size:14))
                 .foregroundColor(.white)
                 .opacity(0.7)
         }
