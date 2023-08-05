@@ -2,8 +2,8 @@
 
 VideoPlayerContainer is a video player component for SwiftUI. Compared with the system built-in one [VideoPlayer](https://developer.apple.com/documentation/avkit/videoplayer), the VideoPlayerContainer provides much more flexible and extendable features that are able to cover most of the common scenarios that you can see on the app such as Tik Tok or Youtube.
 
-![Platform](https://img.shields.io/badge/platform-iOS|macOS-orange.svg)
-![Version](https://img.shields.io/badge/version-16.0|13.0-green.svg)
+![Platform](https://img.shields.io/badge/platform-iOS|macOS|visionOS-orange.svg)
+![Version](https://img.shields.io/badge/version-16.0|13.0|1.0-green.svg)
 ![Version](https://img.shields.io/badge/deps-CocoaPods|SwiftPM-purple.svg)
 
 ## Showcase
