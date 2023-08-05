@@ -8,6 +8,7 @@ VideoPlayerContainer is a video player component for SwiftUI. Compared with the 
 
 ## Showcase
 
+<img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/57a33161-0f59-4106-82f0-a81085c4e90e'><br/>
 <img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/60030c62-b78e-422d-bb2b-d72fa8194681'><br/>
 <table>
     <tr>
@@ -15,7 +16,6 @@ VideoPlayerContainer is a video player component for SwiftUI. Compared with the 
         <img width="50%" src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/4df22d15-9d1b-4fcd-b381-01d05e223552'>
     </tr>
 </table>
-    
 <img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/40740310-1694-45f3-ac76-ad94a12019a1'><br/>
 <img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/e567ac32-f03b-4d68-9ecd-fc808c4cae63'><br/>
 <img src='https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/c778bf0f-51bd-4153-bfa3-2030edc6bb82'><br/>
