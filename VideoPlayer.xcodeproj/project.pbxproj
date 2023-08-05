@@ -20,7 +20,6 @@
 		D4061C482A4B25B900CDD1FF /* FeatureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C3A2A4B25B900CDD1FF /* FeatureWidget.swift */; };
 		D4061C492A4B25B900CDD1FF /* GestureWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C3B2A4B25B900CDD1FF /* GestureWidget.swift */; };
 		D4061C4A2A4B25B900CDD1FF /* RenderWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C3C2A4B25B900CDD1FF /* RenderWidget.swift */; };
-		D40808282A7E850D002AACA0 /* RealityKitContent in Frameworks */ = {isa = PBXBuildFile; productRef = D40808272A7E850D002AACA0 /* RealityKitContent */; };
 		D408082A2A7E850D002AACA0 /* ExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D40808292A7E850D002AACA0 /* ExampleApp.swift */; };
 		D408082C2A7E850D002AACA0 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408082B2A7E850D002AACA0 /* ContentView.swift */; };
 		D408082E2A7E8510002AACA0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D408082D2A7E8510002AACA0 /* Assets.xcassets */; };
@@ -293,7 +292,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D40808382A7E8531002AACA0 /* VideoPlayerContainer.framework in Frameworks */,
-				D40808282A7E850D002AACA0 /* RealityKitContent in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -698,7 +696,6 @@
 			);
 			name = "VisionPro-Example";
 			packageProductDependencies = (
-				D40808272A7E850D002AACA0 /* RealityKitContent */,
 			);
 			productName = "VisionPro-Example";
 			productReference = D40808232A7E850D002AACA0 /* VisionPro-Example.app */;
@@ -1836,13 +1833,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		D40808272A7E850D002AACA0 /* RealityKitContent */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = RealityKitContent;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D49986102A389FEF00384185 /* Project object */;
 }
