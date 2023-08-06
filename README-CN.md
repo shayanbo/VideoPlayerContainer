@@ -87,7 +87,7 @@ dependencies: [
 
 #### Feature Overlay (面板层)
 
-`Feature overlay` 用于展示面板. 这个面板可以从上下左右四个方向出现. 而且我们提供了两种样式, 一种是覆盖式的展示, 不影响其他Overlay. 另一种就是挤压式的展示, 会把所有Overlay挤压到另一侧, 比如 Youtube全屏下的评论面板. 这个可以在 [Youtube-Example](Youtube-Example) 中找到.
+`Feature overlay` 用于展示面板. 这个面板可以从上下左右四个方向出现. 而且我们提供了两种样式, 一种是覆盖式的展示, 不影响其他Overlay, 比如 [QuickTime-Example](QuickTime-Example) 中的播单 `PlaylistWidget`. 另一种就是挤压式的展示, 会把所有Overlay挤压到另一侧, 比如 [Youtube-Example](Youtube-Example) `CommentWidget` 中.
 
 #### Plugin Overlay (插件层)
 
