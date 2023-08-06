@@ -54,6 +54,7 @@ struct ContentView: View {
                 }
             }
             /// make it accessible inside toolbar Widgets
+            /// Generally, we can set Context instance as the whole View tree's environmentObject to enable all of subviews inside of the View to access the Context instance.
             .environmentObject(context)
     }
 }
