@@ -81,7 +81,7 @@ dependencies: [
 
 ![image](https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/9570d129-d8c4-4ebb-ac89-b8423a10cbf1)
 
-#### Render Overlay
+#### Render Overlay (播控渲染层)
 
 `Render Overlay` 位于 `PlayerWidget` 的最底层. 它对外提供了播控能力. 可以访问到 `AVPlayer` 和 `AVPlayerLayer`. 除此之外. 该层还内嵌了一个 `Gesture Overlay`. 对外提供手势控制的能力. 比如 [VisionPro-Example](VisionPro-Example) 中 `PlaybackWidget` 通过 `GestureService` 实现了双击暂停和播放, 以及 `SeekBarWidget` 使用 `GestureService` 实现水平左右滑动来快进和后退.
 
