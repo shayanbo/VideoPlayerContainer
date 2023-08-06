@@ -91,7 +91,7 @@ dependencies: [
 
 #### Plugin Overlay (插件层)
 
-`Plugin Overlay` 是一个没有太多规则约束的控件容器. 当你想要展示一个控件, 这个控件不太适合其他层而且你也不想插入自定义层的时候, 那这个插件层可能就比较合适, 比如视频进度拖拽的预览控件 ([QuickTime-Example]的 `SeekBarWidget` 和 `PreviewWidget` )或者是一个某个逻辑触发之后会展示一小会的控件.
+`Plugin Overlay` 是一个没有太多规则约束的控件容器. 当你想要展示一个控件, 这个控件不太适合其他层而且你也不想插入自定义层的时候, 那这个插件层可能就比较合适, 比如视频进度拖拽的预览控件 ([QuickTime-Example](QuickTime-Example)的 `SeekBarWidget` 和 `PreviewWidget` )或者是一个某个逻辑触发之后会展示一小会的控件.
 
 #### Control Overlay (控制层)
 
