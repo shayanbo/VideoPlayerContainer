@@ -197,15 +197,15 @@ var body: some View {
 当我们创建一个 `PlayerWidget` 并且传入 `Context` 实例之后, 这个 `Context` 实例会被放入Environment. 因此, 所有在 `PlayerWidget` 的控件都能够访问到这个 `Context` 实例. 相较于在 `Widget` 内直接访问 `Context`, 我们更推荐使用 `WithService` 来访问自己的 `Service`, 并且该 `Service` 的State变动会自动更新该控件.
 
 ```swift
-class PlaybackService: Service {
+fileprivate class PlaybackService: Service {
     
     private var rateObservation: NSKeyValueObservation?
     
     private var statusObservation: NSKeyValueObservation?
     
-    @ViewState fileprivate var playOrPaused = false
+    @ViewState var playOrPaused = false
     
-    @ViewState fileprivate var clickable = false
+    @ViewState var clickable = false
     
     required init(_ context: Context) {
         super.init(context)
@@ -219,7 +219,7 @@ class PlaybackService: Service {
         }
     }
     
-    fileprivate func didClick() {
+    func didClick() {
         if context.render.player.rate == 0 {
             context.render.player.play()
         } else {

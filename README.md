@@ -58,69 +58,63 @@ dependencies: [
 ]
 ```
 
-## Requirements
-
-Since I used some of the new features like custom Layout, the current version is required a minimum `iOS` version of `16.0`, and `macOS` version of `13.0`. But I'm considering lowering the minimum version support to `iOS 14.0` and `macOS 12.4`
-
 ## Core Concept
 
 ### Context
 
-Context is the core component and fully accessible from all of the other components in the VideoPlayerContainer, it holds a service locator which we can use to fetch other services to borrow expertise from other components.
+Context is the core class and is fully accessible from all of `Widget`s in the `VideoPlayerContainer`, it holds a service locator which we can use to fetch other `Service`s to borrow expertise from other `Widget`s. Adapters can access other `Service` instance by `context[Service.type]`. `Context` cache at a maximum of one `Service` instance for each `Service Type`. Besides, the built-in `Service` can be accessible by handy way such as `context.render`, `context.control` and so on.
 
 ### Widget
 
-Widget is a View that's inside the VideoPlayerContainer which means it can access the context and in most cases, it has a specific service to handle all of its logic code.
+Widget is literally a SwiftUI View that's inside the `VideoPlayerContainer` which means it can access the context and in most cases, it has a specific `Service` to handle all of its logic code and to communicate with other `Service`s. Generally, we use `WithService` as the root view of the `Widget` to access `Service` instance in `Widget`. This way, not only can we access `Service`'s APIs, but also the `Widget` updates upon the `State`s of `Service` changes.
+
+### PlayerWidget
+
+`PlayerWidget` is the container which holding all of built-in `Overlay`s and also the customized `Widget`s. It's the core View of `VideoPlayerContainer`.
 
 ### Service
 
-Service represents two roles, one is the ViewModel in MVVM architecture, ViewModel handles all of the Output and Input for View. Another role is responsible for communicating with other services. We encourage people to write Service and Widget in one source file. This way, we can use `fileprivate`, and `private` to distinguish which APIs are used only for its Widget and which APIs are open to other services.
+`Service` represents two roles, one is the ViewModel in MVVM architecture, ViewModel handles all of the Output and Input for View. Another role is responsible for communicating with other `Service`s. We encourage people to write `Service` and `Widget` in one source file. This way, we can use `fileprivate`, and `private` to distinguish which APIs are used only for its `Widget` and which APIs are open to other `Service`s.
 
-Actually, there're two kinds of Service: **Widget Service**, **Non-Widget Service**. **Widget Service** is the service used by a specific Widget while **Non-Widget Service** is the service used by other services.
+Actually, there're two kinds of `Service`: **Widget Service**, **Non-Widget Service**. **Widget Service** is the `Service` used by a specific `Widget` while **Non-Widget Service** is the `Service` used by other `Service`s.
 
 ### Overlay
 
-Overlays are the sub-containers inside the VideoPlayerContainer layer by layer and it's the place where widgets sit. We have 5 built-in overlays, from bottom to top, these are render, feature, plugin, control, and toast. In addition, we allow adopters to insert their own overlays
+`Overlay` is the sub-container inside the `VideoPlayerContainer` layer by layer and it's the place where widgets sit. We have 5 built-in overlays, from bottom to top, these are `render`, `feature`, `plugin`, `control`, and `toast`. In addition, we allow adopters to insert their own `Overlay`s.
 
 ![image](https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/9570d129-d8c4-4ebb-ac89-b8423a10cbf1)
 
 #### Render Overlay
 
-Render overlay is sitting at the far bottom of the container. It provides playback service and gesture services. 
-1. Use `context[RenderService.self]` to fetch `RenderService` or use `context[GestureService.self]` to fetch the `GestureService` respectively in your custom `Widget`.
-2. With RenderService, access the player instance which is an `AVPlayer`.
-3. Set up the gravity of the render canvas. 
-4. With `GestureService`, observe predefined events like `tap`, `double-tap`, `long-press`, `drag`. `rotation`, `hover`, and `pinch`. 
-5. For `tap`, `double-tap`, you can know if the touch is located on the left part or right part of the screen.
-6. For `drag`, you can know if the dragging event is done horizontally or vertically(left/right).
+`Render overlay` is sitting at the far bottom of the container. It provides playback service and gesture services. Adapters can access `AVPlayer` and `AVPlayerLayer` instance. Besides, there's one overlay called `GestureOverlay` embbed in the `Render Overlay`. It provides the control over gestures. For example, `PlaybackWidget` in [VisionPro-Example](VisionPro-Example) support double-tap to pause and play by using `GestureService`, and `SeekbarWidget` support dragging horizontally to control the progress by using `GestureService`.
 
 #### Feature Overlay
 
-Feature overlay is used to pop up a panel from 4 directions (`left`, `right`, `top`, `bottom`). We provide two styles as well: `cover` or `squeeze`. With squeeze style, when the popup panel shows up, the render canvas will be squeezed to the other side, like Youtube's comments Panel in fullscreen mode.
+`Feature overlay` is used to slide in and out a panel from 4 directions (`left`, `right`, `top`, `bottom`). We provide two styles as well: `cover` or `squeeze`. `cover` literally display panel without having any affect on other `Overlay`s like [QuickTime-Example](QuickTime-Example)'s `PlaylistWidget`, while `squeeze` display panels with squeezing `Overlay`s to other side. [Youtube-Example](Youtube-Example)'s `CommentWidget`.
 
 #### Plugin Overlay
 
-Plugin Overlay is a sub-container without constraints on it. When you want to show up a widget that's not suitable for other overlays and you don't want to insert your own custom overlay, that's the right place for you, like a thumbnail preview widget for the seek bar on dragging or a simple widget that's visible only in a short time after being triggered.
+`Plugin Overlay` is a sub-container without many constraints on it. When you want to show up a widget that's not suitable for other overlays and you don't want to insert your own custom overlay, that's the right place for you, like a thumbnail preview widget for the seek bar on dragging ([QuickTime-Example](QuickTime-Example)'s `SeekbarWidget` and `PreviewWidget` ) or a simple widget that's visible only in a short time after being triggered.
 
 #### Control Overlay
 
-Control overlay is the most sophisticated overlay and the place where most work will be done. The control overlay is divided into 5 parts: `left`, `right`, `top`, `bottom`, and `center`. Before going on, please allow me introduce a concept called status: 
+`Control overlay` is the most sophisticated overlay and the place where most work will be done. The `Control Overlay` is divided into 5 parts: `left`, `right`, `top`, `bottom`, and `center`. Before going on, please allow me introduce a concept called `Status`: 
 
-We predefined 3 statuses as the screen style, with `halfscreen`, `fullscreen`, and `portrait`. The status changes are 100% decided by you. But generally, `halfscreen` describes the status of the portrait device. `fullscreen` describes the landscape device and `portrait` describes the video the height is higher than the width.
+We predefined 3 statuses describing the environment of `PlayerWidget`. These are `halfscreen`, `fullscreen`, and `portrait`. The status changes are 100% decided by you. But generally, `halfscreen` describes the status of the portrait device that video's width is greater than it's height. `fullscreen` describes the landscape device that `PlayerWidget` fill up the whole screen, and `portrait` describes the status of the portrait device that the video's height is greater than the width.
 
 For these 5 parts, you can configure them for different statuses which is quite common. For example, in `halfscreen` status, the screen is small and we can't attach many widgets to it but in fullscreen status. The video player container makes up the whole screen. We can attach many widgets to it to provide more and more functions.
 
-For these parts, for these statuses, you can customize their shadow, transition, and layout. and other services can fetch the `ControlService` by `context[ControlService.self]` to call present or dismiss programmatically depending on the display style configured.
+For these parts, for these statuses, you can customize their shadow, transition, and layout. and other services can fetch the `ControlService` by `context.control` to call present or dismiss programmatically depending on the `DisplayStyle` configured.
 
 ![image](https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/421a5401-5615-435b-8fed-f6ef4d8c860c)
 
 #### Toast Overlay
 
-Toast Overlay is a simple overlay that you can use to pop up view on the left side which will be disappeared after a few seconds configured.
+`Toast Overlay` is a relatively simple `Overlay` that you can use to pop up view on the left side which will be disappeared after a few seconds configured. It supports a few customization like customizing the Toast Widget.
 
 ## Usage: Add VideoPlayer
 
-Let's say, we are going to code a player view in a video scene, here. We need to import VideoPlayerContainer, and create a Context for the Video Player or the whole video scene.
+Let's say, we are going to author a player view in a video scene, here. We need to import `VideoPlayerContainer`, and create a `Context` for the player view or the whole video scene.
 
 ```swift
 
@@ -136,7 +130,7 @@ struct ContentView: View {
 
 ```
 
-Now, you need to create the PlayerView to make it visible on the scene. here, we use the Type `PlayerWidget`. It's the main container and requires a context instance to initialize it.
+Now, you need to create the `PlayerWidget` to make it visible on the scene. It's the main container holding all of `Overlays` and `Widgets`. It requires a context instance to initialize it.
 
 ```swift
 
@@ -146,7 +140,7 @@ var body: some View {
 
 ```
 
-The VideoPlayerContainer is now attached to the scene. But you can't see it cuz we never do any configuration work and also don't pass the video resource item to play. Let's do some more work ( specify the frame and play a video).
+The `PlayerWidget` is now attached to the scene. But you can't see it because we never do any configuration work and also don't pass the video resource item to play. Let's do some more work (specify the frame and play a video).
 
 ```swift
 
@@ -157,18 +151,18 @@ var body: some View {
 
             /// play video
             let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
-            context[RenderService.self].player.replaceCurrentItem(with: item)
-            context[RenderService.self].player.play()
+            context.render.player.replaceCurrentItem(with: item)
+            context.render.player.play()
         }
 }
 
 ```
 
-Run it, and the video will be playing. Now, as you can see in other apps. We want to attach some widgets to it, like a `PlaybackButton` in the center.
+Run it, and the video will be playing. Now, as you can see in other apps. We want to attach some widgets to it, like a button in the center to play or pause the video.
 
 ## Usage: Write Widgets
 
-As I said above, we need to write a PlaybackButton and attach it to the center of the Player View. First of all, we need to create a SwiftUI source file named PlaybackButtonWidget and write a basic UI.
+As I said above, we need to write a playback control button and attach it to the center of the `PlayerWidget`. First of all, we need to create a SwiftUI source file named `PlaybackWidget` and author some basic UI code.
 
 ```swift
 
@@ -188,7 +182,7 @@ struct PlaybackButtonWidget: View {
 
 ```
 
-This is a view showing a Play icon. Now, we need to attach it to the Player View. 
+This is a view showing a Play icon. Now, we need to attach it to the `PlayerWidget`. Here, we add it to the `Control Overlay`.
 
 ```swift
 
@@ -198,35 +192,34 @@ var body: some View {
         .onAppear {
 
             /// add widgets to the center for halfscreen status
-            let controlService = context[ControlService.self]
-            controlService.configure(.halfScreen(center)) {[
+            context.control.configure(.halfScreen(center)) {[
                 PlaybackButtonWidget()
             ]}
 
             /// play video
             let item = AVPlayerItem(url: Bundle.main.url(forResource: "demo", withExtension: "mp4")!)
-            context[RenderService.self].player.replaceCurrentItem(with: item)
-            context[RenderService.self].player.play()
+            context.render.player.replaceCurrentItem(with: item)
+            context.render.player.play()
         }
 }
 
 ```
 
-Now, you can see an icon in the center, and by default, then you can tap the screen to make it visible or invisible. However, you can see that we don't fill in the logic code to make the icon work (play and pause). How?
+Now, you can see an play icon in the center. Based on default `DisplayStyle` which is `auto`, you can tap the blank area to hide or show the `Control Overlay`. However, when you tap the play icon, you will find nothing happens since we don't populate the logic code to make the `Widget` work as expected (play and pause). How?
 
-When we created the player view and passed in the context instance, the context instance will be put in the environment. Thus, all of the widgets inside the video player container will have access to the context. Instead of accessing context directly on the Widget, we prefer using Service as the ViewModel to handle all the functions of the Widget.
+When we created the `PlayerWidget` and passed in the `Context` instance, the `Context` instance will be put in the environment. Thus, all of the `Widget`s inside the `PlayerWidget` will have access to the `Context`. Instead of accessing `Context` directly inside the `Widget`, we prefer using `WithService` as the root View of the `Widget` to access the `Service` instance. It offers an abilities that get the `Widget` update when the `State` of `Service` changes.
 
 ```swift
 
-class PlaybackService: Service {
+fileprivate class PlaybackService: Service {
     
     private var rateObservation: NSKeyValueObservation?
     
     private var statusObservation: NSKeyValueObservation?
     
-    @ViewState fileprivate var playOrPaused = false
+    @ViewState var playOrPaused = false
     
-    @ViewState fileprivate var clickable = false
+    @ViewState var clickable = false
     
     required init(_ context: Context) {
         super.init(context)
@@ -241,13 +234,11 @@ class PlaybackService: Service {
         }
     }
     
-    fileprivate func didClick() {
-        
-        let service = context[RenderService.self]
-        if service.player.rate == 0 {
-            service.player.play()
+    func didClick() {
+        if context.render.player.rate == 0 {
+            context.render.player.play()
         } else {
-            service.player.pause()
+            context.render.player.pause()
         }
     }
 }
@@ -270,21 +261,21 @@ struct PlaybackWidget: View {
 
 ```
 
-As you can see above, it's a completed Widget. 
+As you can see above, it's a completed `Widget`. 
 
-* We use `fileprivate` modifier to mark APIs that's only available for its belonging Widget.
-* We use `@ViewState` to mark the variable that's able to trigger the SwiftUI update mechanism (like @Published, @State).
-* We use `WithService` as the Widget's root View to make sure any `@ViewState` variable changes will make the whole Widget involved in the update mechanism.
+* We use `fileprivate` modifier to mark APIs that's only available for its belonging `Widget`.
+* We use `@ViewState` to mark the variable that's able to trigger the `SwiftUI` update mechanism (like @Published, @State).
+* We use `WithService` as the `Widget`'s root View to make sure any `@ViewState` variable changes will make the whole `Widget` involved in the update mechanism.
 * We use `@ViewState` variable to condition which image to use in the Widget. (ViewModel's Output).
-* We call service method to complete the widget's work (ViewModel's Input).
+* We call `Service` method to complete the `Widget`'s work (ViewModel's Input).
 
 ## Access Modifiers in Service
 
-We encourage adopters to author Widget and its Service in the same source file. In this way, we can make full use of access modifiers on Service.
+We encourage adopters to author `Widget` and its `Service` in the same source file. In this way, we can make full use of access modifiers on `Service`.
 
-1. If you are creating a **Widget Service** that is only used by its Widget, `fileprivate` is better to modify the Service class. Since it's only able to be accessed by the Widget in the same source file. Also, keep using `private` to modify those properties and methods that are used only inside the Service.
-2. If you are creating a **Widget Service** that offers some API for other services, `internal` or `public` is better to modify the Service class. Since other services have to access your Service Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the Service and using `fileprivate` to modify those properties and methods that are used only by its Widget.
-3. If you are creating a **Non-Widget Service** that offers some API for other services, `internal` or `public` is better to modify the Service class. Since other services have to access your Service Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the Service.
+1. If you are creating a **Widget Service** that is only used by its `Widget`, `fileprivate` is better to modify the `Service` class. Since it's only able to be accessed by the `Widget` in the same source file. Also, keep using `private` to modify those properties and methods that are used only inside the `Service`.
+2. If you are creating a **Widget Service** that offers some API for other `Service`s, `internal` or `public` is better to modify the `Service` class. Since other `Service`s have to access your `Service` Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the `Service` and using `fileprivate` to modify those properties and methods that are used only by its `Widget`.
+3. If you are creating a **Non-Widget Service** that offers some API for other `Service`s, `internal` or `public` is better to modify the `Service` class. Since other `Service`s have to access your `Service` Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the `Service`.
 
 ## Idea / Bug / Improvement
 
