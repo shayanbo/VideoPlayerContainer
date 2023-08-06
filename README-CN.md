@@ -65,7 +65,7 @@ dependencies: [
 
 `Widget` 本身就是 `VideoPlayerContainer` 中一个 `SwiftUI` 的 `View`, 他可以访问到 `Context` 对象, 绝大多数的情况下, 会为它编写一个专门的 `Service` 对象来处于逻辑和负责Service间通讯的工作. 通常我们会在 `Widget` 中使用 `WithService` 作为根视图来访问相应的 `Service`. 这样既能使用 `Service` 提供的方法, 还会在 `Service` 的State变化的时候, 自动刷新当前 `Widget`.
 
-### PlayerWidget
+### PlayerWidget (播放容器控件)
 
 `PlayerWidget` 是 `VideoPlayerContainer` 提供的播放容器, 内部持有了所有了内置 `Overlay`, 也持有了所有自定义的 `Widget`. 是使用该库需要构建的核心视图.
 
@@ -85,7 +85,7 @@ dependencies: [
 
 `Render Overlay` 位于 `PlayerWidget` 的最底层. 它对外提供了播控能力. 可以访问到 `AVPlayer` 和 `AVPlayerLayer`. 除此之外. 该层还内嵌了一个 `Gesture Overlay`. 对外提供手势控制的能力. 比如 [VisionPro-Example](VisionPro-Example) 中 `PlaybackWidget` 通过 `GestureService` 实现了双击暂停和播放, 以及 `SeekBarWidget` 使用 `GestureService` 实现水平左右滑动来快进和后退.
 
-#### Feature Overlay
+#### Feature Overlay (面板层)
 
 `Feature overlay` 用于展示面板. 这个面板可以从上下左右四个方向出现. 而且我们提供了两种样式, 一种是覆盖式的展示, 不影响其他Overlay. 另一种就是挤压式的展示, 会把所有Overlay挤压到另一侧, 比如 Youtube全屏下的评论面板. 这个可以在 [Youtube-Example](Youtube-Example) 中找到.
 
@@ -93,7 +93,7 @@ dependencies: [
 
 `Plugin Overlay` 是一个没有太多规则约束的控件容器. 当你想要展示一个控件, 这个控件不太适合其他层而且你也不想插入自定义层的时候, 那这个插件层可能就比较合适, 比如视频进度拖拽的预览控件 ([QuickTime-Example]的 `SeekBarWidget` 和 `PreviewWidget` )或者是一个某个逻辑触发之后会展示一小会的控件.
 
-#### Control Overlay
+#### Control Overlay (控制层)
 
 `Control Overlay` 是最复杂的一层, 也是大部分 `Widget` 所在的一层. `Control Overlay` 被划分成5个区域: `左`, `右`, `上`, `下`, and `中`. 再继续讲述之前, 我们需要先介绍一个概念叫 `Status`: 
 
@@ -105,7 +105,7 @@ dependencies: [
 
 ![image](https://github.com/shayanbo/VideoPlayerContainer/assets/5426838/421a5401-5615-435b-8fed-f6ef4d8c860c)
 
-#### Toast Overlay
+#### Toast Overlay (提示层)
 
 `Toast Overlay` 是一个相对简单的 `Overlay`, 正如它的名字一样, 他提供了一些Toast提示的服务. 支持连续多个Toast弹出, 旧的Toast会被顶到上面. 直接N秒后自动消失. 目前这个Toast出现和消失的Transition是不对外暴露的, 限定于从左侧入, 然后淡出. 其他的都是可配置的, 比如: 展示时长, 自定义Toast等.
 
