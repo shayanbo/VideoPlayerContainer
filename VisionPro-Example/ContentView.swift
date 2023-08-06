@@ -37,7 +37,7 @@ struct ContentView: View {
                         TimelineWidget()
 
                         /// Widgets displaying status of playback
-                        PlaybackButtonWidget()
+                        PlaybackWidget()
 
                         /// Widgets displaying the progress of playing video
                         SeekBarWidget()

@@ -74,7 +74,7 @@ struct ContentView: View {
                 /// both portrait and fullscreen's center display the same widgets: StepBack, Playback, StepForward
                 context.control.configure([.portrait(.center), .fullScreen(.center)]) {[
                     StepBackWidget(),
-                    PlaybackButtonWidget(),
+                    PlaybackWidget(),
                     StepForwardWidget(),
                 ]}
 

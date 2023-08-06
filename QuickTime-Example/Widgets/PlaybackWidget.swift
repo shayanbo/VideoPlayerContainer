@@ -9,7 +9,7 @@ import SwiftUI
 import Combine
 import VideoPlayerContainer
 
-fileprivate class PlaybackButtonService: Service {
+fileprivate class PlaybackWidgetService: Service {
     
     private var rateObservation: NSKeyValueObservation?
     
@@ -46,10 +46,10 @@ fileprivate class PlaybackButtonService: Service {
     }
 }
 
-struct PlaybackButtonWidget : View {
+struct PlaybackWidget : View {
     
     var body: some View {
-        WithService(PlaybackButtonService.self) { service in
+        WithService(PlaybackWidgetService.self) { service in
             Button {
                 service.didClick()
             } label: {

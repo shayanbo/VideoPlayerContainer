@@ -116,7 +116,9 @@ public class ControlService : Service {
         case custom(animation: Animation?)
     }
     
-    @ViewState fileprivate var hidden = true
+    /// A boolean value that indicates whether the Control overlay is presented.
+    @ViewState public fileprivate(set) var isBeingPresented = true
+    
     private var autoHiddenTimer: Timer?
     
     fileprivate var displayStyle = DisplayStyle.auto(firstAppear: false, animation: .default, duration: 5)
@@ -137,21 +139,21 @@ public class ControlService : Service {
         switch displayStyle {
         case let .manual(firstAppear: _, animation: animation):
             withAnimation(animation) {
-                self.hidden.toggle()
+                self.isBeingPresented.toggle()
             }
         case let .auto(firstAppear: _, animation: animation, duration: duration):
             
             autoHiddenTimer?.invalidate()
             
             withAnimation(animation) {
-                self.hidden.toggle()
+                self.isBeingPresented.toggle()
             }
-            if !hidden {
-                autoHiddenTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: false, block: { [weak self] timer in
+            if isBeingPresented {
+                autoHiddenTimer = Timer.scheduledTimer(withTimeInterval: duration, repeats: false) { [weak self] timer in
                     withAnimation {
-                        self?.hidden.toggle()
+                        self?.isBeingPresented.toggle()
                     }
-                })
+                }
             }
         default: break
         }
@@ -162,7 +164,7 @@ public class ControlService : Service {
     /// It has no effect when the display style is always or never.
     public func present() {
         
-        guard !isPresented else {
+        guard !isBeingPresented else {
             return
         }
         
@@ -170,7 +172,7 @@ public class ControlService : Service {
         
         if case let .custom(animation: animation) = displayStyle {
             withAnimation(animation) {
-                self.hidden = false
+                self.isBeingPresented = true
             }
         }
     }
@@ -180,7 +182,7 @@ public class ControlService : Service {
     /// It has no effect when the display style is always or never.
     public func dismiss() {
         
-        guard isPresented else {
+        guard isBeingPresented else {
             return
         }
         
@@ -188,14 +190,9 @@ public class ControlService : Service {
         
         if case let .custom(animation: animation) = displayStyle {
             withAnimation(animation) {
-                self.hidden = true
+                self.isBeingPresented = false
             }
         }
-    }
-    
-    /// A boolean value that indicates whether the Control overlay is presented.
-    public var isPresented: Bool {
-        !hidden
     }
     
     /// Specifies the display style.
@@ -204,10 +201,10 @@ public class ControlService : Service {
         self.displayStyle = displayStyle
         
         switch displayStyle {
-        case .always: hidden = false
-        case .never: hidden = true
-        case .manual(let firstAppear, _): hidden = !firstAppear
-        case .auto(let firstAppear, _, _): hidden = !firstAppear
+        case .always: isBeingPresented = true
+        case .never: isBeingPresented = false
+        case .manual(let firstAppear, _): isBeingPresented = firstAppear
+        case .auto(let firstAppear, _, _): isBeingPresented = firstAppear
         case .custom: break
         }
     }
@@ -561,7 +558,7 @@ struct ControlWidget: View {
     
     @ViewBuilder var top: some View {
         WithService(ControlService.self) { service in
-            if !service.hidden {
+            if service.isBeingPresented {
                 
                 VStack {
                     switch service.status {
@@ -641,7 +638,7 @@ struct ControlWidget: View {
         WithService(ControlService.self) { service in
             HStack(spacing:0) {
                 
-                if !service.hidden {
+                if service.isBeingPresented {
                     Group {
                         switch service.status {
                         case .halfScreen:
@@ -686,7 +683,7 @@ struct ControlWidget: View {
                 
                 Spacer(minLength: 0)
                 
-                if !service.hidden {
+                if service.isBeingPresented {
                     Group {
                         switch service.status {
                         case .halfScreen:
@@ -721,7 +718,7 @@ struct ControlWidget: View {
                 
                 Spacer(minLength: 0)
                 
-                if !service.hidden {
+                if service.isBeingPresented {
                     Group {
                         switch service.status {
                         case .halfScreen:
@@ -770,7 +767,7 @@ struct ControlWidget: View {
     
     @ViewBuilder var bottom: some View {
         WithService(ControlService.self) { service in
-            if !service.hidden {
+            if service.isBeingPresented {
                 
                 VStack {
                     switch service.status {
@@ -859,7 +856,7 @@ struct ControlWidget: View {
         WithService(ControlService.self) { service in
             ZStack {
                 
-                if let shadow = service.shadow, !service.hidden {
+                if let shadow = service.shadow, service.isBeingPresented {
                     shadow
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                         .transition(.opacity)

@@ -43,7 +43,7 @@ struct ContentView: View {
                             VolumeWidget(),
                             Spacer(),
                             StepBackWidget(),
-                            PlaybackButtonWidget(),
+                            PlaybackWidget(),
                             StepForwardWidget(),
                             Spacer(),
                             PiPWidget(),
