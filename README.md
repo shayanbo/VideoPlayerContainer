@@ -64,9 +64,14 @@ dependencies: [
 
 Context is the core class and is fully accessible from all of `Widget`s in the `VideoPlayerContainer`, it holds a service locator which we can use to fetch other `Service`s to borrow expertise from other `Widget`s. Adapters can access other `Service` instance by `context[Service.type]`. `Context` cache at a maximum of one `Service` instance for each `Service Type`. Besides, the built-in `Service` can be accessible by handy way such as `context.render`, `context.control` and so on.
 
+### TestContext
+
+`TestContext` is a specialized context for tests. when you author unit tests. you should create a `TestContext` instead of `Context` as the constructor parameter of `Service`. This kind of `Context` requires that you have register with `Service` factory method before fetching it from the `Context` instance. In this way, you can make the dependencies of `Service` behave predictably. And you can check the [Test](Test)'s Tests file as an example of `TestContext`.
+
+
 ### Widget
 
-Widget is literally a SwiftUI View that's inside the `VideoPlayerContainer` which means it can access the context and in most cases, it has a specific `Service` to handle all of its logic code and to communicate with other `Service`s. Generally, we use `WithService` as the root view of the `Widget` to access `Service` instance in `Widget`. This way, not only can we access `Service`'s APIs, but also the `Widget` updates upon the `State`s of `Service` changes.
+`Widget` is literally a SwiftUI View that's inside the `VideoPlayerContainer` which means it can access the `Context` and in most cases, it has a specific `Service` to handle all of its logic code and to communicate with other `Service`s. Generally, we use `WithService` as the root view of the `Widget` to access `Service` instance in `Widget`. This way, not only can we access `Service`'s APIs, but also the `Widget` updates upon the `State`s of `Service` changes.
 
 ### PlayerWidget
 
