@@ -74,6 +74,12 @@ public class Context : ObservableObject {
     }
 }
 
+/// TestContext is a specialized Context used for test cases
+///
+/// When you write Unite Test for services, you have to create a TestContext instead of Context.
+/// Actually, the TestContext is a subclass of Context. It requires that you have to register service factory method before fetching.
+/// In this way, you can customize the service instance to **mock** and **stub**.
+///
 public class TestContext : Context {
     
     public static var builtinService = [
@@ -88,10 +94,14 @@ public class TestContext : Context {
         StatusService.self,
     ]
     
+    /// The ServiceType inside this whitelist will created inside instead of looking up registrations
     public var whitelist = [Service.Type]()
     
     private var registrations = [String: Any]()
     
+    /// Register the service factory before using service instance by ``startService(_:)``
+    /// - Parameter type: Type of services. For example, DemoService.self.
+    ///
     public func register<ServiceType>(_ type:ServiceType.Type, factory: @escaping (TestContext)->ServiceType) where ServiceType: Service {
         
         lock.lock()

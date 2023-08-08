@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import Mockingbird
 @testable import VideoPlayerContainer
 
 final class Tests: XCTestCase {
@@ -15,7 +16,13 @@ final class Tests: XCTestCase {
         let context = TestContext()
         
         context.register(TargetService.self) {
-            return TargetService($0)
+            TargetService($0)
+        }
+        
+        context.register(DependencyService.self) {
+            let target = mock(DependencyService.self).initialize($0)
+            givenSwift(target.fetchData()) ~> { 10 }
+            return target
         }
         
         let target = context[TargetService.self]

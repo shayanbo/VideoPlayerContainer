@@ -30,6 +30,7 @@
 		D40808412A7E8561002AACA0 /* RateWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408083C2A7E8561002AACA0 /* RateWidget.swift */; };
 		D40808422A7E8561002AACA0 /* TimelineWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408083D2A7E8561002AACA0 /* TimelineWidget.swift */; };
 		D40808432A7E8561002AACA0 /* DurationWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D408083E2A7E8561002AACA0 /* DurationWidget.swift */; };
+		D4100B732A82A73000267DCF /* TestMocks.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4100B722A82A73000267DCF /* TestMocks.generated.swift */; };
 		D41A3E012A5A586E0061C1AF /* StepService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41A3E002A5A586E0061C1AF /* StepService.swift */; };
 		D42C541E2A7CA9E100827BCC /* PiPWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D42C541D2A7CA9E100827BCC /* PiPWidget.swift */; };
 		D43223862A8215A300905A66 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43223852A8215A300905A66 /* Tests.swift */; };
@@ -40,6 +41,7 @@
 		D43D77492A7BA7CF00A18813 /* PreviewWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43D77482A7BA7CF00A18813 /* PreviewWidget.swift */; };
 		D43D774B2A7BC01400A18813 /* PlaylistWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43D774A2A7BC01400A18813 /* PlaylistWidget.swift */; };
 		D43D774D2A7BC51900A18813 /* MoreWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D43D774C2A7BC51900A18813 /* MoreWidget.swift */; };
+		D446EDEC2A8297F00035B8D4 /* Mockingbird in Frameworks */ = {isa = PBXBuildFile; productRef = D446EDEB2A8297F00035B8D4 /* Mockingbird */; };
 		D45355972A822C5700ACDDBD /* VideoPlayerContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; };
 		D45355982A822C5700ACDDBD /* VideoPlayerContainer.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		D453559A2A822C6300ACDDBD /* VideoPlayerContainer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4061C242A4B257800CDD1FF /* VideoPlayerContainer.framework */; };
@@ -305,6 +307,7 @@
 		D408083C2A7E8561002AACA0 /* RateWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RateWidget.swift; sourceTree = "<group>"; };
 		D408083D2A7E8561002AACA0 /* TimelineWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineWidget.swift; sourceTree = "<group>"; };
 		D408083E2A7E8561002AACA0 /* DurationWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DurationWidget.swift; sourceTree = "<group>"; };
+		D4100B722A82A73000267DCF /* TestMocks.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestMocks.generated.swift; sourceTree = "<group>"; };
 		D41A3E002A5A586E0061C1AF /* StepService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StepService.swift; sourceTree = "<group>"; };
 		D42C541D2A7CA9E100827BCC /* PiPWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PiPWidget.swift; sourceTree = "<group>"; };
 		D43223832A8215A300905A66 /* Test.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Test.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -414,6 +417,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D446EDEC2A8297F00035B8D4 /* Mockingbird in Frameworks */,
 				D45355B02A8230F900ACDDBD /* VideoPlayerContainer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -556,6 +560,7 @@
 		D43223842A8215A300905A66 /* Test */ = {
 			isa = PBXGroup;
 			children = (
+				D4100B722A82A73000267DCF /* TestMocks.generated.swift */,
 				D43223852A8215A300905A66 /* Tests.swift */,
 				D4AB2F1F2A82186400D4FCFF /* DependencyService.swift */,
 				D4799B442A82163600059A3C /* TargetService.swift */,
@@ -842,9 +847,13 @@
 			buildRules = (
 			);
 			dependencies = (
+				D446EDEA2A8297CE0035B8D4 /* PBXTargetDependency */,
 				D43223892A8215A300905A66 /* PBXTargetDependency */,
 			);
 			name = Test;
+			packageProductDependencies = (
+				D446EDEB2A8297F00035B8D4 /* Mockingbird */,
+			);
 			productName = VideoPlayerContainerTests;
 			productReference = D43223832A8215A300905A66 /* Test.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
@@ -1011,6 +1020,9 @@
 				Base,
 			);
 			mainGroup = D499860F2A389FEF00384185;
+			packageReferences = (
+				D446EDE82A82979B0035B8D4 /* XCRemoteSwiftPackageReference "mockingbird" */,
+			);
 			productRefGroup = D49986192A389FEF00384185 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1150,6 +1162,7 @@
 			files = (
 				D43223862A8215A300905A66 /* Tests.swift in Sources */,
 				D4AB2F202A82186400D4FCFF /* DependencyService.swift in Sources */,
+				D4100B732A82A73000267DCF /* TestMocks.generated.swift in Sources */,
 				D4799B452A82163600059A3C /* TargetService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1275,6 +1288,10 @@
 			isa = PBXTargetDependency;
 			target = D4061C232A4B257800CDD1FF /* VideoPlayerContainer */;
 			targetProxy = D43223882A8215A300905A66 /* PBXContainerItemProxy */;
+		};
+		D446EDEA2A8297CE0035B8D4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			productRef = D446EDE92A8297CE0035B8D4 /* Mockingbird */;
 		};
 		D46141562A512D2D00D84E62 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1465,7 +1482,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5V8DJBQ6XZ;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1490,7 +1507,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 5V8DJBQ6XZ;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -2071,6 +2088,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D446EDE82A82979B0035B8D4 /* XCRemoteSwiftPackageReference "mockingbird" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/birdrides/mockingbird";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D446EDE92A8297CE0035B8D4 /* Mockingbird */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D446EDE82A82979B0035B8D4 /* XCRemoteSwiftPackageReference "mockingbird" */;
+			productName = Mockingbird;
+		};
+		D446EDEB2A8297F00035B8D4 /* Mockingbird */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D446EDE82A82979B0035B8D4 /* XCRemoteSwiftPackageReference "mockingbird" */;
+			productName = Mockingbird;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D49986102A389FEF00384185 /* Project object */;
 }
