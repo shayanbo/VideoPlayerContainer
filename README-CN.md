@@ -270,6 +270,10 @@ struct PlaybackWidget: View {
 2. 如果你正在编写一个需要提供给其他 `Service`s 调用的 **Widget Service**, 我们推荐使用 `internal` 或者 `public` 来修饰这个 `Service` 的class. 因为其他的 `Service`s 需要在编译期间通过 `Context` 访问到你的 `Service`. 当然, 对于那些只在 `Service` 内部使用的变量和方法, 还是需要使用 `private` 来修饰. 对于那些只在所属的 `Widget` 内使用的变量和方法, 还是需要使用 `fileprivate` 来修饰.
 3. 如果你正在编写一个 **Non-Widget Service**. 我们推荐使用 `internal` 或者 `public` 来修饰这个 `Service` 的class. 因为其他的 `Service`s 需要在编译期间通过 `Context` 访问到你的 `Service`. 当然, 对于那些只在 `Service` 内部使用的变量和方法, 还是需要使用 `private` 来修饰.
 
+## Core 目录
+
+Core目录的源文件不仅可以用于该工程. 同样地, 他也适用于大部分其他场景. 当你在创建一个复杂页面或者模块的时候. 这些文件可以让你的代码更加可读和可测.
+
 ## 想法 / 缺陷 / 改进
 
 任何问题都可以在Issue板块提出, 我们会及时沟通并且共同改进😀.
