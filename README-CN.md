@@ -62,10 +62,6 @@ dependencies: [
 
 `Context` 是一个核心类, 他可以被 `VideoPlayerContainer` 内所有的 `Widget` 访问到, `Context` 内部持有一个服务定位器(service locator), 提供 `Service` 之间访问的能力. 可以通过context[Service.Type]获取其他 `Service` 实例. `Context` 保证缓存的 `Service` 实例最多只有一个. 除此之外. 内置的 `Service` 提供了扩展API可以方便的获取, 比如 `context.render`, `context.control` 等.
 
-### TestContext (测试上下文)
-
-`TestContext` 是一个特殊的 `Context`. 当你在编写单元测试的时候, 你应该创建一个 `TestContext` 而不是 `Context` 作为 `Service` 构造函数的参数. 这种 `Context` 要求你提前注册 `Service` 的工厂方法, 然后在通过 `Context` 对象获取该 `Service`. 这么一来, 我们可以干预到 `Service` 实例的创建中, 从而提供了可以修改 `Service` 对象的机会. 比如作为一个依赖项, 我们需要设置依赖项的参数和返回值. 可以查看一下[Test](Test)的Tests文件当做示例.
-
 ### Widget (控件)
 
 `Widget` 本身就是 `VideoPlayerContainer` 中一个 `SwiftUI` 的 `View`, 他可以访问到 `Context` 对象, 绝大多数的情况下, 会为它编写一个专门的 `Service` 对象来处于逻辑和负责Service间通讯的工作. 通常我们会在 `Widget` 中使用 `WithService` 作为根视图来访问相应的 `Service`. 这样既能使用 `Service` 提供的方法, 还会在 `Service` 的State变化的时候, 自动刷新当前 `Widget`.
