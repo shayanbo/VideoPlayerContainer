@@ -75,10 +75,22 @@ public class Context : ObservableObject {
     
     private var dependencies = DependencyValues()
     
+    /// Retrieve an external dependency of ``Service``.
+    ///
+    /// You can introduce external dependencies with ``Dependency`` propertyWrapper.
+    /// In this way, you can easily change the implementation of Dependency to mock the return value of external dependencies
+    ///
+    /// - Parameter keyPath: The factory location for external dependency. See Also ``DependencyValues``.
+    ///
     public func dependency<Value>(_ keyPath: KeyPath<DependencyValues, Value>) -> Value {
         dependencies.dependency(keyPath)
     }
     
+    /// Replace the implementation of dependency to mock the return value of external dependencies.
+    ///
+    /// - Parameter keyPath: The factory location for external dependency. See Also ``DependencyValues``.
+    /// - Parameter factory: The factory you wanna overwrite the original one.
+    ///
     public func withDependency<Value>(_ keyPath: KeyPath<DependencyValues, Value>, factory: ()->Value) {
         dependencies.withDependency(keyPath, factory: factory)
     }
