@@ -63,6 +63,8 @@ public class StatusService : Service {
 }
 
 public extension Context {
+    
+    /// Simple alternative for `context[StatusService.self]`
     var status: StatusService {
         self[StatusService.self]
     }

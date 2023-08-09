@@ -131,6 +131,8 @@ fileprivate struct ToastLayout : Layout {
 }
 
 public extension Context {
+    
+    /// Simple alternative for `context[ToastService.self]`
     var toast: ToastService {
         self[ToastService.self]
     }

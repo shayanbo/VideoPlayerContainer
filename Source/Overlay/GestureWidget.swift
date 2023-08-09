@@ -291,6 +291,8 @@ struct GestureWidget: View {
 }
 
 public extension Context {
+    
+    /// Simple alternative for `context[GestureService.self]`
     var gesture: GestureService {
         self[GestureService.self]
     }

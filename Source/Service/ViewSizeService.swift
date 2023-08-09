@@ -28,6 +28,8 @@ public class ViewSizeService : Service {
 }
 
 public extension Context {
+    
+    /// Simple alternative for `context[ViewSizeService.self]`
     var viewSize: ViewSizeService {
         self[ViewSizeService.self]
     }

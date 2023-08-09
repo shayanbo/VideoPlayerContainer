@@ -65,11 +65,11 @@ public struct Dependency<Value> {
 /// All of dependencies should be an read-only computed property extension of it.
 /// The only instance of it is kept inside the ``Context``. See Also ``Dependency``.
 ///
-public class DependencyValues {
+public struct DependencyValues {
     
     private var dependencies = [String: Any]()
     
-    func dependency<Value>(_ keyPath: KeyPath<DependencyValues, Value>) -> Value {
+    mutating func dependency<Value>(_ keyPath: KeyPath<DependencyValues, Value>) -> Value {
         
         let typeKey = String(describing: Value.self)
         
@@ -83,7 +83,7 @@ public class DependencyValues {
         return dep
     }
     
-    func withDependency<Value>(_ keyPath: KeyPath<DependencyValues, Value>, factory: ()->Value) {
+    mutating func withDependency<Value>(_ keyPath: KeyPath<DependencyValues, Value>, factory: ()->Value) {
         
         let typeKey = String(describing: Value.self)
         dependencies[typeKey] = factory()

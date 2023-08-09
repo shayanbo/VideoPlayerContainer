@@ -234,3 +234,11 @@ public extension CoordinateSpace {
         .named(containerSpaceName)
     }
 }
+
+public extension Context {
+    
+    /// Simple alternative for `context[PlayerService.self]`
+    var container: PlayerService {
+        self[PlayerService.self]
+    }
+}

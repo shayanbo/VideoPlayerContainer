@@ -94,3 +94,9 @@ struct FloatControlOverlay: View {
         }
     }
 }
+
+extension Context {
+    var floatControl: FloatControlService {
+        self[FloatControlService.self]
+    }
+}

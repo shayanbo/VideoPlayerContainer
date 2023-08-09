@@ -152,6 +152,8 @@ fileprivate class PlayerView: NSView {
 #endif
 
 public extension Context {
+    
+    /// Simple alternative for `context[RenderService.self]`
     var render: RenderService {
         self[RenderService.self]
     }

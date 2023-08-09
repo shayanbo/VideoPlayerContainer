@@ -894,8 +894,9 @@ public struct IdentifableView : View, Identifiable {
     }
 }
 
-
 public extension Context {
+    
+    /// Simple alternative for `context[ControlService.self]`
     var control: ControlService {
         self[ControlService.self]
     }

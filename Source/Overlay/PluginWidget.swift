@@ -67,6 +67,8 @@ struct PluginWidget: View {
 }
 
 public extension Context {
+    
+    /// Simple alternative for `context[PluginService.self]`
     var plugin: PluginService {
         self[PluginService.self]
     }

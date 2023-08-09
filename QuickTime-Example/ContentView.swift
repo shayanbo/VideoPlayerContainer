@@ -28,18 +28,16 @@ struct ContentView: View {
                     .onAppear {
                         
                         /// only enable the render overlay (remove other default overlays)
-                        let playerService = context[PlayerService.self]
-                        playerService.enable(overlays: [.render, .plugin, .feature])
+                        context.container.enable(overlays: [.render, .plugin, .feature])
                         
                         /// insert a custom overlay at the location above the original Control overlay
                         /// this custom overlay is the float panel you can see in the system builtin macOS QuickTime
-                        playerService.configure(overlay: .control) {
+                        context.container.configure(overlay: .control) {
                             AnyView(FloatControlOverlay())
                         }
                         
                         /// add widgets to the custom overlay
-                        let controlService = context[FloatControlService.self]
-                        controlService.configure(.first) {[
+                        context.floatControl.configure(.first) {[
                             VolumeWidget(),
                             Spacer(),
                             StepBackWidget(),
@@ -50,7 +48,7 @@ struct ContentView: View {
                             ShareWidget(),
                             MoreWidget(),
                         ]}
-                        controlService.configure(.second) {[
+                        context.floatControl.configure(.second) {[
                             TimelineWidget(),
                             SeekBarWidget(),
                             DurationWidget(),
