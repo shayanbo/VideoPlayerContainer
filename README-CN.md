@@ -32,7 +32,8 @@ VideoPlayerContainer 是一个基于SwiftUI的视频播放组件. 相比于系�
 * [VideoNavigation-Example](VideoNavigation-Example)
 * [QuickTime-Example](QuickTime-Example)
 * [VisionPro-Example](VisionPro-Example)
-
+* [Test-Example](Test-Example)
+  
 ## 安装
 
 VideoPlayerContainer 支持多种方法的集成方式
@@ -78,6 +79,14 @@ dependencies: [
 `Service` 代表了两个角色. 其一: 它作为MVVM架构的ViewModel, ViewModel 处理它所属的 `Widget` 的所有的 Output和Input. 其二: 它负责和其他 `Service` 之间的通讯. 我们鼓励大家在同一个源文件中编写 `Service` 和 `Widget`. 如此一来, 我们就可以使用 `fileprivate` 和 `private` 来区分哪些API是所属Widget专享的, 哪些API是提供给其他 `Service` 使用的.
 
 事实上, 存在两种 `Service`: **Widget Service**, **Non-Widget Service**. **Widget Service** 指的是那些被特定 `Widget` 使用的 `Service` while **Non-Widget Service** 指的是那些专门给其他 `Service`s 使用的 `Service`.
+
+### Property Wrappers (属性包装器)
+
+我们内置了3个重要的属性包装器, 确保你可以编写易读并且易测的代码.
+
+* **ViewState (视图状态)**: 它类似于Combine的Published. 你可以用它来标记 `Service` 中的 `State`.
+* **StateSync (状态同步)**: 它类似于 `ViewState`, 但是它是用于同步其他 `Service` 的 `State`. 举个例子, 当你想要你的 `Widget` 会随着其他 `Service` 的某个 `State` 变化而刷新的时候, `StateSync` 就是一个很好的选择.
+* **Dependency (外部依赖)**: 它是用于 `Service` 内部引入外部依赖使用的. 我们推荐大家使用这种方式引入外部依赖, 而不是直接内部创建并持有. 用这种方式的话. 你可以很容易在将外部依赖的实现通过 `Context.withDependency(_:factory:)` 替换掉. 这对**单元测试**来说, 非常实用.
 
 ### Overlay (层)
 
