@@ -286,6 +286,10 @@ We encourage adopters to author `Widget` and its `Service` in the same source fi
 2. If you are creating a **Widget Service** that offers some API for other `Service`s, `internal` or `public` is better to modify the `Service` class. Since other `Service`s have to access your `Service` Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the `Service` and using `fileprivate` to modify those properties and methods that are used only by its `Widget`.
 3. If you are creating a **Non-Widget Service** that offers some API for other `Service`s, `internal` or `public` is better to modify the `Service` class. Since other `Service`s have to access your `Service` Type in the compilation time. Also, keep using `private` to modify those properties and methods that are used only inside the `Service`.
 
+## Core Folder
+
+The source files in the Core folder are not only fitting for this project. but also most of the other requirements. When you are creating a complex scene or module. These core files are really useful and able to make your code more readable and testable.
+
 ## Idea / Bug / Improvement
 
 Feel free to report issues and let's improve it together 😀.
