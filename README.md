@@ -35,6 +35,7 @@ After cloning the repo and opening up the Xcode project, you can see multiple sc
 * [VideoNavigation-Example](VideoNavigation-Example)
 * [QuickTime-Example](QuickTime-Example)
 * [VisionPro-Example](VisionPro-Example)
+* [Test-Example](Test-Example)
 
 ## Installation
 
