@@ -72,63 +72,14 @@ public class Context : ObservableObject {
     public subscript<ServiceType>(_ type:ServiceType.Type) -> ServiceType where ServiceType: Service {
         startService(type)
     }
-}
-
-/// TestContext is a specialized Context used for test cases
-///
-/// When you write Unite Test for services, you have to create a TestContext instead of Context.
-/// Actually, the TestContext is a subclass of Context. It requires that you have to register service factory method before fetching.
-/// In this way, you can customize the service instance to **mock** and **stub**.
-///
-public class TestContext : Context {
     
-    public static var builtinService = [
-        ControlService.self,
-        ToastService.self,
-        PluginService.self,
-        FeatureService.self,
-        RenderService.self,
-        GestureService.self,
-        PlayerService.self,
-        ViewSizeService.self,
-        StatusService.self,
-    ]
+    private var dependencies = DependencyValues()
     
-    /// The ServiceType inside this whitelist will created inside instead of looking up registrations
-    public var whitelist = [Service.Type]()
-    
-    private var registrations = [String: Any]()
-    
-    /// Register the service factory before using service instance by ``startService(_:)``
-    /// - Parameter type: Type of services. For example, DemoService.self.
-    ///
-    public func register<ServiceType>(_ type:ServiceType.Type, factory: @escaping (TestContext)->ServiceType) where ServiceType: Service {
-        
-        lock.lock()
-        defer { lock.unlock() }
-        
-        let typeKey = String(describing: type)
-        registrations[typeKey] = factory
+    public func dependency<Value>(_ keyPath: KeyPath<DependencyValues, Value>) -> Value {
+        dependencies.dependency(keyPath)
     }
     
-    public override func startService<ServiceType>(_ type:ServiceType.Type) -> ServiceType where ServiceType: Service {
-        
-        lock.lock()
-        defer { lock.unlock() }
-        
-        if whitelist.contains(where: { $0 == type}) {
-            return super.startService(type)
-        }
-        
-        let typeKey = String(describing: type)
-        guard let registration = registrations[typeKey] else {
-            fatalError("\(typeKey) not found in TestContext, you have to register before fetching!")
-        }
-        guard let builder = registration as? (TestContext)->ServiceType else {
-            fatalError("Registration is not in line with return value of \(ServiceType.self)")
-        }
-        let service = builder(self)
-        services[typeKey] = service
-        return service
+    public func withDependency<Value>(_ keyPath: KeyPath<DependencyValues, Value>, factory: ()->Value) {
+        dependencies.withDependency(keyPath, factory: factory)
     }
 }
