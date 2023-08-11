@@ -9,9 +9,9 @@ import Foundation
 
 /// Context is the core concept, serving as a hub that's able to be accessed by all ``Service``s and ``Widget``s.
 ///
-/// It maintains a service locator which developers can fetch other Service with it.
-/// Developers are responsible for maintaing the Context instance and pass it to the ``PlayerWidget`` ( primary view in VideoPlayerContainer ).
-/// Generally, the context lifecycle is the same as its enclosing underlying view.
+/// It maintains a service locator which developers can fetch other Service with it without having to register before.
+/// It also maintains a dependencyValues which holds all of external dependencies used by services obtained from this Context.
+/// Generally, the Context lifecycle is the same as its enclosing underlying view.
 ///
 public class Context : ObservableObject {
     
@@ -68,7 +68,7 @@ public class Context : ObservableObject {
         }
     }
     
-    /// Convenient API for ``startService(_:)``.
+    /// Simple alternative for ``startService(_:)``.
     public subscript<ServiceType>(_ type:ServiceType.Type) -> ServiceType where ServiceType: Service {
         startService(type)
     }
