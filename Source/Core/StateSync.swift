@@ -50,7 +50,7 @@ public class StateSync<S, Value> where S: Service {
         self.keyPath = keyPath
     }
     
-    public static subscript<OuterSelf: Service>(_enclosingInstance observed: OuterSelf, wrapped wrappedKeyPath: KeyPath<OuterSelf, Value>, storage storageKeyPath: ReferenceWritableKeyPath<OuterSelf, StateSync>) -> Value {
+    public static subscript<OuterSelf: Service>(_enclosingInstance observed: OuterSelf, wrapped wrappedKeyPath: KeyPath<OuterSelf, Value>, storage storageKeyPath: ReferenceWritableKeyPath<OuterSelf, StateSync>) -> Value? {
         
         let sync = observed[keyPath: storageKeyPath]
         
@@ -62,11 +62,11 @@ public class StateSync<S, Value> where S: Service {
         
         if !sync.initialized {
             
-            let published = observed.context[sync.serviceType][keyPath: sync.keyPath]
-            published.dropFirst().sink { x in
+            let published = observed.context?[sync.serviceType][keyPath: sync.keyPath]
+            published?.dropFirst().sink { x in
                 observed.objectWillChange.send()
             }.store(in: &sync.cancellables)
         }
-        return observed.context[sync.serviceType][keyPath: sync.keyPath].value
+        return observed.context?[sync.serviceType][keyPath: sync.keyPath].value
     }
 }

@@ -35,7 +35,7 @@ fileprivate class PiPWidgetService : Service {
     }
     
     func didClick() {
-        guard let controller = PiPController else {
+        guard let context, let controller = PiPController else {
             return
         }
         context.control.dismiss()

@@ -11,7 +11,7 @@ import VideoPlayerContainer
 fileprivate class MessageWidgetService: Service {
     
     func launchComments() {
-        context[FeatureService.self].present(.right(.squeeze(0))) {
+        context?[FeatureService.self].present(.right(.squeeze(0))) {
             AnyView(CommentWidget())
         }
     }

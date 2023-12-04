@@ -11,7 +11,7 @@ import VideoPlayerContainer
 fileprivate class TitleService: Service {
     
     var title: String {
-        "@\(context[DataService.self].author ?? "--")"
+        "@\(context?[DataService.self].author ?? "--")"
     }
 }
 

@@ -11,8 +11,7 @@ import VideoPlayerContainer
 fileprivate class MoreWidgetService: Service {
     
     func showPlaylist() {
-        let featureService = context[FeatureService.self]
-        featureService.present(.right(.cover)) {
+        context?[FeatureService.self].present(.right(.cover)) {
             AnyView(PlaylistWidget())
         }
     }

@@ -11,7 +11,7 @@ import VideoPlayerContainer
 fileprivate class DescriptionService: Service {
     
     var description: String {
-        context[DataService.self].description ?? "--"
+        context?[DataService.self].description ?? "--"
     }
 }
 

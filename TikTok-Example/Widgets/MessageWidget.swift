@@ -11,6 +11,8 @@ import VideoPlayerContainer
 fileprivate class MesssageService: Service {
     
     func onClick() {
+        guard let context else { return }
+        
         context[FeatureService.self].present(.bottom(.squeeze(0))) { [weak context] in
             context?.control.dismiss()
         } beforeDismiss: { [weak context] in
@@ -18,7 +20,7 @@ fileprivate class MesssageService: Service {
         } content: {
             AnyView(
                 Form {
-                    ForEach(self.context[DataService.self].comments ?? [], id: \.self) { comment in
+                    ForEach(context[DataService.self].comments ?? [], id: \.self) { comment in
                         Text(comment)
                     }
                 }.frame(height: 400)

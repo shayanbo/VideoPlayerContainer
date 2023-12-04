@@ -82,10 +82,10 @@ public struct Dependency<Value> {
         self.keyPath = keyPath
     }
     
-    public static subscript<OuterSelf: Service>(_enclosingInstance observed: OuterSelf, wrapped wrappedKeyPath: KeyPath<OuterSelf, Value>, storage storageKeyPath: ReferenceWritableKeyPath<OuterSelf, Self>) -> Value {
+    public static subscript<OuterSelf: Service>(_enclosingInstance observed: OuterSelf, wrapped wrappedKeyPath: KeyPath<OuterSelf, Value>, storage storageKeyPath: ReferenceWritableKeyPath<OuterSelf, Self>) -> Value? {
         
         let keyPath = observed[keyPath: storageKeyPath].keyPath
-        return observed.context.dependency(keyPath)
+        return observed.context?.dependency(keyPath)
     }
 }
 

@@ -92,6 +92,12 @@ fileprivate class PlayerView: UIView {
         super.layoutSubviews()
         playerLayer?.frame = self.bounds
     }
+    
+    deinit {
+        player?.pause()
+        player?.replaceCurrentItem(with: nil)
+        player = nil
+    }
 }
 
 #elseif os(macOS)
@@ -146,6 +152,12 @@ fileprivate class PlayerView: NSView {
             layer.player = player
             layer.autoresizingMask = [.layerWidthSizable, .layerHeightSizable]
         }
+    }
+    
+    deinit {
+        player?.pause()
+        player?.replaceCurrentItem(with: nil)
+        player = nil
     }
 }
 

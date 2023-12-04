@@ -34,7 +34,7 @@ public typealias Widget = View
 ///
 open class Service : ObservableObject {
 
-    public let context: Context
+    public weak var context: Context?
     
     public required init(_ context: Context) {
         self.context = context

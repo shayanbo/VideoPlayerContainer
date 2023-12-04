@@ -11,7 +11,7 @@ import VideoPlayerContainer
 fileprivate class CommentService: Service {
     
     func closeButtonDidTapped() {
-        context[FeatureService.self].dismiss()
+        context?[FeatureService.self].dismiss()
     }
 }
 

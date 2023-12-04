@@ -38,6 +38,7 @@ fileprivate class PlaybackWidgetService: Service {
     }
     
     func didClick() {
+        guard let context else { return }
         if context.render.player.rate == 0 {
             context.render.player.play()
         } else {

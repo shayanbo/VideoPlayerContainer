@@ -24,8 +24,8 @@ fileprivate class StepBackwardWidgetService: Service {
     }
     
     func stepBackward() {
-        context.render.player.currentItem?.step(byCount: -30 * 5)
-        context.render.player.play()
+        context?.render.player.currentItem?.step(byCount: -30 * 5)
+        context?.render.player.play()
     }
 }
 

@@ -54,6 +54,7 @@ class PreviewWidgetService: Service {
     }
     
     func present() {
+        guard let context else { return }
         if !context.plugin.isBeingPresented {
             context.plugin.present(.topLeading, animation: nil, transition: .identity) {
                 AnyView(PreviewWidget())
@@ -62,8 +63,8 @@ class PreviewWidgetService: Service {
     }
     
     func dismiss() {
-        context.plugin.dismiss(animation: nil)
-        context.stopService(PreviewWidgetService.self)
+        context?.plugin.dismiss(animation: nil)
+        context?.stopService(PreviewWidgetService.self)
     }
 }
 

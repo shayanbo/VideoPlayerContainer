@@ -14,13 +14,13 @@ fileprivate class VolumeWidgetService : Service {
     
     @ViewState var volume: Float = 1 {
         didSet {
-            context.render.player.volume = volume
+            context?.render.player.volume = volume
         }
     }
     
     @ViewState var mute = false {
         didSet {
-            context.render.player.isMuted = mute
+            context?.render.player.isMuted = mute
         }
     }
     

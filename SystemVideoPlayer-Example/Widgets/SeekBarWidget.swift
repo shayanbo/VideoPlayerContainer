@@ -85,7 +85,7 @@ fileprivate class SeekBarWidgetService : Service {
     
     func seekProgress(_ progress: Float) {
         
-        guard let item = context.render.player.currentItem else { return }
+        guard let context, let item = context.render.player.currentItem else { return }
         guard item.duration.seconds.isNormal else { return }
         
         let target = item.duration.seconds * Float64(progress)

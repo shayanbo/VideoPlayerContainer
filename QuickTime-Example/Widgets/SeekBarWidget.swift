@@ -82,7 +82,7 @@ fileprivate class SeekBarWidgetService : Service {
     
     func seekProgress(_ progress: CGFloat) {
         
-        guard let item = context.render.player.currentItem else { return }
+        guard let context, let item = context.render.player.currentItem else { return }
         guard item.duration.seconds.isNormal else { return }
         
         let target = item.duration.seconds * Float64(progress)
@@ -95,7 +95,7 @@ fileprivate class SeekBarWidgetService : Service {
     
     func adjustPreview(hoverPoint: CGPoint, proxy: GeometryProxy) {
         
-        guard let item = context.render.player.currentItem else {
+        guard let context, let item = context.render.player.currentItem else {
             return
         }
         
@@ -118,10 +118,10 @@ fileprivate class SeekBarWidgetService : Service {
     }
     
     func presentPreview() {
-        context[PreviewWidgetService.self].present()
+        context?[PreviewWidgetService.self].present()
     }
     
     func dismissPreview() {
-        context[PreviewWidgetService.self].dismiss()
+        context?[PreviewWidgetService.self].dismiss()
     }
 }

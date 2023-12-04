@@ -24,8 +24,8 @@ fileprivate class StepForwardWidgetService: Service {
     }
     
     func stepForward() {
-        context.render.player.currentItem?.step(byCount: 30 * 5)
-        context.render.player.play()
+        context?.render.player.currentItem?.step(byCount: 30 * 5)
+        context?.render.player.play()
     }
 }
 

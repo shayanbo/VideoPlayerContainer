@@ -91,7 +91,7 @@ public class PlayerService: Service {
 ///
 public struct PlayerWidget: View {
     
-    private let context: Context
+    private weak var context: Context?
     
     /// Contructor for PlayerWidget
     ///
@@ -113,7 +113,7 @@ public struct PlayerWidget: View {
         GeometryReader { proxy in
             
             let _ = {
-                context.viewSize.updateViewSize(proxy.size)
+                context?.viewSize.updateViewSize(proxy.size)
             }()
             
             WithService(PlayerService.self) { service in
@@ -213,10 +213,10 @@ public struct PlayerWidget: View {
                 .clipped()
             }
         }
-        .environmentObject(context)
+        .environmentObject(context ?? Context())
         .coordinateSpace(name: CoordinateSpace.containerSpaceName)
         .onHover { changeOrEnd in
-            context.gesture.handleHover(action: changeOrEnd ? .start : .end)
+            context?.gesture.handleHover(action: changeOrEnd ? .start : .end)
         }
     }
 }
