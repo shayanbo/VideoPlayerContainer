@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 /// Service used by ``PlayerWidget``
 ///
@@ -24,9 +25,19 @@ public class PlayerService: Service {
     
     @ViewState fileprivate var overlayAfterToast:( ()->AnyView )?
     
-    @StateSync(serviceType: FeatureService.self, keyPath: \.$feature) fileprivate var feature
-    
     @ViewState fileprivate var overlays = Overlay.allCases
+    
+    @ViewState fileprivate var feature: FeatureService.Feature?
+    
+    fileprivate var cancellables = [AnyCancellable]()
+    
+    public required init(_ context: Context) {
+        super.init(context)
+        
+        context[FeatureService.self].$feature.sink { [weak self] feature in
+            self?.feature = feature
+        }.store(in: &cancellables)
+    }
     
     /// Reference used by other API like ``enable(overlays:)`` or ``configure(overlay:overlayGetter:)``
     public enum Overlay: CaseIterable {

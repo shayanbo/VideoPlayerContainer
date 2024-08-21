@@ -123,10 +123,14 @@ public class ControlService : Service {
     
     fileprivate var displayStyle = DisplayStyle.auto(firstAppear: false, animation: .default, duration: 5)
     
-    @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
+    fileprivate var status: StatusService.Status?
     
     public required init(_ context: Context) {
         super.init(context)
+        
+        context[StatusService.self].$status.sink(receiveValue: { [weak self] status in
+            self?.status = status
+        }).store(in: &cancellables)
         
         context.gesture.observe(.tap(.all)) { [weak context] _ in
             withAnimation {
@@ -561,73 +565,97 @@ struct ControlWidget: View {
             if service.isBeingPresented {
                 
                 VStack {
-                    switch service.status {
-                    case .halfScreen:
-                        AnyView( service.halfScreenControlBar.top1(service.halfScreenControlBarItems.top1) )
-                    case .fullScreen:
-                        AnyView( service.fullScreenControlBar.top1(service.fullScreenControlBarItems.top1) )
-                    case .portrait:
-                        AnyView( service.portraitScreenControlBar.top1(service.portraitScreenControlBarItems.top1) )
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            AnyView( service.halfScreenControlBar.top1(service.halfScreenControlBarItems.top1) )
+                        case .fullScreen:
+                            AnyView( service.fullScreenControlBar.top1(service.fullScreenControlBarItems.top1) )
+                        case .portrait:
+                            AnyView( service.portraitScreenControlBar.top1(service.portraitScreenControlBarItems.top1) )
+                        }
                     }
                     
-                    switch service.status {
-                    case .halfScreen:
-                        AnyView( service.halfScreenControlBar.top2(service.halfScreenControlBarItems.top2) )
-                    case .fullScreen:
-                        AnyView( service.fullScreenControlBar.top2(service.fullScreenControlBarItems.top2) )
-                    case .portrait:
-                        AnyView( service.portraitScreenControlBar.top2(service.portraitScreenControlBarItems.top2) )
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            AnyView( service.halfScreenControlBar.top2(service.halfScreenControlBarItems.top2) )
+                        case .fullScreen:
+                            AnyView( service.fullScreenControlBar.top2(service.fullScreenControlBarItems.top2) )
+                        case .portrait:
+                            AnyView( service.portraitScreenControlBar.top2(service.portraitScreenControlBarItems.top2) )
+                        }
                     }
                 }
                 .padding(.leading, {
-                    switch service.status {
-                    case .halfScreen:
-                        return service.halfScreenInsets.leading
-                    case .fullScreen:
-                        return service.fullScreenInsets.leading
-                    case .portrait:
-                        return service.portraitScreenInsets.leading
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            return service.halfScreenInsets.leading
+                        case .fullScreen:
+                            return service.fullScreenInsets.leading
+                        case .portrait:
+                            return service.portraitScreenInsets.leading
+                        }
+                    } else {
+                        return 0
                     }
                 }())
                 .padding(.trailing, {
-                    switch service.status {
-                    case .halfScreen:
-                        return service.halfScreenInsets.trailing
-                    case .fullScreen:
-                        return service.fullScreenInsets.trailing
-                    case .portrait:
-                        return service.portraitScreenInsets.trailing
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            return service.halfScreenInsets.trailing
+                        case .fullScreen:
+                            return service.fullScreenInsets.trailing
+                        case .portrait:
+                            return service.portraitScreenInsets.trailing
+                        }
+                    } else {
+                        return 0
                     }
                 }())
                 .padding(.top, {
-                    switch service.status {
-                    case .halfScreen:
-                        return service.halfScreenInsets.top
-                    case .fullScreen:
-                        return service.fullScreenInsets.top
-                    case .portrait:
-                        return service.portraitScreenInsets.top
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            return service.halfScreenInsets.top
+                        case .fullScreen:
+                            return service.fullScreenInsets.top
+                        case .portrait:
+                            return service.portraitScreenInsets.top
+                        }
+                    } else {
+                        return 0
                     }
                 }())
                 .frame(maxWidth: .infinity)
-                .background({ () -> AnyView? in 
-                    switch service.status {
-                    case .halfScreen:
-                        return service.halfScreenShadow.top
-                    case .fullScreen:
-                        return service.fullScreenShadow.top
-                    case .portrait:
-                        return service.portraitScreenShadow.top
+                .background({ () -> AnyView? in
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            return service.halfScreenShadow.top
+                        case .fullScreen:
+                            return service.fullScreenShadow.top
+                        case .portrait:
+                            return service.portraitScreenShadow.top
+                        }
+                    } else {
+                        return nil
                     }
                 }())
                 .transition({
-                    switch service.status {
-                    case .halfScreen:
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            return service.halfScreenTransition.top
+                        case .fullScreen:
+                            return service.fullScreenTransition.top
+                        case .portrait:
+                            return service.portraitScreenTransition.top
+                        }
+                    } else {
                         return service.halfScreenTransition.top
-                    case .fullScreen:
-                        return service.fullScreenTransition.top
-                    case .portrait:
-                        return service.portraitScreenTransition.top
                     }
                 }())
             }
@@ -640,43 +668,57 @@ struct ControlWidget: View {
                 
                 if service.isBeingPresented {
                     Group {
-                        switch service.status {
-                        case .halfScreen:
-                            AnyView( service.halfScreenControlBar.left(service.halfScreenControlBarItems.left) )
-                        case .fullScreen:
-                            AnyView( service.fullScreenControlBar.left(service.fullScreenControlBarItems.left) )
-                        case .portrait:
-                            AnyView( service.portraitScreenControlBar.left(service.portraitScreenControlBarItems.left) )
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                AnyView( service.halfScreenControlBar.left(service.halfScreenControlBarItems.left) )
+                            case .fullScreen:
+                                AnyView( service.fullScreenControlBar.left(service.fullScreenControlBarItems.left) )
+                            case .portrait:
+                                AnyView( service.portraitScreenControlBar.left(service.portraitScreenControlBarItems.left) )
+                            }
                         }
                     }
                     .padding(.leading, {
-                        switch service.status {
-                        case .halfScreen:
-                            return service.halfScreenInsets.leading
-                        case .fullScreen:
-                            return service.fullScreenInsets.leading
-                        case .portrait:
-                            return service.portraitScreenInsets.leading
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                return service.halfScreenInsets.leading
+                            case .fullScreen:
+                                return service.fullScreenInsets.leading
+                            case .portrait:
+                                return service.portraitScreenInsets.leading
+                            }
+                        } else {
+                            return 0
                         }
                     }())
                     .background({ () -> AnyView? in
-                        switch service.status {
-                        case .halfScreen:
-                            return service.halfScreenShadow.left
-                        case .fullScreen:
-                            return service.fullScreenShadow.left
-                        case .portrait:
-                            return service.portraitScreenShadow.left
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                return service.halfScreenShadow.left
+                            case .fullScreen:
+                                return service.fullScreenShadow.left
+                            case .portrait:
+                                return service.portraitScreenShadow.left
+                            }
+                        } else {
+                            return nil
                         }
                     }())
                     .transition({
-                        switch service.status {
-                        case .halfScreen:
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                return service.halfScreenTransition.left
+                            case .fullScreen:
+                                return service.fullScreenTransition.left
+                            case .portrait:
+                                return service.portraitScreenTransition.left
+                            }
+                        } else {
                             return service.halfScreenTransition.left
-                        case .fullScreen:
-                            return service.fullScreenTransition.left
-                        case .portrait:
-                            return service.portraitScreenTransition.left
                         }
                     }())
                 }
@@ -685,33 +727,43 @@ struct ControlWidget: View {
                 
                 if service.isBeingPresented {
                     Group {
-                        switch service.status {
-                        case .halfScreen:
-                            AnyView( service.halfScreenControlBar.center(service.halfScreenControlBarItems.center) )
-                        case .fullScreen:
-                            AnyView( service.fullScreenControlBar.center(service.fullScreenControlBarItems.center) )
-                        case .portrait:
-                            AnyView( service.portraitScreenControlBar.center(service.portraitScreenControlBarItems.center) )
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                AnyView( service.halfScreenControlBar.center(service.halfScreenControlBarItems.center) )
+                            case .fullScreen:
+                                AnyView( service.fullScreenControlBar.center(service.fullScreenControlBarItems.center) )
+                            case .portrait:
+                                AnyView( service.portraitScreenControlBar.center(service.portraitScreenControlBarItems.center) )
+                            }
                         }
                     }
                     .background({ () -> AnyView? in
-                        switch service.status {
-                        case .halfScreen:
-                            return service.halfScreenShadow.center
-                        case .fullScreen:
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                return service.halfScreenShadow.center
+                            case .fullScreen:
+                                return service.fullScreenShadow.center
+                            case .portrait:
+                                return service.portraitScreenShadow.center
+                            }
+                        } else {
                             return service.fullScreenShadow.center
-                        case .portrait:
-                            return service.portraitScreenShadow.center
                         }
                     }())
                     .transition({
-                        switch service.status {
-                        case .halfScreen:
-                            return service.halfScreenTransition.center
-                        case .fullScreen:
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                return service.halfScreenTransition.center
+                            case .fullScreen:
+                                return service.fullScreenTransition.center
+                            case .portrait:
+                                return service.portraitScreenTransition.center
+                            }
+                        } else {
                             return service.fullScreenTransition.center
-                        case .portrait:
-                            return service.portraitScreenTransition.center
                         }
                     }())
                 }
@@ -720,43 +772,57 @@ struct ControlWidget: View {
                 
                 if service.isBeingPresented {
                     Group {
-                        switch service.status {
-                        case .halfScreen:
-                            AnyView( service.halfScreenControlBar.right(service.halfScreenControlBarItems.right) )
-                        case .fullScreen:
-                            AnyView( service.fullScreenControlBar.right(service.fullScreenControlBarItems.right) )
-                        case .portrait:
-                            AnyView( service.portraitScreenControlBar.right(service.portraitScreenControlBarItems.right) )
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                AnyView( service.halfScreenControlBar.right(service.halfScreenControlBarItems.right) )
+                            case .fullScreen:
+                                AnyView( service.fullScreenControlBar.right(service.fullScreenControlBarItems.right) )
+                            case .portrait:
+                                AnyView( service.portraitScreenControlBar.right(service.portraitScreenControlBarItems.right) )
+                            }
                         }
                     }
                     .padding(.trailing, {
-                        switch service.status {
-                        case .halfScreen:
-                            return service.halfScreenInsets.trailing
-                        case .fullScreen:
-                            return service.fullScreenInsets.trailing
-                        case .portrait:
-                            return service.portraitScreenInsets.trailing
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                return service.halfScreenInsets.trailing
+                            case .fullScreen:
+                                return service.fullScreenInsets.trailing
+                            case .portrait:
+                                return service.portraitScreenInsets.trailing
+                            }
+                        } else {
+                            return 0
                         }
                     }())
                     .background({ () -> AnyView? in
-                        switch service.status {
-                        case .halfScreen:
-                            return service.halfScreenShadow.right
-                        case .fullScreen:
-                            return service.fullScreenShadow.right
-                        case .portrait:
-                            return service.portraitScreenShadow.right
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                return service.halfScreenShadow.right
+                            case .fullScreen:
+                                return service.fullScreenShadow.right
+                            case .portrait:
+                                return service.portraitScreenShadow.right
+                            }
+                        } else {
+                            return nil
                         }
                     }())
                     .transition({
-                        switch service.status {
-                        case .halfScreen:
-                            return service.halfScreenTransition.right
-                        case .fullScreen:
+                        if let status = service.status {
+                            switch status {
+                            case .halfScreen:
+                                return service.halfScreenTransition.right
+                            case .fullScreen:
+                                return service.fullScreenTransition.right
+                            case .portrait:
+                                return service.portraitScreenTransition.right
+                            }
+                        } else {
                             return service.fullScreenTransition.right
-                        case .portrait:
-                            return service.portraitScreenTransition.right
                         }
                     }())
                 }
@@ -770,82 +836,108 @@ struct ControlWidget: View {
             if service.isBeingPresented {
                 
                 VStack {
-                    switch service.status {
-                    case .halfScreen:
-                        AnyView( service.halfScreenControlBar.bottom3(service.halfScreenControlBarItems.bottom3) )
-                    case .fullScreen:
-                        AnyView( service.fullScreenControlBar.bottom3(service.fullScreenControlBarItems.bottom3) )
-                    case .portrait:
-                        AnyView( service.portraitScreenControlBar.bottom3(service.portraitScreenControlBarItems.bottom3) )
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            AnyView( service.halfScreenControlBar.bottom3(service.halfScreenControlBarItems.bottom3) )
+                        case .fullScreen:
+                            AnyView( service.fullScreenControlBar.bottom3(service.fullScreenControlBarItems.bottom3) )
+                        case .portrait:
+                            AnyView( service.portraitScreenControlBar.bottom3(service.portraitScreenControlBarItems.bottom3) )
+                        }
                     }
                     
-                    switch service.status {
-                    case .halfScreen:
-                        AnyView( service.halfScreenControlBar.bottom2(service.halfScreenControlBarItems.bottom2) )
-                    case .fullScreen:
-                        AnyView( service.fullScreenControlBar.bottom2(service.fullScreenControlBarItems.bottom2) )
-                    case .portrait:
-                        AnyView( service.portraitScreenControlBar.bottom2(service.portraitScreenControlBarItems.bottom2) )
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            AnyView( service.halfScreenControlBar.bottom2(service.halfScreenControlBarItems.bottom2) )
+                        case .fullScreen:
+                            AnyView( service.fullScreenControlBar.bottom2(service.fullScreenControlBarItems.bottom2) )
+                        case .portrait:
+                            AnyView( service.portraitScreenControlBar.bottom2(service.portraitScreenControlBarItems.bottom2) )
+                        }
                     }
                     
-                    switch service.status {
-                    case .halfScreen:
-                        AnyView( service.halfScreenControlBar.bottom1(service.halfScreenControlBarItems.bottom1) )
-                    case .fullScreen:
-                        AnyView( service.fullScreenControlBar.bottom1(service.fullScreenControlBarItems.bottom1) )
-                    case .portrait:
-                        AnyView( service.portraitScreenControlBar.bottom1(service.portraitScreenControlBarItems.bottom1) )
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            AnyView( service.halfScreenControlBar.bottom1(service.halfScreenControlBarItems.bottom1) )
+                        case .fullScreen:
+                            AnyView( service.fullScreenControlBar.bottom1(service.fullScreenControlBarItems.bottom1) )
+                        case .portrait:
+                            AnyView( service.portraitScreenControlBar.bottom1(service.portraitScreenControlBarItems.bottom1) )
+                        }
                     }
                 }
                 .padding(.leading, {
-                    switch service.status {
-                    case .halfScreen:
-                        return service.halfScreenInsets.leading
-                    case .fullScreen:
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            return service.halfScreenInsets.leading
+                        case .fullScreen:
+                            return service.fullScreenInsets.leading
+                        case .portrait:
+                            return service.portraitScreenInsets.leading
+                        }
+                    } else {
                         return service.fullScreenInsets.leading
-                    case .portrait:
-                        return service.portraitScreenInsets.leading
                     }
                 }())
                 .padding(.trailing, {
-                    switch service.status {
-                    case .halfScreen:
-                        return service.halfScreenInsets.trailing
-                    case .fullScreen:
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            return service.halfScreenInsets.trailing
+                        case .fullScreen:
+                            return service.fullScreenInsets.trailing
+                        case .portrait:
+                            return service.portraitScreenInsets.trailing
+                        }
+                    } else {
                         return service.fullScreenInsets.trailing
-                    case .portrait:
-                        return service.portraitScreenInsets.trailing
                     }
                 }())
                 .padding(.bottom, {
-                    switch service.status {
-                    case .halfScreen:
-                        return service.halfScreenInsets.bottom
-                    case .fullScreen:
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            return service.halfScreenInsets.bottom
+                        case .fullScreen:
+                            return service.fullScreenInsets.bottom
+                        case .portrait:
+                            return service.portraitScreenInsets.bottom
+                        }
+                    } else {
                         return service.fullScreenInsets.bottom
-                    case .portrait:
-                        return service.portraitScreenInsets.bottom
                     }
                 }())
                 .background({ () -> AnyView? in
-                    switch service.status {
-                    case .halfScreen:
-                        return service.halfScreenShadow.bottom
-                    case .fullScreen:
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            return service.halfScreenShadow.bottom
+                        case .fullScreen:
+                            return service.fullScreenShadow.bottom
+                        case .portrait:
+                            return service.portraitScreenShadow.bottom
+                        }
+                    } else {
                         return service.fullScreenShadow.bottom
-                    case .portrait:
-                        return service.portraitScreenShadow.bottom
                     }
                 }())
                 .frame(maxWidth: .infinity)
                 .transition({
-                    switch service.status {
-                    case .halfScreen:
-                        return service.halfScreenTransition.bottom
-                    case .fullScreen:
+                    if let status = service.status {
+                        switch status {
+                        case .halfScreen:
+                            return service.halfScreenTransition.bottom
+                        case .fullScreen:
+                            return service.fullScreenTransition.bottom
+                        case .portrait:
+                            return service.portraitScreenTransition.bottom
+                        }
+                    } else {
                         return service.fullScreenTransition.bottom
-                    case .portrait:
-                        return service.portraitScreenTransition.bottom
                     }
                 }())
             }

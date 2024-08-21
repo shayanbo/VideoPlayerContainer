@@ -64,7 +64,7 @@ struct ContentView: View {
                 }
             }
         }
-        /// sync state from context' service to make current view refresh when the state changes ( like StateSync propertyWrapper used in service)
+        /// sync state from context' service to make current view refresh when the state changes
         .onReceive(context[PlaylistWidgetService.self][keyPath: \.$current]) { output in
             self[keyPath:\.current] = output
         }

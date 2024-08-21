@@ -6,11 +6,21 @@
 //
 
 import SwiftUI
+import Combine
 import VideoPlayerContainer
 
 fileprivate class VolumeWidgetService : Service {
     
-    @StateSync(serviceType: StatusService.self, keyPath: \.$status) var status
+    fileprivate var status: StatusService.Status?
+    
+    fileprivate var cancellables = [AnyCancellable]()
+    
+    required init(_ context: Context) {
+        super.init(context)
+        context[StatusService.self].$status.sink(receiveValue: { [weak self] status in
+            self?.status = status
+        }).store(in: &cancellables)
+    }
     
     @ViewState var volume: Float = 1 {
         didSet {

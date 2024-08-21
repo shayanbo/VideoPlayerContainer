@@ -11,7 +11,6 @@
 		D4061C3E2A4B25B900CDD1FF /* StatusService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C2D2A4B25B900CDD1FF /* StatusService.swift */; };
 		D4061C402A4B25B900CDD1FF /* PlayerWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C302A4B25B900CDD1FF /* PlayerWidget.swift */; };
 		D4061C412A4B25B900CDD1FF /* ViewState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C322A4B25B900CDD1FF /* ViewState.swift */; };
-		D4061C422A4B25B900CDD1FF /* StateSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C332A4B25B900CDD1FF /* StateSync.swift */; };
 		D4061C432A4B25B900CDD1FF /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C342A4B25B900CDD1FF /* Service.swift */; };
 		D4061C442A4B25B900CDD1FF /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C352A4B25B900CDD1FF /* Context.swift */; };
 		D4061C452A4B25B900CDD1FF /* ControlWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4061C372A4B25B900CDD1FF /* ControlWidget.swift */; };
@@ -286,7 +285,6 @@
 		D4061C2D2A4B25B900CDD1FF /* StatusService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StatusService.swift; sourceTree = "<group>"; };
 		D4061C302A4B25B900CDD1FF /* PlayerWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerWidget.swift; sourceTree = "<group>"; };
 		D4061C322A4B25B900CDD1FF /* ViewState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewState.swift; sourceTree = "<group>"; };
-		D4061C332A4B25B900CDD1FF /* StateSync.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StateSync.swift; sourceTree = "<group>"; };
 		D4061C342A4B25B900CDD1FF /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		D4061C352A4B25B900CDD1FF /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
 		D4061C372A4B25B900CDD1FF /* ControlWidget.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ControlWidget.swift; sourceTree = "<group>"; };
@@ -501,7 +499,6 @@
 			isa = PBXGroup;
 			children = (
 				D4061C322A4B25B900CDD1FF /* ViewState.swift */,
-				D4061C332A4B25B900CDD1FF /* StateSync.swift */,
 				D4061C342A4B25B900CDD1FF /* Service.swift */,
 				D4061C352A4B25B900CDD1FF /* Context.swift */,
 				D4623B2A2A8354BA0053B542 /* Dependency.swift */,
@@ -1124,7 +1121,6 @@
 				D4061C462A4B25B900CDD1FF /* ToastWidget.swift in Sources */,
 				D4061C472A4B25B900CDD1FF /* PluginWidget.swift in Sources */,
 				D4061C3E2A4B25B900CDD1FF /* StatusService.swift in Sources */,
-				D4061C422A4B25B900CDD1FF /* StateSync.swift in Sources */,
 				D4061C4A2A4B25B900CDD1FF /* RenderWidget.swift in Sources */,
 				D4061C412A4B25B900CDD1FF /* ViewState.swift in Sources */,
 				D4061C442A4B25B900CDD1FF /* Context.swift in Sources */,

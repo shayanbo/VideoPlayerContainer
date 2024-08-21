@@ -31,7 +31,14 @@ public class FeatureService : Service {
     
     @ViewState fileprivate var dismissOnTap = true
     
-    @StateSync(serviceType: StatusService.self, keyPath: \.$status) fileprivate var status
+    fileprivate var status: StatusService.Status?
+    
+    required init(_ context: Context) {
+        super.init(context)
+        context[StatusService.self].$status.sink(receiveValue: { [weak self] status in
+            self?.status = status
+        }).store(in: &cancellables)
+    }
     
     fileprivate var dismissOnStatusChanged = true
     

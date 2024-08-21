@@ -67,7 +67,7 @@ import Foundation
 /// }
 /// ```
 ///
-/// - Important: With @``Dependency``, @``ViewState``, @``StateSync`` defined in the ``Service``, we can easily figure out how many external dependencies this Service depends on, how many State this Service maintains.
+/// - Important: With @``Dependency``, @``ViewState`` defined in the ``Service``, we can easily figure out how many external dependencies this Service depends on, how many State this Service maintains.
 ///
 @propertyWrapper
 public struct Dependency<Value> {
