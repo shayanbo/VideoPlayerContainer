@@ -598,7 +598,7 @@ struct ControlWidget: View {
                             return service.portraitScreenInsets.leading
                         }
                     } else {
-                        return 0
+                        return service.fullScreenInsets.leading
                     }
                 }())
                 .padding(.trailing, {
@@ -612,7 +612,7 @@ struct ControlWidget: View {
                             return service.portraitScreenInsets.trailing
                         }
                     } else {
-                        return 0
+                        return service.fullScreenInsets.trailing
                     }
                 }())
                 .padding(.top, {
@@ -626,7 +626,7 @@ struct ControlWidget: View {
                             return service.portraitScreenInsets.top
                         }
                     } else {
-                        return 0
+                        return service.fullScreenInsets.top
                     }
                 }())
                 .frame(maxWidth: .infinity)
@@ -641,7 +641,7 @@ struct ControlWidget: View {
                             return service.portraitScreenShadow.top
                         }
                     } else {
-                        return nil
+                        return service.fullScreenShadow.top
                     }
                 }())
                 .transition({
@@ -655,7 +655,7 @@ struct ControlWidget: View {
                             return service.portraitScreenTransition.top
                         }
                     } else {
-                        return service.halfScreenTransition.top
+                        return service.fullScreenTransition.top
                     }
                 }())
             }
@@ -690,7 +690,7 @@ struct ControlWidget: View {
                                 return service.portraitScreenInsets.leading
                             }
                         } else {
-                            return 0
+                            return service.fullScreenInsets.leading
                         }
                     }())
                     .background({ () -> AnyView? in
@@ -704,7 +704,7 @@ struct ControlWidget: View {
                                 return service.portraitScreenShadow.left
                             }
                         } else {
-                            return nil
+                            return service.fullScreenShadow.left
                         }
                     }())
                     .transition({
@@ -718,7 +718,7 @@ struct ControlWidget: View {
                                 return service.portraitScreenTransition.left
                             }
                         } else {
-                            return service.halfScreenTransition.left
+                            return service.fullScreenTransition.left
                         }
                     }())
                 }
@@ -794,7 +794,7 @@ struct ControlWidget: View {
                                 return service.portraitScreenInsets.trailing
                             }
                         } else {
-                            return 0
+                            return service.fullScreenInsets.trailing
                         }
                     }())
                     .background({ () -> AnyView? in
@@ -808,7 +808,7 @@ struct ControlWidget: View {
                                 return service.portraitScreenShadow.right
                             }
                         } else {
-                            return nil
+                            return service.fullScreenShadow.right
                         }
                     }())
                     .transition({
