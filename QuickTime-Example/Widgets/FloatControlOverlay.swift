@@ -11,12 +11,12 @@ import Combine
 
 class FloatControlService : Service {
     
-    @ViewState fileprivate var base = CGSize(width: 0, height: -50)
-    @ViewState fileprivate var offset = CGSize(width: 0, height: -50)
-    @ViewState fileprivate var opacity = 1.0
+    @Published fileprivate var base = CGSize(width: 0, height: -50)
+    @Published fileprivate var offset = CGSize(width: 0, height: -50)
+    @Published fileprivate var opacity = 1.0
     
-    @ViewState fileprivate var layer1: [IdentifableView]?
-    @ViewState fileprivate var layer2: [IdentifableView]?
+    @Published fileprivate var layer1: [IdentifableView]?
+    @Published fileprivate var layer2: [IdentifableView]?
     
     public enum Location {
         case first

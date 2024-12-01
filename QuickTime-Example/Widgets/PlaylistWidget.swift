@@ -15,7 +15,7 @@ class PlaylistWidgetService: Service {
     fileprivate var fileDir: String?
     
     /// Current fileName
-    @ViewState fileprivate(set) var current: String? {
+    @Published fileprivate(set) var current: String? {
         didSet {
             guard let context else { return }
             

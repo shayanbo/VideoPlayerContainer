@@ -13,7 +13,7 @@ import VideoPlayerContainer
 
 fileprivate class TimelineWidgetService : Service {
     
-    @ViewState var current = "00:00"
+    @Published var current = "00:00"
     
     private var timeObserver: Any?
     

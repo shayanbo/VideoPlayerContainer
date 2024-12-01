@@ -25,7 +25,7 @@ struct CountdownWidget : View {
 
 fileprivate class CountdownWidgetService : Service {
     
-    @ViewState var current = "00:00"
+    @Published var current = "00:00"
     
     private var timeObserver: Any?
     

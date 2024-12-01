@@ -22,7 +22,7 @@ struct DurationWidget : View {
 
 fileprivate class DurationWidgetService : Service {
     
-    @ViewState var duration = "00:00"
+    @Published var duration = "00:00"
     
     private var cancellables = [AnyCancellable]()
     

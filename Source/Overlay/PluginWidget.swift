@@ -25,7 +25,7 @@ public class PluginService : Service {
         plugin != nil
     }
     
-    @ViewState fileprivate var plugin: Plugin?
+    @Published fileprivate var plugin: Plugin?
     
     /// Present a plugin widget
     /// 

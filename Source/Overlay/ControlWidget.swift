@@ -23,9 +23,9 @@ public class ControlService : Service {
     
     private var cancellables = [AnyCancellable]()
     
-    @ViewState fileprivate var halfScreenInsets = EdgeInsets()
-    @ViewState fileprivate var fullScreenInsets = EdgeInsets()
-    @ViewState fileprivate var portraitScreenInsets = EdgeInsets()
+    @Published fileprivate var halfScreenInsets = EdgeInsets()
+    @Published fileprivate var fullScreenInsets = EdgeInsets()
+    @Published fileprivate var portraitScreenInsets = EdgeInsets()
     
     fileprivate struct ControlBar {
         
@@ -49,9 +49,9 @@ public class ControlService : Service {
         var center = horizontal
     }
     
-    @ViewState fileprivate var halfScreenControlBar = ControlBar()
-    @ViewState fileprivate var fullScreenControlBar = ControlBar()
-    @ViewState fileprivate var portraitScreenControlBar = ControlBar()
+    @Published fileprivate var halfScreenControlBar = ControlBar()
+    @Published fileprivate var fullScreenControlBar = ControlBar()
+    @Published fileprivate var portraitScreenControlBar = ControlBar()
     
     fileprivate struct ControlBarItems {
         var top1 = [IdentifableView]()
@@ -64,9 +64,9 @@ public class ControlService : Service {
         var center = [IdentifableView]()
     }
     
-    @ViewState fileprivate var halfScreenControlBarItems = ControlBarItems()
-    @ViewState fileprivate var fullScreenControlBarItems = ControlBarItems()
-    @ViewState fileprivate var portraitScreenControlBarItems = ControlBarItems()
+    @Published fileprivate var halfScreenControlBarItems = ControlBarItems()
+    @Published fileprivate var fullScreenControlBarItems = ControlBarItems()
+    @Published fileprivate var portraitScreenControlBarItems = ControlBarItems()
     
     fileprivate struct Transition {
         var top = AnyTransition.move(edge: .top)
@@ -76,9 +76,9 @@ public class ControlService : Service {
         var center = AnyTransition.opacity
     }
     
-    @ViewState fileprivate var halfScreenTransition = Transition()
-    @ViewState fileprivate var fullScreenTransition = Transition()
-    @ViewState fileprivate var portraitScreenTransition = Transition()
+    @Published fileprivate var halfScreenTransition = Transition()
+    @Published fileprivate var fullScreenTransition = Transition()
+    @Published fileprivate var portraitScreenTransition = Transition()
     
     fileprivate struct Shadow {
         var top: AnyView? = AnyView(LinearGradient(colors: [.black.opacity(0.15), .black.opacity(0)], startPoint: .top, endPoint: .bottom))
@@ -88,11 +88,11 @@ public class ControlService : Service {
         var center: AnyView? = nil
     }
     
-    @ViewState fileprivate var shadow: AnyView?
+    @Published fileprivate var shadow: AnyView?
     
-    @ViewState fileprivate var halfScreenShadow = Shadow()
-    @ViewState fileprivate var fullScreenShadow = Shadow()
-    @ViewState fileprivate var portraitScreenShadow = Shadow()
+    @Published fileprivate var halfScreenShadow = Shadow()
+    @Published fileprivate var fullScreenShadow = Shadow()
+    @Published fileprivate var portraitScreenShadow = Shadow()
     
     ///Display style for the Control overlay.
     public enum DisplayStyle {
@@ -117,7 +117,7 @@ public class ControlService : Service {
     }
     
     /// A boolean value that indicates whether the Control overlay is presented.
-    @ViewState public fileprivate(set) var isBeingPresented = true
+    @Published public fileprivate(set) var isBeingPresented = true
     
     private var autoHiddenTimer: Timer?
     
@@ -517,7 +517,7 @@ public class ControlService : Service {
         }
     }
     
-    @ViewState fileprivate var opacity: CGFloat = 1.0
+    @Published fileprivate var opacity: CGFloat = 1.0
     
     /// Specifies the opacity of whole Control overlay.
     /// - Parameters:

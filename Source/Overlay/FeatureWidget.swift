@@ -27,9 +27,9 @@ public class FeatureService : Service {
         }
     }
     
-    @ViewState private(set) var feature: Feature?
+    @Published private(set) var feature: Feature?
     
-    @ViewState fileprivate var dismissOnTap = true
+    @Published fileprivate var dismissOnTap = true
     
     fileprivate var status: StatusService.Status?
     

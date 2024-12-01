@@ -15,19 +15,19 @@ import Combine
 ///
 public class PlayerService: Service {
     
-    @ViewState fileprivate var overlayAfterRender:( ()->AnyView )?
+    @Published fileprivate var overlayAfterRender:( ()->AnyView )?
     
-    @ViewState fileprivate var overlayAfterFeature:( ()->AnyView )?
+    @Published fileprivate var overlayAfterFeature:( ()->AnyView )?
     
-    @ViewState fileprivate var overlayAfterPlugin:( ()->AnyView )?
+    @Published fileprivate var overlayAfterPlugin:( ()->AnyView )?
     
-    @ViewState fileprivate var overlayAfterControl:( ()->AnyView )?
+    @Published fileprivate var overlayAfterControl:( ()->AnyView )?
     
-    @ViewState fileprivate var overlayAfterToast:( ()->AnyView )?
+    @Published fileprivate var overlayAfterToast:( ()->AnyView )?
     
-    @ViewState fileprivate var overlays = Overlay.allCases
+    @Published fileprivate var overlays = Overlay.allCases
     
-    @ViewState fileprivate var feature: FeatureService.Feature?
+    @Published fileprivate var feature: FeatureService.Feature?
     
     fileprivate var cancellables = [AnyCancellable]()
     

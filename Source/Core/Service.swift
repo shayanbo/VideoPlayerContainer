@@ -19,7 +19,7 @@ public typealias Widget = View
 /// The base class for other services, it keeps a reference to its context to make sure the custom service have access to other services.
 ///
 /// Inside Service, we provides two useful propertyWrapper: @``ViewState``.
-/// @ViewState is used to trigger the UI update mechanism, like @State.
+/// @Published is used to trigger the UI update mechanism, like @State.
 ///
 ///
 /// There are two kinds of Service:

@@ -30,7 +30,7 @@ fileprivate class RateWidgetService : Service {
         }
     }
     
-    @ViewState var rate: Rate = .x1_0 {
+    @Published var rate: Rate = .x1_0 {
         didSet {
             context?.render.player.rate = rate.float
         }

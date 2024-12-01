@@ -12,7 +12,7 @@ fileprivate class StepBackwardWidgetService: Service {
     
     private var observation: NSKeyValueObservation?
     
-    @ViewState var enabled = false
+    @Published var enabled = false
         
     required init(_ context: Context) {
         super.init(context)

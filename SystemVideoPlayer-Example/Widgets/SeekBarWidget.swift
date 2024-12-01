@@ -31,7 +31,7 @@ struct SeekBarWidget : View {
 
 fileprivate class SeekBarWidgetService : Service {
     
-    @ViewState var progress: Float = 0.0
+    @Published var progress: Float = 0.0
     
     private var cancellables = [AnyCancellable]()
     

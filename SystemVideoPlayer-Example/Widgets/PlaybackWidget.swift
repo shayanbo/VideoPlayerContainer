@@ -17,9 +17,9 @@ fileprivate class PlaybackWidgetService: Service {
     
     private var cancellables = [AnyCancellable]()
     
-    @ViewState var playOrPaused = false
+    @Published var playOrPaused = false
     
-    @ViewState var clickable = false
+    @Published var clickable = false
     
     required init(_ context: Context) {
         super.init(context)

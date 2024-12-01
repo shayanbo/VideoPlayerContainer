@@ -22,13 +22,13 @@ fileprivate class VolumeWidgetService : Service {
         }).store(in: &cancellables)
     }
     
-    @ViewState var volume: Float = 1 {
+    @Published var volume: Float = 1 {
         didSet {
             context?.render.player.volume = volume
         }
     }
     
-    @ViewState var mute = false {
+    @Published var mute = false {
         didSet {
             context?.render.player.isMuted = mute
         }

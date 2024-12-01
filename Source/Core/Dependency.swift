@@ -17,8 +17,8 @@ import Foundation
 ///
 ///     @Dependency(\.numberClient) var numberClient
 ///
-///     @ViewState var data: Int?
-///     @ViewState var error: Error?
+///     @Published var data: Int?
+///     @Published var error: Error?
 ///
 ///     func fetchData() async throws -> Int {
 ///         do {

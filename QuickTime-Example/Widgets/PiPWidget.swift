@@ -14,8 +14,8 @@ fileprivate class PiPWidgetService : Service {
     private var PiPController: AVPictureInPictureController?
     private var activeObservation: NSKeyValueObservation?
     
-    @ViewState var isActive = false
-    @ViewState var isSupported = false
+    @Published var isActive = false
+    @Published var isSupported = false
     
     required init(_ context: Context) {
         super.init(context)

@@ -31,11 +31,11 @@ fileprivate extension ToastService {
 ///
 public class ToastService: Service {
     
-    @ViewState fileprivate var toasts = [Toast]()
+    @Published fileprivate var toasts = [Toast]()
     
-    @ViewState fileprivate var insets: EdgeInsets = .init(top: 48, leading: 10, bottom: 48, trailing: 0)
+    @Published fileprivate var insets: EdgeInsets = .init(top: 48, leading: 10, bottom: 48, trailing: 0)
     
-    @ViewState fileprivate var lineSpacing: CGFloat = 8
+    @Published fileprivate var lineSpacing: CGFloat = 8
     
     fileprivate var duration: DispatchTimeInterval = .seconds(3)
     

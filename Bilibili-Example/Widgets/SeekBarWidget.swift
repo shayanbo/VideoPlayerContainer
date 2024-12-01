@@ -35,7 +35,7 @@ struct SeekBarWidget : View {
 
 fileprivate class SeekBarWidgetService : Service {
     
-    @ViewState var progress = 0.0
+    @Published var progress = 0.0
     
     private var timeObserver: Any?
     

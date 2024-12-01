@@ -15,9 +15,9 @@ fileprivate class PlaybackService: Service {
     
     private var statusObservation: NSKeyValueObservation?
     
-    @ViewState var playOrPaused = false
+    @Published var playOrPaused = false
     
-    @ViewState var clickable = false
+    @Published var clickable = false
     
     required init(_ context: Context) {
         super.init(context)

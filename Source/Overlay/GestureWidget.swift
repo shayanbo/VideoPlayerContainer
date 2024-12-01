@@ -17,7 +17,7 @@ import Combine
 public class GestureService : Service {
     
     /// Flag to determine if the built-in gesture is enabled or disabled
-    @ViewState public private(set) var enabled = true
+    @Published public private(set) var enabled = true
     
     /// Enable or disable the whole built-in gesture support
     /// - Parameter onOrOff: flag to determine if the built-in gesture is enabled or disabled
@@ -96,27 +96,27 @@ public class GestureService : Service {
     
     /// Drag Gesture.
     /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
-    @ViewState public var simultaneousDragGesture: _EndedGesture<_ChangedGesture<DragGesture>>?
+    @Published public var simultaneousDragGesture: _EndedGesture<_ChangedGesture<DragGesture>>?
     
     /// Tap Gesture.
     /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
-    @ViewState public var simultaneousTapGesture: _EndedGesture<SpatialTapGesture>?
+    @Published public var simultaneousTapGesture: _EndedGesture<SpatialTapGesture>?
 
     /// DoubleTap Gesture.
     /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
-    @ViewState public var simultaneousDoubleTapGesture: _EndedGesture<SpatialTapGesture>?
+    @Published public var simultaneousDoubleTapGesture: _EndedGesture<SpatialTapGesture>?
     
     /// LongPress Gesture.
     /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
-    @ViewState public var simultaneousLongPressGesture: _EndedGesture<LongPressGesture>?
+    @Published public var simultaneousLongPressGesture: _EndedGesture<LongPressGesture>?
     
     /// Pinch Gesture.
     /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
-    @ViewState public var simultaneousPinchGesture: _EndedGesture<_ChangedGesture<MagnificationGesture>>?
+    @Published public var simultaneousPinchGesture: _EndedGesture<_ChangedGesture<MagnificationGesture>>?
     
     /// Rotation Gesture.
     /// Gesture applying over the whole VideoPlayerContainer should be assigned to this to make sure you can receive events.
-    @ViewState public var simultaneousRotationGesture: _EndedGesture<_ChangedGesture<RotationGesture>>?
+    @Published public var simultaneousRotationGesture: _EndedGesture<_ChangedGesture<RotationGesture>>?
     
     //MARK: Gestures
     

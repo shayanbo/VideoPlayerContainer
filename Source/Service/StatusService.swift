@@ -29,7 +29,7 @@ public class StatusService : Service {
         case portrait
     }
     
-    @ViewState public private(set) var status: Status = .halfScreen
+    @Published public private(set) var status: Status = .halfScreen
     
     /// A boolean value that indicates whether the status is fullscreen.
     public var isFullScreen: Bool {

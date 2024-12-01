@@ -14,9 +14,9 @@ class PreviewWidgetService: Service {
     /// Preview Image Generator
     fileprivate var imageGenerator: AVAssetImageGenerator?
     
-    @ViewState fileprivate var previewImage: CGImage?
-    @ViewState fileprivate var displaySize: CGSize = .zero
-    @ViewState fileprivate var offset = CGSize.zero
+    @Published fileprivate var previewImage: CGImage?
+    @Published fileprivate var displaySize: CGSize = .zero
+    @Published fileprivate var offset = CGSize.zero
     
     required init(_ context: Context) {
         super.init(context)
